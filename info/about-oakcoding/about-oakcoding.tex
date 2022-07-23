@@ -1,0 +1,91 @@
+% !TEX program = xelatex
+
+\documentclass{article}
+
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage{multirow}
+\usepackage{polyglossia}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\newcommand{\thegroup}{OakCoding}
+
+\hypersetup{%
+pdftitle = {ข้อมูลกลุ่มโครงงาน Software Construction \textendash \thegroup},
+pdfsubject = {ข้อมูลเกี่ยวกับกลุ่ม \thegroup~โครงงานวิชา 01418211 Software Construction ปีการศึกษา 2565 ภาคต้น},
+pdfauthor = {{6410450176 ปาณชัย}, {6410451041 ธนากร}, {6410451067 ธเนศ}, {6410451199 พศวัต}},
+pdfkeywords = {\thegroup, 01418211, Software Construction}}
+
+\geometry{%
+a4paper,
+margin = 0.75in}
+
+\XeTeXlinebreaklocale "th"
+\setdefaultlanguage[numerals=arabic]{thai}
+\setotherlanguages{english}
+
+\setmainfont{TH Sarabun New}
+\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+
+% \linespread{1.5}
+
+\setlength\headheight{0.75in}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\textbf{\thegroup}~\thepage}
+\pagenumbering{gobble}
+
+\title{\flushleft\vspace{-5ex}\Huge\textbf{ข้อมูลกลุ่มโครงงาน Software Construction}\\
+\Large 01418211 Software Construction ปีการศึกษา 2565 ภาคต้น
+\vspace{-8ex}}
+\author{}
+\date{}
+
+%%%%% BEGIN DOCUMENT %%%%%
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\sloppy\flushleft
+
+สร้าง Desktop Application สําหรับการแจ้งเรื่องร้องเรียนของนิสิตมหาวิทยาลัยเกษตรศาสตร์ ด้วย JavaFX (JavaSE 17 เท่านั้น)\\
+โดยต้องออกแบบและเขียนโปรแกรมที่ใช้หลักการโปรแกรมเชิงวัตถุ
+
+\section{เกี่ยวกับกลุ่ม}
+\begin{tabular}{l l l}
+\textbf{ชื่อกลุ่ม}                      & \thegroup                 &\\
+\textbf{จำนวนสมาชิก}                 & 4                         &\\
+\textbf{ตัวแทนกลุ่ม}                   & พศวัต ถิ่นกาญจน์วัฒนา          &\\
+\textbf{Repository URI}             & \href{https://github.com/CS211-651/project211-oakcoding.git}{https://github.com/CS211-651/project211-oakcoding.git}   & (GitHub Classroom)\\
+                                    & \href{https://github.com/naiithink/oakcoding.git}{https://github.com/naiithink/oakcoding.git}                         & (Development)
+\end{tabular}
+
+\subsection{รายชื่อสมาชิก}
+\begin{tabular}{c l l l l l}
+\hline
+\textbf{ลำดับ}    & \textbf{ชื่อ​}     & \textbf{นามสกุล}           & \textbf{GitHub Username}                                           & \textbf{รหัสนิสิต}       & \textbf{KU E-mail Address}\\
+\hline
+1               & ปาณชัย            & คชกาษร                    & \href{https://github.com/ingfosbreak}{@ingfosbreak}                & 6410450176            & panachai.ko@ku.th\\
+                & Panachai         & Kotchagason               &                                                                    &                       &\\
+2               & ธนากร            & คนหมั่น                     & \href{https://github.com/Thanakorn0Khonman}{@Thanakorn0Khonman}    & 6410451041            & thanakorn.khon@ku.th\\
+                & Thanakorn        & Khonman                   &                                                                    &                       &\\
+3               & ธเนศ             & จีนสีคง                     & \href{https://github.com/thanetjin}{@thanetjin}                    & 6410451067            & thanet.jin@ku.th\\
+                & Thanet           & Jinseekhong               &                                                                    &                       &\\
+4               & พศวัต             & ถิ่นกาญจน์วัฒนา               & \href{https://github.com/naiithink}{@naiithink}                    & 6410451199            & potsawat.t@ku.th\\
+                & Potsawat         & Thinkanwatthana           &                                                                    &                       &\\
+\hline
+\end{tabular}
+
+\section{รับทราบเงื่อนไขการได้เกรด F}
+\begin{enumerate}
+    \setlength\itemsep{0ex}
+    \item โครงงานที่สมบูรณ์ของนิสิตกลุ่มใดที่ไม่ผ่านเกณฑ์ที่กำหนด สมาชิกทุกคนในกลุ่มจะได้เกรด F
+    \item นิสิตกลุ่มใดที่ไม่นำเสนอความก้าวหน้าครั้งใดก็ตาม ภายในเวลาที่กำหนด สมาชิกทุกคนในกลุ่มจะได้เกรด F
+    \item การนำเสนอความก้าวหน้าครั้งใดก็ตามหรือการส่งโครงงานที่สมบูรณ์ นิสิตคนใดที่ไม่มี commit หรือ commit นั้นไม่มีการเขียนโปรแกรมอย่างมีนัยสำคัญ\\
+          นิสิตคนนั้นจะได้เกรด F โดยไม่มีการเปลี่ยนแปลงรายชื่อสมาชิกของกลุ่ม
+\end{enumerate}
+\end{document}
