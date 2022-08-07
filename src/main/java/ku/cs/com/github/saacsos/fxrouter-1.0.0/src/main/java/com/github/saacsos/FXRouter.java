@@ -5,13 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.HashMap;
 
-public final class FXRouter {
+public final class FXRouter  {
     private static final String WINDOW_TITLE = "";
     private static final Double WINDOW_WIDTH = 800.0D;
     private static final Double WINDOW_HEIGHT = 600.0D;
@@ -26,6 +27,12 @@ public final class FXRouter {
     private static Double animationDuration;
     private static AbstractMap<String, RouteScene> routes = new HashMap();
     private static RouteScene currentRoute;
+    ///////////////////
+    private static double x;
+    private static double y;
+
+
+
 
     private FXRouter() {
     }
@@ -37,6 +44,7 @@ public final class FXRouter {
     public static void bind(Object ref, Stage win, String winTitle) {
         checkInstances(ref, win);
         windowTitle = winTitle;
+
     }
 
     public static void bind(Object ref, Stage win, double winWidth, double winHeight) {
@@ -103,9 +111,22 @@ public final class FXRouter {
         String scenePath = "/" + route.scenePath;
         Parent resource = (Parent)FXMLLoader.load((new Object() {
         }).getClass().getResource(scenePath));
+        window.initStyle(StageStyle.UNDECORATED);
         window.setTitle(route.windowTitle);
         window.setScene(new Scene(resource, route.sceneWidth, route.sceneHeight));
         window.show();
+
+        resource.setOnMousePressed(mouseEvent ->{ // On Mouse Press get x , y on pressed on the scene
+            x = mouseEvent.getSceneX();
+            y = mouseEvent.getSceneY();
+        });
+
+        resource.setOnMouseDragged(mouseEvent ->{ // On Dragged set x , y to where the cursor on the screen(while press)
+            window.setX(mouseEvent.getScreenX() - x);
+            window.setY(mouseEvent.getScreenY() - y);
+        });
+
+
         routeAnimation(resource);
     }
 
