@@ -43,7 +43,5 @@ public class ProjectController {
 
     }
 
-    private void setIconified(boolean b) {
-    }
 
 }

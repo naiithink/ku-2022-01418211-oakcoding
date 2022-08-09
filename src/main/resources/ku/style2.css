@@ -1,0 +1,44 @@
+.check-box .box {
+
+-fx-background-color: #0D1A2D;
+-fx-border-color:#0D1A2D;
+-fx-border-radius:3px; 
+
+}
+
+.check-box:selected .mark {
+
+-fx-background-color: white;
+
+}
+
+.linear-grad2{
+   -fx-background-color: linear-gradient( #101f36 31%,#3d138c 72%, #17b8e5 100%);
+}
+
+.util-bar:hover{
+    -fx-opacity: 0.7;
+}
+
+.exit{
+   -fx-background-color: transparent;
+}
+
+.sign-in{
+   -fx-background-color: #1787e5;
+}
+.sign-in:hover{
+   -fx-background-color: #26ABE3;
+}
+
+.sign-in:pressed{
+   -fx-background-color: #1787e5;
+}
+
+.hover:hover{
+   -fx-text-fill: #17b8e5;
+}
+
+.test {
+   -fx-background-radius: 50px;
+}
