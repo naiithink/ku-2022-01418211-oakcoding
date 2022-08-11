@@ -14,6 +14,8 @@ public class Router extends FXRouter {
     private static double x;
     private static double y;
 
+    private static int popWindowPerTime = 0;
+
 
 
     public Router(){
@@ -36,8 +38,25 @@ public class Router extends FXRouter {
 
     public static void popup(String fxml) throws IOException {
         RouteScene route = (RouteScene)routes.get(fxml);
-        loadPopUp(route);
+        if (popWindowPerTime == 0) {
+            loadPopUp(route);
+            popWindowPerTime++;
+        }
 
+    }
+
+    public static void popup(String fxml, Object data) throws IOException {
+        RouteScene route = (RouteScene)routes.get(fxml);
+        if (popWindowPerTime == 0) {
+            route.data = data;
+            loadPopUp(route);
+            popWindowPerTime++;
+        }
+
+    }
+
+    public static void closePopup() {
+        popWindowPerTime = 0;
     }
 
     protected static void loadNewRouteINIT(RouteScene route) throws IOException {
