@@ -21,10 +21,10 @@ class OakConfig {
             );
 
             appConfigProperties.load(appConfigFileBuffer);
-        } catch (FileNotFoundException err) {
-            System.err.println(err.toString());
-        } catch (IOException err) {
-            System.err.println(err.toString());
+        } catch (FileNotFoundException e) {
+            System.err.println("FileNotFoundException: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Caught IOException: " + e.getMessage());
         }
     }
 }
