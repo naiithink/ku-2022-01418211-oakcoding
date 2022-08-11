@@ -15,12 +15,12 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ProjectController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="300.0" styleClass="linear-grad2" stylesheets="@../style.css">
+      <Pane prefHeight="500.0" prefWidth="300.0" styleClass="linear-grad2" stylesheets="@../style/style.css">
          <children>
             <TextField fx:id="username" layoutX="71.0" layoutY="139.0" prefHeight="33.0" prefWidth="160.0" promptText="Username" style="-fx-background-color: transparent; -fx-prompt-text-fill: #ffff; -fx-text-inner-color: #ffff;" />
             <PasswordField fx:id="password" layoutX="71.0" layoutY="190.0" prefHeight="33.0" prefWidth="160.0" promptText="Password" style="-fx-background-color: transparent; -fx-prompt-text-fill: #ffff; -fx-text-inner-color: #ffff;" />
-            <Button fx:id="signIn" layoutX="71.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleSignInButton" prefHeight="25.0" prefWidth="160.0" styleClass="sign-in" stylesheets="@../style.css" text="Sign in" textAlignment="CENTER" textFill="WHITE" />
-            <CheckBox layoutX="53.0" layoutY="285.0" mnemonicParsing="false" stylesheets="@../style.css" text="Remember me" textFill="WHITE">
+            <Button fx:id="signIn" layoutX="71.0" layoutY="241.0" mnemonicParsing="false" onAction="#handleSignInButton" prefHeight="25.0" prefWidth="160.0" styleClass="sign-in" stylesheets="@../style/style.css" text="Sign in" textAlignment="CENTER" textFill="WHITE" />
+            <CheckBox layoutX="53.0" layoutY="285.0" mnemonicParsing="false" stylesheets="@../style/style.css" text="Remember me" textFill="WHITE">
                <styleClass>
                   <String fx:value="check-box" />
                   <String fx:value="box" />
@@ -29,11 +29,11 @@
                   <Font size="11.0" />
                </font>
             </CheckBox>
-            <Label layoutX="163.0" layoutY="285.0" styleClass="hover" stylesheets="@../style.css" text="Reset password" textFill="WHITE" />
+            <Label layoutX="163.0" layoutY="285.0" styleClass="hover" stylesheets="@../style/style.css" text="Reset password" textFill="WHITE" />
             <Label layoutX="64.0" layoutY="320.0" text="Don't have an account?" textFill="WHITE" />
-            <Label layoutX="199.0" layoutY="320.0" styleClass="hover" stylesheets="@../style.css" text="Sign up" textFill="WHITE" underline="true" />
+            <Label layoutX="199.0" layoutY="320.0" styleClass="hover" stylesheets="@../style/style.css" text="Sign up" textFill="WHITE" underline="true" />
             <Label layoutX="73.0" layoutY="449.0" text="Help us improve!" textFill="WHITE" />
-            <Label layoutX="172.0" layoutY="449.0" styleClass="hover" stylesheets="@../style.css" text="feedback" textFill="WHITE" underline="true" />
+            <Label layoutX="172.0" layoutY="449.0" styleClass="hover" stylesheets="@../style/style.css" text="feedback" textFill="WHITE" underline="true" />
             <Separator layoutX="53.0" layoutY="171.0" minHeight="-Infinity" prefHeight="0.1" prefWidth="200.0" style="-fx-background-color: #ffff;" />
             <Separator layoutX="51.0" layoutY="223.0" minHeight="-Infinity" prefHeight="0.1" prefWidth="200.0" style="-fx-background-color: #ffff;" />
             <Pane layoutY="-2.0" prefHeight="33.0" prefWidth="300.0" style="-fx-background-color: #0c1728;">

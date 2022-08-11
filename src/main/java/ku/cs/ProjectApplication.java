@@ -12,19 +12,16 @@ public class ProjectApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //FXRouter.bind(this, stage, "OakCoding", 300, 500);
-        //configRoute();
-        //FXRouter.goTo("project");
-
         Router.bind(this,stage,"OakCoding",300,500);
         configRoute();
-        Router.goTo("project");
+        Router.start("project");
 
     }
 
     private static void configRoute() {
         String packageStr = "ku/cs/";
-        Router.when("project",packageStr+"project.fxml");
+        Router.when("project",packageStr+"project.fxml",300,500);
+        Router.when("test", packageStr+"test.fxml",600,400);
     }
 
 
