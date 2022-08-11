@@ -1,3 +1,8 @@
+@font-face{
+    font-family: 'Kanit';
+    src: url("KanitRegular.ttf");
+}
+
 .check-box .box {
 
 -fx-background-color: #0D1A2D;
@@ -44,6 +49,6 @@
 }
 
 .text {
-    -fx-font-family: 'Kanit-Regular';
+    -fx-font-family: "Kanit";
     -fx-font-size:20;
 }
