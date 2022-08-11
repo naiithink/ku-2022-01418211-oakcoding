@@ -1,0 +1,48 @@
+# Text
+*               text=auto
+
+# ML
+*.dtd           text
+*.xml           text
+
+# TeX
+*.aux           text
+*.cls           text
+*.ind           text
+*.inx           text
+*.sty           text
+*.tex           text
+*.toc           text
+
+# Office suites
+*.docx          -text -diff
+*.pptx          -text -diff
+*.xlsx          -text -diff
+*.odg           -text -diff
+*.odp           -text -diff
+*.ods           -text -diff
+*.odt           -text -diff
+
+# Bin
+*.[ot]tf        -text -diff
+*.7z            -text -diff
+*.bmp           -text -diff
+*.class         -text -diff
+*.gif           -text -diff
+*.gpg           -text -diff
+*.gz            -text -diff
+*.jar           -text -diff
+*.jpg           -text -diff
+*.jpeg          -text -diff
+*.pdf           -text -diff
+*.png           -text -diff
+*.tar           -text -diff
+*.xcf           -text -diff
+*.zip           -text -diff
+
+# LF
+*.sh            text eol=lf
+
+# CRLF
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
