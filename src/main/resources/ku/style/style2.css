@@ -42,3 +42,8 @@
 .test {
    -fx-background-radius: 50px;
 }
+
+.text {
+    -fx-font-family: 'Kanit-Regular';
+    -fx-font-size:20;
+}

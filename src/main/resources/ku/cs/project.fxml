@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ProjectController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.ProjectController">
    <children>
       <Pane prefHeight="500.0" prefWidth="300.0" styleClass="linear-grad2" stylesheets="@../style/style.css">
          <children>
@@ -51,7 +44,7 @@
                </children>
             </Pane>
             <Label fx:id="prompt" alignment="CENTER" layoutX="19.0" layoutY="356.0" prefHeight="17.0" prefWidth="266.0" textFill="#ff3c3c" />
-            <Label layoutX="98.0" layoutY="56.0" text="OakCoding" textFill="WHITE">
+            <Label layoutX="98.0" layoutY="56.0" styleClass="text" stylesheets="@../style/style2.css" text="OakCoding" textFill="WHITE">
                <font>
                   <Font name="Freestyle Script" size="40.0" />
                </font>
