@@ -19,15 +19,40 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17.0.2</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
+            <artifactId>javafx-controls</artifactId>
             <version>17.0.2</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.2</version>
+            <classifier>mac</classifier>
+        </dependency>        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17.0.2</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
+            <version>17.0.2</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17.0.2</version>
+            <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
             <version>17.0.2</version>
         </dependency>
         <dependency>
@@ -78,9 +103,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
@@ -91,6 +117,9 @@
                                     <excludes>
                                         <exclude>module-info.class</exclude>
                                         <exclude>META-INF/**</exclude>
+<!--                                        <exclude>com/sun/javafx/charts/**</exclude>-->
+<!--                                        <exclude>com/sun/javafx/chart/**</exclude>-->
+<!--                                        <exclude>javafx/scene/chart/**</exclude>-->
                                     </excludes>
                                 </filter>
                             </filters>
@@ -98,7 +127,10 @@
                             <transformers>
                                 <transformer implementation=
                                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ku.cs.oakcoding.Main</mainClass>
+                                    <!-- <mainClass>ku.cs.oakcoding.Main</mainClass> -->
+                                    <manifestEntries>
+                                        <Main-Class>ku.cs.oakcoding.Main</Main-Class>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                         </configuration>

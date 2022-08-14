@@ -12,7 +12,8 @@ public class Register {
     }
 
     public boolean doLogin() {
-        if (username.equals("adminTEST") && password.equals("adminTEST")) {
+        if (username.equals("adminTEST")
+            && password.equals("adminTEST")) {
             return true;
         } else {
             return false;

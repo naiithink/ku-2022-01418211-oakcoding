@@ -4,15 +4,18 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import com.github.saacsos.fxrouter.Router;
 
-import java.io.IOException;
-
 public class ProjectApplication extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
-        Router.bind(this, stage, "OakCoding", 300, 500);
-        configRoute();
-        Router.start("project");
+    public void start(Stage stage) {
+        try {
+            Router.bind(this, stage, "OakCoding", 300, 500);
+            configRoute();
+            Router.start("project");
+        } catch (final Exception e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
     private static void configRoute() {
@@ -22,6 +25,6 @@ public class ProjectApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

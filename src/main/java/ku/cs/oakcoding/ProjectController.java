@@ -60,7 +60,7 @@ public class ProjectController {
     }
 
     @FXML
-    public void handleMinimizeButton(MouseEvent mouseEvent) throws IOException {
+    public void handleMinimizeButton(MouseEvent mouseEvent) {
         Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
         stage.setIconified(true);
 
