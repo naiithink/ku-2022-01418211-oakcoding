@@ -123,6 +123,7 @@
                                     </excludes>
                                 </filter>
                             </filters>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer implementation=
