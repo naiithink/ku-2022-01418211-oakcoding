@@ -19,24 +19,20 @@ public class Router extends FXRouter {
     private static double y;
 
     private static int popWindowPerTime = 0;
+    private static int appearWindow = 0;
 
     public Router() {
     }
 
-    public static void start(String routeLabel) throws IOException {
-        RouteScene route = routes.get(routeLabel);
-        loadNewRouteINIT(route);
-    }
-
     public static void goTo(String routeLabel) throws IOException {
         RouteScene route = routes.get(routeLabel);
-        loadNewRouteNOINIT(route);
+        loadNewRoute(route);
     }
 
     public static void goTo(String routeLabel, Object data) throws IOException {
         RouteScene route = routes.get(routeLabel);
         route.data = data;
-        loadNewRouteNOINIT(route);
+        loadNewRoute(route);
     }
 
     public static void popup(String fxml) throws IOException {
@@ -61,26 +57,29 @@ public class Router extends FXRouter {
         popWindowPerTime = 0;
     }
 
-    protected static void loadNewRouteINIT(RouteScene route) throws IOException {
+    public static void loadNewRoute(RouteScene route) throws IOException {
         try {
             currentRoute = route;
             String scenePath = "/" + route.scenePath;
-            Parent resource = FXMLLoader.load((new Object() {
+            Parent resource = (Parent) FXMLLoader.load((new Object() {
             }).getClass().getResource(scenePath));
-            window.initStyle(StageStyle.UNDECORATED);
-            window.initStyle(StageStyle.TRANSPARENT);
+            if (appearWindow == 0) {
+                window.initStyle(StageStyle.UNDECORATED);
+                window.initStyle(StageStyle.TRANSPARENT);
+                appearWindow++;
+            }
             window.setTitle(route.windowTitle);
-            Scene scene = new Scene(resource, route.sceneWidth, route.sceneHeight);
+            Scene scene = new Scene(resource,route.sceneWidth,route.sceneHeight);
             scene.setFill(Color.TRANSPARENT);
             window.setScene(scene);
             window.show();
 
-            resource.setOnMousePressed(mouseEvent -> { // On Mouse Press get x , y on pressed on the scene
+            resource.setOnMousePressed(mouseEvent ->{
                 x = mouseEvent.getSceneX();
                 y = mouseEvent.getSceneY();
             });
 
-            resource.setOnMouseDragged(mouseEvent -> { // On Dragged set x , y to where the cursor on the screen(while press)
+            resource.setOnMouseDragged(mouseEvent ->{
                 window.setX(mouseEvent.getScreenX() - x);
                 window.setY(mouseEvent.getScreenY() - y);
             });
@@ -91,54 +90,28 @@ public class Router extends FXRouter {
         }
     }
 
-    protected static void loadNewRouteNOINIT(RouteScene route) throws IOException {
-        try {
-            currentRoute = route;
-            String scenePath = "/" + route.scenePath;
-            Parent resource = FXMLLoader.load((new Object() {
-            }).getClass().getResource(scenePath));
-            window.setTitle(route.windowTitle);
-            Scene scene = new Scene(resource, route.sceneWidth, route.sceneHeight);
-            scene.setFill(Color.TRANSPARENT);
-            window.setScene(scene);
-            window.show();
-
-            resource.setOnMousePressed(mouseEvent -> { // On Mouse Press get x , y on pressed on the scene
-                x = mouseEvent.getSceneX();
-                y = mouseEvent.getSceneY();
-            });
-
-            resource.setOnMouseDragged(mouseEvent -> { // On Dragged set x , y to where the cursor on the screen(while press)
-                window.setX(mouseEvent.getScreenX() - x);
-                window.setY(mouseEvent.getScreenY() - y);
-            });
-
-            routeAnimation(resource);
-        } catch (IllegalStateException e) {
-            System.err.println("IllegalStateException: " + e.getMessage());
-        }
-    }
 
     public static void loadPopUp(RouteScene route) throws IOException {
         try {
             currentRoute = route;
             String scenePath = "/" + route.scenePath;
             Stage stage = new Stage();
-            Parent resource = FXMLLoader.load((new Object() {
+            Parent resource = (Parent) FXMLLoader.load((new Object() {
             }).getClass().getResource(scenePath));
-            // stage.initStyle(StageStyle.UNDECORATED);
+
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setTitle(route.windowTitle);
-            Scene scene = new Scene(resource, route.sceneWidth, route.sceneHeight);
+            Scene scene = new Scene(resource,route.sceneWidth,route.sceneHeight);
             scene.setFill(Color.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
 
-            resource.setOnMousePressed(mouseEvent -> { // On Mouse Press get x , y on pressed on the scene
+            resource.setOnMousePressed(mouseEvent ->{
                 x = mouseEvent.getSceneX();
                 y = mouseEvent.getSceneY();
             });
-            resource.setOnMouseDragged(mouseEvent -> { // On Dragged set x , y to where the cursor on the screen(while press)
+            resource.setOnMouseDragged(mouseEvent ->{
                 stage.setX(mouseEvent.getScreenX() - x);
                 stage.setY(mouseEvent.getScreenY() - y);
             });
