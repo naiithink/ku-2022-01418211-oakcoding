@@ -1,12 +1,16 @@
-module ku.cs.oakcoding {
+module oakcoding.app {
     requires javafx.controls;
-    requires javafx.graphics;
     requires javafx.fxml;
 
-    opens ku.cs.oakcoding to javafx.controls, javafx.graphics, javafx.fxml;
+    // ku.cs.oakcoding.ProjectApplication.launch()
+    exports ku.cs.oakcoding to javafx.graphics;
 
-    // exports ku.cs.oakcoding to javafx.fxml;
+    // ku.cs.oakcoding.ProjectController
+    opens ku.cs.oakcoding to javafx.fxml;
 
-    // opens ku.cs.oakcoding.app.controllers to javafx.fxml;
-    // exports ku.cs.oakcoding.app.controllers to javafx.fxml;
+    // ku.cs.oakcoding.app.controllers.*
+    opens ku.cs.oakcoding.app.controllers to javafx.fxml;
+
+    // com.github.saacsos.fxrouter
+    opens com.github.saacsos.fxrouter to javafx.fxml;
 }

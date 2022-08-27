@@ -89,7 +89,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ku.cs.oakcoding.ProjectApplication</mainClass>
+                            <mainClass>oakcoding.app/ku.cs.oakcoding.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -115,8 +115,8 @@
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
-                                        <exclude>module-info.class</exclude>
                                         <exclude>META-INF/**</exclude>
+                                        <exclude>module-info.class</exclude>
 <!--                                        <exclude>com/sun/javafx/charts/**</exclude>-->
 <!--                                        <exclude>com/sun/javafx/chart/**</exclude>-->
 <!--                                        <exclude>javafx/scene/chart/**</exclude>-->
