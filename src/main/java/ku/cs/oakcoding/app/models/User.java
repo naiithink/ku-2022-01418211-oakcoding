@@ -1,27 +1,19 @@
 package ku.cs.oakcoding.app.models;
 
-public class RegisterUser {
+public class User {
 
     private String username;
-
     private String password;
-
-    private String passwordConfirm;
-
     private String firstname;
-
     private String lastname;
+    private String picturePath;
 
-    public RegisterUser(String username,
-                        String password,
-                        String passwordConfirm,
-                        String firstname,
-                        String lastname) {
+    public User(String username, String password, String firstname, String lastname, String picturePath){
         this.username = username;
         this.password = password;
-        this.passwordConfirm = passwordConfirm;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.picturePath = picturePath;
     }
 
     public String getUsername() {
@@ -32,15 +24,15 @@ public class RegisterUser {
         return password;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
     public String getFirstname() {
         return firstname;
     }
 
     public String getLastname() {
         return lastname;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
     }
 }

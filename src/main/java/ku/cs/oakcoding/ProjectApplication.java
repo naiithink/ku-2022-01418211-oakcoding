@@ -11,7 +11,7 @@ public class ProjectApplication extends Application {
         try {
             Router.bind(this, stage, "OakCoding", 300, 500);
             configRoute();
-            Router.start("project");
+            Router.goTo("project");
         } catch (final Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
