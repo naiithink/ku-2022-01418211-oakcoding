@@ -10,25 +10,28 @@
 
 ### เริ่มต้น
 
-#### Executable File
+1. **Executable File**
 
-วิธีได้มาซึ่ง executable file ของ applications
+    วิธีได้มาซึ่ง executable file ของ application
 
-* **วิธีที่ 1** – Build ด้วย Maven (แนะนำ[^1])  
+    **วิธีที่ 1** – Build ด้วย Maven (แนะนำ[^1])  
 
         $ mvn clean package
-* **วิธีที่ 2** – Clone git repository นี้[^2]  
+    **วิธีที่ 2** – Clone git repository นี้[^2]  
+
     Executable file และ/หรือ script file ที่เกี่ยวของกับการ execute application ของ project นี้ถูกเก็บอยู่ที่ [`submit/app/`](submit/app/) ของ repository นี้
 
-#### Execute the Application
+2. **Execute the Application**[^1] [^2]
 
-* **UNIX** – macOS, GNU/Linux  
+    เริ่มการทำงานของ application
 
-        $ java -jar "$(ls submit/app/*shaded*)"
+    **UNIX** – macOS, GNU/Linux  
 
-* **Windows**
+        $ java -jar "$(ls submit/app/*shaded.jar)"
 
-        > 
+    **Windows (PowerShell)**
+
+        > .\submit\app\*shaded.jar
 
 </br >
 
