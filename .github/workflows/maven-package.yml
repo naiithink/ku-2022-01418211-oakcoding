@@ -22,12 +22,12 @@ jobs:
           settings-path: ${{ github.workspace }}
       - name: Build with Maven
         run: mvn --batch-mode clean package
-      - run: mkdir -p submit && cp target/*.jar submit
+      - run: mkdir -p submit/app && cp target/*.jar submit/app
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: Package
-          path: submit
+          path: submit/app
 
   auto-create-pr:
     if: github.repository == 'naiithink/oakcoding'
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Package
-          path: submit
+          path: submit/app
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
@@ -66,7 +66,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Package
-          path: submit
+          path: submit/app
       - name: Publish to GitHub Apache Maven Package Registry
         run: mvn --batch-mode deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/$GITHUB_REPOSITORY -s $GITHUB_WORKSPACE/settings.xml
         env:
