@@ -1,6 +1,6 @@
 /**
  * @file OakDigest.java
- * @version 1.0.0-complete
+ * @version 1.0.1-complete
  */
 
 package ku.cs.oakcoding.app.helpers.security;
@@ -60,7 +60,7 @@ public abstract class OakDigest {
      * @note INTERNAL
      */
     protected static String byteArrayToHexString(byte[] bytes) {
-        String result = "";
+        String result = new String();
 
         for (int i = 0, len = bytes.length; i < len; i++) {
             result += Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1);
