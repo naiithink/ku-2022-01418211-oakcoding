@@ -21,7 +21,8 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MessageDigest of a String message or content of a file.
  */
-public abstract class OakDigest {
+public final class OakDigest {
+    private OakDigest() {}
 
     protected static final String DEFAULT_ALGORITHM;
 
@@ -73,7 +74,7 @@ public abstract class OakDigest {
      * Performs the hash computation on a String message.
      * 
      * @param       algorithm   Hasing algorithm to be used
-     * @param       charset     Decodes the  message into a sequence of bytes using the given @link java.nio.charset.Charset charset @endlink
+     * @param       charset     Decodes the message into a sequence of bytes using the given @link java.nio.charset.Charset charset @endlink
      * @param       message     message to be digest
      * 
      * @return      the message digest
@@ -81,8 +82,8 @@ public abstract class OakDigest {
      * @throws      NoSuchAlgorithmException    If the specified algorithm does not exist
      */
     public static String getDigestStringOfMessage(String algorithm,
-                                           Charset charset,
-                                           String message) throws NoSuchAlgorithmException {
+                                                  Charset charset,
+                                                  String message) throws NoSuchAlgorithmException {
         String result = new String();
 
         try {
@@ -99,7 +100,7 @@ public abstract class OakDigest {
     /**
      * Performs the hash computation on a String message using the default algorithm.
      * 
-     * @param       charset     Decodes the  message into a sequence of bytes using the given @link java.nio.charset.Charset charset @endlink
+     * @param       charset     Decodes the message into a sequence of bytes using the given @link java.nio.charset.Charset charset @endlink
      * @param       message     message to be digest
      * 
      * @return      the message digest
@@ -109,7 +110,7 @@ public abstract class OakDigest {
      * @see         ku.cs.oakcoding.app.helpers.security.OakDigest#getDefaultDigestAlgorithm()
      */
     public static String getDigestStringOfMessage(Charset charset,
-                                           String message) throws NoSuchAlgorithmException {
+                                                  String message) throws NoSuchAlgorithmException {
         return getDigestStringOfMessage(DEFAULT_ALGORITHM,
                                         charset,
                                         message);
@@ -128,7 +129,7 @@ public abstract class OakDigest {
      * @see         ku.cs.oakcoding.app.helpers.security.OakDigest#getDefaultCharset()
      */
     public static String getDigestStringOfMessage(String algorithm,
-                                           String message) throws NoSuchAlgorithmException {
+                                                  String message) throws NoSuchAlgorithmException {
         return getDigestStringOfMessage(algorithm,
                                         DEFAULT_CHARSET,
                                         message);
@@ -163,7 +164,8 @@ public abstract class OakDigest {
      * @throws      FileNotFoundException       If the given Path points to file that does not exist
      */
     public static String getDigestStringOf(String algorithm,
-                                    Path filePath) throws NoSuchAlgorithmException, FileNotFoundException {
+                                           Path filePath) throws NoSuchAlgorithmException,
+                                                                 FileNotFoundException {
         if (Files.exists(filePath) == false) {
             throw new FileNotFoundException(filePath.toString());
         }
@@ -200,7 +202,8 @@ public abstract class OakDigest {
      * 
      * @see         ku.cs.oakcoding.app.helpers.security.OakDigest#getDefaultDigestAlgorithm()
      */
-    public static String getDigestStringOf(Path filePath) throws NoSuchAlgorithmException, FileNotFoundException {
+    public static String getDigestStringOf(Path filePath) throws NoSuchAlgorithmException,
+                                                                 FileNotFoundException {
         if (Files.exists(filePath) == false) {
             throw new FileNotFoundException(filePath.toString());
         }
@@ -222,7 +225,8 @@ public abstract class OakDigest {
      * 
      */
     public static String getDigestStringOf(String algorithm,
-                                           String filePathString) throws NoSuchAlgorithmException, FileNotFoundException {
+                                           String filePathString) throws NoSuchAlgorithmException,
+                                                                         FileNotFoundException {
         return getDigestStringOf(FileSystems.getDefault().getPath(filePathString));
     }
 
@@ -238,7 +242,8 @@ public abstract class OakDigest {
      * 
      * @see         ku.cs.oakcoding.app.helpers.security.OakDigest#getDefaultDigestAlgorithm()
      */
-    public static String getDigestStringOf(String filePathString) throws NoSuchAlgorithmException, FileNotFoundException {
+    public static String getDigestStringOf(String filePathString) throws NoSuchAlgorithmException,
+                                                                         FileNotFoundException {
         return getDigestStringOf(DEFAULT_ALGORITHM,
                                  filePathString);
     }

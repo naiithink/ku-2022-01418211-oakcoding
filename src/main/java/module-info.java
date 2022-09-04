@@ -1,4 +1,5 @@
 module oakcoding.app {
+    requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
 

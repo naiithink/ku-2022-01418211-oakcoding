@@ -9,7 +9,23 @@ public class CoreInstanceAlreadyActiveException
         super(message);
     }
 
-    public CoreInstanceAlreadyActiveException(String message, Throwable cause) {
-        super(message, cause);
+    public CoreInstanceAlreadyActiveException(Throwable cause) {
+        super(cause);
+    }
+
+    public CoreInstanceAlreadyActiveException(String message,
+                                              Throwable cause) {
+        super(message,
+              cause);
+    }
+
+    public CoreInstanceAlreadyActiveException(String message,
+                                              Throwable cause,
+                                              boolean enableSuppression,
+                                              boolean writableStackTrace) {
+        super(message,
+              cause,
+              enableSuppression,
+              writableStackTrace);
     }
 }
