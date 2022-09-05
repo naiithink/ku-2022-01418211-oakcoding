@@ -22,10 +22,7 @@ package ku.cs.oakcoding.app.helpers.configurations;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,36 +30,8 @@ import java.util.regex.Pattern;
 import ku.cs.oakcoding.app.helpers.construct.OakPatterns;
 
 public final class OakAppConfigs {
-    private OakAppConfigs instance;
+    private static OakAppConfigs instance;
     private OakAppConfigs() {}
-
-    /**
-     * @warning access to get the instance might be too strong
-     */
-    public OakAppConfigs getInstance() {
-        if (instance == null) {
-            synchronized (OakAppConfigs.class) {
-                if (instance == null) {
-                    instance = new OakAppConfigs();
-                }
-            }
-        }
-
-        return instance;
-    }
-
-    private class EnsureType<T> {
-
-        private T unknownType;
-
-        public EnsureType(T unknownType) {
-            this.unknownType = unknownType;
-        }
-
-        public Class<?> getTypeOfInitializer() {
-            return unknownType.getClass();
-        }
-    }
 
     private static volatile Properties configProperty;
 
@@ -71,25 +40,33 @@ public final class OakAppConfigs {
     private static volatile Pattern patternAppConstruct;
 
     static {
-        String assertConfigFilePathString = OakSystemDefaults.USER_DIR.value()
-                                            + OakSystemDefaults.FILE_SEPARATOR.value()
-                                            + OakAppDefaults.CONFIG_FILE.value();
-        Path assertConfigFilePath = Paths.get(assertConfigFilePathString);
+        if (instance == null) {
+            synchronized (OakAppConfigs.class) {
+                if (instance == null) {
+                    instance = new OakAppConfigs();
+                }
+            }
+        }
 
-        if (Files.exists(assertConfigFilePath, LinkOption.NOFOLLOW_LINKS) == false) {
+        try (InputStream in = instance.getClass()
+                                      .getClassLoader()
+                                      .getResourceAsStream(OakAppDefaults.CONFIG_FILE.get("app.default.configFile"))) {
+
+            Objects.requireNonNull(in);
+
+            configProperty = new Properties();
+
+            configProperty.load(in);
+        } catch (IOException | NullPointerException e) {
             System.err.println("ERROR: App configuration file is missing");
             System.exit(1);
         }
 
-        try (InputStream in = Files.newInputStream(assertConfigFilePath, LinkOption.NOFOLLOW_LINKS)) {
-            configProperty = new Properties();
-
-            configProperty.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         useExperimentalFeature = Boolean.parseBoolean(configProperty.getProperty("useExperimentalFeature"));
+    }
+
+    public static synchronized OakAppConfigs getInstance() {
+        return instance;
     }
 
     // public abstract void restoreToDefault(byte[] authCode);
@@ -129,43 +106,18 @@ public final class OakAppConfigs {
                         : null;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public <T> T getProperty(String key) {
-        T result = null;
-        String preResult = new String();
+    public static boolean containsKey(String key) {
+        return configProperty.containsKey(key);
+    }
 
-        if ((preResult = nonCommentRegionOf(key)) == null) {
-            return null;
+    public static String getProperty(String key) {
+        if (containsKey(key) == false
+            && OakAppDefaults.valueOfKey(key) != null) {
+
+            configProperty.put(key, OakAppDefaults.valueOfKey(key));
         }
 
-        if (isLanguageConstruct(preResult) == true) {
-            EnsureType<T> ensureType = new EnsureType<T>(result);
-            Class<?> resultType = ensureType.getTypeOfInitializer();
-            Class<?> configKeyClass = null;
-
-            try {
-                configKeyClass = Class.forName(languageConstructRegion(preResult));
-            } catch (ClassNotFoundException e) {
-                //** @warning */ 
-            }
-
-            // /.*\=/
-            String configValue = configProperty.getProperty(languageConstructRegion(preResult));
-
-            if (configKeyClass.isAssignableFrom(resultType) == false) {
-                result = null;
-            }
-
-            /**
-             * @todo get a value of an enum constant via method invoked from a string.
-             */
-            // > if (configKeyClass.isEnum()) {
-            // >     T[] enumConstants = configKeyClass.getEnumConstants();
-            // >     result = Enum.valueOf(resultType.getClass(), configValue);
-            // > }
-        }
-
-        return result;
+        return configProperty.getProperty(key);
     }
 
     /**
