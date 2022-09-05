@@ -24,10 +24,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ku.cs.oakcoding.app.helpers.construct.OakPatterns;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
 public final class OakAppConfigs {
     private static OakAppConfigs instance;
@@ -48,18 +51,22 @@ public final class OakAppConfigs {
             }
         }
 
+        configProperty = new Properties();
+
         try (InputStream in = instance.getClass()
                                       .getClassLoader()
                                       .getResourceAsStream(OakAppDefaults.CONFIG_FILE.get("app.default.configFile"))) {
 
             Objects.requireNonNull(in);
 
-            configProperty = new Properties();
-
             configProperty.load(in);
         } catch (IOException | NullPointerException e) {
-            System.err.println("ERROR: App configuration file is missing");
-            System.exit(1);
+            // Use app default
+            OakLogger.log(Level.WARNING, "App configuration file is missing, using defaults");
+            if (selfRecover() == false) {
+                OakLogger.log(Level.SEVERE, "Cannot recover app configuration");
+                System.exit(1);
+            }
         }
 
         useExperimentalFeature = Boolean.parseBoolean(configProperty.getProperty("useExperimentalFeature"));
@@ -67,6 +74,22 @@ public final class OakAppConfigs {
 
     public static synchronized OakAppConfigs getInstance() {
         return instance;
+    }
+
+    private static synchronized boolean selfRecover() {
+        boolean success = false;
+
+        ConcurrentHashMap<String, String> defaults = OakAppDefaults.getDefaultConfig();
+
+        if (defaults != null) {
+            for (ConcurrentHashMap.Entry<String, String> e : defaults.entrySet()) {
+                configProperty.put(e.getKey(), e.getValue());
+            }
+
+            success = true;
+        }
+
+        return success;
     }
 
     // public abstract void restoreToDefault(byte[] authCode);

@@ -53,4 +53,14 @@ public enum OakAppDefaults {
 
         return null;
     }
+
+    public static ConcurrentHashMap<String, String> getDefaultConfig() {
+        ConcurrentHashMap<String, String> defaults = new ConcurrentHashMap<>();
+
+        for (OakAppDefaults e : OakAppDefaults.values()) {
+            defaults.put(e.key, e.value);
+        }
+
+        return defaults;
+    }
 }
