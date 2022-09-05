@@ -60,7 +60,9 @@ public abstract class OakPatterns {
             if (patternSpecialComment == null) {
                 synchronized (OakPatterns.class) {
                     if (patternSpecialComment == null) {
-                        patternSpecialComment = Pattern.compile(rawRegexSpecialCharLint(String.format("\\S*(?=%s)", OakSpecialAppToken.AsChar.COMMENT.value())));
+                        patternSpecialComment = Pattern.compile(
+                            rawRegexSpecialCharLint(String.format("\\S*(?=%c)", OakSpecialAppToken.AsChar.COMMENT.value()))
+                        );
                     }
                 }
             }
@@ -72,9 +74,11 @@ public abstract class OakPatterns {
             if (patternSpecialParameterExpansion == null) {
                 synchronized (OakPatterns.class) {
                     if (patternSpecialParameterExpansion == null) {
-                        patternSpecialParameterExpansion = Pattern.compile(rawRegexSpecialCharLint(String.format("(?<=%s%s).*(?=%s)", OakSpecialAppToken.AsChar.PARAM_EXPANSION.value(),
-                                                                                                                                      OakSpecialAppToken.AsChar.PARAM_EXPANSION_START.value(),
-                                                                                                                                      OakSpecialAppToken.AsChar.PARAM_EXPANSION_END.value())));
+                        patternSpecialParameterExpansion = Pattern.compile(
+                            rawRegexSpecialCharLint(String.format("(?<=%c%c).*(?=%c)", OakSpecialAppToken.AsChar.PARAM_EXPANSION.value(),
+                                                                                       OakSpecialAppToken.AsChar.PARAM_EXPANSION_START.value(),
+                                                                                       OakSpecialAppToken.AsChar.PARAM_EXPANSION_END.value()))
+                        );
                     }
                 }
             }
@@ -85,7 +89,7 @@ public abstract class OakPatterns {
 
     static {
         regexSpecialCharacters = new ConcurrentHashMap<Character, Character>();
-        LINT_PATTERN = "((?<=[^\\W\\[])(?<!\\\\)\\^|(?<!\\\\)\\\\(?=\\w)|(?<=[\\(\\[])(?:\\w*)[\\{\\}](?:\\w*)(?=[\\)\\]])|(?<!\\\\)\\$(?=\\w))"; // "((?<=[^\\W\\[])(?<!\\\\)\\^|(?<!\\\\)\\\\(?=\\w)|(?<!\\\\)\\$(?=\\w))";
+        LINT_PATTERN = "((?<=[^\\W\\[])(?<!\\\\)\\^|(?<!\\\\)\\\\(?=\\w)|(?<=[\\(\\[])(?:\\w*)[\\{\\}](?:\\w*)(?=[\\)\\]])|(?<!\\\\)\\$(?=\\w))";
 
         for (Character ch : REGEX_SPECIAL_CHARS) {
             regexSpecialCharacters.put(ch, ch);
@@ -138,10 +142,5 @@ public abstract class OakPatterns {
 
     public static Pattern getPatternSpecialComment() {
         return OakPatternPool.getPatternSpecialComment();
-    }
-
-    public static void main(String[] args) {
-        String s = "^hello^wo[^]rld$ei(ab{cd)ei$";
-        System.err.println(rawRegexSpecialCharLint(s));
     }
 }
