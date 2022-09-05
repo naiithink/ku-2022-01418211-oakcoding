@@ -32,40 +32,32 @@ public final class OakLogger {
         logFileName = OakAppConfigs.getProperty(OakAppDefaults.NAME.key())
                       + "-"
                       + String.valueOf(OakHotspot.getStartTime()) + ".log";
-    }
 
-    public static void init() {
-        if (logger == null) {
-            synchronized (OakLogger.class) {
-                if (logger == null) {
-                    logger = Logger.getLogger(OakLogger.class.getName());
+        logger = Logger.getLogger(OakLogger.class.getName());
 
-                    consoleHandler = new ConsoleHandler();
-                    logger.addHandler(consoleHandler);
+        consoleHandler = new ConsoleHandler();
+        logger.addHandler(consoleHandler);
 
-                    try {
-                        if (OakAppConfigs.containsKey(OakAppDefaults.LOG_FILE_DIR.key())) {
-                            logFileDirPath = Paths.get(OakAppConfigs.getProperty(OakAppDefaults.LOG_FILE_DIR.key()));
+        try {
+            if (OakAppConfigs.containsKey(OakAppDefaults.LOG_FILE_DIR.key())) {
+                logFileDirPath = Paths.get(OakAppConfigs.getProperty(OakAppDefaults.LOG_FILE_DIR.key()));
 
-                            if (Files.exists(logFileDirPath, LinkOption.NOFOLLOW_LINKS) == false) {
-                                Files.createDirectory(logFileDirPath);
-                            }
-
-                            fileHandler = new FileHandler(logFileDirPath.resolve(Paths.get(logFileName)).toString(), true);
-                        } else {
-                            fileHandler = new FileHandler(OakAppDefaults.LOG_FILE_DIR.value(), true);
-                        }
-
-                        fileHandler.setFormatter(new OakFormatter());
-                        logger.addHandler(fileHandler);
-                    } catch (IOException e) {
-                        logger.log(Level.WARNING, "Configuration for log file could not be found or invalid, only print ont console.");
-                    }
-
-                    logger.log(Level.INFO, ">>>>> LOG START <<<<<");
+                if (Files.exists(logFileDirPath, LinkOption.NOFOLLOW_LINKS) == false) {
+                    Files.createDirectory(logFileDirPath);
                 }
+
+                fileHandler = new FileHandler(logFileDirPath.resolve(Paths.get(logFileName)).toString(), true);
+            } else {
+                fileHandler = new FileHandler(OakAppDefaults.LOG_FILE_DIR.value(), true);
             }
+
+            fileHandler.setFormatter(new OakFormatter());
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Configuration for log file could not be found or invalid, only print onto console");
         }
+
+        logger.log(Level.INFO, ">>>>> LOG START <<<<<");
     }
 
     public static synchronized void log(Level level,
@@ -75,10 +67,5 @@ public final class OakLogger {
 
     public static synchronized void stop() {
         logger.log(Level.INFO, ">>>>> LOG END <<<<<");
-    }
-
-    public static void main(String[] args) {
-        OakLogger.init();
-        OakLogger.log(Level.INFO, "test");
     }
 }

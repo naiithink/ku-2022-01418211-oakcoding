@@ -17,7 +17,7 @@ public enum OakAppDefaults {
     VERSION                         ("app.version",                 "NIL"),
     LOG_FILE_DIR                    ("app.resource.logFile.dir",    "logs"),
     USE_TEMP_DIR                    ("app.resource.useTmpDir",      "true"),
-    USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeature",  "false");
+    USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeatures", "false");
 
     private final String key;
 

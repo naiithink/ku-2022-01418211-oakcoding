@@ -13,9 +13,15 @@ public interface OakResource
         extends Closeable,
                 OakEventListener {
 
+    String getName();
+
+    String getFullName();
+
     URI getURI();
 
     Path getPath();
+
+    Path getParentPath();
 
     File getFile();
 
