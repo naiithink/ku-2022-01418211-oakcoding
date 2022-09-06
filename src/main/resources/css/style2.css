@@ -1,6 +1,11 @@
 @font-face{
     font-family: 'Kanit';
-    src: url("../fonts/KanitRegular.ttf");
+    src: url("../fonts/KanitBold.ttf");
+}
+
+@font-face{
+    font-family: 'Inter';
+    src: url("../fonts/Inter-SemiBold.ttf");
 }
 
 .check-box .box {
@@ -17,10 +22,6 @@
 
 }
 
-.linear-grad2{
-   -fx-background-color: linear-gradient( #101f36 31%,#3d138c 72%, #17b8e5 100%);
-}
-
 .util-bar:hover{
     -fx-opacity: 0.7;
 }
@@ -30,25 +31,34 @@
 }
 
 .sign-in{
-   -fx-background-color: #1787e5;
+   -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
+   -fx-background-radius: 200;
+   -fx-font-family: "Inter";
+   -fx-font-size:13;
+   -fx-font-weight: bolder;
 }
 .sign-in:hover{
-   -fx-background-color: #26ABE3;
+   -fx-background-color: linear-gradient(to right, #FF4874 ,#8F47FF );
 }
 
 .sign-in:pressed{
-   -fx-background-color: #1787e5;
+   -fx-background-color: linear-gradient(to right, #FE3666 ,#8A40FF );
 }
 
 .hover:hover{
    -fx-text-fill: #17b8e5;
 }
 
-.test {
-   -fx-background-radius: 50px;
+.Title {
+    -fx-font-family: "Kanit";
+    -fx-font-weight: bolder;
 }
 
-.text {
-    -fx-font-family: "Kanit";
-    -fx-font-size:20;
+.Text {
+    -fx-font-family: "Inter";
+}
+
+.Text-field {
+    -fx-text-fill: White;
+    -fx-background-color: #2A2C32;
 }

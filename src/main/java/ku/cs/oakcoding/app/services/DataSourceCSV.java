@@ -1,7 +1,11 @@
 package ku.cs.oakcoding.app.services;
 
-import ku.cs.oakcoding.app.models.User;
-public interface DataSourceCSV<T> {
+import java.util.ArrayList;
 
+public interface DataSourceCSV<T> {
+    boolean checkID(String username,String password, String typeCheck);
+    T readThatData(String username,String password);
     void writeData(T t);
+
+    void clearData();
 }
