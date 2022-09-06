@@ -1,0 +1,10 @@
+@font-face{
+    font-family: 'Inter';
+    src: url("../fonts/Inter-ExtraBoldItalic.ttf");
+}
+
+.Text {
+    -fx-font-family: "Inter";
+    -fx-font-style: italic;
+    -fx-font-weight: bolder;
+}

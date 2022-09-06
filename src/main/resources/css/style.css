@@ -1,19 +1,48 @@
+@font-face{
+    font-family: 'Kanit';
+    src: url("../fonts/KanitRegular.ttf");
+}
+
+.Text {
+    -fx-font-family: "Kanit";
+}
+
 .check-box .box {
 
--fx-background-color: #0D1A2D;
--fx-border-color:#0D1A2D;
+-fx-background-color: White;
+-fx-border-color: white;
 -fx-border-radius:3px; 
 
 }
 
 .check-box:selected .mark {
 
--fx-background-color: white;
+-fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
 
 }
 
-.linear-grad2{
-   -fx-background-color: linear-gradient( #101f36 31%,#3d138c 72%, #17b8e5 100%);
+.sign-in{
+   -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
+   -fx-background-radius: 200;
+   -fx-font-family: "Kanit";
+   -fx-font-size:13;
+}
+.sign-in:hover{
+   -fx-background-color: linear-gradient(to right, #FF4874 ,#8F47FF );
+}
+
+.sign-in:pressed{
+   -fx-background-color: linear-gradient(to right, #FE3666 ,#8A40FF );
+}
+
+.hover:hover{
+   -fx-font-size:14;
+   -fx-text-fill: #50c2ff;
+}
+
+.decorated-window{
+   -fx-background-color: #121212;
+   -fx-background-radius: 18px;
 }
 
 .util-bar:hover{
@@ -22,19 +51,4 @@
 
 .exit{
    -fx-background-color: transparent;
-}
-
-.sign-in{
-   -fx-background-color: #1787e5;
-}
-.sign-in:hover{
-   -fx-background-color: #26ABE3;
-}
-
-.sign-in:pressed{
-   -fx-background-color: #1787e5;
-}
-
-.hover:hover{
-   -fx-text-fill: #17b8e5;
 }

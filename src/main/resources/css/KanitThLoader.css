@@ -1,0 +1,8 @@
+@font-face{
+    font-family: 'Kanit';
+    src: url("../fonts/KanitRegular.ttf");
+}
+
+.TextTH {
+    -fx-font-family: "Kanit";
+}

@@ -22,6 +22,10 @@ public class ProjectApplication extends Application {
         String packageStr = "views/";
         Router.when("project", packageStr + "project.fxml", 300, 500);
         Router.when("test", packageStr + "test.fxml", 600, 400);
+        Router.when("register", packageStr + "register.fxml",600,400);
+        Router.when("homeUser",packageStr + "homeUser.fxml",600,400);
+        Router.when("ProfileUser", packageStr + "ProfileUser.fxml",600,400);
+        Router.when("signIn", packageStr + "signIn.fxml",300,500);
     }
 
     public static void main(String[] args) {
