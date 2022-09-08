@@ -40,6 +40,7 @@
 | ครั้งที่ | วันที่        | ความก้าวหน้าของระบบ |
 | :--: | :--------: | :---------------- |
 | 1    | 2022-08-11 | ร่าง User Interface, mockup หน้า Sign In ของแอปพลิเคชัน, patch FXRouter, เพิ่ม custom font ผ่าน CSS, ทดลอง implement module สำหรับอ่าน configuration file |
+| 2    | 2022-09-08 | Class สำหรับอ่าน/เขียนข้อมูลลงบนไฟล์, UI improvements, configuration class, message digest class |
 
 </br >
 
@@ -51,9 +52,3 @@
 | 2    | ธนากร<br />Thanakorn   | คนหมั่น<br />Khonman                   | [@Thanakorn0Khonman](https://github.com/Thanakorn0Khonman)    | `6410451041` | thanakorn.khon@ku.th |
 | 3    | ธเนศ<br />Thanet       | จีนสีคง<br />Jinseekhong               | [@thanetjin](https://github.com/thanetjin)                    | `6410451067` | thanet.jin@ku.th  |
 | 4    | พศวัต<br />Potsawat     | ถิ่นกาญจน์วัฒนา<br />Thinkanwatthana     | [@naiithink](https://github.com/naiithink)                    | `6410451199` | potsawat.t@ku.th  |
-
-### ความก้าวหน้าของระบบ
-
-| ครั้งที่ | วันที่        | ความก้าวหน้าของระบบ |
-| :--: | :--------: | :---------------- |
-| 1    | 2022-08-11 | ร่าง User Interface, mockup หน้า Sign In ของแอปพลิเคชัน, patch FXRouter, เพิ่ม custom font ผ่าน CSS, ทดลอง implement module สำหรับอ่าน configuration file |
