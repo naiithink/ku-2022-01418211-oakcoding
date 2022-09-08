@@ -36,6 +36,7 @@ public final class OakLogger {
         logger = Logger.getLogger(OakLogger.class.getName());
 
         consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
         logger.addHandler(consoleHandler);
 
         try {
@@ -52,17 +53,30 @@ public final class OakLogger {
             }
 
             fileHandler.setFormatter(new OakFormatter());
+            fileHandler.setLevel(Level.ALL);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
             logger.log(Level.WARNING, "Configuration for log file could not be found or invalid, only print onto console");
         }
 
+        logger.setLevel(Level.ALL);
+        logger.setUseParentHandlers(false);
         logger.log(Level.INFO, ">>>>> LOG START <<<<<");
+    }
+
+    private static synchronized String[] getCallerReference() {
+        StackTraceElement[] traceElement = Thread.currentThread().getStackTrace();
+
+        return new String[] { traceElement[3].getClassName(), traceElement[3].getMethodName() };
     }
 
     public static synchronized void log(Level level,
                                         String message) {
-        logger.log(level, message);
+
+        final String[] callerReference = getCallerReference();
+
+        logger.log(level,
+                   new String(callerReference[0] + "." + callerReference[1] + ": " + message));
     }
 
     public static synchronized void stop() {
