@@ -4,7 +4,6 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,7 +43,7 @@
                         <String fx:value="sign-in" />
                      </styleClass>
                   </Button>
-                  <Label layoutX="64.0" layoutY="66.0" text="รายชื่อผู้ใช้งาน" textFill="#e0e0e1">
+                  <Label layoutX="64.0" layoutY="66.0" text="เรื่องร้องเรียน" textFill="#e0e0e1">
                      <font>
                         <Font name="Kanit" size="14.0" />
                      </font>
@@ -59,37 +58,7 @@
                         <Image url="@../images/chat-square_1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="23.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/person-circle%201.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="23.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/table%201.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="23.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/envelope%201.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="63.0" layoutY="116.0" text="การแจ้งเรื่องทั้งหมด" textFill="#e0e0e1">
-                     <font>
-                        <Font name="Kanit" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="63.0" layoutY="169.0" text="องค์กร" textFill="#e0e0e1">
-                     <font>
-                        <Font name="Kanit" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="63.0" layoutY="223.0" text="การรายงานทั้งหมด" textFill="#e0e0e1">
-                     <font>
-                        <Font name="Kanit" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="62.0" layoutY="274.0" text="รายการร้องขอ" textFill="#e0e0e1">
+                  <Label layoutX="63.0" layoutY="116.0" text="แจ้งเรื่อง" textFill="#e0e0e1">
                      <font>
                         <Font name="Kanit" size="14.0" />
                      </font>
@@ -127,25 +96,60 @@
                   <Font name="Kanit" size="14.0" />
                </font>
             </Label>
-            <ListView layoutX="272.0" layoutY="106.0" prefHeight="244.0" prefWidth="295.0" style="-fx-background-color: #2F3137; -fx-background-radius: 10;" />
-            <Label layoutX="493.0" layoutY="59.0" text="Admin" textFill="#e0e0e1">
+            <Label layoutX="501.0" layoutY="59.0" text="User" textFill="#e0e0e1">
                <font>
                   <Font name="Kanit" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="registerButton2" layoutX="427.0" layoutY="366.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="147.0" text="เพิ่มจำนวนเจ้าหน้าที่" textFill="WHITE">
+            <ImageView fitHeight="54.0" fitWidth="78.0" layoutX="297.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/person-circle%201.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="381.0" layoutY="105.0" text="Alexander" textFill="#e0e0e1">
                <font>
-                  <Font name="Kanit Regular" size="12.0" />
+                  <Font name="Kanit" size="18.0" />
                </font>
-               <stylesheets>
-                  <URL value="@../css/KanitThLoader.css" />
-                  <URL value="@../css/style.css" />
-               </stylesheets>
-               <styleClass>
-                  <String fx:value="TextTH" />
-                  <String fx:value="sign-in" />
-               </styleClass>
-            </Button>
+            </Label>
+            <Label layoutX="410.0" layoutY="133.0" text="User" textFill="#e0e0e1">
+               <font>
+                  <Font name="Kanit" size="13.0" />
+               </font>
+            </Label>
+            <Pane layoutX="297.0" layoutY="180.0" prefHeight="194.0" prefWidth="282.0" style="-fx-background-color: #2E3034 #2E3034; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="รหัสประจำตัวนิสิต" textFill="#fdfdff">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="51.0" textFill="#e8e8ee">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="62.0" text="Username" textFill="#fdfdff">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="41.0" text="6410459351" textFill="#e0e0e1">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="87.0" text="Alexander555" textFill="#e0e0e1">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="188.0" layoutY="159.0" text="เปลี่ยนรหัสผ่าน" textFill="#fdfdff">
+                     <font>
+                        <Font name="Kanit" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             </children>
         </Pane>
     </children>

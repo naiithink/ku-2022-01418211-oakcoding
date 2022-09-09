@@ -62,3 +62,8 @@
     -fx-text-fill: White;
     -fx-background-color: #2A2C32;
 }
+.Profile-Circle{
+-fx-padding: 10;
+-fx-background-color: firebrick;
+    -fx-background-radius: 5;
+}
