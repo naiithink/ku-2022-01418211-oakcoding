@@ -4,7 +4,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,19 +18,6 @@
             <Pane prefHeight="406.0" prefWidth="241.0" style="-fx-background-color: #2E3034;" styleClass="border" stylesheets="@../css/registerBorderAdj.css">
                <children>
                   <Pane layoutX="222.0" prefHeight="406.0" prefWidth="19.0" style="-fx-background-color: #2E3034;" />
-                  <Button fx:id="registerButton1" layoutX="7.0" layoutY="59.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="227.0" textFill="WHITE">
-                     <font>
-                        <Font name="Kanit Regular" size="12.0" />
-                     </font>
-                     <stylesheets>
-                        <URL value="@../css/KanitThLoader.css" />
-                        <URL value="@../css/style.css" />
-                     </stylesheets>
-                     <styleClass>
-                        <String fx:value="TextTH" />
-                        <String fx:value="button-selected" />
-                     </styleClass>
-                  </Button>
                       <Button fx:id="registerButton" layoutX="25.0" layoutY="351.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" text="ออกจากระบบ" textFill="WHITE">
                      <font>
                         <Font name="Kanit Regular" size="12.0" />
@@ -42,6 +29,19 @@
                      <styleClass>
                         <String fx:value="TextTH" />
                         <String fx:value="sign-in" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="registerButton11" layoutX="7.0" layoutY="110.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="227.0" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit Regular" size="12.0" />
+                     </font>
+                     <stylesheets>
+                        <URL value="@../css/KanitThLoader.css" />
+                        <URL value="@../css/style.css" />
+                     </stylesheets>
+                     <styleClass>
+                        <String fx:value="TextTH" />
+                        <String fx:value="button-selected" />
                      </styleClass>
                   </Button>
                   <Label layoutX="64.0" layoutY="66.0" text="รายชื่อผู้ใช้งาน" textFill="#e0e0e1">
@@ -127,13 +127,18 @@
                   <Font name="Kanit" size="14.0" />
                </font>
             </Label>
-            <ListView layoutX="272.0" layoutY="106.0" prefHeight="244.0" prefWidth="295.0" style="-fx-background-color: #2F3137; -fx-background-radius: 10;" />
             <Label layoutX="493.0" layoutY="59.0" text="Admin" textFill="#e0e0e1">
                <font>
                   <Font name="Kanit" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="registerButton2" layoutX="427.0" layoutY="366.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="147.0" text="เพิ่มจำนวนเจ้าหน้าที่" textFill="WHITE">
+            <TextField layoutX="297.0" layoutY="134.0" prefHeight="205.0" prefWidth="254.0" style="-fx-background-color: #2E3034 #2E3034; -fx-background-radius: 10;" />
+            <Label layoutX="297.0" layoutY="100.0" text="หัวข้อเรื่องการร้องเรียน" textFill="#e0e0e1">
+               <font>
+                  <Font name="Kanit" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="registerButton1" layoutX="515.0" layoutY="347.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="40.0" text="เพิ่ม" textFill="WHITE">
                <font>
                   <Font name="Kanit Regular" size="12.0" />
                </font>

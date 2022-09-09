@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
+    <children>
+        <Pane prefHeight="406.0" prefWidth="600.0" styleClass="decorated-window" stylesheets="@../css/style.css">
+            <children>
+                <Label layoutX="334.0" layoutY="25.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สมัครสมาชิก staff" textFill="WHITE">
+               <font>
+                  <Font name="Kanit" size="21.0" />
+               </font></Label>
+                <Label layoutX="261.0" layoutY="65.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Firstname" textFill="#d0d0d0">
+               <font>
+                  <Font name="Kanit Regular" size="16.0" />
+               </font></Label>
+                <Label layoutX="429.0" layoutY="66.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Lastname" textFill="#d0d0d0">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+                <Label layoutX="261.0" layoutY="117.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
+               <font>
+                  <Font name="Kanit Regular" size="16.0" />
+               </font></Label>
+                <Label layoutX="262.0" layoutY="169.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password" textFill="#d0d0d0">
+               <font>
+                  <Font name="Kanit Regular" size="16.0" />
+               </font></Label>
+                <Label layoutX="261.0" layoutY="223.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password Confirm" textFill="#d0d0d0">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <Button fx:id="registerButton" layoutX="353.0" layoutY="362.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="26.0" prefWidth="109.0" text="สมัครสมาชิก" textFill="WHITE">
+               <font>
+                  <Font name="Kanit Regular" size="12.0" />
+               </font>
+               <stylesheets>
+                  <URL value="@../css/KanitThLoader.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets>
+               <styleClass>
+                  <String fx:value="TextTH" />
+                  <String fx:value="sign-in" />
+               </styleClass></Button>
+                <TextField fx:id="firstnameField" layoutX="261.0" layoutY="88.0" prefHeight="26.0" prefWidth="135.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                <TextField fx:id="lastnameField" layoutX="428.0" layoutY="88.0" prefHeight="26.0" prefWidth="151.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                <TextField fx:id="usernameField" layoutX="261.0" layoutY="140.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                <TextField fx:id="passwordField" layoutX="261.0" layoutY="196.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                <TextField fx:id="passwordConfirmField" layoutX="261.0" layoutY="245.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+            <Pane prefHeight="406.0" prefWidth="241.0" style="-fx-background-color: #2E3034;" styleClass="border" stylesheets="@../css/registerBorderAdj.css">
+               <children>
+                  <Pane layoutX="222.0" prefHeight="406.0" prefWidth="19.0" style="-fx-background-color: #2E3034;" />
+                      <Label layoutX="18.0" layoutY="135.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="KASETSART" textFill="WHITE">
+                          <font>
+                              <Font name="Inter Bold Italic" size="33.0" />
+                          </font>
+                      </Label>
+                  <Label layoutX="17.0" layoutY="176.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="UNIVERSITY" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+                <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="568.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                    <image>
+                    <Image url="@../images/white-reject.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="17.0" fitWidth="19.0" layoutX="539.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                    <image>
+                        <Image url="@../images/white-minus.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="247.0" layoutY="5.0" onMouseClicked="#handleBackButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                    <image>
+                        <Image url="@../images/arrow-left-short.png" />
+                    </image>
+                </ImageView>
+            <Label layoutX="263.0" layoutY="281.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="276.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="Text" />
+                  <String fx:value="hover" />
+               </styleClass>
+            </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

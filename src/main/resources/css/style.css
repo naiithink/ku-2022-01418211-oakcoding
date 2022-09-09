@@ -20,7 +20,10 @@
 -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
 
 }
-
+.button-selected{
+-fx-background-color:#27282B;
+-fx-border-radius: 50px;
+}
 .sign-in{
    -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
    -fx-background-radius: 200;
@@ -51,4 +54,7 @@
 
 .exit{
    -fx-background-color: transparent;
+}
+.Profile-Circle{
+    -fx-background-radius: 5;
 }
