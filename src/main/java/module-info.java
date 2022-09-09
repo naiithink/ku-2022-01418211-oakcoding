@@ -2,6 +2,7 @@ module oakcoding.app {
     requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.logging;
 
     // ku.cs.oakcoding.ProjectApplication.launch()
     exports ku.cs.oakcoding to javafx.graphics;
