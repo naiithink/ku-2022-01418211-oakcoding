@@ -1,41 +1,48 @@
-package ku.cs.oakcoding.app.services.Picture;
+package ku.cs.oakcoding.app.services.DataSource;
 
-import java.io.File;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.util.Iterator;
+import ku.cs.oakcoding.app.models.picture.Picture;
+import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
+
+
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 
 
-public class PictureSourceCSV {
+public class PictureSourceCSV implements DataSourceCSV<Picture> {
 
-    private String pictureFolder;
+    private String directoryName;
     private String filename;
-    private String pictureForm;
     private String picturePath;
 
-    public PictureSourceCSV(String pictureFolder, String filename, String pictureFrom) {
-        this.pictureFolder = pictureFolder;
-        this.filename = filename;
-        this.pictureForm = pictureFrom;
+    public PictureSourceCSV(String directoryName){
+        this.directoryName = directoryName;
         checkFileIsExisted();
 
     }
 
     private void checkFileIsExisted() {
-        File file = new File(pictureFolder);
+        File file = new File(directoryName);
         if (!file.exists()) {
             file.mkdir();
         }
     }
 
-    public void writePicture(){
+    @Override
+    public Picture readData() {
+        Picture picture = new Picture(picturePath,filename);
+        return picture;
+    }
 
+    @Override
+    public void writeData(Picture pictureFrom) {
         BufferedImage image = null;
-        if (!pictureForm.equals("picture/Default.jpg")){
-            File input_file = new File(pictureForm);
+        if (!pictureFrom.getPicturePath().equals("picture/Default.jpg")){
+            File input_file = new File(pictureFrom.getPicturePath());
             try {
                 image = ImageIO.read(input_file);
 
@@ -49,13 +56,15 @@ public class PictureSourceCSV {
                 ImageReader reader = iter.next();
                 String formatName = reader.getFormatName();
                 if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")){
-                    ImageIO.write(image, "jpg", new File("picture/"+filename+".jpg"));
-                    this.picturePath = "picture/"+filename+".jpg";
+                    ImageIO.write(image, "jpg", new File("picture/"+pictureFrom.getFilename()+".jpg"));
+                    this.picturePath = "picture/"+pictureFrom.getFilename()+".jpg";
+                    this.filename = pictureFrom.getFilename();
                     iis.close();
                 }
                 else if (formatName.equals("png")){
-                    ImageIO.write(image,"png", new File("picture/"+filename+".png"));
-                    this.picturePath = "picture/"+filename+".png";
+                    ImageIO.write(image,"png", new File("picture/"+pictureFrom.getFilename()+".png"));
+                    this.picturePath = "picture/"+pictureFrom.getFilename()+".png";
+                    this.filename = pictureFrom.getFilename();
                     iis.close();
                 }
             } catch (IOException e){
@@ -64,21 +73,16 @@ public class PictureSourceCSV {
         }
         else {
             this.picturePath = "picture/Default.jpg";
+            this.filename = "Default";
         }
     }
 
-    public void deletePicture(String picturePath){
+    @Override
+    public void clearData() {
         File picture = new File(picturePath);
         if (picture.exists() && !picturePath.equals("picture/Default.jpg")) {
             picture.delete();
         }
         this.picturePath = "picture/Default.jpg";
     }
-
-    public String getPicturePath(){
-        return picturePath;
-    }
-
-
-
 }

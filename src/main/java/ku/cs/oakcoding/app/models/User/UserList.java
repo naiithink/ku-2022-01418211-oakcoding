@@ -1,20 +1,21 @@
 package ku.cs.oakcoding.app.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserList {
-    private ArrayList<User> users;
+    private HashMap<String,User> usersMap;
 
     public UserList(){
-        users = new ArrayList<User>();
+        usersMap = new HashMap<>();
     }
 
-    public void addUser(User user){
-        users.add(user);
+    public UserList(HashMap<String,User> usersMap){
+        this.usersMap = usersMap;
     }
 
-    public ArrayList<User> getUsers(){
-        return users;
+    public void addUserMap(String key, User user){
+        usersMap.put(key,user);
     }
-
+    public HashMap<String,User> getUsersMap() {return usersMap;}
 }

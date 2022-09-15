@@ -8,15 +8,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import ku.cs.oakcoding.app.models.IDmanager;
-import ku.cs.oakcoding.app.models.User.User;
+import ku.cs.oakcoding.app.models.DataManager;
 
 import java.io.File;
 import java.io.IOException;
 
 public class RegisterController {
 
-    private IDmanager IDmanager;
+    private DataManager DataManager;
     private String picturePath = "picture/Default.jpg";
     @FXML
     private TextField firstnameField;
@@ -33,7 +32,7 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        IDmanager = new IDmanager();
+        DataManager = new DataManager();
     }
     @FXML
     public void handleRegisterButton(ActionEvent actionEvent) {
@@ -43,16 +42,16 @@ public class RegisterController {
         String lastnameIn = lastnameField.getText();
         String passwordConfirmIn = passwordConfirmField.getText();
 
-        if (IDmanager.doRegister(usernameIn,passwordIn,passwordConfirmIn,firstnameIn,lastnameIn)) {
+        if (DataManager.doRegister(usernameIn,passwordIn,passwordConfirmIn,firstnameIn,lastnameIn)) {
             usernameField.clear();
             passwordField.clear();
             passwordConfirmField.clear();
             firstnameField.clear();
             lastnameField.clear();
 
-            picturePath = IDmanager.writeThenGetPicturePath(usernameIn+".jpg",picturePath);
+            picturePath = DataManager.writePicture(usernameIn,this.picturePath);
 
-            IDmanager.regisID(usernameIn,passwordIn,picturePath,firstnameIn,lastnameIn);
+            DataManager.regisID(usernameIn,passwordIn,picturePath,firstnameIn,lastnameIn);
             try {
                 Router.goTo("project");
             } catch (IOException e){

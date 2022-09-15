@@ -10,15 +10,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import com.github.saacsos.fxrouter.Router;
-import ku.cs.oakcoding.app.models.IDmanager;
+import ku.cs.oakcoding.app.models.DataManager;
 import ku.cs.oakcoding.app.models.User.User;
-
-import ku.cs.oakcoding.app.services.DataSourceCSV;
-import ku.cs.oakcoding.app.services.User.UserDataSourceCSV;
 
 public class LoginController {
 
-    private IDmanager IDmanager;
+    private DataManager DataManager;
 
     @FXML
     private TextField username;
@@ -28,26 +25,26 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        IDmanager = new IDmanager();
+        DataManager = new DataManager();
     }
 
-    @FXML
-    public void handleSignInButton(ActionEvent actionEvent) {
-        String usernameIn = username.getText();
-        String passwordIn = password.getText();
-
-        if (IDmanager.doLogin(usernameIn,passwordIn)){
-            // .getUser
-            User user = IDmanager.getUser(usernameIn,passwordIn);
-            try {
-                Router.goTo("homeUser",user);
-            } catch (IOException e) {
-                System.err.println("ไปที่หน้า homeUser ไม่ได้");
-                System.err.println("ให้ตรวจสอบการกำหนด route");
-            }
-        }
-
-    }
+//    @FXML
+//    public void handleSignInButton(ActionEvent actionEvent) {
+//        String usernameIn = username.getText();
+//        String passwordIn = password.getText();
+//
+//        if (DataManager.doLogin(usernameIn,passwordIn)){
+//            // .getUser
+//            User user = DataManager.getUser(usernameIn,passwordIn);
+//            try {
+//                Router.goTo("homeUser",user);
+//            } catch (IOException e) {
+//                System.err.println("ไปที่หน้า homeUser ไม่ได้");
+//                System.err.println("ให้ตรวจสอบการกำหนด route");
+//            }
+//        }
+//
+//    }
 
     @FXML
     public void handleCloseButton(MouseEvent mouseEvent) {

@@ -4,17 +4,10 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import com.github.saacsos.fxrouter.Router;
-import ku.cs.oakcoding.app.models.IDmanager;
-import ku.cs.oakcoding.app.models.User.User;
-
-import ku.cs.oakcoding.app.services.DataSourceCSV;
-import ku.cs.oakcoding.app.services.User.UserDataSourceCSV;
 
 public class ProjectController {
 

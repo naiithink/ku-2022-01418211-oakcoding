@@ -1,8 +1,6 @@
 package ku.cs.oakcoding;
 
-import ku.cs.oakcoding.app.models.IDmanager;
-
-import java.io.*;
+import ku.cs.oakcoding.app.models.DataManager;
 
 public class testwriter {
     public static void main(String[] args) {
@@ -25,8 +23,8 @@ public class testwriter {
 //            throw new RuntimeException(e);
 //        }
 
-        IDmanager iDmanager = new IDmanager();
-        iDmanager.changePassword("ingfosbreak","qwertyuiop","191245ing");
+//        DataManager dataManager = new DataManager();
+//        dataManager.changePassword("ingfosbreak","qwertyuiop","191245ing");
 
 
     }

@@ -9,11 +9,6 @@ import java.io.IOException;
 
 public class homeUserController {
 
-
-
-
-
-
     @FXML
     public void handleProfileUser(MouseEvent mouseEvent) {
         try {
