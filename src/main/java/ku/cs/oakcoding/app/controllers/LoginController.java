@@ -9,13 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import com.github.saacsos.fxrouter.Router;
-import ku.cs.oakcoding.app.models.DataManager;
+import com.github.saacsos.fxrouter.OakRouter;
 import ku.cs.oakcoding.app.models.User.User;
 
-public class LoginController {
 
-    private DataManager DataManager;
+public class LoginController {
 
     @FXML
     private TextField username;
@@ -23,28 +21,22 @@ public class LoginController {
     @FXML
     private PasswordField password;
 
-    @FXML
-    public void initialize() {
-        DataManager = new DataManager();
-    }
 
-//    @FXML
-//    public void handleSignInButton(ActionEvent actionEvent) {
-//        String usernameIn = username.getText();
-//        String passwordIn = password.getText();
-//
-//        if (DataManager.doLogin(usernameIn,passwordIn)){
-//            // .getUser
-//            User user = DataManager.getUser(usernameIn,passwordIn);
-//            try {
-//                Router.goTo("homeUser",user);
-//            } catch (IOException e) {
-//                System.err.println("ไปที่หน้า homeUser ไม่ได้");
-//                System.err.println("ให้ตรวจสอบการกำหนด route");
-//            }
-//        }
-//
-//    }
+    @FXML
+    public void handleSignInButton(ActionEvent actionEvent) {
+        String usernameIn = username.getText();
+        String passwordIn = password.getText();
+
+        if (User.login(usernameIn,passwordIn)){
+            try {
+                OakRouter.goTo("homeUser",User.getValue(usernameIn));
+            } catch (IOException e) {
+                System.err.println("ไปที่หน้า homeUser ไม่ได้");
+                System.err.println("ให้ตรวจสอบการกำหนด route");
+            }
+        }
+
+    }
 
     @FXML
     public void handleCloseButton(MouseEvent mouseEvent) {
@@ -61,7 +53,7 @@ public class LoginController {
     @FXML
     public void handleBackButton(MouseEvent mouseEvent)  {
         try {
-            Router.goTo("project");
+            OakRouter.goTo("project");
         } catch (final Exception e) {
             System.err.println("ไปที่หน้า start ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");

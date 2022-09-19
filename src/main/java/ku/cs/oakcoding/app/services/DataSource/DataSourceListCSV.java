@@ -1,18 +1,15 @@
 package ku.cs.oakcoding.app.services.DataSource;
 
-import ku.cs.oakcoding.app.models.User.Status;
-import ku.cs.oakcoding.app.models.User.User;
-import ku.cs.oakcoding.app.models.User.UserList;
-import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
 
+import ku.cs.oakcoding.app.models.User.DataList;
 import java.io.*;
 import java.util.Map;
 
-public class UserDataSourceCSV implements DataSourceCSV<UserList> {
+public class DataSourceListCSV implements DataSourceCSV<DataList> {
     private String directoryName;
     private String fileName;
 
-    public UserDataSourceCSV(String directoryName, String fileName) {
+    public DataSourceListCSV(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -36,8 +33,8 @@ public class UserDataSourceCSV implements DataSourceCSV<UserList> {
     }
 
     @Override
-    public UserList readData(){
-        UserList users = new UserList();
+    public DataList readData(){
+        DataList users = new DataList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -49,14 +46,9 @@ public class UserDataSourceCSV implements DataSourceCSV<UserList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                User newUser = new User(Status.valueOf(data[0].trim()),
-                        data[1].trim(),
-                        data[2].trim(),
-                        data[3].trim(),
-                        data[4].trim(),
-                        data[5].trim());
-
-                users.addUserMap(data[1].trim(),newUser);
+                String key = DataBase.getKey(data);
+                Object newObj = DataBase.readData(data);
+                users.addUserMap(key,newObj);
             }
 
 
@@ -80,7 +72,7 @@ public class UserDataSourceCSV implements DataSourceCSV<UserList> {
     }
 
     @Override
-    public void writeData(UserList usersMap){
+    public void writeData(DataList usersMap){
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -91,13 +83,8 @@ public class UserDataSourceCSV implements DataSourceCSV<UserList> {
             fileWriter = new FileWriter(file,true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String,User> entry : usersMap.getUsersMap().entrySet()){
-                String line = entry.getValue().getBAN_STATUS() + ","
-                        + entry.getValue().getUsername() + ","
-                        + entry.getValue().getPassword() + ","
-                        + entry.getValue().getFirstname() + ","
-                        + entry.getValue().getLastname() + ","
-                        + entry.getValue().getPicturePath();
+            for (Map.Entry<String, Object> entry : usersMap.getUsersMap().entrySet()){
+                String line = DataBase.writeData(entry.getValue());
                 writer.append(line);
                 writer.newLine();
             }

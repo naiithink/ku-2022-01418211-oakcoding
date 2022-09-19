@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import com.github.saacsos.fxrouter.Router;
+import com.github.saacsos.fxrouter.OakRouter;
 
 public class ProjectController {
 
@@ -15,7 +15,7 @@ public class ProjectController {
     @FXML
     public void handleSignInButton(ActionEvent actionEvent) {
             try {
-                Router.goTo("signIn");
+                OakRouter.goTo("signIn");
             } catch (IOException e) {
                 System.err.println("ไปที่หน้า login ไม่ได้");
                 System.err.println("ให้ตรวจสอบการกำหนด route");
@@ -25,7 +25,7 @@ public class ProjectController {
     @FXML
     public void handleRegisterButton(MouseEvent mouseEvent) {
         try {
-            Router.goTo("register");
+            OakRouter.goTo("register");
         } catch (IOException e) {
             System.err.println("ไปที่หน้า register ไม่ได้");
             System.err.println("check route");

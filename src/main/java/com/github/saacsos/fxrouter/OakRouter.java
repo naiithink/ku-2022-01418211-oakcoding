@@ -3,16 +3,13 @@ package com.github.saacsos.fxrouter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import com.github.saacsos.fxrouter.FXRouter;
 
 import java.io.IOException;
 
-public class Router extends FXRouter {
+public class OakRouter extends FXRouter {
 
     private static double x;
 
@@ -21,7 +18,7 @@ public class Router extends FXRouter {
     private static int popWindowPerTime = 0;
     private static int appearWindow = 0;
 
-    public Router() {
+    public OakRouter() {
     }
 
     public static void goTo(String routeLabel) throws IOException {

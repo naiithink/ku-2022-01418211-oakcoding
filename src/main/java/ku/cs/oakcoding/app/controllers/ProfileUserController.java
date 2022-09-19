@@ -1,16 +1,5 @@
 package ku.cs.oakcoding.app.controllers;
 
-import com.github.saacsos.fxrouter.Router;
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import ku.cs.oakcoding.app.models.User.User;
-
-import java.io.File;
-import java.io.IOException;
-
 public class ProfileUserController {
 //    private String picturePath;
 //

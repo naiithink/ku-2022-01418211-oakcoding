@@ -1,7 +1,16 @@
 package ku.cs.oakcoding.app.models.User;
 
+import ku.cs.oakcoding.app.Constants.Status;
+import ku.cs.oakcoding.app.Constants.DataType;
+import ku.cs.oakcoding.app.models.DataManager;
+import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
+import ku.cs.oakcoding.app.services.FactoryDatabase;
+
+import java.util.HashMap;
+
 public class User {
 
+    private final DataType role = DataType.USER;
     private Status BAN_Status;
     private String username;
     private String password;
@@ -17,6 +26,33 @@ public class User {
         this.firstname = firstname;
         this.lastname = lastname;
         this.picturePath = picturePath;
+    }
+
+    public static User getValue(String keys){
+        if (containID(keys)){
+            return (User) DataManager.getValue(DataType.USER,keys);
+        }
+        return null;
+    }
+    public static boolean containID(String keys){
+        if (DataManager.containKeys(DataType.USER,keys)){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean login(String username, String password){
+        if (DataManager.login(DataType.USER,username,password)){
+            return true;
+        }
+        return false;
+    }
+
+    public void register(String username){
+        if (!containID(username)){
+            DataSourceCSV dataSourceCSV = FactoryDatabase.getDataSource(DataType.USER);
+
+        }
     }
 
 //    public void changePassword(String username, String password, String newPassword){
@@ -120,13 +156,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "BAN_Status=" + BAN_Status +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", picturePath='" + picturePath + '\'' +
-                '}';
+        return    role + ","
+                + BAN_Status + ","
+                + username + ","
+                + password + ","
+                + firstname + ","
+                + lastname + ","
+                + picturePath;
     }
 }
