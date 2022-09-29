@@ -19,7 +19,7 @@ public final class OakResourcePrefix {
     private static Path prefix;
 
     static {
-        try (InputStream in = OakResourcePrefix.class.getClassLoader().getResourceAsStream("index.properties")) {
+        try (InputStream in = OakResourcePrefix.class.getClassLoader().getResourceAsStream("config.properties")) {
             Objects.nonNull(in);
 
             Properties assertProp = new Properties();
@@ -27,7 +27,7 @@ public final class OakResourcePrefix {
             assertProp.load(in);
 
             if (assertProp.get("index").equals("resource_prefix")) {
-                defaultPrefix = Paths.get(OakResourcePrefix.class.getClassLoader().getResource("index.properties").toURI()).getParent();
+                defaultPrefix = Paths.get(OakResourcePrefix.class.getClassLoader().getResource("config.properties").toURI()).getParent();
                 prefix = defaultPrefix;
             }
         } catch (IOException | URISyntaxException e) {
