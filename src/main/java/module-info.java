@@ -3,7 +3,6 @@ module oakcoding.app {
     requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.desktop;
 
     /* 
      * javafx.graphics is transitively required by javafx.controls
