@@ -1,16 +1,28 @@
 package ku.cs.oakcoding;
 
+import java.util.logging.Level;
+
+import com.github.saacsos.fxrouter.OakRouter;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import com.github.saacsos.fxrouter.OakRouter;
+import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
+import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.StageManager;
+import ku.cs.oakcoding.app.services.StageManager.MalformedFXMLIndexFileException;
+import ku.cs.oakcoding.app.services.StageManager.NoControllerSpecifiedException;
+import ku.cs.oakcoding.app.services.StageManager.SceneNotFoundException;
 
 public class ProjectApplication extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
         try {
-            OakRouter.bind(this, stage, "OakCoding", 300, 500);
+            OakRouter.bind(this, primaryStage, "OakCoding", 300, 500);
             configRoute();
+            // configStageManager(primaryStage);
             OakRouter.goTo("project");
         } catch (final Exception e) {
             System.err.println(e.getMessage());
@@ -27,6 +39,31 @@ public class ProjectApplication extends Application {
         OakRouter.when("ProfileUser", packageStr + "ProfileUser.fxml",600,400);
         OakRouter.when("signIn", packageStr + "signIn.fxml",300,500);
 
+    }
+
+    private void configStageManager(Stage primaryStage) {
+        StageManager stageManager = StageManager.getStageManager();
+
+        try {
+            stageManager.dispatch(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
+                                  OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
+                                  this,
+                                  primaryStage,
+                                  OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
+                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
+                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
+            );
+
+            stageManager.defineHomeSceneFromIndexFile();
+            stageManager.activate();
+        } catch (MalformedFXMLIndexFileException e) {
+            OakLogger.log(Level.SEVERE, "Malformed FXML index file");
+            e.printStackTrace();
+        } catch (SceneNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Scene not found: " + e.getMessage());
+        } catch (NoControllerSpecifiedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

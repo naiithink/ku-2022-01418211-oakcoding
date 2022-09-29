@@ -29,7 +29,7 @@ public final class OakLogger {
     private static final String logFileName;
 
     static {
-        logFileName = OakAppConfigs.getProperty(OakAppDefaults.NAME.key())
+        logFileName = OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key())
                       + "-"
                       + String.valueOf(OakHotspot.getStartTime()) + ".log";
 

@@ -12,12 +12,15 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public enum OakAppDefaults {
 
-    NAME                            ("app.name",                    "OakCoding"),
+    APP_NAME                        ("app.name",                    "OakCoding"),
     DEVELOPER                       ("app.developer",               "ku.cs.oakcoding"),
     VERSION                         ("app.version",                 "NIL"),
     LOG_FILE_DIR                    ("app.resource.logFile.dir",    "logs"),
     USE_TEMP_DIR                    ("app.resource.useTmpDir",      "true"),
-    USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeatures", "false");
+    USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeatures", "false"),
+    FXML_DIR                        ("dir.fxml",                    "views"),
+    FXML_INDEX_DIR                  ("indices",                     "indices"),
+    FXML_INDEX_FILE                 ("index.file.fxml",             "fxml.index.properties");
 
     private final String key;
 
