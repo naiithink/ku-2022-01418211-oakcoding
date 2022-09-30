@@ -41,6 +41,7 @@
 | :--: | :--------: | :---------------- |
 | 1    | 2022-08-11 | ร่าง User Interface, mockup หน้า Sign In ของแอปพลิเคชัน, patch FXRouter, เพิ่ม custom font ผ่าน CSS, ทดลอง implement module สำหรับอ่าน configuration file |
 | 2    | 2022-09-08 | Class สำหรับอ่าน/เขียนข้อมูลลงบนไฟล์, UI improvements, configuration class, message digest class |
+| 3    | 2022-09-30 | UI design, FXML controller linking, dynamic database, StageManager (window management) |
 
 </br >
 
