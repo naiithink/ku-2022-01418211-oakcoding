@@ -39,7 +39,7 @@
                   <Image url="@../images/arrow-left-short.png" />
                </image>
             </ImageView>
-                <Label alignment="CENTER" layoutX="6.0" layoutY="356.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/KanitThLoader.css" text="หากท่านลืมรหัสผ่าน กรุณาติดต่อผู้ดูแลระบบ" textFill="WHITE">
+                <Label alignment="CENTER" layoutX="6.0" layoutY="383.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/KanitThLoader.css" text="หากท่านลืมรหัสผ่าน กรุณาติดต่อผู้ดูแลระบบ" textFill="WHITE">
                <font>
                   <Font name="Kanit" size="13.0" />
                </font></Label>
@@ -63,5 +63,10 @@
             <Separator layoutX="35.0" layoutY="351.0" prefHeight="5.0" prefWidth="235.0" />
             </children>
         </Pane>
+      <Label alignment="CENTER" layoutX="5.0" layoutY="358.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/KanitThLoader.css" text="Forgot your password? Contact admin" textFill="WHITE">
+         <font>
+            <Font name="Kanit" size="13.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

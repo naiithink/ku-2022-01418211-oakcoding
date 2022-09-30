@@ -53,7 +53,7 @@ public class LoginController {
     @FXML
     public void handleBackButton(MouseEvent mouseEvent)  {
         try {
-            OakRouter.goTo("project");
+            OakRouter.goTo("signin");
         } catch (final Exception e) {
             System.err.println("ไปที่หน้า start ไม่ได้");
             System.err.println("ให้ตรวจสอบการกำหนด route");

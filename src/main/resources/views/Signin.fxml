@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.ProjectController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.ProjectController">
     <children>
         <Pane prefHeight="500.0" prefWidth="300.0" styleClass="decorated-window" stylesheets="@../css/style.css">
             <children>
@@ -29,23 +33,23 @@
                           <Image url="@../images/white-minus.png" />
                       </image>
                   </ImageView>
-            <Label layoutX="35.0" layoutY="367.0" styleClass="Text" stylesheets="@../css/style2.css" text="Don’t have an account?" textFill="#d0d0d0">
+            <Label layoutX="35.0" layoutY="366.0" styleClass="Text" stylesheets="@../css/style2.css" text="Don’t have an account?" textFill="#d0d0d0">
                <font>
                   <Font name="Kanit" size="16.0" />
                </font>
             </Label>
             <Separator layoutX="35.0" layoutY="351.0" prefHeight="5.0" prefWidth="235.0" />
-            <Label alignment="CENTER" layoutX="3.0" layoutY="65.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/KanitThLoader.css" text="ระบบแจ้งเรื่อง" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="3.0" layoutY="65.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="ระบบแจ้งเรื่อง" textFill="WHITE">
                <font>
                   <Font name="Kanit Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="3.0" layoutY="89.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" stylesheets="@../css/KanitThLoader.css" text="มหาวิทยาลัยเกษตรศาสตร์" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="3.0" layoutY="89.0" prefHeight="47.0" prefWidth="294.0" styleClass="Text" text="มหาวิทยาลัยเกษตรศาสตร์" textFill="WHITE">
                <font>
                   <Font name="Kanit" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="217.0" layoutY="367.0" onMouseClicked="#handleRegisterButton" text="Register" textFill="#17abff">
+            <Label layoutX="215.0" layoutY="369.0" onMouseClicked="#handleRegisterButton" text="Register" textFill="#17abff">
                <font>
                   <Font name="Kanit" size="14.0" />
                </font>

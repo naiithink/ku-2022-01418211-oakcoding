@@ -15,7 +15,7 @@ public class ProjectController {
     @FXML
     public void handleSignInButton(ActionEvent actionEvent) {
             try {
-                OakRouter.goTo("signIn");
+                OakRouter.goTo("login");
             } catch (IOException e) {
                 System.err.println("ไปที่หน้า login ไม่ได้");
                 System.err.println("ให้ตรวจสอบการกำหนด route");
