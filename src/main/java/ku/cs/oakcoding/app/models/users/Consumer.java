@@ -3,8 +3,8 @@ package ku.cs.oakcoding.app.models.users;
 import ku.cs.oakcoding.app.helpers.hotspot.BanStatus;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.services.DataManager;
-import ku.cs.oakcoding.app.services.FactoryDatabase;
-import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 
 public class Consumer {
 
@@ -48,7 +48,7 @@ public class Consumer {
 
     public void register(String username){
         if (!containID(username)){
-            DataSourceCSV dataSourceCSV = FactoryDatabase.getDataSource(Roles.USER);
+            DataSourceCSV dataSourceCSV = FactoryDataSourceCSV.getDataSource(Roles.USER);
 
         }
     }

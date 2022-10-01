@@ -1,8 +1,7 @@
-package ku.cs.oakcoding.app.services.data_source.data_source_roles;
+package ku.cs.oakcoding.app.services.data_source.Callback;
 
 import ku.cs.oakcoding.app.helpers.hotspot.BanStatus;
 import ku.cs.oakcoding.app.models.users.Consumer;
-import ku.cs.oakcoding.app.services.data_source.ManageDataType;
 
 public class ConsumerData implements ManageDataType<Consumer> {
     public ConsumerData(){}

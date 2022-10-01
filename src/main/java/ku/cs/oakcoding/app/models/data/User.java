@@ -3,8 +3,8 @@ package ku.cs.oakcoding.app.models.data;
 import ku.cs.oakcoding.app.constants.DataType;
 import ku.cs.oakcoding.app.constants.Status;
 import ku.cs.oakcoding.app.services.DataManager;
-import ku.cs.oakcoding.app.services.FactoryDatabase;
-import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 
 public class User {
 
@@ -48,7 +48,7 @@ public class User {
 
     public void register(String username){
         if (!containID(username)){
-            DataSourceCSV dataSourceCSV = FactoryDatabase.getDataSource(DataType.USER);
+            DataSourceCSV dataSourceCSV = FactoryDataSourceCSV.getDataSource(DataType.USER);
 
         }
     }

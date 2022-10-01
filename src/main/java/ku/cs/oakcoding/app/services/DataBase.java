@@ -1,8 +1,9 @@
-package ku.cs.oakcoding.app.services.data_source;
+package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.models.data.User;
-import ku.cs.oakcoding.app.services.data_source.data_source_roles.ConsumerData;
+import ku.cs.oakcoding.app.services.data_source.Callback.ConsumerData;
+import ku.cs.oakcoding.app.services.data_source.Callback.DataCallback;
 
 public class DataBase {
 
