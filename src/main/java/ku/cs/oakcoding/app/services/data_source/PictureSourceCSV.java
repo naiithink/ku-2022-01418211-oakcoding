@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.services.DataSource;
+package ku.cs.oakcoding.app.services.data_source;
 
 import ku.cs.oakcoding.app.models.picture.Picture;
 import javax.imageio.ImageIO;

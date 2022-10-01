@@ -1,10 +1,10 @@
 package ku.cs.oakcoding.app.models.data;
 
-import ku.cs.oakcoding.app.Constants.Status;
-import ku.cs.oakcoding.app.Constants.DataType;
+import ku.cs.oakcoding.app.constants.DataType;
+import ku.cs.oakcoding.app.constants.Status;
 import ku.cs.oakcoding.app.models.DataManager;
-import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
 import ku.cs.oakcoding.app.services.FactoryDatabase;
+import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
 
 import java.util.HashMap;
 

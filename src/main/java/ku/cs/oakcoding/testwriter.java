@@ -1,10 +1,10 @@
 package ku.cs.oakcoding;
 
 
-import ku.cs.oakcoding.app.models.User.DataList;
-import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
 import ku.cs.oakcoding.app.services.FactoryDatabase;
-import ku.cs.oakcoding.app.Constants.DataType;
+import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
+import ku.cs.oakcoding.app.constants.DataType;
+import ku.cs.oakcoding.app.models.data.DataList;
 
 public class testwriter {
     public static void main(String[] args) {

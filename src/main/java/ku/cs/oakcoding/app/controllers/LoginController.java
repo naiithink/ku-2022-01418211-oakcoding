@@ -9,8 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import ku.cs.oakcoding.app.models.data.User;
+
 import com.github.saacsos.fxrouter.OakRouter;
-import ku.cs.oakcoding.app.models.User.User;
 
 
 public class LoginController {

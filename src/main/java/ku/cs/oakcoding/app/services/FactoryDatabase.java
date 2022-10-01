@@ -1,9 +1,9 @@
 package ku.cs.oakcoding.app.services;
 
-import ku.cs.oakcoding.app.Constants.DataType;
-import ku.cs.oakcoding.app.services.DataSource.DataSourceCSV;
-import ku.cs.oakcoding.app.services.DataSource.PictureSourceCSV;
-import ku.cs.oakcoding.app.services.DataSource.DataSourceListCSV;
+import ku.cs.oakcoding.app.constants.DataType;
+import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.DataSourceListCSV;
+import ku.cs.oakcoding.app.services.data_source.PictureSourceCSV;
 
 public class FactoryDatabase {
 

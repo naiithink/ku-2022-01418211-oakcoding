@@ -1,8 +1,8 @@
-package ku.cs.oakcoding.app.services.DataSource;
+package ku.cs.oakcoding.app.services.data_source;
 
-import ku.cs.oakcoding.app.Constants.Status;
-import ku.cs.oakcoding.app.models.User.User;
-import ku.cs.oakcoding.app.Constants.DataType;
+import ku.cs.oakcoding.app.constants.DataType;
+import ku.cs.oakcoding.app.constants.Status;
+import ku.cs.oakcoding.app.models.data.User;
 
 interface ManageDataType<T> {
     public T instanceCreate(String [] data);

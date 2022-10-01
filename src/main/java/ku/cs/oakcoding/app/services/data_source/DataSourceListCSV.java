@@ -1,9 +1,10 @@
-package ku.cs.oakcoding.app.services.DataSource;
+package ku.cs.oakcoding.app.services.data_source;
 
 
-import ku.cs.oakcoding.app.models.User.DataList;
 import java.io.*;
 import java.util.Map;
+
+import ku.cs.oakcoding.app.models.data.DataList;
 
 public class DataSourceListCSV implements DataSourceCSV<DataList> {
     private String directoryName;

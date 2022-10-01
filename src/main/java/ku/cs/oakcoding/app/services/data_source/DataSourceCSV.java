@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.services.DataSource;
+package ku.cs.oakcoding.app.services.data_source;
 
 public interface DataSourceCSV <T>{
 

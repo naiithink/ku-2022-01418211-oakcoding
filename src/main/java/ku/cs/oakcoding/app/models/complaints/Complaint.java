@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.models.Complaint;
+package ku.cs.oakcoding.app.models.complaints;
 
 public class Complaint {
     private String topic;
