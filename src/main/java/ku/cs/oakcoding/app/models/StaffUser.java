@@ -13,4 +13,8 @@ public final class StaffUser
 
         super(role, firstName, lastName, profileImagePath, password);
     }
+
+
+
+
 }

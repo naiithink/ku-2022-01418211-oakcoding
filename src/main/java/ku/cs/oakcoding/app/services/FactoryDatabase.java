@@ -1,6 +1,6 @@
 package ku.cs.oakcoding.app.services;
 
-import ku.cs.oakcoding.app.constants.DataType;
+import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.DataSourceListCSV;
 import ku.cs.oakcoding.app.services.data_source.PictureSourceCSV;
@@ -10,10 +10,10 @@ public class FactoryDatabase {
 
     public FactoryDatabase(){}
 
-    public static DataSourceCSV getDataSource(DataType DataSourceType){
+    public static DataSourceCSV getDataSource(Roles roles){
         DataSourceCSV dataSourceCSV = null;
 
-        switch(DataSourceType){
+        switch(roles){
             case USER, ADMIN, STAFF, COMPLAINT ->{
                 dataSourceCSV = new DataSourceListCSV("data","user.csv");
             }

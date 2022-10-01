@@ -2,11 +2,11 @@ package ku.cs.oakcoding.app.models.users;
 
 import ku.cs.oakcoding.app.helpers.hotspot.BanStatus;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
-import ku.cs.oakcoding.app.models.DataManager;
+import ku.cs.oakcoding.app.services.DataManager;
 import ku.cs.oakcoding.app.services.FactoryDatabase;
 import ku.cs.oakcoding.app.services.data_source.DataSourceCSV;
 
-public class User {
+public class Consumer {
 
     private final Roles role = Roles.USER;
     private BanStatus banStatus;
@@ -17,7 +17,7 @@ public class User {
     private String picturePath;
     // private String type;
 
-    public User(BanStatus banStatus,String username, String password, String firstname, String lastname, String picturePath){
+    public Consumer(BanStatus banStatus, String username, String password, String firstname, String lastname, String picturePath){
         this.banStatus = banStatus;
         this.username = username;
         this.password = password;
@@ -26,9 +26,9 @@ public class User {
         this.picturePath = picturePath;
     }
 
-    public static User getValue(String keys){
+    public static Consumer getValue(String keys){
         if (containID(keys)){
-            return (User) DataManager.getValue(Roles.USER,keys);
+            return (Consumer) DataManager.getValue(Roles.USER,keys);
         }
         return null;
     }

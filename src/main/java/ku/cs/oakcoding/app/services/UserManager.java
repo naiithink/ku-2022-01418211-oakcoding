@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.controllers;
+package ku.cs.oakcoding.app.services;
 
 import java.util.Set;
 
@@ -56,6 +56,20 @@ public final class UserManager {
     public static Boolean passwordCheck(String username,
                                         String password) {
 
+
         
+    }
+
+    public static void changePassword(String username,
+                                      String password,
+                                      String newPassword){
+
+
+    }
+
+    public static String writePicture(){
+
+
+        return "picturePath";
     }
 }
