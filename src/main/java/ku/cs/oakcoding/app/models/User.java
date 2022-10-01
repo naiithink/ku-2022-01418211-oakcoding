@@ -12,15 +12,19 @@ public abstract class User {
 
     private Path profileImagePath;
 
+    private String password;
+
     public User(Roles role,
                 String firstName,
                 String lastName,
-                Path profileImagePath) {
+                Path profileImagePath,
+                String password) {
 
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.profileImagePath = profileImagePath;
+        this.password = password;
     }
 
     public Roles getRole() {
@@ -37,5 +41,13 @@ public abstract class User {
 
     public Path getProfileImagePath() {
         return profileImagePath;
+    }
+
+    public boolean verifyPassword(String seed) {
+        if (password.equals(seed)) {
+            return true;
+        }
+
+        return false;
     }
 }

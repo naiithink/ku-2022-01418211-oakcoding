@@ -8,8 +8,9 @@ public final class AdminUser
     public AdminUser(Roles role,
                      String firstName,
                      String lastName,
-                     Path profileImagePath) {
+                     Path profileImagePath,
+                     String password) {
 
-        super(role, firstName, lastName, profileImagePath);
+        super(role, firstName, lastName, profileImagePath, password);
     }
 }
