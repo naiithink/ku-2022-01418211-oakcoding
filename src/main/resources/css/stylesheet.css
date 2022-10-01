@@ -1,0 +1,91 @@
+/* init */
+.primary-bg-color{
+    -fx-background-color: #121212;
+}
+.secondary-bg-color{
+    -fx-background-color: #2A2C32;
+}
+.gray-color-font{
+    -fx-text-fill: #DCDCDC;
+}
+.white-color-font{
+    -fx-text-fill: #FFFFFF;
+}
+.blue-color-font{
+    -fx-text-fill: #17ABFF;
+    -fx-font-size:16;
+
+}
+
+
+
+/* text && font */
+@font-face{
+    font-family: 'Kanit';
+    src: url("../fonts/KanitRegular.ttf");
+}
+@font-face{
+    font-family: 'Inter';
+    src: url("../fonts/Inter-SemiBold.ttf");
+}
+.text{
+    -fx-font-family: "Kanit";
+}
+.text-bold{
+    -fx-font-family: "Kanit";
+    -fx-font-weight: bolder;
+}
+.text-secondary-font{
+    -fx-font-family: "Inter";
+}
+.text-secondary-font-bold{
+    -fx-font-family: "Inter";
+    -fx-font-weight: bolder;
+}
+
+/* Theme */
+.theme{
+   -fx-background-color: #121212;
+   -fx-background-radius: 18px;
+}
+
+/* sign Button */
+.button-selected{
+-fx-background-color:#27282B;
+-fx-border-radius: 50px;
+}
+.sign-in{
+   -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
+   -fx-background-radius: 200;
+   -fx-font-family: "Kanit";
+   -fx-font-size:13;
+}
+.sign-in:hover{
+   -fx-background-color: linear-gradient(to right, #FF4874 ,#8F47FF );
+}
+.sign-in:pressed{
+   -fx-background-color: linear-gradient(to right, #FE3666 ,#8A40FF );
+}
+.hover:hover{
+   -fx-font-size:14;
+   -fx-text-fill: #50c2ff;
+}
+
+/* util bar */
+
+.util-bar:hover{
+    -fx-opacity: 0.7;
+}
+
+
+.text-field {
+
+    -fx-text-fill: White;
+    -fx-background-color: #2A2C32;
+}
+
+
+
+
+
+

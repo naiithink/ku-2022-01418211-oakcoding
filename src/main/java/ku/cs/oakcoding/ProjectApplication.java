@@ -23,7 +23,7 @@ public class ProjectApplication extends Application {
             OakRouter.bind(this, primaryStage, "OakCoding", 300, 500);
             configRoute();
             // configStageManager(primaryStage);
-            OakRouter.goTo("signin");
+            OakRouter.goTo("authentication");
         } catch (final Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
@@ -37,8 +37,11 @@ public class ProjectApplication extends Application {
         OakRouter.when("register", packageStr + "UserRegister.fxml",600,400);
         OakRouter.when("homeUser",packageStr + "UserHomepage.fxml",600,400);
         OakRouter.when("ProfileUser", packageStr + "ProfileUser.fxml",600,400);
-        OakRouter.when("login", packageStr + "loginForm.fxml",300,500);
-
+        OakRouter.when("login", packageStr + "login.fxml",300,500);
+        OakRouter.when("sign_in", packageStr + "sign_in.fxml",300,500);
+//        UserRegister
+        OakRouter.when("UserRegister", packageStr + "UserRegister.fxml",300,500);
+        OakRouter.when("authentication", packageStr + "authentication.fxml",300,500);
     }
 
     private void configStageManager(Stage primaryStage) {
