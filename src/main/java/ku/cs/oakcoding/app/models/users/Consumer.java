@@ -1,6 +1,7 @@
 package ku.cs.oakcoding.app.models.users;
 
 import ku.cs.oakcoding.app.helpers.hotspot.BanStatus;
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.services.DataManager;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
@@ -48,7 +49,7 @@ public class Consumer {
 
     public void register(String username){
         if (!containID(username)){
-            DataSourceCSV dataSourceCSV = FactoryDataSourceCSV.getDataSource(Roles.USER);
+            DataSourceCSV dataSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.User);
 
         }
     }

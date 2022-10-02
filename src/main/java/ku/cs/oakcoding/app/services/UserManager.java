@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.models.users.DataList;
@@ -13,7 +14,7 @@ public final class UserManager {
     private UserManager() {}
 
     // data/users.csv
-    private static TreeMap<String,Object> registeredUser = ((DataList)(FactoryDataSourceCSV.getDataSource(Roles.USER).readData())).getUsersMap();
+    private static TreeMap<String,Object> registeredUser = ((DataList)(FactoryDataSourceCSV.getDataSource(DataFile.User).readData())).getUsersMap();
 
     public static boolean isRegistered(String username) {
         return registeredUser.containsKey(username);

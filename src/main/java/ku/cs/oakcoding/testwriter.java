@@ -1,6 +1,7 @@
 package ku.cs.oakcoding;
 
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 import ku.cs.oakcoding.app.constants.DataType;
@@ -30,7 +31,7 @@ public class testwriter {
 //        DataManager dataManager = new DataManager();
 //        dataManager.changePassword("ingfosbreak","qwertyuiop","191245ing");
 
-        DataSourceCSV dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataType.USER);
+        DataSourceCSV dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.User);
         DataList dataList = (DataList) dataSourceListCSV.readData();
 
 
