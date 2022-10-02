@@ -12,18 +12,23 @@ public abstract class User {
 
     private Path profileImagePath;
 
+
+    private String username;
+
     private String password;
 
     public User(Roles role,
                 String firstName,
                 String lastName,
                 Path profileImagePath,
+                String username,
                 String password) {
 
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.profileImagePath = profileImagePath;
+        this.username = username;
         this.password = password;
     }
 

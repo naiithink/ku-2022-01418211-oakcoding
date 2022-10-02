@@ -1,20 +1,25 @@
 package ku.cs.oakcoding.app.services;
 
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
+import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.users.DataList;
+import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 
 public final class UserManager {
     private UserManager() {}
 
     // data/users.csv
-    private static Set<String> registeredUser;
+    private static TreeMap<String,Object> registeredUser = ((DataList)(FactoryDataSourceCSV.getDataSource(Roles.USER).readData())).getUsersMap();
 
     public static boolean isRegistered(String username) {
-        return registeredUser.contains(username);
+        return registeredUser.containsKey(username);
     }
 
-    public static User register {}
+    public static void register (){}
 
     public static User login(String username,
                              String password) {
@@ -32,6 +37,9 @@ public final class UserManager {
 
     public static User getUser(String username) {
         if (isRegistered(username)) {
+
+            User result = (User) registeredUser.get(username);
+
             // ResourceObject userInfoObject = ResourceManager.getData(String username);
 
             // get role
@@ -48,7 +56,9 @@ public final class UserManager {
 
             return result;
         }
+        return null;
     }
+
 
     /**
      * 
@@ -56,7 +66,13 @@ public final class UserManager {
     public static Boolean passwordCheck(String username,
                                         String password) {
 
+        if (isRegistered(username)) {
+            User checker = (User) registeredUser.get(username);
+            return (checker.verifyPassword(password));
 
+        }
+
+        return false;
         
     }
 

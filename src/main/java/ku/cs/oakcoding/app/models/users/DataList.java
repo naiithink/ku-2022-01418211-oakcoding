@@ -1,15 +1,16 @@
 package ku.cs.oakcoding.app.models.users;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class DataList {
-    private HashMap<String, Object> DataMap;
+    private TreeMap<String, Object> DataMap;
 
     public DataList(){
-        DataMap = new HashMap<>();
+        DataMap = new TreeMap<>();
     }
 
-    public DataList(HashMap<String,Object> DataMap){
+    public DataList(TreeMap<String, Object> DataMap){
         this.DataMap = DataMap;
     }
 
@@ -17,7 +18,7 @@ public class DataList {
         DataMap.put(key,obj);
     }
     public void removeUserMap(String key) { DataMap.remove(key); }
-    public HashMap<String,Object> getUsersMap() {return DataMap;}
+    public TreeMap<String, Object> getUsersMap() {return DataMap;}
 }
 
 

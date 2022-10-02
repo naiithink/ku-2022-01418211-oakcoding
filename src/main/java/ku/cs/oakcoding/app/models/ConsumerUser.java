@@ -1,5 +1,8 @@
 package ku.cs.oakcoding.app.models;
 
+import ku.cs.oakcoding.app.models.users.Consumer;
+import ku.cs.oakcoding.app.services.DataManager;
+
 import java.nio.file.Path;
 
 public final class ConsumerUser
@@ -13,4 +16,6 @@ public final class ConsumerUser
 
         super(role, firstName, lastName, profileImagePath, password);
     }
+
+
 }
