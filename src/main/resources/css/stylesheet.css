@@ -123,9 +123,9 @@
     -fx-border-radius: 5px;
 }
 .welcome-user-pane{
-        -fx-background-color: #4EA2FF;
+        -fx-background-color: #8BBCCC;
         -fx-font-size:16;
-       -fx-text-fill: #0A141F;
+       -fx-text-fill: #29383d;
        -fx-background-radius: 10px;
 }
 .all-report-user-pane{
@@ -134,6 +134,26 @@
        -fx-text-fill: #332c16;
        -fx-background-radius: 10px;
 }
+.all-report-user-pane-red{
+    -fx-font-size:16;
+    -fx-text-fill: #412f2f;
+    -fx-background-color: #da9e9f;
+    -fx-background-radius: 10px;
+}
+.all-report-user-pane-cream{
+    -fx-font-size:20;
+    -fx-text-fill: #4C4842;
+    -fx-background-color: #FEF3DC;
+    -fx-background-radius: 10px;
+}
+.all-report-user-pane-purple{
+    -fx-font-size:16;
+    -fx-text-fill: #1D1A28;
+    -fx-background-color: #AF9ED1;
+    -fx-background-radius: 10px;
+}
+
+
 .account-setting-pane{
         -fx-background-color: #2A2C32;
         -fx-font-size:16;
@@ -149,11 +169,6 @@
         -fx-text-fill: #a8a8a8;
         -fx-font-size:16;
 }
-
-
-
-
-
 
 /* util bar */
 

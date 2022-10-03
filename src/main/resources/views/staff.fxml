@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.StaffController">
+    <children>
+      <Pane fx:id="welcomeStaffPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/cross.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/minus.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
+               <children>
+                  <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้องรับสู่" textFill="#0a141f" />
+                  <Label layoutX="165.0" layoutY="64.0" styleClass="text-regular" text="ระบบการร้องเรียน" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="363.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/hand-holding-heart.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="74.0" layoutY="267.0" prefHeight="150.0" prefWidth="181.0" styleClass="all-report-user-pane">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" styleClass="all-report-user-pane" text="จำนวนรายงานทั้งหมด" textFill="WHITE" />
+                  <Label fx:id="numberReportOfUser" layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="97.0" styleClass="text-large-bold" text="999" textAlignment="CENTER" textFill="#332c16" />
+                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="139.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/chart-line-up.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="74.0" layoutY="225.0" text="สถิติทั้งหมด" textFill="WHITE" />
+            <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+      <Pane prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
+         <children>
+            <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1" />
+            <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="39.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/flag.png" />
+               </image>
+            </ImageView>
+            <Line endX="100.0" layoutX="107.0" layoutY="500.0" startX="-100.0" />
+            <Label fx:id="fullNameLabelAccountSetting" layoutX="23.0" layoutY="511.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="Peter Parker" textFill="#e0e0e1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="statusLabel" layoutX="24.0" layoutY="531.0" prefHeight="23.0" prefWidth="181.0" styleClass="purple-color-font" text="Staff" textFill="#e0e0e1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="logoutButton" layoutX="142.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleClickLogoutButton" prefHeight="17.0" prefWidth="23.0" styleClass="button-third-dashboard-nav" textFill="#e0e0e1">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/sign-out-alt.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="settingButton" layoutX="13.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="การตั้งค่า" textFill="#e0e0e1" />
+            <ImageView fx:id="settingImageView" fitHeight="23.0" fitWidth="23.0" layoutX="46.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/settings.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="     แดชบอร์ด" textFill="#e0e0e1" />
+            <ImageView fx:id="dashboardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="reportsUserOfStaffPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/cross.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/minus.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="245.0" layoutY="48.0" text="หน้าแจ้งเรื่อง" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="settingStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+         <children>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/cross.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+               <image>
+                  <Image url="@../images/minus.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
+               <children>
+                  <Label fx:id="UsernameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="PeterParker@username" textFill="#e0e0e1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="statusAccountLabel" layoutX="81.0" layoutY="50.0" prefHeight="53.0" prefWidth="181.0" styleClass="purple-color-font" text="Staff" textFill="#e0e0e1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
+                  <Line endX="355.0" layoutX="140.0" layoutY="93.0" startX="-100.0" />
+                  <Label layoutX="81.0" layoutY="93.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Firstname" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="137.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
+                     <children>
+                        <Label fx:id="firstNameLabelAccount" layoutY="-12.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label layoutX="81.0" layoutY="162.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Lasename" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="199.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
+                     <children>
+                        <Label fx:id="lastNameLabel" layoutY="-8.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label fx:id="FullnameLabel" layoutX="81.0" layoutY="224.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Profile" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="261.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
+                     <children>
+                        <Label fx:id="nameProfileSettingLabel" layoutY="-8.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text=" MeWithMarryJane.png" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="AccountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                  <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>
