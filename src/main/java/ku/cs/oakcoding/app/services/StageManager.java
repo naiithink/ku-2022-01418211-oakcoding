@@ -7,7 +7,17 @@
  * @todo Apply Optional fields
  * @todo page tree for navigation
  * @todo Multi-stage management
+ * @todo Stage binding, the JavaBeans way
  * @todo Multi-screen management
+ * @todo Multi-cursor/touch dragging controller
+ * 
+ * @section References
+ * 
+ * - Event Processing
+ *   https://docs.oracle.com/javafx/2/events/processing.htm
+ * 
+ * - Draggable Panels Example
+ *   https://docs.oracle.com/javase/8/javafx/events-tutorial/draggablepanelsexamplejava.htm
  */
 
 package ku.cs.oakcoding.app.services;
@@ -17,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -49,24 +60,32 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventTarget;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -136,6 +155,11 @@ public final class StageManager {
      */
     private static final String CUSTOM_STAGE_STYLE;
 
+    /**
+     * Arc for custom Stage corner
+     */
+    private static final double CUSTOM_STAGE_CORNER_ARC;
+
     private static StageManager instance;
 
     /**
@@ -147,6 +171,13 @@ public final class StageManager {
      * Font resource table
      */
     private static Map<String, Font> fontTable;
+
+    /**
+     * Current Font
+     * 
+     * @note Use during development
+     */
+    private Font currentFont;
 
     /**
      * Logger instance for this StageManager
@@ -201,14 +232,24 @@ public final class StageManager {
     private StageStyle primaryStageStyle;
 
     /**
+     * Icon of the primary Stage
+     */
+    private Node primaryStageTitleIcon;
+
+    /**
      * Title of the primary Stage
      */
     private String primaryStageTitle;
 
     /**
+     * Title of the primary Stage
+     */
+    private Pos primaryStageTitlePosition;
+
+    /**
      * Title bar of the primary Stage
      */
-    private TitleBar primaryStageTitleBar;
+    private Node primaryStageTitleBar;
 
     /**
      * Root page of the primary Stage
@@ -250,6 +291,11 @@ public final class StageManager {
     @Retention (RetentionPolicy.RUNTIME)
     @Target ({ ElementType.TYPE, ElementType.METHOD })
     public @interface OakStageManager {}
+
+    @Inherited
+    @Retention (RetentionPolicy.RUNTIME)
+    @Target (ElementType.FIELD)
+    public @interface Draggable {}
 
     /**
      * The record type for storing a pair of page and, if required, its corresponding controller
@@ -585,34 +631,6 @@ public final class StageManager {
 
             return instance.new parentProperty(pageNick, fxmlResourceName, inheritWidth, inheritHeight, controllerClassName);
         }
-
-        // public static parentProperty readPropertyNoKey(String propertyValue) throws MalformedFXMLIndexFileException {
-        //     String fxmlResourceName;
-        //     Boolean inheritWidth;
-        //     Boolean inheritHeight;
-        //     String controllerClassName;
-
-        //     Pattern p = Pattern.compile(IndexPropertyRegex.VALIDATE_NO_KEY.pattern);
-        //     Matcher m = p.matcher(propertyValue);
-
-        //     if (m.find() == false) {
-        //         throw instance.new MalformedFXMLIndexFileException();
-        //     }
-
-        //     int groupCount = m.groupCount();
-        //     String[] result = new String[groupCount+1];
-
-        //     for (int i = 0; i < groupCount; ++i) {
-        //         result[i] = m.group(i);
-        //     }
-
-        //     fxmlResourceName = result[IndexPropertyRegex.VALIDATE_NO_KEY_FXML_RESOURCE_NAME.groupToGet[0]];
-        //     inheritWidth = result[IndexPropertyRegex.VALIDATE_NO_KEY_WIDTH_INHERITANCE.groupToGet[0]] == IndexPropertyRegex.WIDTH_INHERIT.pattern;
-        //     inheritHeight = result[IndexPropertyRegex.VALIDATE_NO_KEY_WIDTH_INHERITANCE.groupToGet[0]] == IndexPropertyRegex.HEIGHT_INHERIT.pattern;
-        //     controllerClassName = result[IndexPropertyRegex.VALIDATE_NO_KEY_CONTROLLER_NAME.groupToGet[0]];
-
-        //     return instance.new parentProperty(null, fxmlResourceName, inheritWidth, inheritHeight, controllerClassName);
-        // }
     }
 
     static {
@@ -623,8 +641,9 @@ public final class StageManager {
         DEFAULT_STAGE_HEIGHT = 600.0;
         DEFAULT_STAGE_TITLE_BAR_HEIGHT = 30.0;
         CUSTOM_STAGE_STYLE = """
-                -fx-background-radius: 11;
+                -fx-background-radius: 11.0;
                 """;
+        CUSTOM_STAGE_CORNER_ARC = 22.0;
     }
 
     /**
@@ -639,7 +658,14 @@ public final class StageManager {
         pageTable = new ConcurrentHashMap<>();
         resourceIndexProperties = new Properties();
 
+        constructDev();
+
         primaryStage = null;
+    }
+
+    private void constructDev() {
+        primaryStageTitlePosition = Pos.CENTER_LEFT;
+        currentFont = new Font("Noto Sans Display SemiBold", 14);
     }
 
     /**
@@ -699,13 +725,6 @@ public final class StageManager {
         this.primaryStageWidth = primaryStageWidth;
         this.primaryStageHeight = primaryStageHeight;
 
-        // try {
-        //     checkIfMainAppObject(mainApp);
-        // } catch (NotMainAppObjectException e) {
-        //     logger.log(Level.SEVERE, "Attempting to bind with non-main JavaFX application nickName");
-        //     e.printStackTrace();
-        // }
-
         try (InputStream in = Files.newInputStream(fxmlResourceIndexPath)) {
 
             Objects.nonNull(in);
@@ -715,7 +734,6 @@ public final class StageManager {
             logger.log(Level.SEVERE, "Cannot get to FXML index file");
         }
 
-        String pageNickResourceName;
         String controllerClassName;
         Class<?> controllerClass;
         Method getInstanceMethod;
@@ -740,23 +758,6 @@ public final class StageManager {
 
                 parentProperty parentProperty = Utils.readProperty(false, resourceIndexProperties.getProperty(pageNick));
 
-                // String[] parentPropertyFields = resourceIndexProperties.getProperty(pageNick).split(INDEX_PROPERTY_TOKEN);
-
-                // if (parentPropertyFields.length == 0
-                //     || parentPropertyFields.length > 2) {
-
-                //     logger.log(Level.SEVERE, "FXML index property '" + pageNick + "' has no property value");
-
-                //     continue;
-                // } else if (parentPropertyFields.length > 2) {
-                //     logger.log(Level.SEVERE, "Too many property field for '" + pageNick + "'");
-
-                //     continue;
-                // }
-
-                // pageNickResourceName = Optional.ofNullable(parentPropertyFields[0])
-                //                                  .orElseThrow(MalformedFXMLIndexFileException::new);
-
                 prefWidth = Optional.of(
                     Double.valueOf(
                         getRootXMLAttribute(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName),
@@ -772,28 +773,6 @@ public final class StageManager {
                                             FXMLAttribute.PANE_PREF_HEIGHT.value).orElse("0.0")
                     )
                 );
-
-                // if (parentPropertyFields.length == 1) {
-                //     controllerClassName = getRootXMLAttribute(fxmlResourcePrefixPath.resolve(pageNickResourceName),
-                //                                               FXMLLoader.FX_NAMESPACE_PREFIX,
-                //                                               FXMLLoader.FX_CONTROLLER_ATTRIBUTE).orElseThrow(NoControllerSpecifiedException::new);
-
-                //     logger.log(Level.INFO, "Using controller declared in FXML resource file: " + pageNickResourceName + " for page nickName: '" + pageNick + "'");
-
-                //     pageTable.put(pageNick, new ParentMap(FXMLLoader.load(fxmlResourcePrefixPath.resolve(parentPropertyFields[0]).toUri().toURL()),
-                //                                                null,
-                //                                                prefWidth,
-                //                                                prefHeight));
-
-                //     logger.log(Level.INFO, "page added: " + pageNick + ": **/" + pageNickResourceName + " -> " + controllerClassName); 
-
-                //     continue;
-                // } else {
-                //     controllerClassName = Optional.ofNullable(parentPropertyFields[1])
-                //                                   .orElseThrow(MalformedFXMLIndexFileException::new);
-
-                //     logger.log(Level.INFO, "Using controller declared in FXML index property file: " + fxmlResourceIndexPath.getFileName().toString() + " for page nickName: '" + pageNick + "'");
-                // }
 
                 if (parentProperty.controllerClassName == null) {
                     controllerClassName = getRootXMLAttribute(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName),
@@ -845,7 +824,7 @@ public final class StageManager {
 
                 loader.setLocation(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName).toUri().toURL());
                 loader.setController(controllerInstance);
-                parent = loader.load(); // new page(loader.load(), primaryStageWidth, primaryStageHeight);
+                parent = loader.load();
 
                 pageTable.put(pageNick, new PageMap(parent,
                                                            controllerClass,
@@ -1151,7 +1130,6 @@ public final class StageManager {
             Object controllerInstance;
 
             FXMLLoader loader;
-            Parent parent;
 
             try {
                 controllerClassName = new String();
@@ -1204,8 +1182,6 @@ public final class StageManager {
                 loader.setLocation(fxmlPath.toUri().toURL());
                 loader.setController(controllerInstance);
 
-                // scene = new page(loader.load(), primaryStageWidth, primaryStageHeight);
-
                 pageTable.put(pageNick, new PageMap(loader.load(),
                                                      controllerClass,
                                                      prefWidth,
@@ -1256,9 +1232,20 @@ public final class StageManager {
         pageTable.remove(pageNick);
     }
 
+    public Parent getPage(String pageNick) throws PageNotFoundException {
+        if (pageTable.containsKey(pageNick) == false) {
+            logger.log(Level.SEVERE, "Attempting to add a child to non existing page: " + pageNick);
+
+            throw new PageNotFoundException(pageNick);
+        }
+
+        return pageTable.get(pageNick).parent;
+    }
+
     /**
      * Sets the current page
      * 
+     * @param       stage                         Stage for page to be set
      * @param       pageNick                      NickName for a page in the page table to be used
      * 
      * @throws      PageNotFoundException         when pageNick is not in the page table
@@ -1274,7 +1261,6 @@ public final class StageManager {
                         String pageNick) throws PageNotFoundException {
 
         if (pageNick == null) {
-            // defineHomeSceneFromIndexFile();
             logger.log(Level.SEVERE, "Home page has not been set");
             throw new PageNotFoundException();
         }
@@ -1331,16 +1317,44 @@ public final class StageManager {
             this.primaryStageScenePage.getChildren().remove(this.currentPrimaryStageScenePage);
             this.primaryStageScenePage.getChildren().add(pageTable.get(pageNick).parent);
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
+
+            this.primaryStageTitleBar.toFront();
         }
 
         logger.log(Level.INFO, "Current page has been set to '" + pageNick + "'");
     }
 
+    /**
+     * Sets the current page
+     * 
+     * @param       pageNick                      NickName for a page in the page table to be used
+     * 
+     * @throws      PageNotFoundException         when pageNick is not in the page table
+     * 
+     * @see pageTable
+     * @see addPage
+     * @see removePage
+     * 
+     * @todo option to perform smooth Stage resizing
+     * @bug Smooth Stage resizing animation task cancellation
+     */
     public void setPage(String pageNick) throws PageNotFoundException {
         setPage(this.primaryStage, pageNick);
     }
 
-    // !!!
+    /**
+     * Add child element to page
+     */
+    public void addChildToPage(String pageNick,
+                               Node child) throws PageNotFoundException {
+
+        if (pageTable.containsKey(pageNick) == false) {
+            logger.log(Level.SEVERE, "Attempting to add a child to non existing page: " + pageNick);
+
+            throw new PageNotFoundException(pageNick);
+        }
+    }
+
     /**
      * Shows the primary Stage containing the home page
      * 
@@ -1351,7 +1365,6 @@ public final class StageManager {
      */
     public void activate() throws PageNotFoundException {
         if (homePageNick == null) {
-            // autoDefineHomePage();
             logger.log(Level.SEVERE, "Cannot set initial page, home page has not been set");
 
             throw new PageNotFoundException();
@@ -1383,9 +1396,6 @@ public final class StageManager {
     }
 
     private void craftPrimaryStage(StageStyle stageStyle) {
-
-        // this.primaryStage.setResizable(true);
-
         if (stageStyle != StageStyle.UNDECORATED
             && stageStyle != StageStyle.TRANSPARENT) {
 
@@ -1400,10 +1410,15 @@ public final class StageManager {
 
         AnchorPane rootNode = new AnchorPane();
 
-        rootNode.setStyle(CUSTOM_STAGE_STYLE);
+        clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
+
+        TitleBar titleBar = new TitleBar(this.primaryStage,
+                                         this.primaryStageTitle,
+                                         this.primaryStageWidth,
+                                         DEFAULT_STAGE_TITLE_BAR_HEIGHT);
 
         rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageTitleBar.setWidth(newValue);
+            titleBar.setWidth(newValue);
         });
 
         rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
@@ -1416,24 +1431,17 @@ public final class StageManager {
 
         rootNode.setPrefHeight(DEFAULT_STAGE_TITLE_BAR_HEIGHT + this.primaryStageHeight);
 
-        this.primaryStageTitleBar = new TitleBar(this.primaryStage,
-                                                 this.primaryStageTitle,
-                                                 this.primaryStageWidth,
-                                                 DEFAULT_STAGE_TITLE_BAR_HEIGHT);
-
-        // add title bar here
-        // rootNode.getChildren().add(pageTable.get(pageNick).parent);
-        // ObservableList<Node> children = FXCollections.observableList();
+        this.primaryStageTitleBar = titleBar;
 
         rootNode.getChildren().add(this.primaryStageTitleBar);
         rootNode.getChildren().add(pageTable.get(homePageNick).parent);
+
+        this.primaryStageTitleBar.toFront();
 
         AnchorPane.setTopAnchor(this.primaryStageTitleBar, 0.0);
         AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 1.0);
 
         Scene rootScene = new Scene(rootNode);
-        //                             pageTable.get(homePageNick).prefWidth.get(),
-        //                             pageTable.get(homePageNick).prefHeight.get());
 
         rootScene.setFill(Color.TRANSPARENT);
         rootScene.setRoot(rootNode);
@@ -1486,8 +1494,10 @@ public final class StageManager {
      */
     public final class TitleBar
             extends HBox {
-        
+
         private final double BUTTON_PADDING = 8.0;
+
+        private final Insets TITLE_BAR_ELEMENT_INSETS = new Insets(0, 10, 0, 10);
 
         private final String BUTTON_STYLE = """
             -fx-background-radius: 160;
@@ -1497,25 +1507,255 @@ public final class StageManager {
             -fx-min-height: 1;
         """;
 
+        private class StageControlButton
+                extends Button {
+
+            public enum StageControlButtonType {
+                CLOSE_BUTTON,
+                MINIMIZE_BUTTON,
+                FULL_SCREEN_TOGGLE_BUTTON;
+            }
+
+            private final StageControlButtonType BUTTON_TYPE;
+
+            public StageControlButton(StageControlButtonType buttonType) {
+                this.BUTTON_TYPE = buttonType;
+            }
+
+            public StageControlButton(String text,
+                                      StageControlButtonType buttonType) {
+
+                super(text);
+                this.BUTTON_TYPE = buttonType;
+            }
+
+            public StageControlButton(String text,
+                                      StageControlButtonType buttonType,
+                                      Node graphic) {
+
+                super(text, graphic);
+                this.BUTTON_TYPE = buttonType;
+            }
+        }
+
+        private final Insets STAGE_CONTROL_BUTTON_PADDING = new Insets(1, 1, 1, 1);
+
+        private final String TITLE_BAR_COLOR = "-fx-background-color: #ffffff";
+
+        private final String HOVERED_BUTTON_STYLE = "-fx-border-color: #000000";
+
         private final String CLOSE_BUTTON_COLOR = "-fx-background-color: #ed6a5e;";
 
         private final String MINIMIZE_BUTTON_COLOR = "-fx-background-color: #f5bf4f;";
 
-        private final String FULL_SCREEN_BUTTON_COLOR = "-fx-background-color: #62c555;";
+        private final String FULL_SCREEN_TOGGLE_BUTTON_COLOR = "-fx-background-color: #62c555;";
+
+        private final boolean STAGE_CONTROL_BUTTON_BOX_POSITION_LEFT = false;
 
         private Stage stage;
 
         private Robot robot;
 
-        private EventHandler<MouseEvent> handlerOnCloseRequest = e -> {
+        private Button closeButton;
+
+        private Button minimizeButton;
+
+        private Button fullScreenToggleButton;
+
+        private final StageDragContext stageDragContext;
+
+        private static final class StageDragContext {
+
+            public double offSetX;
+
+            public double offSetY;
+        }
+
+        private class TitleBarButtonEvent<T extends StageControlButton>
+                    extends MouseEvent {
+
+            public TitleBarButtonEvent(EventType<? extends MouseEvent> eventType,
+                                       double x,
+                                       double y,
+                                       double screenX,
+                                       double screenY,
+                                       MouseButton button,
+                                       int clickCount,
+                                       boolean shiftDown,
+                                       boolean controlDown,
+                                       boolean altDown,
+                                       boolean metaDown,
+                                       boolean primaryButtonDown,
+                                       boolean middleButtonDown,
+                                       boolean secondaryButtonDown,
+                                       boolean synthesized,
+                                       boolean popupTrigger,
+                                       boolean stillSincePress,
+                                       PickResult pickResult) {
+
+                super(eventType,
+                      x,
+                      y,
+                      screenX,
+                      screenY,
+                      button,
+                      clickCount,
+                      shiftDown,
+                      controlDown,
+                      altDown,
+                      metaDown,
+                      primaryButtonDown,
+                      middleButtonDown,
+                      secondaryButtonDown,
+                      synthesized,
+                      popupTrigger,
+                      stillSincePress,
+                      pickResult);
+            }
+
+            public TitleBarButtonEvent(EventType<? extends MouseEvent> eventType,
+                                       double x,
+                                       double y,
+                                       double screenX,
+                                       double screenY,
+                                       MouseButton button,
+                                       int clickCount,
+                                       boolean shiftDown,
+                                       boolean controlDown,
+                                       boolean altDown,
+                                       boolean metaDown,
+                                       boolean primaryButtonDown,
+                                       boolean middleButtonDown,
+                                       boolean secondaryButtonDown,
+                                       boolean backButtonDown,
+                                       boolean forwardButtonDown,
+                                       boolean synthesized,
+                                       boolean popupTrigger,
+                                       boolean stillSincePress,
+                                       PickResult pickResult) {
+
+                super(eventType,
+                      x,
+                      y,
+                      screenX,
+                      screenY,
+                      button,
+                      clickCount,
+                      shiftDown,
+                      controlDown,
+                      altDown,
+                      metaDown,
+                      primaryButtonDown,
+                      middleButtonDown,
+                      secondaryButtonDown,
+                      backButtonDown,
+                      forwardButtonDown,
+                      synthesized,
+                      popupTrigger,
+                      stillSincePress,
+                      pickResult);
+            }
+
+            public TitleBarButtonEvent(Object source,
+                                       EventTarget target,
+                                       EventType<? extends MouseEvent> eventType,
+                                       double x,
+                                       double y,
+                                       double screenX,
+                                       double screenY,
+                                       MouseButton button,
+                                       int clickCount,
+                                       boolean shiftDown,
+                                       boolean controlDown,
+                                       boolean altDown,
+                                       boolean metaDown,
+                                       boolean primaryButtonDown,
+                                       boolean middleButtonDown,
+                                       boolean secondaryButtonDown,
+                                       boolean synthesized,
+                                       boolean popupTrigger,
+                                       boolean stillSincePress,
+                                       PickResult pickResult) {
+
+                super(source,
+                      target,
+                      eventType,
+                      x,
+                      y,
+                      screenX,
+                      screenY,
+                      button,
+                      clickCount,
+                      shiftDown,
+                      controlDown,
+                      altDown,
+                      metaDown,
+                      primaryButtonDown,
+                      middleButtonDown,
+                      secondaryButtonDown,
+                      synthesized,
+                      popupTrigger,
+                      stillSincePress,
+                      pickResult);
+            }
+
+            public TitleBarButtonEvent(Object source,
+                                       EventTarget target,
+                                       EventType<? extends MouseEvent> eventType,
+                                       double x,
+                                       double y,
+                                       double screenX,
+                                       double screenY,
+                                       MouseButton button,
+                                       int clickCount,
+                                       boolean shiftDown,
+                                       boolean controlDown,
+                                       boolean altDown,
+                                       boolean metaDown,
+                                       boolean primaryButtonDown,
+                                       boolean middleButtonDown,
+                                       boolean secondaryButtonDown,
+                                       boolean backButtonDown,
+                                       boolean forwardButtonDown,
+                                       boolean synthesized,
+                                       boolean popupTrigger,
+                                       boolean stillSincePress,
+                                       PickResult pickResult) {
+
+                super(source,
+                      target,
+                      eventType,
+                      x,
+                      y,
+                      screenX,
+                      screenY,
+                      button,
+                      clickCount,
+                      shiftDown,
+                      controlDown,
+                      altDown,
+                      metaDown,
+                      primaryButtonDown,
+                      middleButtonDown,
+                      secondaryButtonDown,
+                      backButtonDown,
+                      forwardButtonDown,
+                      synthesized,
+                      popupTrigger,
+                      stillSincePress,
+                      pickResult);
+            }
+        }
+
+        private EventHandler<MouseEvent> handleOnCloseRequest = e -> {
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         };
 
-        private EventHandler<MouseEvent> handlerOnMinimizeRequest = e -> {
+        private EventHandler<MouseEvent> handleOnMinimizeRequest = e -> {
             stage.setIconified(true);
         };
 
-        private EventHandler<MouseEvent> handlerOnFullScreenRequest = e -> {
+        private EventHandler<MouseEvent> handleOnFullScreenToggleRequest = e -> {
             if (stage.isFullScreen()) {
                 stage.setFullScreen(false);
                 stage.getScene().getRoot().setStyle(CUSTOM_STAGE_STYLE);
@@ -1526,13 +1766,13 @@ public final class StageManager {
         };
 
         @FXML
-        private Button closeButton;
+        private Button customCloseButton;
 
         @FXML
-        private Button minimizeButton;
+        private Button customMinimizeButton;
 
         @FXML
-        private Button fullScreenButton;
+        private Button customFullScreenToggleButton;
 
         public TitleBar(Stage stage,
                         String stageTitle,
@@ -1541,108 +1781,116 @@ public final class StageManager {
 
             this.stage = stage;
 
-            closeButton = new Button();
-            minimizeButton = new Button();
-            fullScreenButton = new Button();
+            stageDragContext = new StageDragContext();
 
-            closeButton.setStyle(BUTTON_STYLE + CLOSE_BUTTON_COLOR);
-            closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnCloseRequest);
-
-            minimizeButton.setStyle(BUTTON_STYLE + MINIMIZE_BUTTON_COLOR);
-            minimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnMinimizeRequest);
-
-            fullScreenButton.setStyle(BUTTON_STYLE + FULL_SCREEN_BUTTON_COLOR);
-            fullScreenButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnFullScreenRequest);
-
-            super.setStyle("-fx-background-color: white;");
-            super.setPadding(new Insets(0, 10, 0, 10));
             super.setPrefWidth(width);
             super.setPrefHeight(height);
-            super.setAlignment(Pos.CENTER_RIGHT);
-            
-            super.getChildren().add(closeButton);
-            super.getChildren().add(minimizeButton);
-            super.getChildren().add(fullScreenButton);
+            super.setStyle(TITLE_BAR_COLOR);
 
-            super.setSpacing(BUTTON_PADDING);
-            
-            // titleBar.setPrefWidth(prefWidth);
-            // titleBar.prefHeight(prefHeight);
+            super.setFillHeight(true);
+            super.setMaxWidth(Double.MAX_VALUE);
 
-            // addStageTitle(this, stageTitle);
-            // addStageControlButtonStack(this);
+            HBox stageGrabBarBox = createStageGrabBarBox(primaryStageTitleIcon, stageTitle);
+            HBox stageControlButtonBox = createStageControlButtonBox();
 
-            // if (titleBar == null) {
-            //     synchronized (StageManager.TitleBarController.class) {
-            //         if (titleBar == null) {
-            //             titleBar = new HBox();
-            //             titleBar.setPadding(new Insets(0, 10, 10, 10));
-            //             // titleBar.setPrefWidth(prefWidth);
-            //             // titleBar.prefHeight(prefHeight);
+            if (STAGE_CONTROL_BUTTON_BOX_POSITION_LEFT) {
+                super.getChildren().add(stageControlButtonBox);
+                super.getChildren().add(stageGrabBarBox);
 
-            //             addStageTitle(titleBar, stageTitle);
-            //             addStageControlButtonStack(titleBar);
-            //         }
-            //     }
-            // }
+                super.setAlignment(Pos.CENTER_LEFT);
+            } else {
+                super.getChildren().add(stageGrabBarBox);
+                super.getChildren().add(stageControlButtonBox);
+
+                super.setAlignment(Pos.CENTER_RIGHT);
+            }
+
+            HBox.setHgrow(stageGrabBarBox, Priority.ALWAYS);
         }
 
-        // public TitleBar newTitleBar(/* double prefWidth, */
-        //                             /* double prefHeight, */
-        //                             String stageTitle) {
-
-        //     titleBar = new TitleBar();
-        //     titleBar.setPadding(new Insets(0, 10, 10, 10));
-        //     // titleBar.setPrefWidth(prefWidth);
-        //     // titleBar.prefHeight(prefHeight);
-
-        //     addStageTitle(titleBar, stageTitle);
-        //     addStageControlButtonStack(titleBar);
-
-        //     // if (titleBar == null) {
-        //     //     synchronized (StageManager.TitleBarController.class) {
-        //     //         if (titleBar == null) {
-        //     //             titleBar = new HBox();
-        //     //             titleBar.setPadding(new Insets(0, 10, 10, 10));
-        //     //             // titleBar.setPrefWidth(prefWidth);
-        //     //             // titleBar.prefHeight(prefHeight);
-
-        //     //             addStageTitle(titleBar, stageTitle);
-        //     //             addStageControlButtonStack(titleBar);
-        //     //         }
-        //     //     }
-        //     // }
-
-        //     return titleBar;
-        // }
-
-        private void addStageControlButtonStack(TitleBar titleBar) {
-            StackPane buttonBar = new StackPane();
+        private HBox createStageControlButtonBox() {
+            HBox stageControlButtonBox = new HBox();
 
             closeButton = new Button();
             minimizeButton = new Button();
-            fullScreenButton = new Button();
+            fullScreenToggleButton = new Button();
+
+            closeButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
+            minimizeButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
+            fullScreenToggleButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
 
             closeButton.setStyle(BUTTON_STYLE + CLOSE_BUTTON_COLOR);
-            closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnCloseRequest);
+            closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnCloseRequest);
 
             minimizeButton.setStyle(BUTTON_STYLE + MINIMIZE_BUTTON_COLOR);
-            minimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnMinimizeRequest);
+            minimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnMinimizeRequest);
 
-            fullScreenButton.setStyle(BUTTON_STYLE + FULL_SCREEN_BUTTON_COLOR);
-            fullScreenButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handlerOnFullScreenRequest);
+            fullScreenToggleButton.setStyle(BUTTON_STYLE + FULL_SCREEN_TOGGLE_BUTTON_COLOR);
+            fullScreenToggleButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnFullScreenToggleRequest);
 
-            buttonBar.getChildren().addAll(closeButton, minimizeButton, fullScreenButton);
-            buttonBar.setAlignment(Pos.CENTER_RIGHT);
+            stageControlButtonBox.setPadding(TITLE_BAR_ELEMENT_INSETS);
 
-            titleBar.getChildren().add(buttonBar);
+            stageControlButtonBox.setAlignment(Pos.CENTER);
+
+            // wheater to use custom or default
+            stageControlButtonBox.getChildren().add(closeButton);
+            stageControlButtonBox.getChildren().add(minimizeButton);
+            stageControlButtonBox.getChildren().add(fullScreenToggleButton);
+
+            stageControlButtonBox.setSpacing(BUTTON_PADDING);
+
+            return stageControlButtonBox;
         }
 
-        private void addStageTitle(TitleBar titleBar,
-                                   String title) {
+        private HBox createStageGrabBarBox(Node stageIcon,
+                                           String stageTitle) {
 
-            Text titleText = new Text(title);
-            super.getChildren().add(titleText);
+            HBox stageGrabBarBox = new HBox();
+
+            Node stageIconNode = createStageTitleIconNode(stageIcon);
+            Text stageTitleText = createStageTitleText(stageTitle);
+
+            if (stageIconNode != null) {
+                stageGrabBarBox.getChildren().add(stageIconNode);
+            }
+
+            stageGrabBarBox.getChildren().add(stageTitleText);
+            stageGrabBarBox.setAlignment(Pos.CENTER_LEFT);
+            stageGrabBarBox.setPadding(TITLE_BAR_ELEMENT_INSETS);
+
+            HBox.setHgrow(stageTitleText, Priority.ALWAYS);
+
+            stageGrabBarBox.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    stageDragContext.offSetX = primaryStage.getX() - event.getScreenX();
+                    stageDragContext.offSetY = primaryStage.getY() - event.getScreenY();
+                }
+            });
+
+            stageGrabBarBox.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    primaryStage.setX(event.getScreenX() + stageDragContext.offSetX);
+                    primaryStage.setY(event.getScreenY() + stageDragContext.offSetY);
+                }
+            });
+
+            return stageGrabBarBox;
+        }
+
+        private Text createStageTitleText(String stageTitle) {
+            Text titleText = new Text(stageTitle);
+
+            titleText.setFont(currentFont);
+
+            return titleText;
+        }
+
+        private Node createStageTitleIconNode(Node icon) {
+            return icon;
         }
 
         public void setWidth(Number width) {
@@ -1661,22 +1909,109 @@ public final class StageManager {
          */
         @FXML
         public void onClose(ActionEvent event) {
-            closeButton.fire();
+            customCloseButton.fire();
         }
 
         @FXML
         public void onMinimize(ActionEvent event) {
-            minimizeButton.fire();
+            customMinimizeButton.fire();
         }
 
         @FXML
-        public void onFullScreen(ActionEvent event) {
-            fullScreenButton.fire();
+        public void onFullScreenToggle(ActionEvent event) {
+            customFullScreenToggleButton.fire();
         }
         /**
          * For custom Parent
          */
     }
 
-    public final class RootSceneController {}
+    /**
+     * @section Draggability
+     */
+
+    /**
+     * Property holding drag mode status
+     */
+    private SimpleBooleanProperty dragModeActiveProperty = new SimpleBooleanProperty(this.primaryStage, "dragModeActive", true);
+
+    /**
+     * Mouse dragging context
+     */
+    private static final class DragContext {
+
+        public double mouseAnchorX;
+
+        public double mouseAnchorY;
+
+        public double initialTranslateX;
+
+        public double initialTranslateY;
+    }
+
+    /**
+     * Make a Node draggable
+     */
+    public <T extends Node> Node makeDraggable(final T node) {
+        final DragContext dragContext = new DragContext();
+        final Group wrapGroup = new Group(node);
+
+        wrapGroup.maxWidth(Double.MAX_VALUE);
+
+        wrapGroup.addEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(final MouseEvent mouseEvent) {
+                if (dragModeActiveProperty.get()) {
+                    mouseEvent.consume();
+                }
+            }
+        });
+
+        wrapGroup.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(final MouseEvent mouseEvent) {
+                if (dragModeActiveProperty.get()) {
+                    dragContext.mouseAnchorX = mouseEvent.getX();
+                    dragContext.mouseAnchorY = mouseEvent.getY();
+
+                    dragContext.initialTranslateX = node.getTranslateX();
+                    dragContext.initialTranslateY = node.getTranslateY();
+                }
+            }
+        });
+
+        wrapGroup.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(final MouseEvent mouseEvent) {
+                if (dragModeActiveProperty.get()) {
+                    node.setTranslateX(dragContext.initialTranslateX
+                                       + mouseEvent.getX()
+                                       - dragContext.mouseAnchorX);
+                    node.setTranslateY(dragContext.initialTranslateY
+                                       + mouseEvent.getY()
+                                       - dragContext.mouseAnchorY);
+                }
+            }
+        });
+
+        return wrapGroup;
+    }
+
+    private static void clipChildren(Region region,
+                                     double arc) {
+
+        final Rectangle rootRegion = new Rectangle();
+
+        rootRegion.setArcWidth(arc);
+        rootRegion.setArcHeight(arc);
+        region.setClip(rootRegion);
+
+        region.layoutBoundsProperty().addListener((observer, oldValue, newValue) -> {
+            rootRegion.setWidth(newValue.getWidth());
+            rootRegion.setHeight(newValue.getHeight());
+        });
+    }
 }

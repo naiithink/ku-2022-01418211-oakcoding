@@ -8,12 +8,12 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
-import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.helpers.resources.ResourcePrefix;
 import ku.cs.oakcoding.app.services.StageManager;
 import ku.cs.oakcoding.app.services.StageManager.MalformedFXMLIndexFileException;
 import ku.cs.oakcoding.app.services.StageManager.NoControllerSpecifiedException;
-import ku.cs.oakcoding.app.services.StageManager.SceneNotFoundException;
+import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
 
 public class ProjectApplication extends Application {
 
@@ -45,21 +45,21 @@ public class ProjectApplication extends Application {
         StageManager stageManager = StageManager.getStageManager();
 
         try {
-            stageManager.dispatch(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
-                                  OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
-                                  this,
-                                  primaryStage,
-                                  OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
-                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
-                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
+            stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
+                                   ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
+                                   this,
+                                   primaryStage,
+                                   OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
+                                   Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
+                                   Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
             );
 
-            stageManager.defineHomeSceneFromIndexFile();
+            stageManager.autoDefineHomePage();
             stageManager.activate();
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
             e.printStackTrace();
-        } catch (SceneNotFoundException e) {
+        } catch (PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Scene not found: " + e.getMessage());
         } catch (NoControllerSpecifiedException e) {
             e.printStackTrace();
