@@ -48,8 +48,9 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             String line = "";
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
-                String key = DataBase.getKey(data);
-                Object newObj = DataBase.readData(data);
+                String[] dataTrim = trimData(data);
+                String key = DataBase.getKey(dataTrim);
+                Object newObj = DataBase.readData(dataTrim);
                 users.addUserMap(key,newObj);
             }
 
@@ -121,6 +122,18 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             throw new RuntimeException(e);
         }
 
+
+    }
+
+    public String [] trimData(String [] data){
+        String [] dataTrim = new String[data.length];
+
+        for (int i = 0; i < data.length; i++){
+            dataTrim[i] = data[i].substring(1, data[i].length() - 1);
+        }
+
+
+        return dataTrim;
 
     }
 

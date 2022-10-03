@@ -1,6 +1,7 @@
 package ku.cs.oakcoding.app.models;
 
 import java.nio.file.Path;
+import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 
 public abstract class User {
 
@@ -11,7 +12,6 @@ public abstract class User {
     private String lastName;
 
     private Path profileImagePath;
-
 
     private String username;
 
@@ -48,11 +48,25 @@ public abstract class User {
         return profileImagePath;
     }
 
+    public String getUsername() { return username;}
+
+    public String getPassword() { return password;}
+
     public boolean verifyPassword(String seed) {
         if (password.equals(seed)) {
             return true;
         }
 
         return false;
+    }
+
+    public String getQuoteFormat(Object o){
+        String line = o + "";
+        String result = "\"" + line + "\"";
+        return result;
+    }
+
+    public String formatCSV() {
+        return null;
     }
 }
