@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterControllers">
+    <children>
+        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
+            <children>
+            <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
+               <children>
+                  <ImageView disable="true" fitHeight="568.0" fitWidth="340.0" layoutX="-15.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bg-register.jpg" />
+                     </image>
+                  </ImageView>
+                      <Label layoutX="22.0" layoutY="230.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="KASETSART" textFill="WHITE">
+                          <font>
+                              <Font name="Inter Bold Italic" size="33.0" />
+                          </font>
+                      </Label>
+                  <Label layoutX="21.0" layoutY="271.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="UNIVERSITY" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="17.0" fitWidth="13.0" layoutX="8.0" layoutY="8.0" onMouseClicked="#handleBackButtonGoToLoginPage" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/angle-left.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
+               <children>
+                      <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                          <image>
+                              <Image url="@../images/minus.png" />
+                          </image>
+                      </ImageView>
+                      <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                          <image>
+                          <Image url="@../images/cross.png" />
+                          </image>
+                      </ImageView>
+                      <Button fx:id="registerUserButton" layoutX="229.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleRegisterUserButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="42.0" layoutY="429.0" prefHeight="23.0" prefWidth="158.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="ของมหาวิทยาลัยเกษศาสตร์" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="412.0" prefHeight="23.0" prefWidth="193.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="กดที่ปุ่มนี้เพื่อยืนยันว่าคุณเป็นนิสิต" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="confrimStudentCheckbox" layoutX="14.0" layoutY="420.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="28.0" stylesheets="@../css/style.css" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit" size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="Text" />
+                        <String fx:value="hover" />
+                     </styleClass>
+                  </Label>
+                      <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password Confirm" textFill="#d0d0d0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                      <Label layoutX="18.0" layoutY="225.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                      <TextField fx:id="usernameField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                      <TextField fx:id="firstnameField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <Label layoutX="17.0" layoutY="114.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Firstname" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                      <TextField fx:id="lastnameField" layoutX="292.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <Label layoutX="292.0" layoutY="115.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Lastname" textFill="#d0d0d0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                      <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สมัครสมาชิก" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit" size="21.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordField" layoutX="16.0" layoutY="247.0" prefHeight="26.0" prefWidth="215.0" />
+                  <PasswordField fx:id="passwordConfirmField" layoutX="17.0" layoutY="297.0" prefHeight="26.0" prefWidth="215.0" />
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/upload.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameProfileUploadLabel" layoutX="172.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AlexProfile.png" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="messageWhenRegisterLabel" layoutX="179.0" layoutY="521.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการสมัครสมาชิกเรียบร้อย" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            </children>
+        </Pane>
+      <Pane fx:id="addStaffRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
+         <children>
+            <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
+               <children>
+                  <ImageView disable="true" fitHeight="568.0" fitWidth="340.0" layoutX="-15.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bg-register.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="22.0" layoutY="230.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="KASETSART" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="271.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="UNIVERSITY" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="17.0" fitWidth="13.0" layoutX="8.0" layoutY="8.0" onMouseClicked="#handleBackButtonGoToAdminPage" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/angle-left.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
+               <children>
+                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/minus.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/cross.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="registerStaffButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterStaffButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="Text" />
+                        <String fx:value="hover" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password Confirm" textFill="#d0d0d0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="18.0" layoutY="225.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameStaffField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" visible="false" />
+                  <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="firstnameStaffField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                  <Label layoutX="17.0" layoutY="114.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Firstname" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="lastnameStaffField" layoutX="292.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                  <Label layoutX="292.0" layoutY="115.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Lastname" textFill="#d0d0d0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="เพิ่มจำนวนเจ้าหน้าที่" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit" size="21.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordStaffField" layoutX="16.0" layoutY="247.0" prefHeight="26.0" prefWidth="215.0" />
+                  <PasswordField fx:id="passwordConfirmStaffField" layoutX="17.0" layoutY="297.0" prefHeight="26.0" prefWidth="215.0" />
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/upload.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameProfileUploadStaffLabel" layoutX="172.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AliceProfileStaff.png" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="messageWhenRegisterStaffLabel" layoutX="179.0" layoutY="496.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการเพิ่มเจ้าหน้าที่เรียบร้อย" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="addOrganizationPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
+         <children>
+            <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
+               <children>
+                  <ImageView disable="true" fitHeight="568.0" fitWidth="340.0" layoutX="-15.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bg-register.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="22.0" layoutY="230.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="KASETSART" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="271.0" prefHeight="53.0" prefWidth="206.0" styleClass="Text" stylesheets="@../css/InterEngBoldItalic.css" text="UNIVERSITY" textFill="WHITE">
+                     <font>
+                        <Font name="Inter Bold Italic" size="33.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="17.0" fitWidth="13.0" layoutX="8.0" layoutY="8.0" onMouseClicked="#handleBackButtonGoToAdminPage" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/angle-left.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
+               <children>
+                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar" visible="false">
+                     <image>
+                        <Image url="@../images/minus.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/cross.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="registerOrganizationButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterOrganizationButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="51.0" layoutY="413.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="Text" />
+                        <String fx:value="hover" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="236.0" prefHeight="25.0" prefWidth="215.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Member (ใช้คอมม่าคั่นแต่ละชื่อ)" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="bossOfOrganizationField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                  <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Boss" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="organizationNameField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                  <Label layoutX="17.0" layoutY="114.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Organization Name" textFill="#d0d0d0">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สร้าง Organization" textFill="WHITE">
+                     <font>
+                        <Font name="Kanit" size="21.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="413.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                     <image>
+                        <Image url="@../images/upload.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="nameLogoUploadOrganizationLabel" layoutX="173.0" layoutY="412.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="toktokOrganization.png" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="messageWhenRegisterOrganizationLabel" layoutX="163.0" layoutY="497.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการเพิ่ม Organization เรียบร้อย" textFill="#da9e9f">
+                     <font>
+                        <Font name="Kanit Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="memberOfOrganizationField" layoutX="17.0" layoutY="261.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

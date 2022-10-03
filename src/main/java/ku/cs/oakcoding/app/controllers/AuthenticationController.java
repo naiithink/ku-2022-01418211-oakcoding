@@ -1,16 +1,16 @@
 package ku.cs.oakcoding.app.controllers;
 
+import com.github.saacsos.fxrouter.OakRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.awt.event.MouseEvent;
 
 public class AuthenticationController {
     @FXML
@@ -38,9 +38,13 @@ public class AuthenticationController {
     private ImageView backButtonGoToGetStartedPage;
 
     @FXML
+    private Button registerUserHereButton;
+
+    @FXML
     void handleLoginButton(ActionEvent event) {
 //        ส่วนของ ปุ่ม login ต้อง implement user ให้ตรง
     }
+
     @FXML
     void handlegetStartedButtonToLoginPage(ActionEvent event) {
         if (event.getSource() == getStartedButton){
@@ -48,10 +52,21 @@ public class AuthenticationController {
             loginPane.setVisible(true);
         }
     }
-    public void handleBackButtonGoToGetStartedPage(javafx.scene.input.MouseEvent mouseEvent) {
+
+    public void handleRegisterUserHereToRegisterPage(ActionEvent actionEvent) {
+        try {
+            OakRouter.goTo("register");
+        } catch (final Exception e) {
+            System.err.println("ไปที่หน้า register ไม่ได้");
+            System.err.println("ให้ตรวจสอบการกำหนด route");
+        }
+    }
+
+
+    public void handleBackButtonGoToGetStartedPage(MouseEvent mouseEvent) {
         if (mouseEvent.getSource() == backButtonGoToGetStartedPage){
-            loginPane.setVisible(false);
             getStartedPane.setVisible(true);
+            loginPane.setVisible(false);
         }
     }
 
@@ -59,11 +74,9 @@ public class AuthenticationController {
         Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
         stage.close();
     }
-
     public void handleMinimizeButton(javafx.scene.input.MouseEvent mouseEvent) {
         Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-
 
 }
