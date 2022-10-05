@@ -8,12 +8,15 @@
 
 package ku.cs.oakcoding;
 
+import java.io.FileNotFoundException;
+import java.nio.file.NotDirectoryException;
 import java.util.logging.Level;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.helpers.resources.ResourcePrefix;
 import ku.cs.oakcoding.app.services.StageManager;
@@ -24,20 +27,24 @@ import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
 public class ProjectApplication extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws NotDirectoryException,
+                                                 FileNotFoundException {
+
         OakLogger.log(Level.INFO, "App is loading...");
+
         configStageManager(primaryStage);
     }
 
-    private void configStageManager(Stage primaryStage) {
+    private void configStageManager(Stage primaryStage) throws NotDirectoryException, FileNotFoundException {
         StageManager stageManager = StageManager.getStageManager();
 
         stageManager.setLogger(OakLogger.getLogger());
+        stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty("app.resource.fonts.dir")), 14.0);
 
         try {
-            stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
-                                                             .resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
-                                   ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
+            stageManager.bindStage(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
+                                                                .resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
+                                   OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
                                    this,
                                    primaryStage,
                                    true,
@@ -46,6 +53,7 @@ public class ProjectApplication extends Application {
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
             );
 
+            stageManager.setStageControlButtonAlignLeft(false);
             stageManager.autoDefineHomePage();
             stageManager.activate();
             OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));

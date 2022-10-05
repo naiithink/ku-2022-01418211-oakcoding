@@ -26,9 +26,12 @@ import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -36,6 +39,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
@@ -2176,7 +2180,20 @@ public final class StageManager {
     /**
      * @section Fonts
      */
-    static {}
+
+    /**
+     * Set containing all expected Font resource content type; MIME
+     */
+    private static Set<String> FONT_CONTENT_TYPE_ARRAY;
+
+    static {
+        FONT_CONTENT_TYPE_ARRAY = new TreeSet<>();
+
+        FONT_CONTENT_TYPE_ARRAY.add("font/ttf");
+        FONT_CONTENT_TYPE_ARRAY.add("font/otf");
+        FONT_CONTENT_TYPE_ARRAY.add("font/woff");
+        FONT_CONTENT_TYPE_ARRAY.add("font/woff2");
+    }
 
     private void initializeSectionFont() {
         fontTable = new ConcurrentHashMap<>();
@@ -2194,4 +2211,64 @@ public final class StageManager {
      * @note Use during development
      */
     private Font currentFont;
+
+    /**
+     * Loads Fonts from a directory
+     * 
+     * @param       fontDirPath     Directory containing all the Fonts to be loaded
+     * @param       fontSize        Default Font size
+     * 
+     * @throws      FileNotFoundException       when Path does not exist
+     * @throws      NotDirectoryException       when Path does not point to a directory
+     */
+    public void loadFontsFrom(Path fontDirPath,
+                              double fontSize) throws FileNotFoundException,
+                                                      NotDirectoryException {
+
+        if (Files.exists(fontDirPath) == false) {
+            logger.log(Level.SEVERE, "Font directory does not exist: " + fontDirPath.toString());
+
+            throw new FileNotFoundException(fontDirPath.toString());
+        } else if (Files.isDirectory(fontDirPath) == false) {
+            logger.log(Level.SEVERE, "Not directory: " + fontDirPath.toString());
+
+            throw new NotDirectoryException(fontDirPath.toString());
+        }
+
+        int fontLoadCount = 0;
+
+        try (DirectoryStream<Path> dirs = Files.newDirectoryStream(fontDirPath)) {
+
+            for (Path entry : dirs) {
+                if (FONT_CONTENT_TYPE_ARRAY.contains(Files.probeContentType(entry)) == false) {
+                    continue;
+                }
+
+                try (InputStream in = Files.newInputStream(entry)) {
+
+                    Font font = Font.loadFont(in, fontSize);
+
+                    fontTable.put(font.getName(), font);
+
+                    fontLoadCount++;
+                    logger.log(Level.INFO, "Loaded font: '" + font.getName() + "', size: " + font.getSize());
+                }
+            }
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Cannot reach font directory, got 'IOException'");
+
+            System.exit(1);
+        } finally {
+            logger.log(Level.INFO, Integer.toString(fontLoadCount) + "font" + (fontLoadCount == 1 ? "" : "s") + "loaded");
+        }
+    }
+
+    /**
+     * Gets the unmodifiable Font table containing all loaded Fonts
+     * 
+     * @see loadFontsFrom
+     */
+    public Map<String, Font> getFontTable() {
+        return Collections.unmodifiableMap(fontTable);
+    }
 }
