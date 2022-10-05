@@ -1,6 +1,7 @@
 package ku.cs.oakcoding.app.models;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.TreeMap;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
@@ -72,16 +73,16 @@ public abstract class User {
 
     public void changePassword(String newPassword){
         DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
-        TreeMap<String, Object> users = ((DataList) userCSV.readData()).getUsersMap();
-        ConsumerUser user = (ConsumerUser) users.get(this.username);
+        DataList users = (DataList) userCSV.readData();
+        User user = users.getUser(this.username);
 
-        users.remove(this.username);
+
+        users.removeUserMap(this.username);
         user.setNewPassword(newPassword);
-        users.put(this.username,user);
+        users.addUserMap(this.username, user);
 
         userCSV.clearData();
-        DataList newUsers = new DataList(users);
-        userCSV.writeData(newUsers);
+        userCSV.writeData(users);
 
     }
 
@@ -93,7 +94,5 @@ public abstract class User {
         return result;
     }
 
-    public String formatCSV() {
-        return null;
-    }
+    public abstract String formatCSV();
 }

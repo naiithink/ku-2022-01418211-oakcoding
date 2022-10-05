@@ -8,8 +8,6 @@ import java.nio.file.Path;
 public final class ConsumerUser
         extends User {
 
-    private BanStatus banStatus;
-
     public ConsumerUser(Roles role,
                         BanStatus banStatus,
                         String firstName,
@@ -19,16 +17,11 @@ public final class ConsumerUser
                         String password) {
 
         super(role, firstName, lastName, profileImagePath, username, password);
-        this.banStatus = banStatus;
-    }
-    public BanStatus getBanStatus(){
-        return banStatus;
     }
     @Override
     public String formatCSV(){
 
             String line = getQuoteFormat(getRole()) + ","
-                    + getQuoteFormat(getBanStatus()) + ","
                     + getQuoteFormat(getFirstName()) + ","
                     + getQuoteFormat(getLastName()) + ","
                     + getQuoteFormat(getProfileImagePath()) + ","
@@ -36,7 +29,7 @@ public final class ConsumerUser
                     + getQuoteFormat(getPassword());
 
             return line;
-        }
+
     }
 
 

@@ -1,18 +1,19 @@
 package ku.cs.oakcoding.app.services.data_source.CSV;
 
-
-import java.io.*;
-import java.util.Map;
-
+import ku.cs.oakcoding.app.models.Ban.Ban;
+import ku.cs.oakcoding.app.models.Ban.BanList;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.models.users.DataList;
 import ku.cs.oakcoding.app.services.DataBase;
 
-public class DataSourceListCSV implements DataSourceCSV<DataList> {
+import java.io.*;
+import java.util.Map;
+
+public class BanListCSV implements DataSourceCSV<>{
     private String directoryName;
     private String fileName;
 
-    public DataSourceListCSV(String directoryName, String fileName) {
+    public BanListCSV(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
         checkFileIsExisted();
@@ -35,9 +36,10 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
         }
     }
 
+
     @Override
-    public DataList readData(){
-        DataList users = new DataList();
+    public BanList readData(){
+        BanList banList = new BanList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -50,9 +52,10 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
                 String[] dataTrim = trimData(data);
-                String key = DataBase.getKey(dataTrim);
-                User newObj = (User) DataBase.readData(dataTrim);
-                users.addUserMap(key,newObj);
+                String key = dataTrim[0];
+                Ban newBan = new Ban(dataTrim[0],dataTrim[1]);
+                banList.addBanMap(key,newBan);
+
             }
 
 
@@ -71,12 +74,12 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
 
 
         }
-        return users;
+        return banList;
 
     }
 
     @Override
-    public void writeData(DataList usersMap){
+    public void writeData(BanList banMap){
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -87,8 +90,9 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             fileWriter = new FileWriter(file,true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String, User> entry : usersMap.getUsersMap().entrySet()){
-                String line = DataBase.writeData(entry.getValue());
+            for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()){
+                Ban ban = entry.getValue();
+                String line = ban.formatCSV();
                 writer.append(line);
                 writer.newLine();
             }
@@ -138,5 +142,11 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
 
     }
 
-}
 
+
+
+
+
+
+
+}
