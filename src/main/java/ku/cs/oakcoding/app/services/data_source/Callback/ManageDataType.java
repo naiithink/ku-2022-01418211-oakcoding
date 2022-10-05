@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.services.data_source.Callback;
+package ku.cs.oakcoding.app.services.data_source.callback;
 
 public interface ManageDataType<T>{
         public T instanceCreate(String [] data);

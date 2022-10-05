@@ -1,12 +1,9 @@
-package ku.cs.oakcoding.app.services.data_source.Callback;
+package ku.cs.oakcoding.app.services.data_source.callback;
 
-import ku.cs.oakcoding.app.helpers.hotspot.Roles;
-import ku.cs.oakcoding.app.models.BanStatus;
-import ku.cs.oakcoding.app.models.ConsumerUser;
-import ku.cs.oakcoding.app.models.users.Consumer;
-
-import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import ku.cs.oakcoding.app.models.ConsumerUser;
+import ku.cs.oakcoding.app.models.Roles;
 
 public class ConsumerData implements ManageDataType<ConsumerUser> {
     public ConsumerData(){}

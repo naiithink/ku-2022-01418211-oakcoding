@@ -1,15 +1,19 @@
-package ku.cs.oakcoding.app.services.data_source.CSV;
+package ku.cs.oakcoding.app.services.data_source.csv;
 
-import ku.cs.oakcoding.app.models.Ban.Ban;
-import ku.cs.oakcoding.app.models.Ban.BanList;
-import ku.cs.oakcoding.app.models.DataList;
-import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.services.DataBase;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
-public class BanListCSV implements DataSourceCSV<>{
+import ku.cs.oakcoding.app.models.ban.Ban;
+import ku.cs.oakcoding.app.models.ban.BanList;
+import ku.cs.oakcoding.app.services.DataBase;
+
+public class BanListCSV implements DataSourceCSV<BanList>{
     private String directoryName;
     private String fileName;
 
@@ -91,8 +95,7 @@ public class BanListCSV implements DataSourceCSV<>{
             writer = new BufferedWriter(fileWriter);
 
             for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()){
-                Ban ban = entry.getValue();
-                String line = DataBase.readData();
+                String line = DataBase.writeData(entry);
                 writer.append(line);
                 writer.newLine();
             }

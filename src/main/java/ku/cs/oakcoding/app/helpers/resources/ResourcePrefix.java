@@ -16,7 +16,7 @@ public final class ResourcePrefix {
     private static Path prefix;
 
     static {
-        try (InputStream in = ResourcePrefix.class.getClassLoader().getResourceAsStream("index.properties")) {
+        try (InputStream in = ResourcePrefix.class.getClassLoader().getResourceAsStream("config.properties")) {
             Objects.nonNull(in);
 
             Properties assertProp = new Properties();

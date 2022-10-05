@@ -1,10 +1,9 @@
 package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.helpers.hotspot.Roles;
-import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceListCSV;
-import ku.cs.oakcoding.app.services.data_source.CSV.PictureSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.DataSourceListCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.PictureSourceCSV;
 
 public class FactoryDataSourceCSV {
 

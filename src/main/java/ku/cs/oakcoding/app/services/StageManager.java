@@ -10,14 +10,6 @@
  * @todo Stage binding, the JavaBeans way
  * @todo Multi-screen management
  * @todo Multi-cursor/touch dragging controller
- * 
- * @section References
- * 
- * - Event Processing
- *   https://docs.oracle.com/javafx/2/events/processing.htm
- * 
- * - Draggable Panels Example
- *   https://docs.oracle.com/javase/8/javafx/events-tutorial/draggablepanelsexamplejava.htm
  */
 
 package ku.cs.oakcoding.app.services;
@@ -97,15 +89,25 @@ import javafx.stage.WindowEvent;
 /**
  * Manager for the primary application Stage
  * 
- * @attention This version of the StageManager was written to fully support JavaFX version 17.0.2.
+ * @attention This version of the StageManager was written to fully support
+ *            JavaFX version 17.0.2.
+ * 
  * @note This version of the StageManager only supports single-stage application
  * 
- * This class is following the singleton pattern since there must only be one instance
- * of the StageManager that takes control over the primary @link javafx.stage.Stage @unlink
- * provided by the platform.
+ * @brief This class is following the singleton pattern since there
+ *        MUST only be one instance of the StageManager that takes
+ *        control over the primary @link javafx.stage.Stage @unlink
+ *        provided by the platform.
  * 
- * Controller MUST be declared in either FXML resource file or in FXML index property file, not both.
- * Lines starting with @ref COMMENT_SYMBOL will be ignored.
+ *        Controller MUST be declared in either FXML resource file or in
+ *        FXML index property file, not both.
+ *        Lines starting with @ref COMMENT_SYMBOL will be ignored.
+ * 
+ * 
+ * The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+ * "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are
+ * to be interpreted as described in RFC 2119 <https://www.ietf.org/rfc/rfc2119.txt>.
+ * 
  * 
  * @section Synopsis
  * 
@@ -114,21 +116,29 @@ import javafx.stage.WindowEvent;
  *      \item{Define the home page for your application}
  *      \item{Show your application Stage with page set to home}
  * \end{enumerate}
+ * 
+ * 
+ * @section Overall References
+ * 
+ * References that are more specific to some sections were directly added to
+ * the section heading.
+ * 
+ * - Event Processing
+ *   https://docs.oracle.com/javafx/2/events/processing.htm
  */
 public final class StageManager {
 
     /**
-     * If required, controller to be used must be written in singleton pattern
+     * Logger instance for this StageManager
+     */
+    private Logger logger;
+
+    /**
+     * If required, controller to be used MUST be written in singleton pattern
      * 
      * Name of the method for getting controller type instance
      */
     private static final String GET_INSTANCE_METHOD_NAME;
-
-    /**
-     * Delimiter used to delimit the .fxml resource and its controller name field in a record
-     * read from FXML index property file.
-     */
-    private static final String INDEX_PROPERTY_TOKEN;
 
     /**
      * Lines in FXML index property file begining with this charactor are comments and will be ignored
@@ -145,44 +155,12 @@ public final class StageManager {
      */
     private static final double DEFAULT_STAGE_HEIGHT;
 
-    /**
-     * Default height of the Stage title bar
-     */
-    private static final double DEFAULT_STAGE_TITLE_BAR_HEIGHT;
-
-    /**
-     * Style for platform-undecorated custom stage
-     */
-    private static final String CUSTOM_STAGE_STYLE;
-
-    /**
-     * Arc for custom Stage corner
-     */
-    private static final double CUSTOM_STAGE_CORNER_ARC;
-
     private static StageManager instance;
 
     /**
      * Configuration file for this StageManager
      */
     private static Optional<Properties> stageManagerConfigProperties;
-
-    /**
-     * Font resource table
-     */
-    private static Map<String, Font> fontTable;
-
-    /**
-     * Current Font
-     * 
-     * @note Use during development
-     */
-    private Font currentFont;
-
-    /**
-     * Logger instance for this StageManager
-     */
-    private Logger logger;
 
     /**
      * Path to the FXML index property file
@@ -202,22 +180,12 @@ public final class StageManager {
     private Map<String, PageMap> pageTable;
 
     /**
-     * A tree holding the primary Stage hierarchy
-     */
-    private TreeMap<String, Stage> stageTree;
-
-    /**
      * Properties type storing all the records loaded from the FXML index property file
      */
     private Properties resourceIndexProperties;
 
     /**
-     * Visual bound of the current screen
-     */
-    private Rectangle2D visualBounds;
-
-    /**
-     * The instance of the main nickName point of the JavaFX application
+     * The instance of the main pageNick point of the JavaFX application
      */
     private Object mainApp;
 
@@ -227,29 +195,14 @@ public final class StageManager {
     private Stage primaryStage;
 
     /**
-     * Uses platform default title bar
+     * StageStyle of the primary Stage
      */
     private StageStyle primaryStageStyle;
-
-    /**
-     * Icon of the primary Stage
-     */
-    private Node primaryStageTitleIcon;
 
     /**
      * Title of the primary Stage
      */
     private String primaryStageTitle;
-
-    /**
-     * Title of the primary Stage
-     */
-    private Pos primaryStageTitlePosition;
-
-    /**
-     * Title bar of the primary Stage
-     */
-    private Node primaryStageTitleBar;
 
     /**
      * Root page of the primary Stage
@@ -262,7 +215,7 @@ public final class StageManager {
     private AnchorPane primaryStageScenePage;
 
     /**
-     * Root page/Node/Parent of the primary Stage
+     * Current root page/Node/Parent of the primary Stage
      */
     private Parent currentPrimaryStageScenePage;
 
@@ -281,7 +234,7 @@ public final class StageManager {
     private double primaryStageHeight;
 
     /**
-     * page nickName of the primary page
+     * Page pageNick of the primary page with non-whitescape characters
      */
     private String homePageNick;
 
@@ -292,11 +245,6 @@ public final class StageManager {
     @Target ({ ElementType.TYPE, ElementType.METHOD })
     public @interface OakStageManager {}
 
-    @Inherited
-    @Retention (RetentionPolicy.RUNTIME)
-    @Target (ElementType.FIELD)
-    public @interface Draggable {}
-
     /**
      * The record type for storing a pair of page and, if required, its corresponding controller
      */
@@ -306,58 +254,6 @@ public final class StageManager {
                            Optional<Double> prefHeight,
                            Boolean inheritWidth,
                            Boolean inheritHeight) {}
-
-    /**
-     * Extended Stage
-     */
-    public class XStage
-            extends Stage {
-
-        private Parent titleBarPane;
-
-        private Parent navBarPane;
-
-        private Parent mainPage;
-
-        private CopyOnWriteArrayList<Node> pages;
-
-        public XStage() {
-            this.titleBarPane = null;
-            this.navBarPane = null;
-        }
-
-        public XStage(StageStyle style) {
-            super(style);
-
-            this.titleBarPane = null;
-            this.navBarPane = null;
-        }
-
-        public XStage(StageStyle style,
-                      Parent titleBarPane,
-                      Parent navBarPane) {
-
-            this(style);
-
-            this.titleBarPane = titleBarPane;
-            this.navBarPane = navBarPane;
-        }
-
-        public XStage(StageStyle style,
-                      Parent navBarPane) {
-
-            this(style, null, navBarPane);
-        }
-
-        public void addPages(Node... pages) {
-            for (Node page : pages)
-                this.pages.add(page);
-        }
-
-        public void setMainPage(Parent mainPage) {
-            this.mainPage = mainPage;
-        }
-    }
 
     /**
      * Attribute name in an FXML parent
@@ -372,29 +268,6 @@ public final class StageManager {
         private FXMLAttribute(String value) {
             this.value = value;
         }
-
-        String value() {
-            return value;
-        }
-    }
-
-    public static class Alignment {
-
-        public static final int[] TOP_LEFT  = { 0, 0 };
-
-        public static final int[] MIDDLE_TOP = { 1, 0 };
-
-        public static final int[] TOP_RIGHT = { 2, 0 };
-
-        public static final int CENTRE      = 0b1111;
-
-        public static final int TOP         = 0b0001;
-
-        public static final int BOTTOM      = 0b0010;
-
-        public static final int LEFT        = 0b0100;
-
-        public static final int RIGHT       = 0b1000;
     }
 
     /**
@@ -481,7 +354,7 @@ public final class StageManager {
     /**
      * Object holding parsed record information of a certain page
      */
-    private class parentProperty {
+    private class ParentProperty {
 
         private String pageNick;
 
@@ -491,13 +364,13 @@ public final class StageManager {
 
         private Boolean inheritHeight;
 
-        private String controllerClassName;
+        private Optional<String> controllerClassName;
 
-        public parentProperty(String pageNick,
+        public ParentProperty(String pageNick,
                               String pageNickResourceName,
                               Boolean inheritWidth,
                               Boolean inheritHeight,
-                              String controllerClassName) {
+                              Optional<String> controllerClassName) {
 
             this.pageNick = pageNick;
             this.pageNickResourceName = pageNickResourceName;
@@ -522,7 +395,7 @@ public final class StageManager {
             return inheritHeight;
         }
 
-        public String getControllerClassName() {
+        public Optional<String> getControllerClassName() {
             return controllerClassName;
         }
     }
@@ -530,50 +403,41 @@ public final class StageManager {
     /**
      * Parse property value from FXML index file
      * 
-     * <parent_entry> "=" <fxml_resource_name.fxml> "|" <fixed_width "W" | inherit_width "w"> "," <fixed_height "H" | inherit_height "h"> "|" [ "=>" <controller> ]
+     * <pageNick> "=" <fxml_resource_name.fxml> "|" <fixed_width "W" | inherit_width "w"> "," <fixed_height "H" | inherit_height "h"> "|" [ "=>" <controller> ]
      * 
-     * fixed_width, fixed_height:        construct a stage using width/height defined in fxml resource file (.fxml)
-     * inherit_width, inherit_height:    construct a stage using inherited width/height from its parent Stage
+     * fixed_width, fixed_height:        construct a stage using width/height defined in FXML resource file (.fxml)
+     * inherit_width, inherit_height:    construct a stage using inherited width/height from its the previous page set to Stage
      * 
      * e.g.,
      *  home=home.fxml|w,H|=>com.naiithink.app.controllers.HomeController
      * 
-     * @note value MUST be written in order
+     * @note value MUST be written in order from left to right
      */
     private static class Utils {
 
-        public static final String RESOURCE_NAME_EXTENSION;
-
-        public static final String MENU_BAR_RESOURCE_NAME;
-
-        static {
-            RESOURCE_NAME_EXTENSION = "fxml";
-            MENU_BAR_RESOURCE_NAME = "menu_bar" + '.' + RESOURCE_NAME_EXTENSION;
-        }
-
         /**
-         * FXML index property parsing pattern
+         * FXML index property parsing patterns
          */
         private enum IndexPropertyRegex {
 
             WIDTH_INHERIT                           (null,                   "w"),
             HEIGHT_INHERIT                          (null,                   "h"),
-            VALIDATE                                (new int[] { 0 },        "(^\\w+)(?:=)(\\w+\\.fxml)(?:\\|)([WwHh])(?:,)([WwHh])(?:\\|)(?:(?:=>)([\\w\\.]+))?"),
-            VALIDATE_NO_KEY                         (new int[] { 0 },        "(?<=\\W)*(\\w+\\.fxml)(?:\\|)([WwHh])(?:,)([WwHh])(?:\\|)(?:(?:=>)([\\w\\.]+))?"),
+            VALIDATE                                (new int[] { 0 },        "(^\\w+)(?:=\\s*)(\\w+\\.fxml)(?:\\s*\\|\\s*)([WwHh])(?:\\s*,\\s*)([WwHh])(?:\\s*\\|\\s*)(?:(?:\\s*=>\\s*)([\\w\\.]+))?"),
+            VALIDATE_NO_KEY                         (new int[] { 0 },        "(?<=\\W)*(\\w+\\.fxml)(?:\\s*\\|\\s*)([WwHh])(?:\\s*,\\s*)([WwHh])(?:\\s*\\|\\s*)(?:(?:\\s*=>\\s*)([\\w\\.]+))?"),
             VALIDATE_NO_KEY_FXML_RESOURCE_NAME      (new int[] { 1 },        null),
             VALIDATE_NO_KEY_WIDTH_INHERITANCE       (new int[] { 2 },        null),
             VALIDATE_NO_KEY_HEIGHT_INHERITANCE      (new int[] { 3 },        null),
             VALIDATE_NO_KEY_CONTROLLER_NAME         (new int[] { 4 },        null),
-            VALIDATE_PARENT_ENTRY                   (new int[] { 1 },        null),
+            VALIDATE_PAGE_NICKNAME                   (new int[] { 1 },       null),
             VALIDATE_FXML_RESOURCE_NAME             (new int[] { 2 },        null),
             VALIDATE_WIDTH_INHERITANCE              (new int[] { 3 },        null),
             VALIDATE_HEIGHT_INHERITANCE             (new int[] { 4 },        null),
             VALIDATE_CONTROLLER_NAME                (new int[] { 5 },        null),
             ROOT_DILIMITER                          (new int[] { -1 },       "=" ),
-            PARENT_ENTRY                            (new int[] { 0 },        "\\w+(?==)"),
+            PAGE_NICKNAME                           (new int[] { 0 },        "\\w+(?=\\s*=)"),
             FXML_RESOURCE_NAME                      (new int[] { 0 },        "(?<=\\W)*\\w+\\.(fxml)(?=\\W+)"),
-            DIMENSIONAL_INHERITANCE                 (new int[] { 1, 2 },     "(?<=\\|)([wWhH])(?:,)([wWhH])(?=\\|)"),
-            CONTROLLER_NAME                         (new int[] { 0 },        "(?<==>).*");
+            DIMENSIONAL_INHERITANCE                 (new int[] { 1, 2 },     "(?<=\\|\\s*)([wWhH])(?:\\s*,\\s*)([wWhH])(?=\\s*\\|)"),
+            CONTROLLER_NAME                         (new int[] { 0 },        "(?<==>\\s*).*");
 
             private final int[] groupToGet;
 
@@ -585,14 +449,14 @@ public final class StageManager {
             }
         }
 
-        public static parentProperty readProperty(boolean keyExist,
+        public static ParentProperty readProperty(boolean keyExist,
                                                   String propertyValue) throws MalformedFXMLIndexFileException {
 
             String pageNick;
             String fxmlResourceName;
             Boolean inheritWidth;
             Boolean inheritHeight;
-            String controllerClassName;
+            Optional<String> controllerClassName;
 
             Pattern p;
 
@@ -616,34 +480,35 @@ public final class StageManager {
             }
 
             if (keyExist) {
-                pageNick = result[IndexPropertyRegex.VALIDATE_PARENT_ENTRY.groupToGet[0]].trim();
+                pageNick = result[IndexPropertyRegex.VALIDATE_PAGE_NICKNAME.groupToGet[0]].trim();
                 fxmlResourceName = result[IndexPropertyRegex.VALIDATE_FXML_RESOURCE_NAME.groupToGet[0]].trim();
                 inheritWidth = result[IndexPropertyRegex.VALIDATE_WIDTH_INHERITANCE.groupToGet[0]].trim().equals(IndexPropertyRegex.WIDTH_INHERIT.pattern);
                 inheritHeight = result[IndexPropertyRegex.VALIDATE_HEIGHT_INHERITANCE.groupToGet[0]].trim().equals(IndexPropertyRegex.HEIGHT_INHERIT.pattern);
-                controllerClassName = result[IndexPropertyRegex.VALIDATE_CONTROLLER_NAME.groupToGet[0]].trim();
+                controllerClassName = Optional.ofNullable(result[IndexPropertyRegex.VALIDATE_CONTROLLER_NAME.groupToGet[0]]);
             } else {
                 pageNick = null;
                 fxmlResourceName = result[IndexPropertyRegex.VALIDATE_NO_KEY_FXML_RESOURCE_NAME.groupToGet[0]].trim();
                 inheritWidth = result[IndexPropertyRegex.VALIDATE_NO_KEY_WIDTH_INHERITANCE.groupToGet[0]].trim().equals(IndexPropertyRegex.WIDTH_INHERIT.pattern);
                 inheritHeight = result[IndexPropertyRegex.VALIDATE_NO_KEY_HEIGHT_INHERITANCE.groupToGet[0]].trim().equals(IndexPropertyRegex.HEIGHT_INHERIT.pattern);
-                controllerClassName = result[IndexPropertyRegex.VALIDATE_NO_KEY_CONTROLLER_NAME.groupToGet[0]].trim();
+                controllerClassName = Optional.ofNullable(result[IndexPropertyRegex.VALIDATE_NO_KEY_CONTROLLER_NAME.groupToGet[0]]);
             }
 
-            return instance.new parentProperty(pageNick, fxmlResourceName, inheritWidth, inheritHeight, controllerClassName);
+            if (controllerClassName.isPresent()) {
+                controllerClassName = controllerClassName.map(s -> {
+                    return s.trim();
+                });
+            }
+
+            return instance.new ParentProperty(pageNick, fxmlResourceName, inheritWidth, inheritHeight, controllerClassName);
         }
     }
 
     static {
         GET_INSTANCE_METHOD_NAME = "getInstance";
-        INDEX_PROPERTY_TOKEN = "\\=>";
         COMMENT_SYMBOL = '#';
         DEFAULT_STAGE_WIDTH = 800.0;
         DEFAULT_STAGE_HEIGHT = 600.0;
         DEFAULT_STAGE_TITLE_BAR_HEIGHT = 30.0;
-        CUSTOM_STAGE_STYLE = """
-                -fx-background-radius: 11.0;
-                """;
-        CUSTOM_STAGE_CORNER_ARC = 22.0;
     }
 
     /**
@@ -652,9 +517,6 @@ public final class StageManager {
     private StageManager() {
         logger = Logger.getLogger(getClass().getName());
 
-        visualBounds = Screen.getPrimary().getBounds();
-
-        fontTable = new ConcurrentHashMap<>();
         pageTable = new ConcurrentHashMap<>();
         resourceIndexProperties = new Properties();
 
@@ -664,8 +526,9 @@ public final class StageManager {
     }
 
     private void constructDev() {
-        primaryStageTitlePosition = Pos.CENTER_LEFT;
-        currentFont = new Font("Noto Sans Display SemiBold", 14);
+        initializeSectionFont();
+        initializeSectionDraggability();
+        initializeSectionCustomTitleBar();
     }
 
     /**
@@ -684,12 +547,13 @@ public final class StageManager {
     }
 
     /**
-     * Binds the application Stage to StageManager's Stage
+     * Binds the application Stage with StageManager's Stage
      * 
-     * @param       fxmlResourceIndexPath      Path to the FXML index property file
-     * @param       fxmlResourcePrefixPath     Prefix Path of FXML files to be loaded
-     * @param       mainApp                     The instance of the main nickName point of the JavaFX application
+     * @param       fxmlResourceIndexPath       Path to the FXML index property file
+     * @param       fxmlResourcePrefixPath      Prefix Path of FXML files to be loaded
+     * @param       mainApp                     The instance of the main pageNick point of the JavaFX application
      * @param       primaryStage                The primary Stage of the application
+     * @param       primaryStageStyle           Style of the primary Stage
      * @param       primaryStageTitle           Title of the primary Stage
      * @param       primaryStageWidth           Width of the primary Stage
      * @param       primaryStageHeight          Height of the primary Stage
@@ -700,7 +564,7 @@ public final class StageManager {
                           Path fxmlResourcePrefixPath,
                           Object mainApp,
                           Stage primaryStage,
-                          StageStyle stageStyle,
+                          StageStyle primaryStageStyle,
                           String primaryStageTitle,
                           double primaryStageWidth,
                           double primaryStageHeight) throws MalformedFXMLIndexFileException,
@@ -711,7 +575,7 @@ public final class StageManager {
         Objects.nonNull(primaryStage);
 
         if (Application.class.isAssignableFrom(mainApp.getClass()) == false) {
-            logger.log(Level.SEVERE, "Unable to take control over main JavaFX nickName, invalid argument type for parameter 'mainApp'");
+            logger.log(Level.SEVERE, "Unable to take control over main JavaFX pageNick, invalid argument type for parameter 'mainApp'");
 
             System.exit(1);
         }
@@ -719,11 +583,16 @@ public final class StageManager {
         this.fxmlResourceIndexPath = fxmlResourceIndexPath;
         this.fxmlResourcePrefixPath = fxmlResourcePrefixPath;
         this.mainApp = mainApp;
-        this.primaryStageStyle = stageStyle;
         this.primaryStage = primaryStage;
         this.primaryStageTitle = primaryStageTitle;
         this.primaryStageWidth = primaryStageWidth;
         this.primaryStageHeight = primaryStageHeight;
+        
+        if (primaryStageStyle == null) {
+            this.primaryStageStyle = StageStyle.DECORATED;
+        } else {
+            this.primaryStageStyle = primaryStageStyle;
+        }
 
         try (InputStream in = Files.newInputStream(fxmlResourceIndexPath)) {
 
@@ -734,7 +603,7 @@ public final class StageManager {
             logger.log(Level.SEVERE, "Cannot get to FXML index file");
         }
 
-        String controllerClassName;
+        Optional<String> controllerClassName;
         Class<?> controllerClass;
         Method getInstanceMethod;
         Object controllerInstance;
@@ -751,12 +620,12 @@ public final class StageManager {
             for (String pageNick : parentEntries) {
 
                 loader = new FXMLLoader();
-                controllerClassName = new String();
+                controllerClassName = Optional.empty();
 
                 prefWidth = Optional.empty();
                 prefHeight = Optional.empty();
 
-                parentProperty parentProperty = Utils.readProperty(false, resourceIndexProperties.getProperty(pageNick));
+                ParentProperty parentProperty = Utils.readProperty(false, resourceIndexProperties.getProperty(pageNick));
 
                 prefWidth = Optional.of(
                     Double.valueOf(
@@ -774,31 +643,32 @@ public final class StageManager {
                     )
                 );
 
-                if (parentProperty.controllerClassName == null) {
-                    controllerClassName = getRootXMLAttribute(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName),
+                if (parentProperty.controllerClassName.isPresent() == false) {
+                    controllerClassName = Optional.ofNullable(getRootXMLAttribute(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName),
                                                               FXMLLoader.FX_NAMESPACE_PREFIX,
-                                                              FXMLLoader.FX_CONTROLLER_ATTRIBUTE).orElseThrow(NoControllerSpecifiedException::new);
+                                                              FXMLLoader.FX_CONTROLLER_ATTRIBUTE).orElseThrow(NoControllerSpecifiedException::new)
+                    );
   
-                    logger.log(Level.INFO, "Using controller declared in FXML resource file: " + parentProperty.pageNickResourceName + " for page nickName: '" + pageNick + "'");
+                    logger.log(Level.INFO, "Using controller declared in FXML resource file: '" + parentProperty.pageNickResourceName + "' for page pageNick: '" + pageNick + "'");
 
                     pageTable.put(pageNick, new PageMap(FXMLLoader.load(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName).toUri().toURL()),
-                                                               null,
-                                                               prefWidth,
-                                                               prefHeight,
-                                                               parentProperty.inheritWidth,
-                                                               parentProperty.inheritHeight));
+                                                        null,
+                                                        prefWidth,
+                                                        prefHeight,
+                                                        parentProperty.inheritWidth,
+                                                        parentProperty.inheritHeight));
 
-                    logger.log(Level.INFO, "page added: " + pageNick + ": **/" + parentProperty.pageNickResourceName + " -> " + controllerClassName); 
+                    logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' -> '" + controllerClassName + "'"); 
 
                     continue;
                 } else {
                     controllerClassName = Optional.ofNullable(parentProperty.controllerClassName)
                                                   .orElseThrow(MalformedFXMLIndexFileException::new);
 
-                    logger.log(Level.INFO, "Using controller declared in FXML index property file: " + fxmlResourceIndexPath.getFileName().toString() + " for page nickName: '" + pageNick + "'");
+                    logger.log(Level.INFO, "Using controller declared in FXML index property file: '" + fxmlResourceIndexPath.getFileName().toString() + "' for page pageNick: '" + pageNick + "'");
                 }
 
-                controllerClass = Class.forName(controllerClassName);
+                controllerClass = Class.forName(controllerClassName.get());
 
                 if (controllerClass.isAnnotationPresent(StageManager.OakStageManager.class) == false) {
                     /**
@@ -827,13 +697,13 @@ public final class StageManager {
                 parent = loader.load();
 
                 pageTable.put(pageNick, new PageMap(parent,
-                                                           controllerClass,
-                                                           prefWidth,
-                                                           prefHeight,
-                                                           parentProperty.inheritWidth,
-                                                           parentProperty.inheritHeight));
+                                                    controllerClass,
+                                                    prefWidth,
+                                                    prefHeight,
+                                                    parentProperty.inheritWidth,
+                                                    parentProperty.inheritHeight));
 
-                logger.log(Level.INFO, "page added: " + pageNick + ": **/" + parentProperty.pageNickResourceName + " => " + controllerClassName);
+                logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' => '" + controllerClassName + "'");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -858,11 +728,11 @@ public final class StageManager {
     }
 
     /**
-     * Binds the application Stage to StageManager's Stage
+     * Binds the application Stage with StageManager's Stage without customizing StageStyle
      * 
      * @param       fxmlResourceIndexPath       Path to the FXML index property file
      * @param       fxmlResourcePrefixPath      Prefix Path of FXML files to be loaded
-     * @param       mainApp                     The instance of the main nickName point of the JavaFX application
+     * @param       mainApp                     The instance of the main pageNick point of the JavaFX application
      * @param       primaryStage                The primary Stage of the application
      * @param       primaryStageTitle           Title of the primary Stage
      * @param       primaryStageWidth           Width of the primary Stage
@@ -889,14 +759,15 @@ public final class StageManager {
                   primaryStageHeight);
     }
 
-        /**
-     * Binds the application Stage to StageManager's Stage
+    /**
+     * Binds the application Stage with StageManager's Stage with an option to toggle the use of
+     * StageStyle.TRANSPARENT for the primary Stage
      * 
      * @param       fxmlResourceIndexPath       Path to the FXML index property file
      * @param       fxmlResourcePrefixPath      Prefix Path of FXML files to be loaded
-     * @param       mainApp                     The instance of the main nickName point of the JavaFX application
+     * @param       mainApp                     The instance of the main pageNick point of the JavaFX application
      * @param       primaryStage                The primary Stage of the application
-     * @param       transparentStageStyle       Use StageStyle.TRANSPARENT
+     * @param       transparentStageStyle       If true, use StageStyle.TRANSPARENT for the primary Stage. Otherwise, use StageStyle.UNDECORATED
      * @param       primaryStageTitle           Title of the primary Stage
      * @param       primaryStageWidth           Width of the primary Stage
      * @param       primaryStageHeight          Height of the primary Stage
@@ -905,10 +776,9 @@ public final class StageManager {
      */
     public void bindStage(Path fxmlResourceIndexPath,
                           Path fxmlResourcePrefixPath,
-                          Path titleBarResourcePath,
                           Object mainApp,
                           Stage primaryStage,
-                          Boolean transparentStageStyle,
+                          boolean transparentStageStyle,
                           String primaryStageTitle,
                           double primaryStageWidth,
                           double primaryStageHeight) throws MalformedFXMLIndexFileException,
@@ -933,13 +803,13 @@ public final class StageManager {
     }
 
     /**
-     * Binds the application Stage to StageManager's Stage
+     * Binds the application Stage with StageManager's Stage
      * 
      * @param       fxmlResourceIndexPathString         String representation of the Path to the FXML index property file
      * @param       fxmlResourcePrefixPathString        String representation of the prefix Path of FXML files to be loaded
-     * @param       mainApp                             The instance of the main nickName point of the JavaFX application
+     * @param       mainApp                             The instance of the main pageNick point of the JavaFX application
      * @param       primaryStage                        The primary Stage of the application
-     * @param       stageStyle                          Style of the primary Stage
+     * @param       primaryStageStyle                   Style of the primary Stage
      * @param       primaryStageTitle                   Title of the primary Stage
      * @param       primaryStageWidth                   Width of the primary Stage
      * @param       primaryStageHeight                  Height of the primary Stage
@@ -950,7 +820,7 @@ public final class StageManager {
                           String fxmlResourcePrefixPathString,
                           Object mainApp,
                           Stage primaryStage,
-                          StageStyle stageStyle,
+                          StageStyle primaryStageStyle,
                           String primaryStageTitle,
                           double primaryStageWidth,
                           double primaryStageHeight) throws MalformedFXMLIndexFileException,
@@ -968,12 +838,26 @@ public final class StageManager {
                   Paths.get(fxmlResourcePrefixPathString),
                   mainApp,
                   primaryStage,
-                  stageStyle,
+                  primaryStageStyle,
                   primaryStageTitle,
                   primaryStageWidth,
                   primaryStageHeight);
     }
 
+    /**
+     * Binds the application Stage with StageManager's Stage with an option to toggle the use of
+     * StageStyle.TRANSPARENT for the primary Stage
+     * 
+     * @param       fxmlResourceIndexPathString         String representation of the Path to the FXML index property file
+     * @param       fxmlResourcePrefixPathString        String representation of the prefix Path of FXML files to be loaded
+     * @param       mainApp                             The instance of the main pageNick point of the JavaFX application
+     * @param       primaryStage                        The primary Stage of the application
+     * @param       primaryStageTitle                   Title of the primary Stage
+     * @param       primaryStageWidth                   Width of the primary Stage
+     * @param       primaryStageHeight                  Height of the primary Stage
+     * 
+     * @throws      MalformedFXMLIndexFileException     when the FXML index property file is malformed
+     */
     public void bindStage(String fxmlResourceIndexPathString,
                           String fxmlResourcePrefixPathString,
                           Object mainApp,
@@ -983,22 +867,57 @@ public final class StageManager {
                           double primaryStageHeight) throws MalformedFXMLIndexFileException,
                                                             NoControllerSpecifiedException {
 
-        Objects.nonNull(fxmlResourceIndexPathString);
+        bindStage(fxmlResourceIndexPathString,
+                  fxmlResourcePrefixPathString,
+                  mainApp,
+                  primaryStage,
+                  null,
+                  primaryStageTitle,
+                  primaryStageWidth,
+                  primaryStageHeight);
+    }
 
-        if (Files.exists(Paths.get(fxmlResourceIndexPathString)) == false) {
-            logger.log(Level.SEVERE, "FXML index file not found");
+    /**
+     * Binds the application Stage with StageManager's Stage with an option to toggle the use of
+     * StageStyle.TRANSPARENT for the primary Stage
+     * 
+     * @param       fxmlResourceIndexPathString         String representation of the Path to the FXML index property file
+     * @param       fxmlResourcePrefixPathString        String representation of the prefix Path of FXML files to be loaded
+     * @param       mainApp                             The instance of the main pageNick point of the JavaFX application
+     * @param       primaryStage                        The primary Stage of the application
+     * @param       transparentStageStyle               If true, use StageStyle.TRANSPARENT for the primary Stage. Otherwise, use StageStyle.UNDECORATED
+     * @param       primaryStageTitle                   Title of the primary Stage
+     * @param       primaryStageWidth                   Width of the primary Stage
+     * @param       primaryStageHeight                  Height of the primary Stage
+     * 
+     * @throws      MalformedFXMLIndexFileException     when the FXML index property file is malformed
+     */
+    public void bindStage(String fxmlResourceIndexPathString,
+                          String fxmlResourcePrefixPathString,
+                          Object mainApp,
+                          Stage primaryStage,
+                          boolean transparentStageStyle,
+                          String primaryStageTitle,
+                          double primaryStageWidth,
+                          double primaryStageHeight) throws MalformedFXMLIndexFileException,
+                                                            NoControllerSpecifiedException {
 
-            System.exit(1);
+        StageStyle stageStyle;
+
+        if (transparentStageStyle == true) {
+            stageStyle = StageStyle.TRANSPARENT;
+        } else {
+            stageStyle = StageStyle.UNDECORATED;
         }
 
-        bindStage(Paths.get(fxmlResourceIndexPathString),
-                 Paths.get(fxmlResourcePrefixPathString),
-                 mainApp,
-                 primaryStage,
-                 null,
-                 primaryStageTitle,
-                 primaryStageWidth,
-                 primaryStageHeight);
+        bindStage(fxmlResourceIndexPathString,
+                  fxmlResourcePrefixPathString,
+                  mainApp,
+                  primaryStage,
+                  stageStyle,
+                  primaryStageTitle,
+                  primaryStageWidth,
+                  primaryStageHeight);
     }
 
     /**
@@ -1040,7 +959,7 @@ public final class StageManager {
     }
 
     /**
-     * Defines page nickName of the primary page to the first record in FXML index property file
+     * Defines page pageNick of the primary page to the first record in FXML index property file
      * 
      * @throws      PageNotFoundException       when the first record in FXML index property file define a page that is not in the page table
      * 
@@ -1059,15 +978,15 @@ public final class StageManager {
                 }
             }
 
-                homePageNick = Optional.ofNullable(parentProperty.split("\\=")[0])
-                                      .filter(s -> pageTable.containsKey(s))
-                                      .get();
+                homePageNick = Optional.ofNullable(parentProperty.split("\\s*\\=")[0])
+                                       .filter(s -> pageTable.containsKey(s))
+                                       .get();
 
                 logger.log(Level.INFO, "Defined home page to '" + homePageNick + "'");
 
                 return;
         } catch (NoSuchElementException e) {
-            logger.log(Level.SEVERE, "Attempting to define unrecognizable home page nickName");
+            logger.log(Level.SEVERE, "Attempting to define unrecognizable home page pageNick");
             throw new PageNotFoundException(parentProperty);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Got IOException while attempting to define home page from FXML index file");
@@ -1076,7 +995,7 @@ public final class StageManager {
     }
 
     /**
-     * Defines home page nickName to the first record in FXML index property file.
+     * Defines home page pageNick to the first record in FXML index property file.
      * 
      * @param       pageNick          NickName of a page to be defined to
      * 
@@ -1092,7 +1011,7 @@ public final class StageManager {
             return true;
         }
 
-        logger.log(Level.SEVERE, "Attempting to define unrecognizable home page nickName");
+        logger.log(Level.SEVERE, "Attempting to define unrecognizable home page pageNick");
         throw new PageNotFoundException(pageNick);
     }
 
@@ -1114,7 +1033,7 @@ public final class StageManager {
                         Boolean inheritHeight) throws FileNotFoundException {
 
         if (pageTable.containsKey(pageNick)) {
-            logger.log(Level.SEVERE, "page nickName already exist: " + pageNick);
+            logger.log(Level.SEVERE, "page pageNick already exist: " + pageNick);
 
             return;
         }
@@ -1183,13 +1102,13 @@ public final class StageManager {
                 loader.setController(controllerInstance);
 
                 pageTable.put(pageNick, new PageMap(loader.load(),
-                                                     controllerClass,
-                                                     prefWidth,
-                                                     prefHeight,
-                                                     inheritWidth,
-                                                     inheritHeight));
+                                                    controllerClass,
+                                                    prefWidth,
+                                                    prefHeight,
+                                                    inheritWidth,
+                                                    inheritHeight));
 
-                logger.log(Level.INFO, "page added: " + pageNick + ": **/" + sceneResourcePathString);
+                logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + sceneResourcePathString + "'");
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Got 'IOException' while loading FXML resource: " + e.getMessage());
             } catch (ClassNotFoundException e) {
@@ -1266,7 +1185,7 @@ public final class StageManager {
         }
 
         if (pageTable.containsKey(pageNick) == false) {
-            logger.log(Level.SEVERE, "Attempting to set unrecognized page nickName '" + pageNick + "', current page will not be changed");
+            logger.log(Level.SEVERE, "Attempting to set unrecognized page pageNick '" + pageNick + "', current page will not be changed");
         }
 
         PageMap mapOfPageToSet = pageTable.get(pageNick);
@@ -1303,7 +1222,8 @@ public final class StageManager {
         }
 
         if (mapOfPageToSet.inheritHeight == false) {
-            stage.setHeight(mapOfPageToSet.prefHeight.get());
+            double prefHeight = mapOfPageToSet.prefHeight.get();
+            stage.setHeight(DEFAULT_STAGE_TITLE_BAR_HEIGHT + prefHeight);
         }
 
         if (this.primaryStageStyle == null
@@ -1317,9 +1237,10 @@ public final class StageManager {
             this.primaryStageScenePage.getChildren().remove(this.currentPrimaryStageScenePage);
             this.primaryStageScenePage.getChildren().add(pageTable.get(pageNick).parent);
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
-
-            this.primaryStageTitleBar.toFront();
         }
+
+        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
+        this.primaryStageTitleBar.toFront();
 
         logger.log(Level.INFO, "Current page has been set to '" + pageNick + "'");
     }
@@ -1395,64 +1316,6 @@ public final class StageManager {
         logger.log(Level.INFO, "Activated Stage");
     }
 
-    private void craftPrimaryStage(StageStyle stageStyle) {
-        if (stageStyle != StageStyle.UNDECORATED
-            && stageStyle != StageStyle.TRANSPARENT) {
-
-            logger.log(Level.SEVERE, "Attempted to craft Stage with invalid StageStyle: " + stageStyle.name());
-
-            System.exit(1);
-        }
-
-        this.primaryStage.initStyle(stageStyle);
-
-        this.primaryStage.setHeight(DEFAULT_STAGE_TITLE_BAR_HEIGHT + this.primaryStageHeight);
-
-        AnchorPane rootNode = new AnchorPane();
-
-        clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
-
-        TitleBar titleBar = new TitleBar(this.primaryStage,
-                                         this.primaryStageTitle,
-                                         this.primaryStageWidth,
-                                         DEFAULT_STAGE_TITLE_BAR_HEIGHT);
-
-        rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
-            titleBar.setWidth(newValue);
-        });
-
-        rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageScenePage.setPrefWidth((double) newValue);
-        });
-
-        rootNode.heightProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageScenePage.setPrefHeight((double) newValue - DEFAULT_STAGE_TITLE_BAR_HEIGHT);
-        });
-
-        rootNode.setPrefHeight(DEFAULT_STAGE_TITLE_BAR_HEIGHT + this.primaryStageHeight);
-
-        this.primaryStageTitleBar = titleBar;
-
-        rootNode.getChildren().add(this.primaryStageTitleBar);
-        rootNode.getChildren().add(pageTable.get(homePageNick).parent);
-
-        this.primaryStageTitleBar.toFront();
-
-        AnchorPane.setTopAnchor(this.primaryStageTitleBar, 0.0);
-        AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 1.0);
-
-        Scene rootScene = new Scene(rootNode);
-
-        rootScene.setFill(Color.TRANSPARENT);
-        rootScene.setRoot(rootNode);
-
-        this.currentPrimaryStageScenePage = pageTable.get(homePageNick).parent;
-        this.primaryStageScene = rootScene;
-        this.primaryStageScenePage = rootNode;
-
-        this.primaryStage.setScene(rootScene);
-    }
-
     /**
      * Activates a non
      */
@@ -1483,15 +1346,250 @@ public final class StageManager {
     /**
      * Activates a sub-Stage with its parent/owner set to the primaryStage
      * 
-     * @param       pageNick          page nickName of the constructing sub-Stage
+     * @param       pageNick          page pageNick of the constructing sub-Stage
      */
     public void activateSubstage(String pageNick) throws PageNotFoundException {
         activateSubstage(primaryStage, pageNick);
     }
 
     /**
-     * Custom title bar
+     * @section Custom Stage
      */
+    static {
+        CUSTOM_STAGE_STYLE = """
+            -fx-background-radius: 11.0;
+        """;
+
+        CUSTOM_STAGE_CORNER_ARC = 22.0;
+    }
+
+    private void initializeSectionCustomTitleBar() {
+        visualBounds = Screen.getPrimary().getBounds();
+        primaryStageTitlePosition = Pos.CENTER_LEFT;
+    }
+
+    /**
+     * Style for platform-undecorated custom stage
+     */
+    private static final String CUSTOM_STAGE_STYLE;
+
+    /**
+     * Arc for custom Stage corner
+     */
+    private static final double CUSTOM_STAGE_CORNER_ARC;
+
+    /**
+     * Default height of the Stage title bar
+     */
+    private static final double DEFAULT_STAGE_TITLE_BAR_HEIGHT;
+
+    /**
+     * Visual bounds of the current screen
+     */
+    private Rectangle2D visualBounds;
+
+    /**
+     * Icon of the primary Stage
+     */
+    private Node primaryStageTitleIcon;
+
+    /**
+     * Title bar of the primary Stage
+     */
+    private Node primaryStageTitleBar;
+
+    /**
+     * Custom title bar PageMap
+     * 
+     * @see setCustomTitleBarTo
+     * 
+     * @note In dev, currently unavailable
+     * 
+     * @todo setCustomTitleBarTo
+     */
+    private PageMap customTitleBarPage;
+
+    /**
+     * Title of the primary Stage
+     */
+    private Pos primaryStageTitlePosition;
+
+    /**
+     * A tree holding the primary Stage hierarchy
+     */
+    private TreeMap<String, Stage> stageTree;
+
+    /**
+     * Alignments used in custom Stage
+     */
+    public static class Alignment {
+
+        public static final int[] TOP_LEFT  = { 0, 0 };
+
+        public static final int[] MIDDLE_TOP = { 1, 0 };
+
+        public static final int[] TOP_RIGHT = { 2, 0 };
+
+        public static final int CENTRE      = 0b1111;
+
+        public static final int TOP         = 0b0001;
+
+        public static final int BOTTOM      = 0b0010;
+
+        public static final int LEFT        = 0b0100;
+
+        public static final int RIGHT       = 0b1000;
+    }
+
+    /**
+     * Extended Stage
+     */
+    public class XStage
+            extends Stage {
+
+        private Parent titleBarPane;
+
+        private Parent navBarPane;
+
+        private Parent mainPage;
+
+        private CopyOnWriteArrayList<Node> pages;
+
+        public XStage() {
+            this.titleBarPane = null;
+            this.navBarPane = null;
+        }
+
+        public XStage(StageStyle style) {
+            super(style);
+
+            this.titleBarPane = null;
+            this.navBarPane = null;
+        }
+
+        public XStage(StageStyle style,
+                      Parent titleBarPane,
+                      Parent navBarPane) {
+
+            this(style);
+
+            this.titleBarPane = titleBarPane;
+            this.navBarPane = navBarPane;
+        }
+
+        public XStage(StageStyle style,
+                      Parent navBarPane) {
+
+            this(style, null, navBarPane);
+        }
+
+        public void addPages(Node... pages) {
+            for (Node page : pages)
+                this.pages.add(page);
+        }
+
+        public void setMainPage(Parent mainPage) {
+            this.mainPage = mainPage;
+        }
+    }
+
+    /**
+     * Sets the custom title bar of the Stage to pageNick
+     */
+    public void setCustomTitleBarTo(String customTitleBarPageNick) {}
+
+    /**
+     * When using custom Stage, sets the Stage control button box alignment to left
+     * Defaults to true.
+     */
+    public void setStageControlButtonAlignLeft(boolean isStageControlButtonAlignLeft) {
+        TitleBar.stageControlButtonBoxPositionLeft = isStageControlButtonAlignLeft;
+    }
+
+    /**
+     * Craft a custom Stage
+     * 
+     * @param       stageStyle          StageStyle of the custom Stage
+     */
+    private void craftPrimaryStage(StageStyle stageStyle) {
+        if (stageStyle != StageStyle.UNDECORATED
+            && stageStyle != StageStyle.TRANSPARENT) {
+
+            logger.log(Level.SEVERE, "Attempted to craft Stage with invalid StageStyle: " + stageStyle.name());
+
+            System.exit(1);
+        }
+
+        double prefPageHeight;
+        double prefStageHeight;
+
+        double prefPageWidth;
+        double prefStageWidth;
+
+        this.primaryStage.initStyle(stageStyle);
+
+        if (this.pageTable.get(this.homePageNick).inheritHeight) {
+            prefPageHeight = this.primaryStageHeight;
+        } else {
+            prefPageHeight = pageTable.get(homePageNick).prefHeight.get();
+        }
+        
+        if (this.pageTable.get(this.homePageNick).inheritWidth) {
+            prefPageWidth = this.primaryStageWidth;
+        } else {
+            prefPageWidth = pageTable.get(homePageNick).prefWidth.get();
+        }
+        
+        prefStageWidth = prefPageWidth;
+        prefStageHeight = DEFAULT_STAGE_TITLE_BAR_HEIGHT + prefPageHeight;
+
+        this.primaryStage.setHeight(prefStageHeight);
+
+        AnchorPane rootNode = new AnchorPane();
+
+        clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
+
+        TitleBar titleBar = new TitleBar(this.primaryStage,
+                                         this.primaryStageTitle,
+                                         prefStageWidth,
+                                         DEFAULT_STAGE_TITLE_BAR_HEIGHT);
+
+        rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
+            titleBar.setWidth(newValue);
+        });
+
+        rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
+            this.primaryStageScenePage.setPrefWidth((double) newValue);
+        });
+
+        rootNode.heightProperty().addListener((observer, oldValue, newValue) -> {
+            this.primaryStageScenePage.setPrefHeight((double) newValue - DEFAULT_STAGE_TITLE_BAR_HEIGHT);
+        });
+
+        rootNode.setPrefHeight(prefStageHeight);
+
+        this.primaryStageTitleBar = titleBar;
+
+        rootNode.getChildren().add(this.primaryStageTitleBar);
+        rootNode.getChildren().add(pageTable.get(homePageNick).parent);
+
+        this.primaryStageTitleBar.toFront();
+
+        AnchorPane.setTopAnchor(this.primaryStageTitleBar, 0.0);
+        AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 0.0);
+
+        Scene rootScene = new Scene(rootNode);
+
+        rootScene.setFill(Color.TRANSPARENT);
+        rootScene.setRoot(rootNode);
+
+        this.currentPrimaryStageScenePage = pageTable.get(homePageNick).parent;
+        this.primaryStageScene = rootScene;
+        this.primaryStageScenePage = rootNode;
+
+        this.primaryStage.setScene(rootScene);
+    }
+
     public final class TitleBar
             extends HBox {
 
@@ -1538,6 +1636,8 @@ public final class StageManager {
             }
         }
 
+        private static boolean stageControlButtonBoxPositionLeft;
+
         private final Insets STAGE_CONTROL_BUTTON_PADDING = new Insets(1, 1, 1, 1);
 
         private final String TITLE_BAR_COLOR = "-fx-background-color: #ffffff";
@@ -1549,8 +1649,6 @@ public final class StageManager {
         private final String MINIMIZE_BUTTON_COLOR = "-fx-background-color: #f5bf4f;";
 
         private final String FULL_SCREEN_TOGGLE_BUTTON_COLOR = "-fx-background-color: #62c555;";
-
-        private final boolean STAGE_CONTROL_BUTTON_BOX_POSITION_LEFT = false;
 
         private Stage stage;
 
@@ -1774,6 +1872,10 @@ public final class StageManager {
         @FXML
         private Button customFullScreenToggleButton;
 
+        static {
+            stageControlButtonBoxPositionLeft = true;
+        }
+
         public TitleBar(Stage stage,
                         String stageTitle,
                         double width,
@@ -1793,7 +1895,7 @@ public final class StageManager {
             HBox stageGrabBarBox = createStageGrabBarBox(primaryStageTitleIcon, stageTitle);
             HBox stageControlButtonBox = createStageControlButtonBox();
 
-            if (STAGE_CONTROL_BUTTON_BOX_POSITION_LEFT) {
+            if (stageControlButtonBoxPositionLeft) {
                 super.getChildren().add(stageControlButtonBox);
                 super.getChildren().add(stageGrabBarBox);
 
@@ -1927,8 +2029,44 @@ public final class StageManager {
     }
 
     /**
-     * @section Draggability
+     * Masks children of the region with the region itself
      */
+    private static void clipChildren(Region region,
+                                     double arc) {
+
+        final Rectangle rootRegion = new Rectangle();
+
+        rootRegion.setArcWidth(arc);
+        rootRegion.setArcHeight(arc);
+        region.setClip(rootRegion);
+
+        region.layoutBoundsProperty().addListener((observer, oldValue, newValue) -> {
+            rootRegion.setWidth(newValue.getWidth());
+            rootRegion.setHeight(newValue.getHeight());
+        });
+    }
+
+    /**
+     * @section Draggability
+     * 
+     * @subsection References
+     * 
+     * - Draggable Panels Example
+     *   https://docs.oracle.com/javase/8/javafx/events-tutorial/draggablepanelsexamplejava.htm
+     */
+    static {}
+
+    private void initializeSectionDraggability() {}
+
+    /**
+     * The annotation used to annontate states that SHOULD be Draggable
+     * 
+     * @note In dev, currently unavailable
+     */
+    @Inherited
+    @Retention (RetentionPolicy.RUNTIME)
+    @Target (ElementType.FIELD)
+    public @interface Draggable {}
 
     /**
      * Property holding drag mode status
@@ -2000,18 +2138,25 @@ public final class StageManager {
         return wrapGroup;
     }
 
-    private static void clipChildren(Region region,
-                                     double arc) {
+    /**
+     * @section Fonts
+     */
+    static {}
 
-        final Rectangle rootRegion = new Rectangle();
-
-        rootRegion.setArcWidth(arc);
-        rootRegion.setArcHeight(arc);
-        region.setClip(rootRegion);
-
-        region.layoutBoundsProperty().addListener((observer, oldValue, newValue) -> {
-            rootRegion.setWidth(newValue.getWidth());
-            rootRegion.setHeight(newValue.getHeight());
-        });
+    private void initializeSectionFont() {
+        fontTable = new ConcurrentHashMap<>();
+        currentFont = new Font("Noto Sans Display SemiBold", 14);
     }
+
+    /**
+     * Font resource table
+     */
+    private static Map<String, Font> fontTable;
+
+    /**
+     * Current Font
+     * 
+     * @note Use during development
+     */
+    private Font currentFont;
 }

@@ -1,13 +1,10 @@
 package ku.cs.oakcoding.app.models;
 
 import java.nio.file.Path;
-import java.util.Map;
-import java.util.TreeMap;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 public abstract class User {
 

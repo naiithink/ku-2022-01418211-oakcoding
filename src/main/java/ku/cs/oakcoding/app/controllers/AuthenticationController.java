@@ -1,6 +1,5 @@
 package ku.cs.oakcoding.app.controllers;
 
-import com.github.saacsos.fxrouter.OakRouter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ku.cs.oakcoding.app.services.StageManager;
+import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
 
 public class AuthenticationController {
     @FXML
@@ -55,10 +56,9 @@ public class AuthenticationController {
 
     public void handleRegisterUserHereToRegisterPage(ActionEvent actionEvent) {
         try {
-            OakRouter.goTo("register");
-        } catch (final Exception e) {
-            System.err.println("ไปที่หน้า register ไม่ได้");
-            System.err.println("ให้ตรวจสอบการกำหนด route");
+            StageManager.getStageManager().setPage("register");
+        } catch (PageNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

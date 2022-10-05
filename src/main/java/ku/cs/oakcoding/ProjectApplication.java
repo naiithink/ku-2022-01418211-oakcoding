@@ -2,8 +2,6 @@ package ku.cs.oakcoding;
 
 import java.util.logging.Level;
 
-import com.github.saacsos.fxrouter.OakRouter;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
@@ -19,36 +17,19 @@ public class ProjectApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            OakRouter.bind(this, primaryStage, "OakCoding", 300, 500);
-            configRoute();
-            // configStageManager(primaryStage);
-            OakRouter.goTo("signin");
-        } catch (final Exception e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
-        }
-    }
-
-    private static void configRoute() {
-        String packageStr = "views/";
-        OakRouter.when("signin", packageStr + "Signin.fxml", 300, 500);
-        OakRouter.when("test", packageStr + "test.fxml", 600, 400);
-        OakRouter.when("register", packageStr + "UserRegister.fxml",600,400);
-        OakRouter.when("homeUser",packageStr + "UserHomepage.fxml",600,400);
-        OakRouter.when("ProfileUser", packageStr + "ProfileUser.fxml",600,400);
-        OakRouter.when("login", packageStr + "loginForm.fxml",300,500);
-
+        configStageManager(primaryStage);
     }
 
     private void configStageManager(Stage primaryStage) {
         StageManager stageManager = StageManager.getStageManager();
 
         try {
-            stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
+            stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
+                                                             .resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
                                    ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
                                    this,
                                    primaryStage,
+                                   true,
                                    OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))

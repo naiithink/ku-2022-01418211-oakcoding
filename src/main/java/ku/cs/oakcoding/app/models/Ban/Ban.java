@@ -1,6 +1,4 @@
-package ku.cs.oakcoding.app.models.Ban;
-
-import ku.cs.oakcoding.app.models.BanStatus;
+package ku.cs.oakcoding.app.models.ban;
 
 public class Ban {
     String username;

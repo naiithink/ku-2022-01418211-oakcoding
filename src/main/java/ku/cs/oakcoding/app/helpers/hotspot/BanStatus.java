@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.models;
+package ku.cs.oakcoding.app.helpers.hotspot;
 
 public enum BanStatus {
     BAN,

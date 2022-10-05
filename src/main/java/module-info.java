@@ -24,7 +24,5 @@ module oakcoding.app {
     /* 
      * com.github.saacsos.fxrouter
      */
-    opens   com.github.saacsos.fxrouter         to  javafx.fxml;
     opens ku.cs.oakcoding.app.services to javafx.fxml;
-    opens ku.cs.oakcoding.app.services.data_source.CSV to javafx.fxml;
 }

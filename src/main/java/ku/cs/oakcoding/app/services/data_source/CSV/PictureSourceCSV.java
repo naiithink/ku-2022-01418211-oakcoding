@@ -1,15 +1,15 @@
-package ku.cs.oakcoding.app.services.data_source.CSV;
+package ku.cs.oakcoding.app.services.data_source.csv;
 
-import ku.cs.oakcoding.app.models.picture.Picture;
-import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+
+import ku.cs.oakcoding.app.models.picture.Picture;
 
 
 public class PictureSourceCSV implements DataSourceCSV<Picture> {

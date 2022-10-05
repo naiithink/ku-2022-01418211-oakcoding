@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.models.Ban;
+package ku.cs.oakcoding.app.models.ban;
 
 import ku.cs.oakcoding.app.models.User;
 

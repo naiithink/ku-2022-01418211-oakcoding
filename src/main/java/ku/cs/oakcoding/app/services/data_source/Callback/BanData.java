@@ -1,11 +1,6 @@
-package ku.cs.oakcoding.app.services.data_source.Callback;
+package ku.cs.oakcoding.app.services.data_source.callback;
 
-import ku.cs.oakcoding.app.helpers.hotspot.Roles;
-import ku.cs.oakcoding.app.models.Ban.Ban;
-import ku.cs.oakcoding.app.models.BanStatus;
-import ku.cs.oakcoding.app.models.ConsumerUser;
-
-import java.nio.file.Paths;
+import ku.cs.oakcoding.app.models.ban.Ban;
 
 public class BanData implements ManageDataType<Ban>{
 

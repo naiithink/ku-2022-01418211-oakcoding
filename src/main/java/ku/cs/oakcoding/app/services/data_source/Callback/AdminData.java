@@ -1,9 +1,6 @@
-package ku.cs.oakcoding.app.services.data_source.Callback;
+package ku.cs.oakcoding.app.services.data_source.callback;
 
 import ku.cs.oakcoding.app.models.AdminUser;
-import ku.cs.oakcoding.app.models.BanStatus;
-import ku.cs.oakcoding.app.models.ConsumerUser;
-import ku.cs.oakcoding.app.models.users.Consumer;
 
 public class AdminData implements ManageDataType<AdminUser> {
     public AdminData(){}
@@ -17,5 +14,15 @@ public class AdminData implements ManageDataType<AdminUser> {
     @Override
     public String getKey(String [] data){
         return data[2].trim();
+    }
+    @Override
+    public String getQuoteFormat(Object o) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    @Override
+    public String formatCSV(Object o) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
