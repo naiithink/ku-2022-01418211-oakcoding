@@ -673,7 +673,7 @@ public final class StageManager {
                                                         parentProperty.inheritWidth,
                                                         parentProperty.inheritHeight));
 
-                    logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' -> '" + controllerClassName + "'"); 
+                    logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' -> '" + controllerClassName.get() + "'"); 
 
                     continue;
                 } else {
@@ -718,7 +718,7 @@ public final class StageManager {
                                                     parentProperty.inheritWidth,
                                                     parentProperty.inheritHeight));
 
-                logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' => '" + controllerClassName + "'");
+                logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' => '" + controllerClassName.get() + "'");
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -13,7 +13,7 @@ public final class OakFormatter extends Formatter {
                + ","    + record.getLevel()
                + ","    + record.getSourceClassName()
                         + "."    + record.getSourceMethodName()
-               + ","    + record.getMessage()
+               + ","    + "\"" + record.getMessage() + "\""
                + "\n";
     }
 }

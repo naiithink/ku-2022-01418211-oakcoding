@@ -30,7 +30,9 @@ public enum OakAppDefaults {
 
     static {
         CONFIG_FILE = new ConcurrentHashMap<>();
-        CONFIG_FILE.put("app.default.configFile", "config.properties");
+        CONFIG_FILE.put("app.default.config.file", "config.properties");
+        CONFIG_FILE.put("app.default.config.file.test.key", "index");
+        CONFIG_FILE.put("app.default.config.file.test.value", "resource_prefix");
     }
 
     private OakAppDefaults(String key,

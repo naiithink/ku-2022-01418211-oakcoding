@@ -2,34 +2,67 @@ package ku.cs.oakcoding.app.helpers.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+
+import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
 public final class ResourcePrefix {
     private ResourcePrefix() {}
+
+    private static FileSystem jarFS;
+
+    private static Path rootResourcePath;
 
     private static Path defaultPrefix;
 
     private static Path prefix;
 
     static {
-        try (InputStream in = ResourcePrefix.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try {
+            final URI uri = ResourcePrefix.class.getClassLoader().getResource(OakAppDefaults.CONFIG_FILE.get("app.default.config.file")).toURI();
+
+            if (uri.getScheme().equals("jar")) {
+                Map<String, String> env = new ConcurrentHashMap<>();
+                env.put("create", "true");
+
+                jarFS = FileSystems.newFileSystem(uri, env);
+
+                OakLogger.log(Level.INFO, "Running in JAR mode");
+            }
+
+            rootResourcePath = Paths.get(uri);
+        } catch (IOException e) {
+            OakLogger.log(Level.SEVERE, "Cannot create file system, got 'IOException'");
+        } catch (URISyntaxException e) {
+            OakLogger.log(Level.SEVERE, "Cannot create file system, got 'URISyntaxException'");
+        }
+
+        try (InputStream in = Files.newInputStream(rootResourcePath)) {
             Objects.nonNull(in);
 
             Properties assertProp = new Properties();
 
             assertProp.load(in);
 
-            if (assertProp.get("index").equals("resource_prefix")) {
-                defaultPrefix = Paths.get(ResourcePrefix.class.getClassLoader().getResource("config.properties").toURI()).getParent();
+            if (assertProp.get(OakAppDefaults.CONFIG_FILE.get("app.default.config.file.test.key")).equals(OakAppDefaults.CONFIG_FILE.get("app.default.config.file.test.value"))) {
+                defaultPrefix = rootResourcePath.getParent();
                 prefix = defaultPrefix;
             }
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-            System.err.println("ERROR: Cannot get prefix path");
+        } catch (IOException e) {
+            OakLogger.log(Level.SEVERE, "Cannot get prefix path, got 'IOException'");
+
             System.exit(1);
         }
     }

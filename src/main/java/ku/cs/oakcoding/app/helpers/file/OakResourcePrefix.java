@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
 public final class OakResourcePrefix {
@@ -19,7 +20,7 @@ public final class OakResourcePrefix {
     private static Path prefix;
 
     static {
-        try (InputStream in = OakResourcePrefix.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream in = OakResourcePrefix.class.getClassLoader().getResourceAsStream(OakAppDefaults.CONFIG_FILE.get("app.default.config.file"))) {
             Objects.nonNull(in);
 
             Properties assertProp = new Properties();
@@ -27,7 +28,7 @@ public final class OakResourcePrefix {
             assertProp.load(in);
 
             if (assertProp.get("index").equals("resource_prefix")) {
-                defaultPrefix = Paths.get(OakResourcePrefix.class.getClassLoader().getResource("config.properties").toURI()).getParent();
+                defaultPrefix = Paths.get(OakResourcePrefix.class.getClassLoader().getResource(OakAppDefaults.CONFIG_FILE.get("app.default.config.file")).toURI()).getParent();
                 prefix = defaultPrefix;
             }
         } catch (IOException | URISyntaxException e) {

@@ -25,7 +25,7 @@ public class ProjectApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        OakLogger.log(Level.INFO, "App Started");
+        OakLogger.log(Level.INFO, "App is loading...");
         configStageManager(primaryStage);
     }
 
@@ -48,13 +48,13 @@ public class ProjectApplication extends Application {
 
             stageManager.autoDefineHomePage();
             stageManager.activate();
+            OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
-            e.printStackTrace();
         } catch (PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Scene not found: " + e.getMessage());
         } catch (NoControllerSpecifiedException e) {
-            e.printStackTrace();
+            OakLogger.log(Level.SEVERE, "No controller specified: " + e.getMessage());
         }
     }
 

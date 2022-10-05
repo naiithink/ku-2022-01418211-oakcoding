@@ -55,7 +55,7 @@ public final class OakAppConfigs {
 
         try (InputStream in = instance.getClass()
                                       .getClassLoader()
-                                      .getResourceAsStream(OakAppDefaults.CONFIG_FILE.get("app.default.configFile"))) {
+                                      .getResourceAsStream(OakAppDefaults.CONFIG_FILE.get("app.default.config.file"))) {
 
             Objects.requireNonNull(in);
 
