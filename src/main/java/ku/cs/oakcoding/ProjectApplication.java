@@ -32,6 +32,8 @@ public class ProjectApplication extends Application {
         OakLogger.log(Level.INFO, "App is loading...");
 
         configStageManager(primaryStage);
+
+        OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));
     }
 
     private void configStageManager(Stage primaryStage) throws NotDirectoryException, FileNotFoundException {
@@ -55,7 +57,6 @@ public class ProjectApplication extends Application {
             stageManager.setStageControlButtonAlignLeft(false);
             stageManager.autoDefineHomePage();
             stageManager.activate();
-            OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
         } catch (PageNotFoundException e) {
