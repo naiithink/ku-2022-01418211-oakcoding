@@ -134,6 +134,13 @@ public final class StageManager {
     private Logger logger;
 
     /**
+     * Use custom Logger instead of StageManager's built-in
+     */
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    /**
      * If required, controller to be used MUST be written in singleton pattern
      * 
      * Name of the method for getting controller type instance
