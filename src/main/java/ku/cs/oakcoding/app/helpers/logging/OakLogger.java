@@ -82,4 +82,8 @@ public final class OakLogger {
     public static synchronized void stop() {
         logger.log(Level.INFO, ">>>>> LOG END <<<<<");
     }
+
+    public static synchronized Logger getLogger() {
+        return logger;
+    }
 }

@@ -250,7 +250,7 @@ public final class StageManager {
      */
     @Retention (RetentionPolicy.RUNTIME)
     @Target ({ ElementType.TYPE, ElementType.METHOD })
-    public @interface OakStageManager {}
+    public @interface TheStageManager {}
 
     /**
      * The record type for storing a pair of page and, if required, its corresponding controller
@@ -677,12 +677,12 @@ public final class StageManager {
 
                 controllerClass = Class.forName(controllerClassName.get());
 
-                if (controllerClass.isAnnotationPresent(StageManager.OakStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + parentProperty.pageNickResourceName + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + StageManager.OakStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.OakStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -691,7 +691,7 @@ public final class StageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(StageManager.OakStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);
@@ -1083,12 +1083,12 @@ public final class StageManager {
 
                 controllerClass = Class.forName(controllerClassName);
 
-                if (controllerClass.isAnnotationPresent(StageManager.OakStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + sceneResourcePathString + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + StageManager.OakStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.OakStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -1097,7 +1097,7 @@ public final class StageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(StageManager.OakStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);

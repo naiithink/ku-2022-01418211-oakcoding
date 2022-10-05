@@ -32,6 +32,8 @@ public class ProjectApplication extends Application {
     private void configStageManager(Stage primaryStage) {
         StageManager stageManager = StageManager.getStageManager();
 
+        stageManager.setLogger(OakLogger.getLogger());
+
         try {
             stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
                                                              .resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
