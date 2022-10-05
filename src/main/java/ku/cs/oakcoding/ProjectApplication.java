@@ -8,12 +8,12 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
-import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.helpers.resources.ResourcePrefix;
 import ku.cs.oakcoding.app.services.StageManager;
 import ku.cs.oakcoding.app.services.StageManager.MalformedFXMLIndexFileException;
 import ku.cs.oakcoding.app.services.StageManager.NoControllerSpecifiedException;
-import ku.cs.oakcoding.app.services.StageManager.SceneNotFoundException;
+import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
 
 public class ProjectApplication extends Application {
 
@@ -23,7 +23,7 @@ public class ProjectApplication extends Application {
             OakRouter.bind(this, primaryStage, "OakCoding", 300, 500);
             configRoute();
             // configStageManager(primaryStage);
-            OakRouter.goTo("admin");
+            OakRouter.goTo("signin");
         } catch (final Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
@@ -37,36 +37,29 @@ public class ProjectApplication extends Application {
         OakRouter.when("register", packageStr + "UserRegister.fxml",600,400);
         OakRouter.when("homeUser",packageStr + "UserHomepage.fxml",600,400);
         OakRouter.when("ProfileUser", packageStr + "ProfileUser.fxml",600,400);
-        OakRouter.when("login", packageStr + "login.fxml",300,500);
-        OakRouter.when("sign_in", packageStr + "sign_in.fxml",300,500);
-//        UserRegister
-        OakRouter.when("UserRegister", packageStr + "UserRegister.fxml",300,500);
-        OakRouter.when("authentication", packageStr + "authentication.fxml",300,500);
-        OakRouter.when("register", packageStr + "register.fxml",806,567);
-        OakRouter.when("user", packageStr + "user.fxml",806,567);
-        OakRouter.when("staff", packageStr + "staff.fxml",806,567);
-        OakRouter.when("admin", packageStr + "admin.fxml",870,567);
+        OakRouter.when("login", packageStr + "loginForm.fxml",300,500);
+
     }
 
     private void configStageManager(Stage primaryStage) {
         StageManager stageManager = StageManager.getStageManager();
 
         try {
-            stageManager.dispatch(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
-                                  OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
-                                  this,
-                                  primaryStage,
-                                  OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
-                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
-                                  Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
+            stageManager.bindStage(ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_FILE.key())),
+                                   ResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
+                                   this,
+                                   primaryStage,
+                                   OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
+                                   Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
+                                   Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
             );
 
-            stageManager.defineHomeSceneFromIndexFile();
+            stageManager.autoDefineHomePage();
             stageManager.activate();
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
             e.printStackTrace();
-        } catch (SceneNotFoundException e) {
+        } catch (PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Scene not found: " + e.getMessage());
         } catch (NoControllerSpecifiedException e) {
             e.printStackTrace();
