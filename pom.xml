@@ -16,7 +16,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
+        <!--         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
@@ -33,7 +33,7 @@
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
             <classifier>mac</classifier>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>org.openjfx</groupId>
