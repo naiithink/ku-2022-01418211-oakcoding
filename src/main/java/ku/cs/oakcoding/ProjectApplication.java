@@ -40,7 +40,7 @@ public class ProjectApplication extends Application {
         StageManager stageManager = StageManager.getStageManager();
 
         stageManager.setLogger(OakLogger.getLogger());
-        stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty("app.resource.fonts.dir")), 14.0);
+        stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FONT_DIR.key())), 14.0);
 
         try {
             stageManager.bindStage(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
