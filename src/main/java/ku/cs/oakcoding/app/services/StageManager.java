@@ -2259,7 +2259,7 @@ public final class StageManager {
 
             System.exit(1);
         } finally {
-            logger.log(Level.INFO, Integer.toString(fontLoadCount) + "font" + (fontLoadCount == 1 ? "" : "s") + "loaded");
+            logger.log(Level.INFO, Integer.toString(fontLoadCount) + " font" + (fontLoadCount == 1 ? "" : "s") + " loaded");
         }
     }
 

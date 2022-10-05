@@ -18,7 +18,6 @@ import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.helpers.resources.ResourcePrefix;
 import ku.cs.oakcoding.app.services.StageManager;
 import ku.cs.oakcoding.app.services.StageManager.MalformedFXMLIndexFileException;
 import ku.cs.oakcoding.app.services.StageManager.NoControllerSpecifiedException;
