@@ -202,6 +202,13 @@ public final class StageManager {
     private Stage primaryStage;
 
     /**
+     * If true, Stages constructed by this StageManager will always positioned at the center of current Screen.
+     * Otherwise, Stage will never be re-positioned.
+     * Defaults to true.
+     */
+    private boolean alwaysCenteredStage;
+
+    /**
      * StageStyle of the primary Stage
      */
     private StageStyle primaryStageStyle;
@@ -524,6 +531,7 @@ public final class StageManager {
     private StageManager() {
         logger = Logger.getLogger(getClass().getName());
 
+        alwaysCenteredStage = true;
         pageTable = new ConcurrentHashMap<>();
         resourceIndexProperties = new Properties();
 
@@ -1249,6 +1257,10 @@ public final class StageManager {
         AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
         this.primaryStageTitleBar.toFront();
 
+        if (this.alwaysCenteredStage) {
+            this.primaryStage.centerOnScreen();
+        }
+
         logger.log(Level.INFO, "Current page has been set to '" + pageNick + "'");
     }
 
@@ -1320,6 +1332,10 @@ public final class StageManager {
 
         this.primaryStage.show();
 
+        if (this.alwaysCenteredStage) {
+            this.primaryStage.centerOnScreen();
+        }
+
         logger.log(Level.INFO, "Activated Stage");
     }
 
@@ -1357,6 +1373,16 @@ public final class StageManager {
      */
     public void activateSubstage(String pageNick) throws PageNotFoundException {
         activateSubstage(primaryStage, pageNick);
+    }
+
+    /**
+     * Sets default Stage alignment on the current Screen
+     * Defaults to true.
+     * 
+     * @param       alwaysCenteredStage     If true, Stages constructed by this StageManager will always positioned at the center of current Screen. Otherwise, Stage will never be re-positioned.
+     */
+    public void setAlwaysCenteredStage(boolean alwaysCenteredStage) {
+        this.alwaysCenteredStage = alwaysCenteredStage;
     }
 
     /**
@@ -1437,7 +1463,7 @@ public final class StageManager {
 
         public static final int[] TOP_RIGHT = { 2, 0 };
 
-        public static final int CENTRE      = 0b1111;
+        public static final int CENTER      = 0b1111;
 
         public static final int TOP         = 0b0001;
 
@@ -1506,8 +1532,10 @@ public final class StageManager {
     public void setCustomTitleBarTo(String customTitleBarPageNick) {}
 
     /**
-     * When using custom Stage, sets the Stage control button box alignment to left
-     * Defaults to true.
+     * When using custom Stage, sets default Stage control button box alignment on the title bar
+     * Defaults to true, which means, left-aligned.
+     * 
+     * @param       isStageControlButtonAlignLeft       If true sets the Stage control button box alignment to left. Otherwise, stick it to the left of title bar.
      */
     public void setStageControlButtonAlignLeft(boolean isStageControlButtonAlignLeft) {
         TitleBar.stageControlButtonBoxPositionLeft = isStageControlButtonAlignLeft;
