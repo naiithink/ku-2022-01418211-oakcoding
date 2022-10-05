@@ -15,15 +15,19 @@ public class FactoryDataSourceCSV {
         DataSourceCSV dataSourceCSV = null;
 
         switch(file){
-            case User ->{
-                dataSourceCSV = new DataSourceListCSV("data","user.csv");
+            case USER ->{
+                dataSourceCSV = new DataSourceListCSV("data","users.csv");
             }
-            case Complaint ->{
-                dataSourceCSV = new DataSourceListCSV("data","complaint.csv");
+            case SUSPENDED -> {
+                dataSourceCSV = new DataSourceListCSV("data", "suspended.csv");
             }
-            case Picture -> {
+            case COMPLAINT ->{
+                dataSourceCSV = new DataSourceListCSV("data","complaints.csv");
+            }
+            case PICTURE -> {
                 dataSourceCSV = new PictureSourceCSV("picture");
             }
+
         }
 
 

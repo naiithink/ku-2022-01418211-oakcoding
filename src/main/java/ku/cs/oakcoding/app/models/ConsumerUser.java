@@ -10,8 +10,8 @@ public final class ConsumerUser
 
     private BanStatus banStatus;
 
-    public ConsumerUser(ฺBanStatus banStatus,
-                        Roles role,
+    public ConsumerUser(Roles role,
+                        BanStatus banStatus,
                         String firstName,
                         String lastName,
                         Path profileImagePath,
@@ -29,11 +29,11 @@ public final class ConsumerUser
 
             String line = getQuoteFormat(getRole()) + ","
                     + getQuoteFormat(getBanStatus()) + ","
-                    + getQuoteFormat(getUsername()) + ","
-                    + getQuoteFormat(getPassword()) + ","
                     + getQuoteFormat(getFirstName()) + ","
                     + getQuoteFormat(getLastName()) + ","
-                    + getQuoteFormat(getProfileImagePath());
+                    + getQuoteFormat(getProfileImagePath()) + ","
+                    + getQuoteFormat(getUsername()) + ","
+                    + getQuoteFormat(getPassword());
 
             return line;
         }

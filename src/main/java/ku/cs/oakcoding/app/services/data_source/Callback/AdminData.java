@@ -9,8 +9,7 @@ public class AdminData implements ManageDataType<AdminUser> {
     public AdminData(){}
     @Override
     public AdminUser instanceCreate(String [] data) {
-        Consumer consumer = new Consumer(BanStatus.valueOf(data[1].trim()),data[2].trim(),data[3].trim(),data[4].trim(),data[5].trim(),data[6].trim());
-        return consumer;
+        return null;
     }
     @Override
     public String instanceWrite(Object obj) { return ((AdminUser) obj).formatCSV();}
