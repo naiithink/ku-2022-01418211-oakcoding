@@ -22,18 +22,5 @@ public class Ban {
         return username;
     }
 
-    public String getQuoteFormat(Object o){
-        String line = o + "";
-        String result = "\"" + line + "\"";
-        return result;
-    }
 
-    public String formatCSV(){
-
-        String line = getQuoteFormat(getUsername()) + ","
-                    + getQuoteFormat(getReasonBan());
-
-        return line;
-    }
-}
 }

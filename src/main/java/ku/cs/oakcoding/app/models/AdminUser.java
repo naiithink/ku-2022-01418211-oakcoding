@@ -11,8 +11,9 @@ public final class AdminUser
                      String firstName,
                      String lastName,
                      Path profileImagePath,
+                     String username,
                      String password) {
 
-        super(role, firstName, lastName, profileImagePath, password);
+        super(role, firstName, lastName, profileImagePath, username, password);
     }
 }

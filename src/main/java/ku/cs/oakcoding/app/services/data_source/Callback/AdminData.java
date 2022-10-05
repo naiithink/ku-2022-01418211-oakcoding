@@ -12,7 +12,7 @@ public class AdminData implements ManageDataType<AdminUser> {
         return null;
     }
     @Override
-    public String instanceWrite(Object obj) { return ((AdminUser) obj).formatCSV();}
+    public String instanceWrite(Object obj) { return formatCSV(obj);}
 
     @Override
     public String getKey(String [] data){

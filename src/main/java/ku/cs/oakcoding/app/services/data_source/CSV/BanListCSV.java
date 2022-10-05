@@ -92,7 +92,7 @@ public class BanListCSV implements DataSourceCSV<>{
 
             for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()){
                 Ban ban = entry.getValue();
-                String line = ban.formatCSV();
+                String line = DataBase.readData();
                 writer.append(line);
                 writer.newLine();
             }

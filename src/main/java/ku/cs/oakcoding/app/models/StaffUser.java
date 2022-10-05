@@ -1,5 +1,7 @@
 package ku.cs.oakcoding.app.models;
 
+import ku.cs.oakcoding.app.helpers.hotspot.Roles;
+
 import java.nio.file.Path;
 
 public final class StaffUser
@@ -9,9 +11,10 @@ public final class StaffUser
                      String firstName,
                      String lastName,
                      Path profileImagePath,
+                     String username,
                      String password) {
 
-        super(role, firstName, lastName, profileImagePath, password);
+        super(role, firstName, lastName, profileImagePath, username, password);
     }
 
 

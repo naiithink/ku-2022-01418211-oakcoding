@@ -86,13 +86,4 @@ public abstract class User {
 
     }
 
-
-
-    public String getQuoteFormat(Object o){
-        String line = o + "";
-        String result = "\"" + line + "\"";
-        return result;
-    }
-
-    public abstract String formatCSV();
 }
