@@ -1,3 +1,11 @@
+/**
+ * @file ProjectApplication.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding;
 
 import java.util.logging.Level;
