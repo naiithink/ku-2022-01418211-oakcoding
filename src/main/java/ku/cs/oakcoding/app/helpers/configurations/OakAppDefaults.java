@@ -15,7 +15,7 @@ public enum OakAppDefaults {
     APP_NAME                        ("app.name",                    "OakCoding"),
     DEVELOPER                       ("app.developer",               "ku.cs.oakcoding"),
     VERSION                         ("app.version",                 "NIL"),
-    LOG_FILE_DIR                    ("app.resource.logFile.dir",    "logs"),
+    LOG_FILE_DIR                    ("app.resource.log.dir",        "logs"),
     USE_TEMP_DIR                    ("app.resource.useTmpDir",      "true"),
     USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeatures", "false"),
     FXML_DIR                        ("dir.fxml",                    "fxml"),
