@@ -1,13 +1,21 @@
+/**
+ * @file Ban.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.models.ban;
 
 public class Ban {
-    String username;
+    String userName;
     String reasonBan;
 
-    public Ban(String username,
+    public Ban(String userName,
                String reasonBan){
 
-        this.username = username;
+        this.userName = userName;
         this.reasonBan = reasonBan;
 
     }
@@ -16,8 +24,8 @@ public class Ban {
         return reasonBan;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
 

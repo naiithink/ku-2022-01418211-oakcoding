@@ -1,28 +1,36 @@
+/**
+ * @file Picture.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.models.picture;
 
 public class Picture {
     private String picturePath;
-    private String filename;
+    private String fileName;
 
-    public Picture(String picturePath, String filename){
+    public Picture(String picturePath, String fileName){
         this.picturePath = picturePath;
-        this.filename = filename;
+        this.fileName = fileName;
     }
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
 
-    public void setFilename(String filename){
-        this.filename = filename;
+    public void setFileName(String fileName){
+        this.fileName = fileName;
     }
 
     public String getPicturePath(){
         return picturePath;
     }
 
-    public String getFilename(){
-        return filename;
+    public String getFileName(){
+        return fileName;
     }
 
 

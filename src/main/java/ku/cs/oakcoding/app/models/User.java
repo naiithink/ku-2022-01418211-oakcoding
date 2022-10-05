@@ -1,3 +1,11 @@
+/**
+ * @file User.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.models;
 
 import java.nio.file.Path;
@@ -16,7 +24,7 @@ public abstract class User {
 
     private Path profileImagePath;
 
-    private String username;
+    private String userName;
 
     private String password;
 
@@ -24,14 +32,14 @@ public abstract class User {
                 String firstName,
                 String lastName,
                 Path profileImagePath,
-                String username,
+                String userName,
                 String password) {
 
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
         this.profileImagePath = profileImagePath;
-        this.username = username;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -51,7 +59,7 @@ public abstract class User {
         return profileImagePath;
     }
 
-    public String getUsername() { return username;}
+    public String getUserName() { return userName;}
 
     public String getPassword() { return password;}
 
@@ -70,12 +78,12 @@ public abstract class User {
     public void changePassword(String newPassword){
         DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
         DataList users = (DataList) userCSV.readData();
-        User user = users.getUser(this.username);
+        User user = users.getUser(this.userName);
 
 
-        users.removeUserMap(this.username);
+        users.removeUserMap(this.userName);
         user.setNewPassword(newPassword);
-        users.addUserMap(this.username, user);
+        users.addUserMap(this.userName, user);
 
         userCSV.clearData();
         userCSV.writeData(users);

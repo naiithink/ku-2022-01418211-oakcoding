@@ -1,5 +1,12 @@
-package ku.cs.oakcoding.app.services.data_source.csv;
+/**
+ * @file DataSourceListCSV.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
 
+package ku.cs.oakcoding.app.services.data_source.csv;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,8 +21,15 @@ import ku.cs.oakcoding.app.models.DataList;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.services.DataBase;
 
+/**
+ * DataSourceListCSV
+ * 
+ * @todo Verbose name 'directoryName' -> 'dirName'
+ */
 public class DataSourceListCSV implements DataSourceCSV<DataList> {
+
     private String directoryName;
+
     private String fileName;
 
     public DataSourceListCSV(String directoryName, String fileName) {
@@ -24,6 +38,13 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
         checkFileIsExisted();
     }
 
+    /**
+     * @todo Use API?
+     *       <https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html>
+     *       - Files::exists(Path, LinkOption...)
+     *       - Files::createFile(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
+     * 
+     */
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -41,8 +62,13 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
         }
     }
 
+    /**
+     * @todo Why nesting those <?>::close statements?
+     * @todo Use try-with-resources?
+     *       <https://dev.java/learn/catching-and-handling-exceptions/#anchor_6>
+     */
     @Override
-    public DataList readData(){
+    public DataList readData() {
         DataList users = new DataList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -58,9 +84,8 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
                 String[] dataTrim = trimData(data);
                 String key = DataBase.getKey(dataTrim);
                 User newObj = (User) DataBase.readData(dataTrim);
-                users.addUserMap(key,newObj);
+                users.addUserMap(key, newObj);
             }
-
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -75,14 +100,16 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
                 throw new RuntimeException(e);
             }
 
-
         }
         return users;
 
     }
 
+    /**
+     * @todo Use try-with-resources?
+     */
     @Override
-    public void writeData(DataList usersMap){
+    public void writeData(DataList usersMap) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -90,10 +117,10 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
         BufferedWriter writer = null;
 
         try {
-            fileWriter = new FileWriter(file,true);
+            fileWriter = new FileWriter(file, true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String, User> entry : usersMap.getUsersMap().entrySet()){
+            for (Map.Entry<String, User> entry : usersMap.getUsersMap().entrySet()) {
                 String line = DataBase.writeData(entry.getValue());
                 writer.append(line);
                 writer.newLine();
@@ -101,14 +128,16 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
 
             writer.close();
 
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * @todo Use try-with-resources?
+     */
     @Override
-    public void clearData(){
+    public void clearData() {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -122,27 +151,26 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             writer.append(line);
             writer.close();
 
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
     }
 
-    public String [] trimData(String [] data){
-        String [] dataTrim = new String[data.length];
+    /**
+     * @todo Assert null before trimming
+     */
+    public String[] trimData(String[] data) {
+        String[] dataTrim = new String[data.length];
 
-        for (int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length; i++) {
             dataTrim[i] = data[i].substring(1, data[i].length() - 1);
         }
-
 
         return dataTrim;
 
     }
 
 }
-

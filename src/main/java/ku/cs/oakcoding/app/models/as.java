@@ -1,3 +1,11 @@
+/**
+ * @file As.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05; file name
+ */
+
 //package ku.cs.oakcoding.app.models;
 //
 //

@@ -1,3 +1,11 @@
+/**
+ * @file BanListCSV.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.services.data_source.csv;
 
 import java.io.BufferedReader;
@@ -13,8 +21,15 @@ import ku.cs.oakcoding.app.models.ban.Ban;
 import ku.cs.oakcoding.app.models.ban.BanList;
 import ku.cs.oakcoding.app.services.DataBase;
 
-public class BanListCSV implements DataSourceCSV<BanList>{
+/**
+ * BanListCSV
+ * 
+ * @todo Verbose name 'directoryName' -> 'dirName'
+ */
+public class BanListCSV implements DataSourceCSV<BanList> {
+
     private String directoryName;
+
     private String fileName;
 
     public BanListCSV(String directoryName, String fileName) {
@@ -23,6 +38,12 @@ public class BanListCSV implements DataSourceCSV<BanList>{
         checkFileIsExisted();
     }
 
+    /**
+     * @todo Use API?
+     *       <https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html>
+     *       - Files::exists(Path, LinkOption...)
+     *       - Files::createFile(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
+     */
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -40,9 +61,12 @@ public class BanListCSV implements DataSourceCSV<BanList>{
         }
     }
 
-
+    /**
+     * @todo Use try-with-resources?
+     *       <https://dev.java/learn/catching-and-handling-exceptions/#anchor_6>
+     */
     @Override
-    public BanList readData(){
+    public BanList readData() {
         BanList banList = new BanList();
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
@@ -57,11 +81,10 @@ public class BanListCSV implements DataSourceCSV<BanList>{
                 String[] data = line.split(",");
                 String[] dataTrim = trimData(data);
                 String key = dataTrim[0];
-                Ban newBan = new Ban(dataTrim[0],dataTrim[1]);
-                banList.addBanMap(key,newBan);
+                Ban newBan = new Ban(dataTrim[0], dataTrim[1]);
+                banList.addBanMap(key, newBan);
 
             }
-
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -76,14 +99,16 @@ public class BanListCSV implements DataSourceCSV<BanList>{
                 throw new RuntimeException(e);
             }
 
-
         }
         return banList;
 
     }
 
+    /**
+     * @todo Use try-with-resources?
+     */
     @Override
-    public void writeData(BanList banMap){
+    public void writeData(BanList banMap) {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -91,10 +116,10 @@ public class BanListCSV implements DataSourceCSV<BanList>{
         BufferedWriter writer = null;
 
         try {
-            fileWriter = new FileWriter(file,true);
+            fileWriter = new FileWriter(file, true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()){
+            for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()) {
                 String line = DataBase.writeData(entry);
                 writer.append(line);
                 writer.newLine();
@@ -102,14 +127,16 @@ public class BanListCSV implements DataSourceCSV<BanList>{
 
             writer.close();
 
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * @todo Use try-with-resources?
+     */
     @Override
-    public void clearData(){
+    public void clearData() {
         String filePath = directoryName + File.separator + fileName;
         File file = new File(filePath);
 
@@ -123,33 +150,26 @@ public class BanListCSV implements DataSourceCSV<BanList>{
             writer.append(line);
             writer.close();
 
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
     }
 
-    public String [] trimData(String [] data){
-        String [] dataTrim = new String[data.length];
+    /**
+     * @todo Assert null before trimming
+     */
+    public String[] trimData(String[] data) {
+        String[] dataTrim = new String[data.length];
 
-        for (int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length; i++) {
             dataTrim[i] = data[i].substring(1, data[i].length() - 1);
         }
-
 
         return dataTrim;
 
     }
-
-
-
-
-
-
-
 
 }

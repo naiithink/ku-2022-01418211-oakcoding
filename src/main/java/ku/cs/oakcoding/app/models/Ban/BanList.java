@@ -1,26 +1,32 @@
-package ku.cs.oakcoding.app.models.ban;
+/**
+ * @file BanList.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
 
-import ku.cs.oakcoding.app.models.User;
+package ku.cs.oakcoding.app.models.ban;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public class BanList {
-    private Map<String, Ban> BanMap;
+    private Map<String, Ban> banMap;
 
     public BanList(){
-        BanMap = new TreeMap<>();
+        banMap = new TreeMap<>();
     }
 
-    public BanList(Map<String, Ban> BanMap){
-        this.BanMap = BanMap;
+    public BanList(Map<String, Ban> banMap){
+        this.banMap = banMap;
     }
 
     public void addBanMap(String key, Ban obj){
-        BanMap.put(key,obj);
+        banMap.put(key,obj);
     }
-    public void removeBanMap(String key) { BanMap.remove(key); }
+    public void removeBanMap(String key) { banMap.remove(key); }
 
-    public Ban getBanUser(String username) { return BanMap.get(username); }
-    public Map<String, Ban> getUsersMap() {return BanMap;}
+    public Ban getBanUser(String userName) { return banMap.get(userName); }
+    public Map<String, Ban> getUsersMap() {return banMap;}
 }

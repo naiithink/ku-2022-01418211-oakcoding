@@ -1,3 +1,11 @@
+/**
+ * @file UserManager.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.services;
 
 import java.util.Map;
@@ -10,21 +18,24 @@ public final class UserManager {
     private UserManager() {}
 
     // data/users.csv
-    private static Map<String,User> registeredUser = ((DataList)(FactoryDataSourceCSV.getDataSource(DataFile.USER).readData())).getUsersMap();
+    private static Map<String, User> registeredUser = ((DataList) (FactoryDataSourceCSV.getDataSource(DataFile.USER)
+                                                                                       .readData())
+    ).getUsersMap();
 
-    public static boolean isRegistered(String username) {
-        return registeredUser.containsKey(username);
+    public static boolean isRegistered(String userName) {
+        return registeredUser.containsKey(userName);
     }
 
-    public static void register (){}
+    public static void register() {
+    }
 
-    public static User login(String username,
-                             String password) {
+    public static User login(String userName,
+            String password) {
 
-        if (isRegistered(username)
-            && passwordCheck(username, password)) {
+        if (isRegistered(userName)
+                && passwordCheck(userName, password)) {
 
-            User result = getUser(username);
+            User result = getUser(userName);
 
             return result;
         }
@@ -32,12 +43,12 @@ public final class UserManager {
         return null;
     }
 
-    public static User getUser(String username) {
-        if (isRegistered(username)) {
+    public static User getUser(String userName) {
+        if (isRegistered(userName)) {
 
-            User result = (User) registeredUser.get(username);
+            User result = (User) registeredUser.get(userName);
 
-            // ResourceObject userInfoObject = ResourceManager.getData(String username);
+            // ResourceObject userInfoObject = ResourceManager.getData(String userName);
 
             // get role
             // users.csv->ROLE
@@ -47,7 +58,8 @@ public final class UserManager {
 
             // String firstName = userInfoObject.getField(String "FIRST_NAME");
             // String lastName = userInfoObject.getField(String "LAST_NAME");
-            // Boolean hasCustomImage = Boolean.valuOf(userInfoObject.getField(String "PROFILE_IMAGE_STATUS").toLowerCase());
+            // Boolean hasCustomImage = Boolean.valuOf(userInfoObject.getField(String
+            // "PROFILE_IMAGE_STATUS").toLowerCase());
 
             // User result = new User(userRole, firstName, lastName, hasCustomImage);
 
@@ -56,39 +68,38 @@ public final class UserManager {
         return null;
     }
 
-
     /**
      * 
      */
-    public static Boolean passwordCheck(String username,
-                                        String password) {
+    public static Boolean passwordCheck(String userName,
+            String password) {
 
-        if (isRegistered(username)) {
-            User checker = (User) registeredUser.get(username);
+        if (isRegistered(userName)) {
+            User checker = (User) registeredUser.get(userName);
             return (checker.verifyPassword(password));
 
         }
 
         return false;
-        
+
     }
 
-    public static boolean changePassword(String username,
-                                      String newPassword){
+    public static boolean changePassword(String userName, String newPassword) {
 
-        if (isRegistered(username)){
-            User user = getUser(username);
-            if (!(user.getPassword().equals(newPassword))){
+        if (isRegistered(userName)) {
+            User user = getUser(userName);
+            if (!(user.getPassword().equals(newPassword))) {
                 return true;
             }
         }
         return false;
 
-
     }
 
-    public static String writePicture(){
-
+    /**
+     * @todo Implement method
+     */
+    public static String writePicture() {
 
         return "picturePath";
     }

@@ -1,3 +1,11 @@
+/**
+ * @file PictureSourceCSV.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.services.data_source.csv;
 
 import java.awt.image.BufferedImage;
@@ -11,19 +19,31 @@ import javax.imageio.stream.ImageInputStream;
 
 import ku.cs.oakcoding.app.models.picture.Picture;
 
-
+/**
+ * PictureSourceCSV
+ * 
+ * @todo Verbose name 'directoryName' -> 'dirName'
+ */
 public class PictureSourceCSV implements DataSourceCSV<Picture> {
 
     private String directoryName;
+
     private String filename;
+
     private String picturePath;
 
-    public PictureSourceCSV(String directoryName){
+    public PictureSourceCSV(String directoryName) {
         this.directoryName = directoryName;
         checkFileIsExisted();
 
     }
 
+    /**
+     * @todo Use API?
+     *       <https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html>
+     *       - Files::exists(Path, LinkOption...)
+     *       - Files::createDirectory(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
+     */
     private void checkFileIsExisted() {
         File file = new File(directoryName);
         if (!file.exists()) {
@@ -33,19 +53,25 @@ public class PictureSourceCSV implements DataSourceCSV<Picture> {
 
     @Override
     public Picture readData() {
-        Picture picture = new Picture(picturePath,filename);
+        Picture picture = new Picture(picturePath, filename);
         return picture;
     }
 
+    /**
+     * @todo Use try-with-resources?
+     * @todo ?: 'iis' -> 'in' since there is only
+     * @todo Hard coding
+     * @todo Image resources can also be manipulated via static methods of java.nio.file.Files, as same as regular files
+     */
     @Override
     public void writeData(Picture pictureFrom) {
         BufferedImage image = null;
-        if (!pictureFrom.getPicturePath().equals("picture/Default.jpg")){
-            File input_file = new File(pictureFrom.getPicturePath());
+        if (!pictureFrom.getPicturePath().equals("picture/Default.jpg")) {
+            File inputFile = new File(pictureFrom.getPicturePath());
             try {
-                image = ImageIO.read(input_file);
+                image = ImageIO.read(inputFile);
 
-                ImageInputStream iis = ImageIO.createImageInputStream(input_file);
+                ImageInputStream iis = ImageIO.createImageInputStream(inputFile);
                 Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
 
                 if (!iter.hasNext()) {
@@ -54,28 +80,29 @@ public class PictureSourceCSV implements DataSourceCSV<Picture> {
 
                 ImageReader reader = iter.next();
                 String formatName = reader.getFormatName();
-                if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")){
-                    ImageIO.write(image, "jpg", new File("picture/"+pictureFrom.getFilename()+".jpg"));
-                    this.picturePath = "picture/"+pictureFrom.getFilename()+".jpg";
-                    this.filename = pictureFrom.getFilename();
+                if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")) {
+                    ImageIO.write(image, "jpg", new File("picture/" + pictureFrom.getFileName() + ".jpg"));
+                    this.picturePath = "picture/" + pictureFrom.getFileName() + ".jpg";
+                    this.filename = pictureFrom.getFileName();
+                    iis.close();
+                } else if (formatName.equals("png")) {
+                    ImageIO.write(image, "png", new File("picture/" + pictureFrom.getFileName() + ".png"));
+                    this.picturePath = "picture/" + pictureFrom.getFileName() + ".png";
+                    this.filename = pictureFrom.getFileName();
                     iis.close();
                 }
-                else if (formatName.equals("png")){
-                    ImageIO.write(image,"png", new File("picture/"+pictureFrom.getFilename()+".png"));
-                    this.picturePath = "picture/"+pictureFrom.getFilename()+".png";
-                    this.filename = pictureFrom.getFilename();
-                    iis.close();
-                }
-            } catch (IOException e){
+            } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-        }
-        else {
+        } else {
             this.picturePath = "picture/Default.jpg";
             this.filename = "Default";
         }
     }
 
+    /**
+     * @todo Hard coding
+     */
     @Override
     public void clearData() {
         File picture = new File(picturePath);
