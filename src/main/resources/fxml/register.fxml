@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterControllers">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
         <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
             <children>
@@ -67,7 +67,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="confrimStudentCheckbox" layoutX="14.0" layoutY="420.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="28.0" stylesheets="@../css/style.css" textFill="WHITE">
+                  <CheckBox fx:id="confirmStudentCheckbox" layoutX="14.0" layoutY="420.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="28.0" stylesheets="@../css/style.css" textFill="WHITE">
                      <font>
                         <Font name="Kanit" size="14.0" />
                      </font>
@@ -91,19 +91,19 @@
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                      <TextField fx:id="usernameField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <TextField fx:id="userNameField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                       <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                      <TextField fx:id="firstnameField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <TextField fx:id="firstNameField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                       <Label layoutX="17.0" layoutY="114.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Firstname" textFill="#d0d0d0">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                      <TextField fx:id="lastnameField" layoutX="292.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
+                      <TextField fx:id="lastNameField" layoutX="292.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                       <Label layoutX="292.0" layoutY="115.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Lastname" textFill="#d0d0d0">
                      <font>
                         <Font size="15.0" />

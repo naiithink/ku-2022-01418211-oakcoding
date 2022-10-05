@@ -1,3 +1,11 @@
+/**
+ * @file StaffController.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.controllers;
 
 import javafx.event.ActionEvent;
@@ -16,13 +24,13 @@ import java.util.ResourceBundle;
 
 public class StaffController implements Initializable {
     @FXML
-    private Button AccountChangeInfoButton;
+    private Button accountChangeInfoButton;
 
     @FXML
-    private Label FullnameLabel;
+    private Label fullNameLabel;
 
     @FXML
-    private Label UsernameLabel;
+    private Label userNameLabel;
 
     @FXML
     private Button dashboardButton;

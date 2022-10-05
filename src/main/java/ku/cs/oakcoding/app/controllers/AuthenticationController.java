@@ -1,3 +1,11 @@
+/**
+ * @file AuthenticationController.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.controllers;
 
 import javafx.event.ActionEvent;
@@ -47,7 +55,7 @@ public class AuthenticationController {
     }
 
     @FXML
-    void handlegetStartedButtonToLoginPage(ActionEvent event) {
+    void handleGetStartedButtonToLoginPage(ActionEvent event) {
         if (event.getSource() == getStartedButton){
             getStartedPane.setVisible(false);
             loginPane.setVisible(true);

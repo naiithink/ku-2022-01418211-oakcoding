@@ -120,7 +120,7 @@
             </ImageView>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
-                  <Label fx:id="UsernameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="PeterParker@username" textFill="#e0e0e1">
+                  <Label fx:id="userNameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="PeterParker@username" textFill="#e0e0e1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -160,7 +160,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Label fx:id="FullnameLabel" layoutX="81.0" layoutY="224.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Profile" textFill="WHITE">
+                  <Label fx:id="fullNameLabel" layoutX="81.0" layoutY="224.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Profile" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -174,7 +174,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button fx:id="AccountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                  <Button fx:id="accountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
                   <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/peter-parker.png" />

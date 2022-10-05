@@ -1,3 +1,11 @@
+/**
+ * @file UserController.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.controllers;
 
 import java.net.URL;
@@ -18,7 +26,7 @@ public class UserController implements Initializable{
     private Pane createReportsUserPane;
 
     @FXML
-    private Label FullnameLabel;
+    private Label fullNameLabel;
 
     @FXML
     private Button createReportButton;

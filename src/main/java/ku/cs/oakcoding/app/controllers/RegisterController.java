@@ -1,3 +1,11 @@
+/**
+ * @file RegisterController.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.controllers;
 
 import javafx.event.ActionEvent;
@@ -14,18 +22,19 @@ import javafx.stage.Stage;
 import ku.cs.oakcoding.app.services.StageManager;
 import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
 
-public class RegisterControllers {
+public class RegisterController {
 // User Register
     @FXML
     private Label messageWhenRegisterLabel;
-    @FXML
-    private CheckBox confrimStudentCheckbox;
 
     @FXML
-    private TextField firstnameField;
+    private CheckBox confirmStudentCheckbox;
 
     @FXML
-    private TextField lastnameField;
+    private TextField firstNameField;
+
+    @FXML
+    private TextField lastNameField;
 
     @FXML
     private Label nameProfileUploadLabel;
@@ -40,7 +49,7 @@ public class RegisterControllers {
     private Button registerButton;
 
     @FXML
-    private TextField usernameField;
+    private TextField userNameField;
 
 //  Add Staff
     @FXML
@@ -64,6 +73,7 @@ public class RegisterControllers {
         Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+
     public void handleBackButtonGoToLoginPage(javafx.scene.input.MouseEvent mouseEvent) {
         try {
             StageManager.getStageManager().setPage("authentication");

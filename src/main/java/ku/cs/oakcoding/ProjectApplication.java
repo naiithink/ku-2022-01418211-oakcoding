@@ -17,6 +17,7 @@ public class ProjectApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        OakLogger.log(Level.INFO, "App Started");
         configStageManager(primaryStage);
     }
 

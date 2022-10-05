@@ -15,7 +15,7 @@
     <children>
         <Pane fx:id="getStartedPane" prefHeight="500.0" prefWidth="300.0" styleClass="theme" stylesheets="@../css/stylesheet.css" visible="false">
             <children>
-                <Button fx:id="getStartedButton" layoutX="56.0" layoutY="293.0" mnemonicParsing="false" onAction="#handlegetStartedButtonToLoginPage" prefHeight="34.0" prefWidth="189.0" styleClass="sign-in" text="Get Started" textAlignment="CENTER" textFill="WHITE">
+                <Button fx:id="getStartedButton" layoutX="56.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleGetStartedButtonToLoginPage" prefHeight="34.0" prefWidth="189.0" styleClass="sign-in" text="Get Started" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font></Button>

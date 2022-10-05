@@ -1,3 +1,11 @@
+/**
+ * @file AdminController.java
+ * 
+ * Reviews:
+ *  - Naming
+ *      1. (CASE) naiithink, 2022-10-05
+ */
+
 package ku.cs.oakcoding.app.controllers;
 
 
@@ -18,22 +26,22 @@ import javafx.stage.Stage;
 public class AdminController implements Initializable {
 
     @FXML
-    private Button AccountChangeInfoButton;
+    private Button accountChangeInfoButton;
 
     @FXML
-    private Label FullnameLabel;
+    private Label fullNameLabel;
 
     @FXML
-    private Label UsernameLabel;
+    private Label userNameLabel;
 
     @FXML
-    private Button complantsButton;
+    private Button complaintsButton;
 
     @FXML
-    private ImageView complantsImageView;
+    private ImageView complaintsImageView;
 
     @FXML
-    private Pane complantsPane;
+    private Pane complaintsPane;
 
     @FXML
     private Button dashboardButton;
@@ -126,17 +134,17 @@ public class AdminController implements Initializable {
     private ImageView userImageView;
 
     @FXML
-    void handleClickComplants(ActionEvent event) {
+    void handleClickComplaints(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle-seleted.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle-seleted.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
 
 
-        complantsButton.setStyle("-fx-text-fill: #FFFFFF;" +
+        complaintsButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
                 "-fx-border-radius: 5px;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -160,7 +168,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complantsPane.setVisible(true);
+        complaintsPane.setVisible(true);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
@@ -172,7 +180,7 @@ public class AdminController implements Initializable {
     void handleClickDashboard(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home-seleted.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
@@ -180,7 +188,7 @@ public class AdminController implements Initializable {
         dashboardButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
                 "-fx-border-radius: 5px;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -201,7 +209,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(true);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
@@ -219,7 +227,7 @@ public class AdminController implements Initializable {
     void handleClickOrganizations(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building-seleted.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
@@ -235,7 +243,7 @@ public class AdminController implements Initializable {
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -250,7 +258,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(true);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
@@ -262,7 +270,7 @@ public class AdminController implements Initializable {
     void handleClickReport(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines-seleted.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
@@ -281,7 +289,7 @@ public class AdminController implements Initializable {
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -293,7 +301,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(true);
         requestPane.setVisible(false);
@@ -304,7 +312,7 @@ public class AdminController implements Initializable {
     void handleClickRequest(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope-seleted.png").toExternalForm()));
@@ -326,7 +334,7 @@ public class AdminController implements Initializable {
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -335,7 +343,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(true);
@@ -346,7 +354,7 @@ public class AdminController implements Initializable {
     void handleClickSetting(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
@@ -368,7 +376,7 @@ public class AdminController implements Initializable {
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -377,7 +385,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
@@ -389,7 +397,7 @@ public class AdminController implements Initializable {
     void handleClickUser(ActionEvent event) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         userImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
-        complantsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
+        complaintsImageView.setImage(new Image(getClass().getResource("/images/comment-alt-middle.png").toExternalForm()));
         organizationsImageView.setImage(new Image(getClass().getResource("/images/building.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
@@ -411,7 +419,7 @@ public class AdminController implements Initializable {
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
-        complantsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
                 "-fx-background-color:transparent;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
@@ -420,7 +428,7 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(true);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
@@ -442,7 +450,7 @@ public class AdminController implements Initializable {
     public void initPane(){
         welcomePane.setVisible(true);
         userPane.setVisible(false);
-        complantsPane.setVisible(false);
+        complaintsPane.setVisible(false);
         organizationsPane.setVisible(false);
         reportPane.setVisible(false);
         requestPane.setVisible(false);
