@@ -2,8 +2,8 @@ package ku.cs.oakcoding.app.services.data_source.CSV;
 
 import ku.cs.oakcoding.app.models.Ban.Ban;
 import ku.cs.oakcoding.app.models.Ban.BanList;
+import ku.cs.oakcoding.app.models.DataList;
 import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.users.DataList;
 import ku.cs.oakcoding.app.services.DataBase;
 
 import java.io.*;

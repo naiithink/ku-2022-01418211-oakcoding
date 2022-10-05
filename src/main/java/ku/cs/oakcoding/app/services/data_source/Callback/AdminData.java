@@ -1,7 +1,7 @@
 package ku.cs.oakcoding.app.services.data_source.Callback;
 
-import ku.cs.oakcoding.app.helpers.hotspot.BanStatus;
 import ku.cs.oakcoding.app.models.AdminUser;
+import ku.cs.oakcoding.app.models.BanStatus;
 import ku.cs.oakcoding.app.models.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.Consumer;
 

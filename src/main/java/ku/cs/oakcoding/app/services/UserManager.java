@@ -8,8 +8,8 @@ import java.util.TreeSet;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
 import ku.cs.oakcoding.app.models.ConsumerUser;
+import ku.cs.oakcoding.app.models.DataList;
 import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.users.DataList;
 import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 
 public final class UserManager {

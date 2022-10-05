@@ -4,8 +4,8 @@ package ku.cs.oakcoding.app.services.data_source.CSV;
 import java.io.*;
 import java.util.Map;
 
+import ku.cs.oakcoding.app.models.DataList;
 import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.users.DataList;
 import ku.cs.oakcoding.app.services.DataBase;
 
 public class DataSourceListCSV implements DataSourceCSV<DataList> {

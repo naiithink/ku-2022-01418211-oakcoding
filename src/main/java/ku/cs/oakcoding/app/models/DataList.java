@@ -1,6 +1,4 @@
-package ku.cs.oakcoding.app.models.users;
-
-import ku.cs.oakcoding.app.models.User;
+package ku.cs.oakcoding.app.models;
 
 import java.util.HashMap;
 import java.util.Map;

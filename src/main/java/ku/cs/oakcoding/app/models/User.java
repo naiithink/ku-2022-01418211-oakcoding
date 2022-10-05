@@ -6,7 +6,6 @@ import java.util.TreeMap;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.hotspot.Roles;
-import ku.cs.oakcoding.app.models.users.DataList;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.CSV.DataSourceCSV;
 
