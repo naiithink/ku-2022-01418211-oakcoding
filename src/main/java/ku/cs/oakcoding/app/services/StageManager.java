@@ -1386,7 +1386,7 @@ public final class StageManager {
 
         if (mapOfPageToSet.inheritHeight == false) {
             double prefHeight = mapOfPageToSet.prefHeight.get();
-            stage.setHeight(this.customTitleBarNode.getHeight() + prefHeight);
+            stage.setHeight(this.titleBarHeight + prefHeight);
         }
 
         if (this.primaryStageStyle == null
@@ -1600,6 +1600,9 @@ public final class StageManager {
      */
     private HBox customTitleBarNode;
 
+    /**
+     * Dragging context of the custom Stage
+     */
     private TitleBar.StageDragContext stageDragContext;
 
     /**
