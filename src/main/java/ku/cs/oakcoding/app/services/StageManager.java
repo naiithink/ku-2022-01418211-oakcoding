@@ -1934,7 +1934,6 @@ public final class StageManager {
         }
 
         prefStageWidth = prefPageWidth;
-        prefStageHeight = titleBarHeight + prefPageHeight;
 
         AnchorPane rootNode = new AnchorPane();
 
@@ -1970,8 +1969,9 @@ public final class StageManager {
                                     this.primaryStageTitle,
                                     prefStageWidth,
                                     titleBarHeight);
-
         }
+
+        prefStageHeight = titleBarHeight + prefPageHeight;
 
         this.primaryStage.setHeight(prefStageHeight);
 
@@ -2578,7 +2578,7 @@ public final class StageManager {
 
     private void initializeSectionFont() {
         fontTable = new ConcurrentHashMap<>();
-        currentFont = new Font("Noto Sans Display SemiBold", 14);
+        currentFont = new Font("Inter Bold", 14);
     }
 
     /**
