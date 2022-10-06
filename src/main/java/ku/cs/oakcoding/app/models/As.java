@@ -4,6 +4,7 @@
  * Reviews:
  *  - Naming
  *      1. (CASE) naiithink, 2022-10-05; file name
+ *      2. (CASE) naiithink, 2022-10-06; comments
  */
 
 //package ku.cs.oakcoding.app.models;
@@ -26,11 +27,11 @@
 //
 //
 //    //
-//    public boolean doRegister(String username, String password, String confirmPassword, String firstname, String lastname) {
-//        if (firstname != null && lastname != null && username != null && password != null && confirmPassword != null) {
+//    public boolean doRegister(String userName, String password, String confirmPassword, String firstName, String lastName) {
+//        if (firstName != null && lastName != null && userName != null && password != null && confirmPassword != null) {
 //            DataSourceCSV dataSourceCSV = new FactoryDatabase().getDataSource(DataType.USER);
 //            HashMap<String, User> usersMap = ((UserList) dataSourceCSV.readData()).getUsersMap();
-//            if (password.equals(confirmPassword) && !usersMap.containsKey(username)) {
+//            if (password.equals(confirmPassword) && !usersMap.containsKey(userName)) {
 //                return true;
 //            }
 //            return false;
@@ -39,19 +40,19 @@
 //        return false;
 //    }
 //
-//    public boolean doLogin(String username, String password) {
-//        if (username != null && password != null) {
+//    public boolean doLogin(String userName, String password) {
+//        if (userName != null && password != null) {
 //            DataSourceCSV dataSourceCSV = FactoryDatabase.getDataSource(DataType.USER);
 //            HashMap<String, User> usersMap = ((UserList) dataSourceCSV.readData()).getUsersMap();
-//            return usersMap.containsKey(username);
+//            return usersMap.containsKey(userName);
 //        }
 //        return false;
 //    }
 ////
-////    public boolean changePassword(String username, String password, String newPassword){
-////        if (username != null && password != null && newPassword != null){
+////    public boolean changePassword(String userName, String password, String newPassword){
+////        if (userName != null && password != null && newPassword != null){
 ////            UserDataSourceCSV dataSourceCSV = new UserDataSourceCSV("data", "user.csv");
-////            if (dataSourceCSV.checkID(username,password,"All")){
+////            if (dataSourceCSV.checkID(userName,password,"All")){
 ////                return true;
 ////            }
 ////            else {
@@ -65,17 +66,17 @@
 ////        }
 ////    }
 ////
-////    public User getUser(String username, String password){
+////    public User getUser(String userName, String password){
 ////        UserDataSourceCSV dataSourceCSV = new UserDataSourceCSV("data", "user.csv");
-////        User user = dataSourceCSV.readThatData(username,password);
+////        User user = dataSourceCSV.readThatData(userName,password);
 ////        return user;
 ////    }
 //
-//    public void regisID(String username, String password, String picturePath, String firstname, String lastname){
-//        User user = new User(Status.UNBAN,username,password,firstname,lastname,picturePath);
+//    public void regisID(String userName, String password, String picturePath, String firstName, String lastName){
+//        User user = new User(Status.UNBAN,userName,password,firstName,lastName,picturePath);
 //        DataSourceCSV userDataSource = FactoryDatabase.getDataSource(DataType.USER);
 //        HashMap<String,User> userHashMap = ((UserList) userDataSource.readData()).getUsersMap();
-//        userHashMap.put(username,user);
+//        userHashMap.put(userName,user);
 //
 //        UserList newUserList = new UserList(userHashMap);
 //        userDataSource.clearData();
