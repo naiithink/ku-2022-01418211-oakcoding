@@ -2578,7 +2578,7 @@ public final class StageManager {
 
     private void initializeSectionFont() {
         fontTable = new ConcurrentHashMap<>();
-        currentFont = new Font("Inter Bold", 14);
+        currentFont = new Font("System", 14);
     }
 
     /**
