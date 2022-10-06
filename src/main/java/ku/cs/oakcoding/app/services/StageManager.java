@@ -25,13 +25,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -53,11 +56,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
@@ -172,6 +175,11 @@ public final class StageManager {
      * Configuration file for this StageManager
      */
     private static Optional<Properties> stageManagerConfigProperties;
+
+    /**
+     * Special nickName pool
+     */
+    private SpecialNick specialNickPool;
 
     /**
      * Path to the FXML index property file
@@ -521,6 +529,79 @@ public final class StageManager {
         }
     }
 
+    /**
+     * Special nickName parser
+     */
+    private class SpecialNick {
+
+        /**
+         * Lines in FXML index property file begining with this charactor are special nickNames
+         */
+        public static final char SPECIAL_NICK_SYMBOL;
+
+        public enum SpecialNicks {
+
+            CUSTOM_TITLE_BAR        ("title_bar");
+
+            private final String nick;
+
+            private SpecialNicks(String nick) {
+                this.nick = nick;
+            }
+        }
+
+        /**
+         * Map of special nickName to its corresponding value
+         */
+        private Map<String, Optional<Object>> specialNickMap;
+
+        static {
+            SPECIAL_NICK_SYMBOL = '$';
+        }
+
+        protected SpecialNick() {
+            specialNickMap = new ConcurrentHashMap<>();
+        }
+
+        /**
+         * Adds special nickName with its mapped values
+         * 
+         * @param       nickName        Special nickName
+         * @param       value           Value mapped to by nickName
+         */
+        void putRecord(String nickName,
+                              Optional<Object> value) {
+
+            specialNickMap.put(nickName, value);
+        }
+
+        /**
+         * Gets a special nickName object
+         * 
+         * @param       nickName        Special nickName
+         */
+        Optional<Object> getRecord(String nickName) {
+            if (specialNickMap.containsKey(nickName) == false) {
+                logger.log(Level.SEVERE, "Special nickName map does not contain nick: '" + nickName + "'");
+
+                return null;
+            }
+
+            return specialNickMap.get(nickName);
+        }
+
+        boolean containsNick(String nickName) {
+            return specialNickMap.containsKey(nickName);
+        }
+
+        /**
+         * Gets the unmodifiable special nickName with its mapped values
+         */
+        public Map<String, Object> getSpecialNickMap() {
+            return Collections.unmodifiableMap(specialNickMap);
+        }
+    }
+
     static {
         GET_INSTANCE_METHOD_NAME = "getInstance";
         COMMENT_SYMBOL = '#';
@@ -535,6 +616,8 @@ public final class StageManager {
     private StageManager() {
         logger = Logger.getLogger(getClass().getName());
 
+        specialNickPool = new SpecialNick();
+
         alwaysCenteredStage = true;
         pageTable = new ConcurrentHashMap<>();
         resourceIndexProperties = new Properties();
@@ -547,7 +630,7 @@ public final class StageManager {
     private void constructDev() {
         initializeSectionFont();
         initializeSectionDraggability();
-        initializeSectionCustomTitleBar();
+        initializeSectionCustomStage();
     }
 
     /**
@@ -637,6 +720,19 @@ public final class StageManager {
             Set<String> parentEntries = resourceIndexProperties.stringPropertyNames();
 
             for (String pageNick : parentEntries) {
+                if (pageNick.charAt(0) == SpecialNick.SPECIAL_NICK_SYMBOL) {
+
+                    if (resourceIndexProperties.get(pageNick) == null) {
+                        logger.log(Level.SEVERE, "A special nickName record requires exactly two fields");
+
+                        throw new MalformedFXMLIndexFileException();
+                    }
+
+                    this.specialNickPool.putRecord(pageNick.substring(1).trim(), Optional.ofNullable(resourceIndexProperties.get(pageNick).toString().trim()));
+                    logger.log(Level.INFO, "Special nickName added: '" + pageNick.substring(1) + "': '" + resourceIndexProperties.get(pageNick) + "'");
+
+                    continue;
+                }
 
                 loader = new FXMLLoader();
                 controllerClassName = Optional.empty();
@@ -969,9 +1065,53 @@ public final class StageManager {
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Got 'IOException' while reading FXML file: " + e.getMessage());
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Got 'ParserConfigurationException' while reading FXML file: " + e.getMessage());
         } catch (SAXException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Got 'SAXException' while reading FXML file: " + e.getMessage());
+        }
+
+        return result;
+    }
+
+    private Optional<List<String>> getNodeAttribute(Path xmlDocumentPath,
+                                                    String tagName,
+                                                    String nsPrefix,
+                                                    String attribute,
+                                                    int occurrences) {
+
+        List<String> resultList = new CopyOnWriteArrayList<>();
+        Optional<List<String>> result = Optional.of(resultList);
+
+        try (InputStream in = Files.newInputStream(xmlDocumentPath, StandardOpenOption.READ)) {
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dbf.newDocumentBuilder();
+            Document doc = builder.parse(in);
+
+            NodeList nodes = doc.getElementsByTagName(tagName);
+
+            if (nodes.getLength() == 0) {
+                return Optional.empty();
+            }
+
+            for (int i = 0, lim = nodes.getLength(); i < lim; ++i) {
+                if (nodes.item(i).getAttributes().getNamedItem(nsPrefix + ":" + attribute) != null) {
+                    resultList.add(nodes.item(i).getAttributes().getNamedItem(nsPrefix + ":" + attribute).getNodeValue());
+
+                    if (--occurrences == 0) {
+                        break;
+                    }
+                } else if (lim - i == 1
+                           && nodes.item(i).getAttributes().getNamedItem(nsPrefix + ":" + attribute) == null) {
+                    result = Optional.empty();
+                }
+            }
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Got 'IOException' while reading FXML file: " + e.getMessage());
+        } catch (ParserConfigurationException e) {
+            logger.log(Level.SEVERE, "Got 'ParserConfigurationException' while reading FXML file: " + e.getMessage());
+        } catch (SAXException e) {
+            logger.log(Level.SEVERE, "Got 'SAXException' while reading FXML file: " + e.getMessage());
         }
 
         return result;
@@ -992,7 +1132,11 @@ public final class StageManager {
             while (in.ready()) {
                 parentProperty = in.readLine();
 
-                if ((parentProperty.charAt(0) == COMMENT_SYMBOL) == false) {
+                if (parentProperty.length() == 0) {
+                    continue;
+                } else if ((parentProperty.charAt(0) == COMMENT_SYMBOL) == false
+                           && (parentProperty.charAt(0) == SpecialNick.SPECIAL_NICK_SYMBOL) == false) {
+
                     break;
                 }
             }
@@ -1242,7 +1386,7 @@ public final class StageManager {
 
         if (mapOfPageToSet.inheritHeight == false) {
             double prefHeight = mapOfPageToSet.prefHeight.get();
-            stage.setHeight(DEFAULT_STAGE_TITLE_BAR_HEIGHT + prefHeight);
+            stage.setHeight(this.customTitleBarNode.getHeight() + prefHeight);
         }
 
         if (this.primaryStageStyle == null
@@ -1340,14 +1484,15 @@ public final class StageManager {
             this.primaryStage.centerOnScreen();
         }
 
+        this.primaryStage.setResizable(true);
+
         logger.log(Level.INFO, "Activated Stage");
     }
 
     /**
      * Activates a non
      */
-    public void activateChildStage(String pageNick) {
-    }
+    public void activateChildStage(String pageNick) {}
 
     /**
      * Activates a 
@@ -1391,6 +1536,10 @@ public final class StageManager {
 
     /**
      * @section Custom Stage
+     * 
+     * @subsection  Custom Title Bar Specifications
+     * A custom title bar MUST be a type that inherit @link javafx.scene.layout.HBox @unlink
+     * and has at least one button that fire  'customCloseButton'.
      */
     static {
         CUSTOM_STAGE_STYLE = """
@@ -1400,7 +1549,7 @@ public final class StageManager {
         CUSTOM_STAGE_CORNER_ARC = 22.0;
     }
 
-    private void initializeSectionCustomTitleBar() {
+    private void initializeSectionCustomStage() {
         visualBounds = Screen.getPrimary().getBounds();
         primaryStageTitlePosition = Pos.CENTER_LEFT;
     }
@@ -1436,6 +1585,11 @@ public final class StageManager {
     private Node primaryStageTitleBar;
 
     /**
+     * Height of the custom Stage's title bar
+     */
+    private double titleBarHeight;
+
+    /**
      * Custom title bar PageMap
      * 
      * @see setCustomTitleBarTo
@@ -1444,7 +1598,24 @@ public final class StageManager {
      * 
      * @todo setCustomTitleBarTo
      */
-    private PageMap customTitleBarPage;
+    private HBox customTitleBarNode;
+
+    private TitleBar.StageDragContext stageDragContext;
+
+    /**
+     * Presence of custom close button assignment presence
+     */
+    private boolean hasCustomCloseButton;
+
+    /**
+     * Presence of custom close minimize button assignment presence
+     */
+    private boolean hasCustomMinimizeButton;
+
+    /**
+     * Presence of custom close full screen toggle button assignment
+     */
+    private boolean hasCustomFullScreenToggleButton;
 
     /**
      * Title of the primary Stage
@@ -1531,9 +1702,189 @@ public final class StageManager {
     }
 
     /**
-     * Sets the custom title bar of the Stage to pageNick
+     * Thrown to indicate that the custom title bar FXML resource specification is invalid
+     * 
+     * @ref Custom_Title_Bar_Specifications
      */
-    public void setCustomTitleBarTo(String customTitleBarPageNick) {}
+    public final class InvalidCustomTitleBarException
+            extends Exception {
+
+        public InvalidCustomTitleBarException() {
+        }
+
+        public InvalidCustomTitleBarException(String message) {
+            super(message);
+        }
+
+        public InvalidCustomTitleBarException(Throwable cause) {
+            super(cause);
+        }
+
+        public InvalidCustomTitleBarException(String message,
+                                              Throwable cause) {
+
+            super(message, cause);
+        }
+
+        public InvalidCustomTitleBarException(String message,
+                                              Throwable cause,
+                                              boolean enableSuppression,
+                                              boolean writableStackTrace) {
+
+            super(message, cause, enableSuppression, writableStackTrace);
+        }
+    }
+
+    /**
+     * Sets the custom title bar of a custom Stage to pageNick
+     * 
+     * @note Custom title bar MUST inherited the type @link javafx.scene.layout.HBox @unlink
+     * 
+     * @param       customTitleBarParentPath              Path to the custom title bar FXML resource
+     */
+    public void setCustomTitleBarResourceTo(Path customTitleBarParentPath) throws FileNotFoundException,
+                                                                                  InvalidCustomTitleBarException {
+
+        if (Files.exists(customTitleBarParentPath) == false) {
+            throw new FileNotFoundException(customTitleBarParentPath.toString());
+        }
+
+        Optional<List<String>> customButtonList = getNodeAttribute(customTitleBarParentPath,
+                                                                   "Button",
+                                                                   FXMLLoader.FX_NAMESPACE_PREFIX,
+                                                                   FXMLLoader.FX_ID_ATTRIBUTE,
+                                                                   0);
+
+        if (customButtonList.isEmpty()) {
+            throw new InvalidCustomTitleBarException("No such required Stage control Button assignments, at least a Button with fx:id 'customCloseButton'");
+        }
+
+        List<String> buttonIDList = customButtonList.get();
+
+        int[] buttonIDCount = new int[3];
+
+        for (String buttonID : buttonIDList) {
+            if (buttonID.equals("customCloseButton")) {
+                buttonIDCount[0]++;
+            } else if (buttonID.equals("customMinimizeButton")) {
+                buttonIDCount[1]++;
+            } else if (buttonID.equals("customFullScreenToggleButton")) {
+                buttonIDCount[2]++;
+            }
+        }
+
+        if (buttonIDCount[0] == 1) {
+            hasCustomCloseButton = true;
+        } else {
+            throw new InvalidCustomTitleBarException("Required exactly one Stage control button with fx:id 'customCloseButton'");
+        }
+
+        if (buttonIDCount[1] == 1) {
+            hasCustomMinimizeButton = true;
+        } else if (buttonIDCount[1] > 1) {
+            throw new InvalidCustomTitleBarException("Duplicate Stage control Button assignment");
+        }
+
+        if (buttonIDCount[2] == 1) {
+            hasCustomFullScreenToggleButton = true;
+        } else if (buttonIDCount[2] > 1) {
+            throw new InvalidCustomTitleBarException("Duplicate Stage control Button assignment");
+        }
+
+        stageDragContext = new TitleBar.StageDragContext();
+        Parent customTitleBarParent = null;
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.setLocation(customTitleBarParentPath.toUri().toURL());
+            loader.setController(new TitleBar(this.primaryStage));
+
+            customTitleBarParent = loader.load();
+        } catch (InvalidCustomTitleBarException e) {
+            logger.log(Level.SEVERE, "Failed to automatically define custom title bar, invalid specs");
+
+            System.exit(1);
+        } catch (MalformedURLException e) {
+            logger.log(Level.SEVERE, "Failed to set custom title bar to: '" + customTitleBarParentPath.toString() + "'");
+
+            System.exit(1);
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Got 'IOException' while attempting to set custom title bar to: '" + customTitleBarParentPath.toString() + "'. Try checking the custom title bar specifications");
+
+            System.exit(1);
+        }
+
+        if (customTitleBarParent.getClass().isAssignableFrom(HBox.class) == false) {
+            throw new InvalidCustomTitleBarException(customTitleBarParentPath.toString());
+        }
+
+        customTitleBarParent.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                stageDragContext.offSetX = primaryStage.getX() - event.getScreenX();
+                stageDragContext.offSetY = primaryStage.getY() - event.getScreenY();
+            }
+        });
+
+        customTitleBarParent.addEventFilter(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX() + stageDragContext.offSetX);
+                primaryStage.setY(event.getScreenY() + stageDragContext.offSetY);
+            }
+        });
+
+        this.customTitleBarNode = (HBox) customTitleBarParent;
+    }
+
+    /**
+     * Sets the custom title bar of a custom Stage to pageNick
+     * 
+     * @note Custom title bar MUST inherited the type @link javafx.scene.layout.HBox @unlink
+     * 
+     * @param       customTitleBarParentPathString        String representation of Path to the custom title bar FXML resource
+     * @throws InvalidCustomTitleBarException
+     */
+    public void setCustomTitleBarResourceTo(String customTitleBarParentPathString) throws FileNotFoundException,
+                                                                                          InvalidCustomTitleBarException {
+
+        Path customTitleBarPath = this.fxmlResourcePrefixPath.resolve(customTitleBarParentPathString);
+
+        if (Files.exists(customTitleBarPath) == false) {
+            throw new FileNotFoundException(customTitleBarParentPathString);
+        }
+
+        setCustomTitleBarResourceTo(customTitleBarPath);
+    }
+
+    /**
+     * Defines custom title bar to a special nickName ':title_bar' from FXML index property file
+     * @throws InvalidCustomTitleBarException
+     * 
+     * @note Custom title bar MUST inherited the type @link javafx.scene.layout.HBox @unlink
+     * 
+     */
+    public void autoDefineCustomTitleBar() throws FileNotFoundException,
+                                                  InvalidCustomTitleBarException {
+
+        if (specialNickPool.getRecord(SpecialNick.SpecialNicks.CUSTOM_TITLE_BAR.nick).isPresent() == false) {
+            logger.log(Level.SEVERE, "Failed to define custom title bar from FXML index property file");
+
+            return;
+        }
+
+        Path customTitleBarPath = this.fxmlResourcePrefixPath.resolve(
+            specialNickPool.getRecord(SpecialNick.SpecialNicks.CUSTOM_TITLE_BAR.nick).get().toString()
+        );
+
+        if (Files.exists(customTitleBarPath) == false) {
+            throw new FileNotFoundException(customTitleBarPath.toString());
+        }
+
+        setCustomTitleBarResourceTo(customTitleBarPath);
+    }
 
     /**
      * When using custom Stage, sets default Stage control button box alignment on the title bar
@@ -1572,29 +1923,62 @@ public final class StageManager {
         } else {
             prefPageHeight = pageTable.get(homePageNick).prefHeight.get();
         }
-        
+
         if (this.pageTable.get(this.homePageNick).inheritWidth) {
             prefPageWidth = this.primaryStageWidth;
         } else {
             prefPageWidth = pageTable.get(homePageNick).prefWidth.get();
         }
-        
-        prefStageWidth = prefPageWidth;
-        prefStageHeight = DEFAULT_STAGE_TITLE_BAR_HEIGHT + prefPageHeight;
 
-        this.primaryStage.setHeight(prefStageHeight);
+        prefStageWidth = prefPageWidth;
+        prefStageHeight = titleBarHeight + prefPageHeight;
 
         AnchorPane rootNode = new AnchorPane();
 
         clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
 
-        TitleBar titleBar = new TitleBar(this.primaryStage,
-                                         this.primaryStageTitle,
-                                         prefStageWidth,
-                                         DEFAULT_STAGE_TITLE_BAR_HEIGHT);
+        HBox titleBar;
+
+        if (this.specialNickPool.containsNick(SpecialNick.SpecialNicks.CUSTOM_TITLE_BAR.nick)) {
+            if (this.customTitleBarNode == null) {
+                try {
+                    autoDefineCustomTitleBar();
+                } catch (InvalidCustomTitleBarException e) {
+                    logger.log(Level.SEVERE, e.getMessage());
+
+                    System.exit(1);
+                } catch (FileNotFoundException e) {
+                    logger.log(Level.SEVERE, "Failed to automatically define custom title bar");
+
+                    System.exit(1);
+                }
+            }
+
+            titleBarHeight = this.customTitleBarNode.getPrefHeight();
+            prefStageHeight = titleBarHeight + prefPageHeight;
+
+            titleBar = (HBox) this.customTitleBarNode;
+
+            titleBar.setPrefWidth(prefStageWidth);
+            titleBar.setPrefHeight(titleBarHeight);
+        } else {
+            titleBarHeight = DEFAULT_STAGE_TITLE_BAR_HEIGHT;
+            titleBar = new TitleBar(this.primaryStage,
+                                    this.primaryStageTitle,
+                                    prefStageWidth,
+                                    titleBarHeight);
+
+        }
+
+        this.primaryStage.setHeight(prefStageHeight);
 
         rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
-            titleBar.setWidth(newValue);
+            if (titleBar instanceof TitleBar) {
+                TitleBar titleBarT = (TitleBar) titleBar;
+                titleBarT.setWidth(newValue);
+            } else {
+                titleBar.setPrefWidth((double) newValue);
+            }
         });
 
         rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
@@ -1602,11 +1986,8 @@ public final class StageManager {
         });
 
         rootNode.heightProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageScenePage.setPrefHeight((double) newValue - DEFAULT_STAGE_TITLE_BAR_HEIGHT);
+            this.primaryStageScenePage.setPrefHeight((double) newValue - titleBarHeight);
         });
-
-        rootNode.setPrefHeight(prefStageHeight);
-
         this.primaryStageTitleBar = titleBar;
 
         rootNode.getChildren().add(this.primaryStageTitleBar);
@@ -1625,6 +2006,8 @@ public final class StageManager {
         this.currentPrimaryStageScenePage = pageTable.get(homePageNick).parent;
         this.primaryStageScene = rootScene;
         this.primaryStageScenePage = rootNode;
+
+        rootNode.setPrefHeight(prefStageHeight);
 
         this.primaryStage.setScene(rootScene);
     }
@@ -1915,10 +2298,16 @@ public final class StageManager {
             stageControlButtonBoxPositionLeft = true;
         }
 
-        public TitleBar(Stage stage,
-                        String stageTitle,
-                        double width,
-                        double height) {
+        private TitleBar(Stage stage) throws InvalidCustomTitleBarException {
+            this.stage = stage;
+
+            stageDragContext = new StageDragContext();
+        }
+
+        private TitleBar(Stage stage,
+                         String stageTitle,
+                         double width,
+                         double height) {
 
             this.stage = stage;
 
@@ -1973,7 +2362,7 @@ public final class StageManager {
 
             stageControlButtonBox.setAlignment(Pos.CENTER);
 
-            // wheater to use custom or default
+            // Whether to use custom or default
             stageControlButtonBox.getChildren().add(closeButton);
             stageControlButtonBox.getChildren().add(minimizeButton);
             stageControlButtonBox.getChildren().add(fullScreenToggleButton);
@@ -2043,28 +2432,17 @@ public final class StageManager {
         }
 
         @FXML
-        public void initialize() {}
+        public void initialize() {
+            customCloseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnCloseRequest);
 
-        /**
-         * For custom Parent
-         */
-        @FXML
-        public void onClose(ActionEvent event) {
-            customCloseButton.fire();
-        }
+            if (hasCustomMinimizeButton) {
+                customMinimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnMinimizeRequest);
+            }
 
-        @FXML
-        public void onMinimize(ActionEvent event) {
-            customMinimizeButton.fire();
+            if (hasCustomFullScreenToggleButton) {
+                customFullScreenToggleButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnFullScreenToggleRequest);
+            }
         }
-
-        @FXML
-        public void onFullScreenToggle(ActionEvent event) {
-            customFullScreenToggleButton.fire();
-        }
-        /**
-         * For custom Parent
-         */
     }
 
     /**
