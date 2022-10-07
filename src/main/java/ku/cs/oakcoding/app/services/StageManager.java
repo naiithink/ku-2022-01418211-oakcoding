@@ -50,6 +50,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.security.auth.login.CredentialException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -74,6 +75,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
@@ -84,6 +86,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -229,6 +232,11 @@ public final class StageManager {
      * Title of the primary Stage
      */
     private String primaryStageTitle;
+
+    /**
+     * Menu bar of the primary Stage
+     */
+    private MenuBar primaryStageMenuBar;
 
     /**
      * Root page of the primary Stage
@@ -766,7 +774,13 @@ public final class StageManager {
   
                     logger.log(Level.INFO, "Using controller declared in FXML resource file: '" + parentProperty.pageNickResourceName + "' for page pageNick: '" + pageNick + "'");
 
-                    pageTable.put(pageNick, new PageMap(FXMLLoader.load(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName).toUri().toURL()),
+                    Pane page = FXMLLoader.load(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName).toUri().toURL());
+
+                    if (this.primaryStageMenuBar != null) {
+                        page.getChildren().add(this.primaryStageMenuBar);
+                    }
+
+                    pageTable.put(pageNick, new PageMap(page,
                                                         null,
                                                         prefWidth,
                                                         prefHeight,
@@ -1033,6 +1047,21 @@ public final class StageManager {
                   primaryStageTitle,
                   primaryStageWidth,
                   primaryStageHeight);
+    }
+
+    /**
+     * Sets the primary Stage MenuBar
+     * 
+     * @param       menuBar         MenuBar to be set
+     */
+    public void setMenuBar(MenuBar menuBar) {
+        this.primaryStageMenuBar = menuBar;
+
+        if (System.getProperty("os.name").toLowerCase().contains("mac")
+            || System.getProperty("os.name").toLowerCase().contains("darwin")) {
+
+            this.primaryStageMenuBar.setUseSystemMenuBar(true);
+        }
     }
 
     /**
@@ -1484,18 +1513,14 @@ public final class StageManager {
             this.primaryStage.centerOnScreen();
         }
 
+        this.primaryStage.setFullScreenExitHint("กด ESC เพื่อออกจากโหมด Full-screen");
         this.primaryStage.setResizable(true);
 
         logger.log(Level.INFO, "Activated Stage");
     }
 
     /**
-     * Activates a non
-     */
-    public void activateChildStage(String pageNick) {}
-
-    /**
-     * Activates a 
+     * Activates a sub Stage
      */
     public void activateSubstage(Stage parentStage,
                                  String pageNick) throws PageNotFoundException {
@@ -1991,7 +2016,10 @@ public final class StageManager {
         rootNode.heightProperty().addListener((observer, oldValue, newValue) -> {
             this.primaryStageScenePage.setPrefHeight((double) newValue - titleBarHeight);
         });
+
         this.primaryStageTitleBar = titleBar;
+
+        rootNode.getChildren().add(this.primaryStageMenuBar);
 
         rootNode.getChildren().add(this.primaryStageTitleBar);
         rootNode.getChildren().add(pageTable.get(homePageNick).parent);
@@ -2023,9 +2051,10 @@ public final class StageManager {
         private final Insets TITLE_BAR_ELEMENT_INSETS = new Insets(0, 10, 0, 10);
 
         private final String BUTTON_STYLE = """
-            -fx-background-radius: 160;
-            -fx-pref-width: 14;
-            -fx-pref-height: 14;
+            -fx-focus-color: transparent;
+            -fx-background-radius: 150;
+            -fx-pref-width: 12;
+            -fx-pref-height: 12;
             -fx-min-width: 1;
             -fx-min-height: 1;
         """;
@@ -2067,23 +2096,23 @@ public final class StageManager {
 
         private final String TITLE_BAR_COLOR = "-fx-background-color: #ffffff";
 
-        private final String HOVERED_BUTTON_STYLE = "-fx-border-color: #000000";
+        private final String CLOSE_BUTTON_COLOR = "#ed6a5e";
 
-        private final String CLOSE_BUTTON_COLOR = "-fx-background-color: #ed6a5e;";
+        private final String MINIMIZE_BUTTON_COLOR = "#f5bf4f";
 
-        private final String MINIMIZE_BUTTON_COLOR = "-fx-background-color: #f5bf4f;";
-
-        private final String FULL_SCREEN_TOGGLE_BUTTON_COLOR = "-fx-background-color: #62c555;";
+        private final String FULL_SCREEN_TOGGLE_BUTTON_COLOR = "#62c555";
 
         private Stage stage;
 
         private Robot robot;
 
-        private Button closeButton;
+        private static final double STAGE_CONTROL_BUTTON_RADIUS;
 
-        private Button minimizeButton;
+        private Circle closeButton;
 
-        private Button fullScreenToggleButton;
+        private Circle minimizeButton;
+
+        private Circle fullScreenToggleButton;
 
         private final StageDragContext stageDragContext;
 
@@ -2279,10 +2308,18 @@ public final class StageManager {
         };
 
         private EventHandler<MouseEvent> handleOnFullScreenToggleRequest = e -> {
+            Rectangle clipper = (Rectangle) primaryStageScenePage.getClip();
+
             if (stage.isFullScreen()) {
+                clipper.setArcWidth(CUSTOM_STAGE_CORNER_ARC);
+                clipper.setArcHeight(CUSTOM_STAGE_CORNER_ARC);
+
                 stage.setFullScreen(false);
                 stage.getScene().getRoot().setStyle(CUSTOM_STAGE_STYLE);
             } else {
+                clipper.setArcWidth(0);
+                clipper.setArcHeight(0);
+
                 stage.setFullScreen(true);
                 stage.getScene().getRoot().setStyle(null);
             }
@@ -2299,6 +2336,7 @@ public final class StageManager {
 
         static {
             stageControlButtonBoxPositionLeft = true;
+            STAGE_CONTROL_BUTTON_RADIUS = 6.5;
         }
 
         private TitleBar(Stage stage) throws InvalidCustomTitleBarException {
@@ -2344,21 +2382,22 @@ public final class StageManager {
         private HBox createStageControlButtonBox() {
             HBox stageControlButtonBox = new HBox();
 
-            closeButton = new Button();
-            minimizeButton = new Button();
-            fullScreenToggleButton = new Button();
+            closeButton = new Circle();
+            minimizeButton = new Circle();
+            fullScreenToggleButton = new Circle();
 
-            closeButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
-            minimizeButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
-            fullScreenToggleButton.setPadding(STAGE_CONTROL_BUTTON_PADDING);
+            closeButton.setRadius(STAGE_CONTROL_BUTTON_RADIUS);
+            minimizeButton.setRadius(STAGE_CONTROL_BUTTON_RADIUS);
+            fullScreenToggleButton.setRadius(STAGE_CONTROL_BUTTON_RADIUS);
 
-            closeButton.setStyle(BUTTON_STYLE + CLOSE_BUTTON_COLOR);
+            closeButton.setFill(Color.valueOf(CLOSE_BUTTON_COLOR));
+            minimizeButton.setFill(Color.valueOf(MINIMIZE_BUTTON_COLOR));
+            fullScreenToggleButton.setFill(Color.valueOf(FULL_SCREEN_TOGGLE_BUTTON_COLOR));
+
             closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnCloseRequest);
 
-            minimizeButton.setStyle(BUTTON_STYLE + MINIMIZE_BUTTON_COLOR);
             minimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnMinimizeRequest);
 
-            fullScreenToggleButton.setStyle(BUTTON_STYLE + FULL_SCREEN_TOGGLE_BUTTON_COLOR);
             fullScreenToggleButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnFullScreenToggleRequest);
 
             stageControlButtonBox.setPadding(TITLE_BAR_ELEMENT_INSETS);

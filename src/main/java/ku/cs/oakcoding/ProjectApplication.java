@@ -13,6 +13,9 @@ import java.nio.file.NotDirectoryException;
 import java.util.logging.Level;
 
 import javafx.application.Application;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
@@ -36,11 +39,14 @@ public class ProjectApplication extends Application {
         OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));
     }
 
-    private void configStageManager(Stage primaryStage) throws NotDirectoryException, FileNotFoundException {
+    private void configStageManager(Stage primaryStage) throws NotDirectoryException,
+                                                               FileNotFoundException {
+
         StageManager stageManager = StageManager.getStageManager();
 
         stageManager.setLogger(OakLogger.getLogger());
         stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FONT_DIR.key())), 14.0);
+        stageManager.setMenuBar(newMenuBar());
 
         try {
             stageManager.bindStage(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_INDEX_DIR.key()))
@@ -56,6 +62,7 @@ public class ProjectApplication extends Application {
 
             stageManager.setStageControlButtonAlignLeft(false);
             stageManager.autoDefineHomePage();
+
             stageManager.activate();
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
@@ -64,6 +71,29 @@ public class ProjectApplication extends Application {
         } catch (NoControllerSpecifiedException e) {
             OakLogger.log(Level.SEVERE, "No controller specified: " + e.getMessage());
         }
+    }
+
+    private MenuBar newMenuBar() {
+        MenuItem oakCodingAboutMenuItem = new MenuItem("OakCoding");
+        MenuItem contactUsAboutMenuItem = new MenuItem("ติดต่อเรา");
+
+        Menu aboutMenu = new Menu("เกี่ยวกับ");
+        aboutMenu.getItems().addAll(oakCodingAboutMenuItem,
+                                    contactUsAboutMenuItem);
+
+
+        MenuItem loginAccountMenuItem = new MenuItem("ลงชื่อเข้าใช้");
+
+        Menu accountMenu = new Menu("บัญชี");
+        accountMenu.getItems().addAll(loginAccountMenuItem);
+
+
+        MenuItem howTosHelpMenuItem = new MenuItem("วิธีใช้");
+
+        Menu helpMenu = new Menu("ช่วยเหลือ");
+        helpMenu.getItems().addAll(howTosHelpMenuItem);
+
+        return new MenuBar(aboutMenu, accountMenu, helpMenu);
     }
 
     public static void main(String[] args) {
