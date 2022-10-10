@@ -11,7 +11,9 @@ package ku.cs.oakcoding.app.models;
 import java.nio.file.Path;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.picture.ProfileImage;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
+import ku.cs.oakcoding.app.services.UserManager;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 public abstract class User {
@@ -22,7 +24,7 @@ public abstract class User {
 
     private String lastName;
 
-    private Path profileImagePath;
+    private ProfileImage profileImage;
 
     private String userName;
 
@@ -31,14 +33,14 @@ public abstract class User {
     public User(Roles role,
                 String firstName,
                 String lastName,
-                Path profileImagePath,
+                ProfileImage profileImage,
                 String userName,
                 String password) {
 
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.profileImagePath = profileImagePath;
+        this.profileImage = profileImage;
         this.userName = userName;
         this.password = password;
     }
@@ -55,8 +57,8 @@ public abstract class User {
         return lastName;
     }
 
-    public Path getProfileImagePath() {
-        return profileImagePath;
+    public ProfileImage getProfileImagePath() {
+        return profileImage;
     }
 
     public String getUserName() { return userName;}
@@ -76,17 +78,19 @@ public abstract class User {
     }
 
     public void changePassword(String newPassword){
-        DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
-        DataList users = (DataList) userCSV.readData();
-        User user = users.getUser(this.userName);
+        if (UserManager.changePassword(this.userName, newPassword)) {
+            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
+            DataList users = (DataList) userCSV.readData();
+            User user = users.getUser(this.userName);
 
 
-        users.removeUserMap(this.userName);
-        user.setNewPassword(newPassword);
-        users.addUserMap(this.userName, user);
+            users.removeUserMap(this.userName);
+            user.setNewPassword(newPassword);
+            users.addUserMap(this.userName, user);
 
-        userCSV.clearData();
-        userCSV.writeData(users);
+            userCSV.clearData();
+            userCSV.writeData(users);
+        }
 
     }
 

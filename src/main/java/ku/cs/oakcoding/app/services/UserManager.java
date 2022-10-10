@@ -8,11 +8,15 @@
 
 package ku.cs.oakcoding.app.services;
 
+import java.nio.file.Path;
 import java.util.Map;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.ConsumerUser;
 import ku.cs.oakcoding.app.models.DataList;
+import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 public final class UserManager {
     private UserManager() {}
@@ -22,11 +26,27 @@ public final class UserManager {
                                                                                        .readData())
     ).getUsersMap();
 
-    public static boolean isRegistered(String userName) {
-        return registeredUser.containsKey(userName);
-    }
+    public static boolean isRegistered(String userName) { return registeredUser.containsKey(userName); }
 
-    public static void register() {
+    public static void register(String firstName,
+                                String lastName,
+                                String userName,
+                                String password,
+                                String confirmPassword,
+                                Path profileImagePath) {
+
+        if ( !isRegistered(userName) && password.equals(confirmPassword) ){
+            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
+
+            ConsumerUser newUser = new ConsumerUser(Roles.CONSUMER, firstName, lastName, profileImagePath, userName, password);
+            registeredUser.put(userName, newUser);
+            userCSV.clearData();
+
+            DataList newData = new DataList(registeredUser);
+            userCSV.writeData(newData);
+
+        }
+
     }
 
     public static User login(String userName,

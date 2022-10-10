@@ -8,11 +8,13 @@
 
 package ku.cs.oakcoding.app.services.data_source.csv;
 
+import java.io.IOException;
+
 public interface DataSourceCSV<T> {
 
     T readData();
 
-    void writeData(T t);
+    void writeData(T t) throws IOException;
 
     void clearData();
 }

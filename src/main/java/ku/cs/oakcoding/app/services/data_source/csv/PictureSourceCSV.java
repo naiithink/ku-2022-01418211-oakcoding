@@ -17,14 +17,14 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
-import ku.cs.oakcoding.app.models.picture.Picture;
+import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
 /**
  * PictureSourceCSV
  * 
  * @todo Verbose name 'directoryName' -> 'dirName'
  */
-public class PictureSourceCSV implements DataSourceCSV<Picture> {
+public class PictureSourceCSV implements DataSourceCSV<ProfileImage> {
 
     private String directoryName;
 
@@ -52,9 +52,9 @@ public class PictureSourceCSV implements DataSourceCSV<Picture> {
     }
 
     @Override
-    public Picture readData() {
-        Picture picture = new Picture(picturePath, filename);
-        return picture;
+    public ProfileImage readData() {
+        ProfileImage profileImage = new ProfileImage(picturePath, filename);
+        return profileImage;
     }
 
     /**
@@ -64,10 +64,10 @@ public class PictureSourceCSV implements DataSourceCSV<Picture> {
      * @todo Image resources can also be manipulated via static methods of java.nio.file.Files, as same as regular files
      */
     @Override
-    public void writeData(Picture pictureFrom) {
+    public void writeData(ProfileImage profileImageFrom) {
         BufferedImage image = null;
-        if (!pictureFrom.getPicturePath().equals("picture/Default.jpg")) {
-            File inputFile = new File(pictureFrom.getPicturePath());
+        if (!profileImageFrom.getPicturePath().equals("picture/Default.jpg")) {
+            File inputFile = new File(profileImageFrom.getPicturePath());
             try {
                 image = ImageIO.read(inputFile);
 
@@ -81,14 +81,14 @@ public class PictureSourceCSV implements DataSourceCSV<Picture> {
                 ImageReader reader = iter.next();
                 String formatName = reader.getFormatName();
                 if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")) {
-                    ImageIO.write(image, "jpg", new File("picture/" + pictureFrom.getFileName() + ".jpg"));
-                    this.picturePath = "picture/" + pictureFrom.getFileName() + ".jpg";
-                    this.filename = pictureFrom.getFileName();
+                    ImageIO.write(image, "jpg", new File("picture/" + profileImageFrom.getFileName() + ".jpg"));
+                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".jpg";
+                    this.filename = profileImageFrom.getFileName();
                     iis.close();
                 } else if (formatName.equals("png")) {
-                    ImageIO.write(image, "png", new File("picture/" + pictureFrom.getFileName() + ".png"));
-                    this.picturePath = "picture/" + pictureFrom.getFileName() + ".png";
-                    this.filename = pictureFrom.getFileName();
+                    ImageIO.write(image, "png", new File("picture/" + profileImageFrom.getFileName() + ".png"));
+                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".png";
+                    this.filename = profileImageFrom.getFileName();
                     iis.close();
                 }
             } catch (IOException e) {
