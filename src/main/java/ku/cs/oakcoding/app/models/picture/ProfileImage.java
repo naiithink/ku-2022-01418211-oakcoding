@@ -14,6 +14,8 @@ public class ProfileImage {
     private Path profileImagePath;
     private String fileName;
 
+    public ProfileImage(){}
+
     public ProfileImage(Path profileImagePath, String fileName){
         this.profileImagePath = profileImagePath;
         this.fileName = fileName;

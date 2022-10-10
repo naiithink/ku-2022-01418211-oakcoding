@@ -26,10 +26,6 @@ public class AdminData implements ManageDataType<AdminUser> {
         return formatCSV(obj);
     }
 
-    @Override
-    public String getKey(String[] data) {
-        return data[2].trim();
-    }
 
     @Override
     public String getQuoteFormat(Object o) {

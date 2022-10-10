@@ -1,6 +1,6 @@
 /**
  * @file PictureSourceCSV.java
- * 
+ *
  * Reviews:
  *  - Naming
  *      1. (CASE) naiithink, 2022-10-05
@@ -11,6 +11,7 @@ package ku.cs.oakcoding.app.services.data_source.csv;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -21,7 +22,7 @@ import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
 /**
  * PictureSourceCSV
- * 
+ *
  * @todo Verbose name 'directoryName' -> 'dirName'
  */
 public class PictureSourceCSV implements DataSourceCSV<ProfileImage> {
@@ -53,7 +54,7 @@ public class PictureSourceCSV implements DataSourceCSV<ProfileImage> {
 
     @Override
     public ProfileImage readData() {
-        ProfileImage profileImage = new ProfileImage(picturePath, filename);
+        ProfileImage profileImage = new ProfileImage(Paths.get(picturePath), filename);
         return profileImage;
     }
 
@@ -65,39 +66,39 @@ public class PictureSourceCSV implements DataSourceCSV<ProfileImage> {
      */
     @Override
     public void writeData(ProfileImage profileImageFrom) {
-        BufferedImage image = null;
-        if (!profileImageFrom.getPicturePath().equals("picture/Default.jpg")) {
-            File inputFile = new File(profileImageFrom.getPicturePath());
-            try {
-                image = ImageIO.read(inputFile);
-
-                ImageInputStream iis = ImageIO.createImageInputStream(inputFile);
-                Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-
-                if (!iter.hasNext()) {
-                    throw new RuntimeException("No readers found!");
-                }
-
-                ImageReader reader = iter.next();
-                String formatName = reader.getFormatName();
-                if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")) {
-                    ImageIO.write(image, "jpg", new File("picture/" + profileImageFrom.getFileName() + ".jpg"));
-                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".jpg";
-                    this.filename = profileImageFrom.getFileName();
-                    iis.close();
-                } else if (formatName.equals("png")) {
-                    ImageIO.write(image, "png", new File("picture/" + profileImageFrom.getFileName() + ".png"));
-                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".png";
-                    this.filename = profileImageFrom.getFileName();
-                    iis.close();
-                }
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-        } else {
-            this.picturePath = "picture/Default.jpg";
-            this.filename = "Default";
-        }
+//        BufferedImage image = null;
+//        if (!profileImageFrom.getPicturePath().equals("picture/Default.jpg")) {
+//            File inputFile = new File(profileImageFrom.getPicturePath());
+//            try {
+//                image = ImageIO.read(inputFile);
+//
+//                ImageInputStream iis = ImageIO.createImageInputStream(inputFile);
+//                Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+//
+//                if (!iter.hasNext()) {
+//                    throw new RuntimeException("No readers found!");
+//                }
+//
+//                ImageReader reader = iter.next();
+//                String formatName = reader.getFormatName();
+//                if (formatName.equals("jpeg") || formatName.equals("jpg") || formatName.equals("JPEG")) {
+//                    ImageIO.write(image, "jpg", new File("picture/" + profileImageFrom.getFileName() + ".jpg"));
+//                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".jpg";
+//                    this.filename = profileImageFrom.getFileName();
+//                    iis.close();
+//                } else if (formatName.equals("png")) {
+//                    ImageIO.write(image, "png", new File("picture/" + profileImageFrom.getFileName() + ".png"));
+//                    this.picturePath = "picture/" + profileImageFrom.getFileName() + ".png";
+//                    this.filename = profileImageFrom.getFileName();
+//                    iis.close();
+//                }
+//            } catch (IOException e) {
+//                System.err.println(e.getMessage());
+//            }
+//        } else {
+//            this.picturePath = "picture/Default.jpg";
+//            this.filename = "Default";
+//        }
     }
 
     /**

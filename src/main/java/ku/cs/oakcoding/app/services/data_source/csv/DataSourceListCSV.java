@@ -17,9 +17,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.DataList;
+import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.services.DataBase;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.callback.FileCallBack;
 
 /**
  * DataSourceListCSV
@@ -28,14 +32,15 @@ import ku.cs.oakcoding.app.services.DataBase;
  */
 public class DataSourceListCSV implements DataSourceCSV<DataList> {
 
-    private String directoryName;
+    private String dirName;
 
     private String fileName;
 
-    public DataSourceListCSV(String directoryName, String fileName) {
-        this.directoryName = directoryName;
+    public DataSourceListCSV(String dirName, String fileName) {
+        this.dirName = dirName;
         this.fileName = fileName;
-        checkFileIsExisted();
+        checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + fileName,MakeFileType.FILE);
     }
 
     /**
@@ -45,21 +50,28 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
      *       - Files::createFile(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
      * 
      */
-    private void checkFileIsExisted() {
-        File file = new File(directoryName);
-        if (!file.exists()) {
-            file.mkdir();
+    private void checkFileIsExisted(String filePath, MakeFileType makeFileType) {
+
+        if (makeFileType == MakeFileType.DIRECTORY) {
+
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
         }
 
-        String filePath = directoryName + File.separator + fileName;
-        file = new File(filePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        if (makeFileType == MakeFileType.FILE) {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
     }
 
     /**
@@ -70,7 +82,7 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
     @Override
     public DataList readData() {
         DataList users = new DataList();
-        String filePath = directoryName + File.separator + fileName;
+        String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
         BufferedReader buffer = null;
@@ -82,9 +94,8 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
                 String[] dataTrim = trimData(data);
-                String key = DataBase.getKey(dataTrim);
-                User newObj = (User) DataBase.readData(dataTrim);
-                users.addUserMap(key, newObj);
+                DataSourceCSV userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE,dataTrim[0]);
+                users.addUser((User) userSourceCSV.readData());
             }
 
         } catch (FileNotFoundException e) {
@@ -109,8 +120,8 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
      * @todo Use try-with-resources?
      */
     @Override
-    public void writeData(DataList usersMap) {
-        String filePath = directoryName + File.separator + fileName;
+    public void writeData(DataList usersSet) {
+        String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 
         FileWriter fileWriter = null;
@@ -120,8 +131,10 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             fileWriter = new FileWriter(file, true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String, User> entry : usersMap.getUsersMap().entrySet()) {
-                String line = DataBase.writeData(entry.getValue());
+            for (User entry : usersSet.getUsers()) {
+                String line = DataBase.writeData(entry, FileCallBack.USER);
+                DataSourceCSV userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE, entry.getUserName());
+                userSourceCSV.writeData(entry);
                 writer.append(line);
                 writer.newLine();
             }
@@ -138,7 +151,7 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
      */
     @Override
     public void clearData() {
-        String filePath = directoryName + File.separator + fileName;
+        String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 
         FileWriter fileWriter = null;

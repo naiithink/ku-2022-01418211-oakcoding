@@ -36,7 +36,7 @@ public class PictureRefactoring implements DataSourceCSV{
 
     @Override
     public Object readData() {
-        ProfileImage profileImage;
+        ProfileImage profileImage = new ProfileImage();
         return profileImage;
     }
 

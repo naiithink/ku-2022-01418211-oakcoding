@@ -8,27 +8,27 @@
 
 package ku.cs.oakcoding.app.models;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class DataList {
-    private Map<String, User> dataMap;
+    private Set<User> dataSet;
 
     public DataList(){
-        dataMap = new TreeMap<>();
+        dataSet = new HashSet<>();
     }
 
-    public DataList(Map<String, User> dataMap){
-        this.dataMap = dataMap;
+    public DataList(HashSet<User> dataHashSet){
+        this.dataSet = dataHashSet;
     }
 
-    public void addUserMap(String key, User obj){
-        dataMap.put(key,obj);
+    public void addUser(User user){
+        dataSet.add(user);
     }
-    public void removeUserMap(String key) { dataMap.remove(key); }
-
-    public User getUser(String userName) { return dataMap.get(userName); }
-    public Map<String, User> getUsersMap() {return dataMap;}
+    public void removeUser(User user) { dataSet.remove(user); }
+    public Set<User> getUsers() {return dataSet;}
 }
 
 

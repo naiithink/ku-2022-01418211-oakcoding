@@ -8,25 +8,21 @@
 
 package ku.cs.oakcoding.app.models.ban;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BanList {
-    private Map<String, Ban> banMap;
+    private Set<Ban> banSet;
 
     public BanList(){
-        banMap = new TreeMap<>();
+        banSet = new HashSet<>();
     }
 
-    public BanList(Map<String, Ban> banMap){
-        this.banMap = banMap;
+    public BanList(HashSet<Ban> banSet){
+        this.banSet = banSet;
     }
 
-    public void addBanMap(String key, Ban obj){
-        banMap.put(key,obj);
-    }
-    public void removeBanMap(String key) { banMap.remove(key); }
-
-    public Ban getBanUser(String userName) { return banMap.get(userName); }
-    public Map<String, Ban> getUsersMap() {return banMap;}
+    public void addBan(Ban banUser){ banSet.add(banUser); }
+    public void removeBanMap(Ban banUser) { banSet.remove(banUser); }
+    public Set<Ban> getUsersSet() {return banSet;}
 }

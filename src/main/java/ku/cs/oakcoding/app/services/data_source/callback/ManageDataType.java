@@ -17,8 +17,6 @@ public interface ManageDataType<T> {
 
         public String instanceWrite(Object obj);
 
-        public String getKey(String[] data);
-
         public String getQuoteFormat(Object o);
 
         public String formatCSV(Object o);

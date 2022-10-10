@@ -8,6 +8,8 @@
 
 package ku.cs.oakcoding.app.models;
 
+import ku.cs.oakcoding.app.models.picture.ProfileImage;
+
 import java.nio.file.Path;
 
 public final class AdminUser
@@ -16,7 +18,7 @@ public final class AdminUser
     public AdminUser(Roles role,
                      String firstName,
                      String lastName,
-                     Path profileImagePath,
+                     ProfileImage profileImagePath,
                      String userName,
                      String password) {
 

@@ -30,10 +30,6 @@ public class BanData implements ManageDataType<Ban> {
      * 
      * NullPointerException is unchecked Exception.
      */
-    @Override
-    public String getKey(String[] data) {
-        return data[0].trim();
-    }
 
     @Override
     public String getQuoteFormat(Object o) {

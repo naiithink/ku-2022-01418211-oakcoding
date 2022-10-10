@@ -12,6 +12,7 @@ import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceListCSV;
 import ku.cs.oakcoding.app.services.data_source.csv.PictureSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.UserSourceCSV;
 
 public class FactoryDataSourceCSV {
 
@@ -21,21 +22,24 @@ public class FactoryDataSourceCSV {
     /**
      * @todo Avoid using raw type DataSourceCSV; DataSourceCSV<T>
      */
-    public static DataSourceCSV getDataSource(DataFile file) {
+    public static DataSourceCSV getDataSource(DataFile file,String fileName) {
         DataSourceCSV dataSourceCSV = null;
 
         switch (file) {
             case USER -> {
-                dataSourceCSV = new DataSourceListCSV("data", "users.csv");
+                dataSourceCSV = new DataSourceListCSV("data", fileName);
+            }
+            case USERPROFILE -> {
+                dataSourceCSV = new UserSourceCSV(fileName);
             }
             case SUSPENDED -> {
-                dataSourceCSV = new DataSourceListCSV("data", "suspended.csv");
+                dataSourceCSV = new DataSourceListCSV("data", fileName);
             }
             case COMPLAINT -> {
-                dataSourceCSV = new DataSourceListCSV("data", "complaints.csv");
+                dataSourceCSV = new DataSourceListCSV("data", fileName);
             }
             case PICTURE -> {
-                dataSourceCSV = new PictureSourceCSV("picture");
+                dataSourceCSV = new PictureSourceCSV(fileName);
             }
 
         }

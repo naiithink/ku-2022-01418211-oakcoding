@@ -8,13 +8,10 @@
 
 package ku.cs.oakcoding.app.models;
 
-import java.nio.file.Path;
-
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
-import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.UserManager;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.callback.FileCallBack;
+
+import java.nio.file.Path;
 
 public abstract class User {
 
@@ -29,6 +26,8 @@ public abstract class User {
     private String userName;
 
     private String password;
+
+    private final FileCallBack fileCallBack = FileCallBack.USER;
 
     public User(Roles role,
                 String firstName,
@@ -57,8 +56,8 @@ public abstract class User {
         return lastName;
     }
 
-    public ProfileImage getProfileImagePath() {
-        return profileImage;
+    public Path getProfileImagePath() {
+        return profileImage.getProFileImagePath();
     }
 
     public String getUserName() { return userName;}
@@ -78,20 +77,24 @@ public abstract class User {
     }
 
     public void changePassword(String newPassword){
-        if (UserManager.changePassword(this.userName, newPassword)) {
-            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
-            DataList users = (DataList) userCSV.readData();
-            User user = users.getUser(this.userName);
+//        if (UserManager.changePassword(this.userName, newPassword)) {
+//            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
+//            DataList users = (DataList) userCSV.readData();
+//            User user = users.getUser(this.userName);
+//
+//
+//            users.removeUserMap(this.userName);
+//            user.setNewPassword(newPassword);
+//            users.addUserMap(this.userName, user);
+//
+//            userCSV.clearData();
+//            userCSV.writeData(users);
+//        }
 
+    }
 
-            users.removeUserMap(this.userName);
-            user.setNewPassword(newPassword);
-            users.addUserMap(this.userName, user);
-
-            userCSV.clearData();
-            userCSV.writeData(users);
-        }
-
+    public FileCallBack getFileCallBack(){
+        return fileCallBack;
     }
 
 }

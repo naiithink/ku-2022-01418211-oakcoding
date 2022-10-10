@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 
 import ku.cs.oakcoding.app.models.ConsumerUser;
 import ku.cs.oakcoding.app.models.Roles;
+import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
 public class ConsumerData implements ManageDataType<ConsumerUser> {
 
@@ -26,7 +27,7 @@ public class ConsumerData implements ManageDataType<ConsumerUser> {
         ConsumerUser consumer = new ConsumerUser(Roles.valueOf(data[0].trim()),
                 data[1].trim(),
                 data[2].trim(),
-                Paths.get(data[3].trim()),
+                new ProfileImage(),
                 data[4].trim(),
                 data[5].trim());
         return consumer;
@@ -40,10 +41,6 @@ public class ConsumerData implements ManageDataType<ConsumerUser> {
     /**
      * @todo Assert null before String::trim
      */
-    @Override
-    public String getKey(String[] data) {
-        return data[1].trim();
-    }
 
     @Override
     public String getQuoteFormat(Object o) {

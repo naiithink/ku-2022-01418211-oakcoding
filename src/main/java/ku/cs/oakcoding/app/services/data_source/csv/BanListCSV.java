@@ -17,9 +17,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.Roles;
+import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.models.ban.Ban;
 import ku.cs.oakcoding.app.models.ban.BanList;
 import ku.cs.oakcoding.app.services.DataBase;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 /**
@@ -36,7 +40,6 @@ public class BanListCSV implements DataSourceCSV<BanList> {
     public BanListCSV(String directoryName, String fileName) {
         this.directoryName = directoryName;
         this.fileName = fileName;
-        checkFileIsExisted();
     }
 
     /**
@@ -45,21 +48,28 @@ public class BanListCSV implements DataSourceCSV<BanList> {
      *       - Files::exists(Path, LinkOption...)
      *       - Files::createFile(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
      */
-    private void checkFileIsExisted() {
-        File file = new File(directoryName);
-        if (!file.exists()) {
-            file.mkdir();
+    private void checkFileIsExisted(String filePath, MakeFileType makeFileType) {
+
+        if (makeFileType == MakeFileType.DIRECTORY) {
+
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
         }
 
-        String filePath = directoryName + File.separator + fileName;
-        file = new File(filePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        if (makeFileType == MakeFileType.FILE) {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
     }
 
     /**
@@ -69,38 +79,38 @@ public class BanListCSV implements DataSourceCSV<BanList> {
     @Override
     public BanList readData() {
         BanList banList = new BanList();
-        String filePath = directoryName + File.separator + fileName;
-        File file = new File(filePath);
-        FileReader reader = null;
-        BufferedReader buffer = null;
-
-        try {
-            reader = new FileReader(file);
-            buffer = new BufferedReader(reader);
-            String line = "";
-            while ((line = buffer.readLine()) != null) {
-                String[] data = line.split(",");
-                String[] dataTrim = trimData(data);
-                String key = dataTrim[0];
-                Ban newBan = new Ban(dataTrim[0], dataTrim[1]);
-                banList.addBanMap(key, newBan);
-
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-
-            try {
-                buffer.close();
-                reader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
+//        String filePath = directoryName + File.separator + fileName;
+//        File file = new File(filePath);
+//        FileReader reader = null;
+//        BufferedReader buffer = null;
+//
+//        try {
+//            reader = new FileReader(file);
+//            buffer = new BufferedReader(reader);
+//            String line = "";
+//            while ((line = buffer.readLine()) != null) {
+//                String[] data = line.split(",");
+//                String[] dataTrim = trimData(data);
+//                String key = dataTrim[0];
+//                Ban newBan = new Ban(dataTrim[0], dataTrim[1]);
+//                banList.addBanMap(key, newBan);
+//
+//            }
+//
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//
+//            try {
+//                buffer.close();
+//                reader.close();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//        }
         return banList;
 
     }
@@ -120,8 +130,8 @@ public class BanListCSV implements DataSourceCSV<BanList> {
             fileWriter = new FileWriter(file, true);
             writer = new BufferedWriter(fileWriter);
 
-            for (Map.Entry<String, Ban> entry : banMap.getUsersMap().entrySet()) {
-                String line = DataBase.writeData(entry);
+            for (Ban entry : banMap.getUsersSet()) {
+                String line = DataBase.writeData(entry,entry.getFileCallBack());
                 writer.append(line);
                 writer.newLine();
             }
@@ -131,6 +141,7 @@ public class BanListCSV implements DataSourceCSV<BanList> {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     /**

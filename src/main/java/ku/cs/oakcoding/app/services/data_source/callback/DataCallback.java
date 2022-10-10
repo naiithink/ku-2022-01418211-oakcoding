@@ -17,10 +17,6 @@ public class DataCallback {
         return manageDataType.instanceCreate(data);
     }
 
-    public static String readKey(ManageDataType manageDataType, String[] data) {
-        return manageDataType.getKey(data);
-    }
-
     public static String writeData(ManageDataType manageDataType, Object obj) {
         return manageDataType.instanceWrite(obj);
     }
