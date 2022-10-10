@@ -12,7 +12,7 @@
  * @todo Multi-cursor/touch dragging controller
  */
 
-package ku.cs.oakcoding.app.services;
+package ku.cs.oakcoding.app.services.stages;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -50,7 +50,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.security.auth.login.CredentialException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -84,6 +83,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
 import javafx.scene.shape.Circle;
@@ -136,7 +136,7 @@ import javafx.stage.WindowEvent;
  * - Event Processing
  *   https://docs.oracle.com/javafx/2/events/processing.htm
  */
-public final class StageManager {
+public final class OldStageManager {
 
     /**
      * Logger instance for this StageManager
@@ -172,7 +172,7 @@ public final class StageManager {
      */
     private static final double DEFAULT_STAGE_HEIGHT;
 
-    private static StageManager instance;
+    private static OldStageManager instance;
 
     /**
      * Configuration file for this StageManager
@@ -252,6 +252,8 @@ public final class StageManager {
      * Current root page/Node/Parent of the primary Stage
      */
     private Parent currentPrimaryStageScenePage;
+
+    private StackPane currentPrimaryStageScenePageContent;
 
     /**
      * Width of the primary Stage
@@ -621,7 +623,7 @@ public final class StageManager {
     /**
      * Contructor is kept private, singleton
      */
-    private StageManager() {
+    private OldStageManager() {
         logger = Logger.getLogger(getClass().getName());
 
         specialNickPool = new SpecialNick();
@@ -644,11 +646,11 @@ public final class StageManager {
     /**
      * Gets the instance of StageManager
      */
-    public static StageManager getStageManager() {
+    public static OldStageManager getStageManager() {
         if (instance == null) {
-            synchronized (StageManager.class) {
+            synchronized (OldStageManager.class) {
                 if (instance == null) {
-                    instance = new StageManager();
+                    instance = new OldStageManager();
                 }
             }
         }
@@ -799,12 +801,12 @@ public final class StageManager {
 
                 controllerClass = Class.forName(controllerClassName.get());
 
-                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + parentProperty.pageNickResourceName + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -813,7 +815,7 @@ public final class StageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);
@@ -1268,12 +1270,12 @@ public final class StageManager {
 
                 controllerClass = Class.forName(controllerClassName);
 
-                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + sceneResourcePathString + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -1282,7 +1284,7 @@ public final class StageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);
@@ -1382,40 +1384,42 @@ public final class StageManager {
 
         PageMap mapOfPageToSet = pageTable.get(pageNick);
 
-        if (mapOfPageToSet.inheritWidth == false) {
-            double prefWidth = mapOfPageToSet.prefWidth.get();
+        if (this.primaryStage.isFullScreen() == false) {
+            if (mapOfPageToSet.inheritWidth == false) {
+                double prefWidth = mapOfPageToSet.prefWidth.get();
 
-            /**
-             * @bug
-             *
-             * final int P = 10;
-             *
-             * double d = prefWidth - stage.getWidth();
-             * double dx = d / P;
-             * long t = (long) Math.ceil(Math.abs(d) / P);
-             *
-             * Timer resize = new Timer();
-             *
-             * resize.scheduleAtFixedRate(new TimerTask() {
-             *
-             *     @Override
-             *     public void run() {
-             *
-             *         if (stage.getWidth() != prefWidth) {
-             *             stage.setWidth(stage.getWidth() + dx);
-             *         } else {
-             *             this.cancel();
-             *         }
-             *     }
-             * }, 0, t);
-             */
+                /**
+                 * @bug
+                 *
+                 * final int P = 10;
+                 *
+                 * double d = prefWidth - stage.getWidth();
+                 * double dx = d / P;
+                 * long t = (long) Math.ceil(Math.abs(d) / P);
+                 *
+                 * Timer resize = new Timer();
+                 *
+                 * resize.scheduleAtFixedRate(new TimerTask() {
+                 *
+                 *     @Override
+                 *     public void run() {
+                 *
+                 *         if (stage.getWidth() != prefWidth) {
+                 *             stage.setWidth(stage.getWidth() + dx);
+                 *         } else {
+                 *             this.cancel();
+                 *         }
+                 *     }
+                 * }, 0, t);
+                 */
 
-            stage.setWidth(prefWidth);
-        }
-
-        if (mapOfPageToSet.inheritHeight == false) {
-            double prefHeight = mapOfPageToSet.prefHeight.get();
-            stage.setHeight(this.titleBarHeight + prefHeight);
+                stage.setWidth(prefWidth);
+            }
+        
+            if (mapOfPageToSet.inheritHeight == false) {
+                double prefHeight = mapOfPageToSet.prefHeight.get();
+                stage.setHeight(this.titleBarHeight + prefHeight);
+            }
         }
 
         if (this.primaryStageStyle == null
@@ -1961,6 +1965,7 @@ public final class StageManager {
         prefStageWidth = prefPageWidth;
 
         AnchorPane rootNode = new AnchorPane();
+        StackPane mainPageContent = new StackPane();
 
         clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
 
@@ -2019,21 +2024,33 @@ public final class StageManager {
 
         this.primaryStageTitleBar = titleBar;
 
+        // MenuBar
         rootNode.getChildren().add(this.primaryStageMenuBar);
 
+        // Title bar
         rootNode.getChildren().add(this.primaryStageTitleBar);
-        rootNode.getChildren().add(pageTable.get(homePageNick).parent);
+
+        // Page content
+        mainPageContent.getChildren().add(pageTable.get(homePageNick).parent);
+
+        StackPane.setAlignment(pageTable.get(homePageNick).parent, Pos.CENTER);
+
+        rootNode.getChildren().add(mainPageContent);
+        // rootNode.getChildren().add(pageTable.get(homePageNick).parent);
 
         this.primaryStageTitleBar.toFront();
 
         AnchorPane.setTopAnchor(this.primaryStageTitleBar, 0.0);
-        AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 0.0);
+        AnchorPane.setBottomAnchor(mainPageContent, 0.0);
+
+        // AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 0.0);
 
         Scene rootScene = new Scene(rootNode);
 
         rootScene.setFill(Color.TRANSPARENT);
         rootScene.setRoot(rootNode);
 
+        this.currentPrimaryStageScenePageContent = mainPageContent;
         this.currentPrimaryStageScenePage = pageTable.get(homePageNick).parent;
         this.primaryStageScene = rootScene;
         this.primaryStageScenePage = rootNode;
@@ -2317,6 +2334,9 @@ public final class StageManager {
                 stage.setFullScreen(false);
                 stage.getScene().getRoot().setStyle(CUSTOM_STAGE_STYLE);
             } else {
+                currentPrimaryStageScenePageContent.setPrefWidth(visualBounds.getWidth());
+                currentPrimaryStageScenePageContent.setPrefHeight(primaryStageHeight - titleBarHeight);
+
                 clipper.setArcWidth(0);
                 clipper.setArcHeight(0);
 

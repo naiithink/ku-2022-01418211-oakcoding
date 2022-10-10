@@ -18,8 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ku.cs.oakcoding.app.services.StageManager;
-import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
 public class AuthenticationController {
     @FXML
@@ -64,7 +64,7 @@ public class AuthenticationController {
 
     public void handleRegisterUserHereToRegisterPage(ActionEvent actionEvent) {
         try {
-            StageManager.getStageManager().setPage("register");
+            OldStageManager.getStageManager().setPage("register");
         } catch (PageNotFoundException e) {
             e.printStackTrace();
         }

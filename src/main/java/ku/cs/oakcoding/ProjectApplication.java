@@ -19,12 +19,13 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.configurations.OakSystemDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.services.StageManager;
-import ku.cs.oakcoding.app.services.StageManager.MalformedFXMLIndexFileException;
-import ku.cs.oakcoding.app.services.StageManager.NoControllerSpecifiedException;
-import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.MalformedFXMLIndexFileException;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.NoControllerSpecifiedException;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
 public class ProjectApplication extends Application {
 
@@ -42,7 +43,7 @@ public class ProjectApplication extends Application {
     private void configStageManager(Stage primaryStage) throws NotDirectoryException,
                                                                FileNotFoundException {
 
-        StageManager stageManager = StageManager.getStageManager();
+        OldStageManager stageManager = OldStageManager.getStageManager();
 
         stageManager.setLogger(OakLogger.getLogger());
         stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FONT_DIR.key())), 14.0);
@@ -60,7 +61,12 @@ public class ProjectApplication extends Application {
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
             );
 
-            stageManager.setStageControlButtonAlignLeft(false);
+            if (OakSystemDefaults.OS_NAME.value().toLowerCase().contains("mac") == false
+                && OakSystemDefaults.OS_NAME.value().toLowerCase().contains("darwin") == false) {
+
+                stageManager.setStageControlButtonAlignLeft(false);
+            }
+
             stageManager.autoDefineHomePage();
 
             stageManager.activate();

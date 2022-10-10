@@ -1,0 +1,17 @@
+package ku.cs.oakcoding.app.services.stages;
+
+import javafx.stage.Stage;
+import ku.cs.oakcoding.app.services.stages.components.Page;
+
+public class XStages {
+
+    protected XStages() {}
+
+    public static XStage bindRootStage(Stage primaryStage,
+                                       XStageStyle style,
+                                       Page page,
+                                       boolean isResponsivePage) {
+
+        
+    }
+}

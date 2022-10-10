@@ -19,8 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ku.cs.oakcoding.app.services.StageManager;
-import ku.cs.oakcoding.app.services.StageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
 public class RegisterController {
 // User Register
@@ -76,7 +76,7 @@ public class RegisterController {
 
     public void handleBackButtonGoToLoginPage(javafx.scene.input.MouseEvent mouseEvent) {
         try {
-            StageManager.getStageManager().setPage("authentication");
+            OldStageManager.getStageManager().setPage("authentication");
         } catch (PageNotFoundException e) {
             e.printStackTrace();
         }

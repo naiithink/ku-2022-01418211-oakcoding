@@ -1,0 +1,93 @@
+package ku.cs.oakcoding.app.services.stages;
+
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import javafx.geometry.Rectangle2D;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public final class StageManager {
+
+    private Logger logger;
+
+    private static StageManager instance;
+
+    private Stage primaryStage;
+
+    private Rectangle2D visualBounds;
+
+    private static final double DEFAULT_STAGE_WIDTH = 800.0;
+
+    private static final double DEFAULT_STAGE_HEIGHT = 600.0;
+
+    private static PageTable pageTable;
+
+    private static Map<Integer, XStage> stageTable;
+
+    private String titleText;
+
+    private Path fxmlResourcePrefixPath;
+
+    private Path fontResourcePrefixPath;
+
+    private Path resourceIndexFilePath;
+
+    private Font font;
+
+    private StageManager() {}
+
+    public static StageManager getStageManager() {
+        if (instance == null) {
+            synchronized (StageManager.class) {
+                if (instance == null) {
+                    instance = new StageManager();
+                }
+            }
+        }
+
+        return instance;
+    }
+
+    /**
+     * Optional, step 0
+     */
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
+    /**
+     * Step 1
+     */
+    public void setResourcePrefixPathTo(Path resourcePrefixPath) {
+        this.fxmlResourcePrefixPath = resourcePrefixPath;
+    }
+
+    /**
+     * Step 2
+     */
+    public void setResourceIndexFile(Path resourceIndexFilePath) {
+        this.resourceIndexFilePath = resourceIndexFilePath;
+    }
+
+    /**
+     * Optional, step 3
+     */
+    public void setFontResourcePrefixPath(Path fontResourcePrefixPath) {
+        this.fontResourcePrefixPath = fontResourcePrefixPath;
+    }
+
+    /**
+     * Step 3
+     */
+    public void bindStage(Stage primaryStage,
+                          XStageStyle style,
+                          String title,
+                          double width,
+                          double height) {
+
+        this.primaryStage = primaryStage;
+        // this.
+    }
+}
