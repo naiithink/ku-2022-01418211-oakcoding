@@ -1,0 +1,189 @@
+/* init */
+.primary-bg-color{
+    -fx-background-color: #121212;
+}
+.secondary-bg-color{
+    -fx-background-color: #2A2C32;
+}
+.gray-color-font{
+    -fx-text-fill: #DCDCDC;
+}
+.white-color-font{
+    -fx-text-fill: #FFFFFF;
+}
+.blue-color-font{
+    -fx-text-fill: #17ABFF;
+    -fx-font-size:16;
+}
+.yellow-color-font{
+    -fx-text-fill: #FFDC71;
+    -fx-font-size:16;
+}
+.purple-color-font{
+    -fx-text-fill: #D4D9F2;
+    -fx-font-size:16;
+}
+
+
+
+/* text && font */
+@font-face{
+    font-family: 'Kanit';
+    src: url("../fonts/KanitRegular.ttf");
+}
+@font-face{
+    font-family: 'Inter';
+    src: url("../fonts/Inter-SemiBold.ttf");
+}
+.text{
+    -fx-font-family: "Kanit";
+}
+.text-bold{
+    -fx-font-family: "Kanit";
+    -fx-font-weight: bolder;
+}
+.text-secondary-font{
+    -fx-font-family: "Inter";
+}
+.text-secondary-font-bold{
+    -fx-font-family: "Inter";
+    -fx-font-weight: bolder;
+}
+.text-large-bold{
+    -fx-font-family: "Inter";
+    -fx-font-weight: bolder;
+    -fx-font-size:40;
+}
+.text-regular{
+    -fx-font-family: "Inter";
+    -fx-font-size:16;
+}
+
+/* Theme */
+.theme{
+   -fx-background-color: #121212;
+   -fx-background-radius: 18px;
+}
+
+/* sign Button */
+.button-selected{
+-fx-background-color:#27282B;
+-fx-border-radius: 50px;
+}
+.sign-in{
+   -fx-background-color: linear-gradient(to right,#F9678A , #9855FF  );
+   -fx-background-radius: 200;
+   -fx-font-family: "Kanit";
+   -fx-font-size:13;
+}
+.sign-in:hover{
+   -fx-background-color: linear-gradient(to right, #FF4874 ,#8F47FF );
+}
+.sign-in:pressed{
+   -fx-background-color: linear-gradient(to right, #FE3666 ,#8A40FF );
+}
+.hover:hover{
+   -fx-font-size:14;
+   -fx-text-fill: #50c2ff;
+}
+.button-red{
+    -fx-font-size:14;
+    -fx-text-fill: #412f2f;
+    -fx-background-color: #da9e9f;
+    -fx-border-radius: 80px;
+}
+.button-red:hover{
+    -fx-opacity: 0.7;
+}
+.button-blue{
+    -fx-text-fill:#F5F5F5;
+    -fx-font-size:16;
+    -fx-background-color: #037bff;
+    -fx-border-radius: 80px;
+}
+.button-blue:hover{
+    -fx-opacity: 0.7;
+}
+.button-secondary-text{
+    -fx-background-color: transparent;
+    -fx-underline: true;
+}
+.button-secondary-text:hover{
+    -fx-opacity: 0.7;
+    -fx-cursor: hand;
+}
+.button-third-dashboard-nav{
+    -fx-text-fill: #C0C0C9;
+    -fx-font-size:18;
+    -fx-background-color:transparent;
+}
+.button-third-dashboard-nav:hover{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #7986CD;
+    -fx-border-radius: 5px;
+}
+.welcome-user-pane{
+        -fx-background-color: #8BBCCC;
+        -fx-font-size:16;
+       -fx-text-fill: #29383d;
+       -fx-background-radius: 10px;
+}
+.all-report-user-pane{
+        -fx-background-color: #FFDC71;
+        -fx-font-size:16;
+       -fx-text-fill: #332c16;
+       -fx-background-radius: 10px;
+}
+.all-report-user-pane-red{
+    -fx-font-size:16;
+    -fx-text-fill: #412f2f;
+    -fx-background-color: #da9e9f;
+    -fx-background-radius: 10px;
+}
+.all-report-user-pane-cream{
+    -fx-font-size:20;
+    -fx-text-fill: #4C4842;
+    -fx-background-color: #FEF3DC;
+    -fx-background-radius: 10px;
+}
+.all-report-user-pane-purple{
+    -fx-font-size:16;
+    -fx-text-fill: #1D1A28;
+    -fx-background-color: #AF9ED1;
+    -fx-background-radius: 10px;
+}
+
+
+.account-setting-pane{
+        -fx-background-color: #2A2C32;
+        -fx-font-size:16;
+       -fx-text-fill: #C0C0C9;
+       -fx-background-radius: 10px;
+}
+.account-setting-button{
+        -fx-text-fill: #DCDCDC;
+        -fx-background-color: #27282A;
+        -fx-border-radius: 5px;
+}
+.account-setting-text{
+        -fx-text-fill: #a8a8a8;
+        -fx-font-size:16;
+}
+
+/* util bar */
+
+.util-bar:hover{
+    -fx-opacity: 0.7;
+}
+
+.text-field {
+
+    -fx-text-fill: White;
+    -fx-background-color: #2A2C32;
+}
+
+
+
+
+
+
