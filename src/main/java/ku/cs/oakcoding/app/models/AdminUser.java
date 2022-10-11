@@ -9,19 +9,24 @@
 package ku.cs.oakcoding.app.models;
 
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
-
-import java.nio.file.Path;
+import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
 
 public final class AdminUser
         extends User {
 
+    private final ModelCallBack modelCallBack = ModelCallBack.USERPROFILE;
+
     public AdminUser(Roles role,
                      String firstName,
                      String lastName,
-                     ProfileImage profileImagePath,
                      String userName,
-                     String password) {
+                     String password,
+                     ProfileImage profileImagePath) {
 
-        super(role, firstName, lastName, profileImagePath, userName, password);
+        super(role, firstName, lastName, userName, password,profileImagePath);
+    }
+
+    public ModelCallBack getModelCallBack(){
+        return modelCallBack;
     }
 }

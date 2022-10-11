@@ -9,27 +9,25 @@
 package ku.cs.oakcoding.app.models;
 
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
-import ku.cs.oakcoding.app.services.data_source.callback.FileCallBack;
-
-import java.nio.file.Path;
+import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
 
 public final class StaffUser
         extends User {
 
-    private final FileCallBack fileCallBack = FileCallBack.STAFF;
+    private final ModelCallBack modelCallBack = ModelCallBack.USERPROFILE;
 
     public StaffUser(Roles role,
                      String firstName,
                      String lastName,
-                     ProfileImage profileImagePath,
                      String userName,
-                     String password) {
+                     String password,
+                     ProfileImage profileImagePath) {
 
-        super(role, firstName, lastName, profileImagePath, userName, password);
+        super(role, firstName, lastName, userName, password,profileImagePath);
     }
 
-    public FileCallBack getFileCallBack(){
-        return fileCallBack;
+    public ModelCallBack getModelCallBack(){
+        return modelCallBack;
     }
 
 

@@ -98,7 +98,7 @@ public class UserSourceCSV implements DataSourceCSV<User>{
             fileWriter = new FileWriter(file);
             writer = new BufferedWriter(fileWriter);
 
-            String line = DataBase.writeData(user, user.getFileCallBack());
+            String line = DataBase.writeData(user, user.getModelCallBack());
             writer.append(line);
             writer.newLine();
             writer.close();

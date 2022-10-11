@@ -8,6 +8,8 @@
 
 package ku.cs.oakcoding.app.services.data_source.callback;
 
+import ku.cs.oakcoding.app.models.StaffUser;
+
 public class StaffData implements ManageDataType<StaffData>{
     public StaffData(){}
 
@@ -18,16 +20,19 @@ public class StaffData implements ManageDataType<StaffData>{
 
     @Override
     public String instanceWrite(Object obj) {
-        return null;
+        return formatCSV(obj);
     }
 
     @Override
     public String getQuoteFormat(Object o) {
-        return null;
+        String line = o + "";
+        String result = "\"" + line + "\"";
+        return result;
     }
 
     @Override
     public String formatCSV(Object o) {
+        StaffUser staffUser = (StaffUser) o;
         return null;
     }
 }

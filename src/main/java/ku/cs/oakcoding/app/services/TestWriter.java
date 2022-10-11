@@ -16,23 +16,23 @@ public class TestWriter {
         ConsumerUser consumerUser = new ConsumerUser(Roles.CONSUMER,
                 "INK",
                 "panachai",
-                        profileImage,
                         "ingfosbreak",
-                "191245ing");
+                "191245ing",
+                profileImage);
 
         StaffUser consumerUser1 = new StaffUser(Roles.STAFF,
                 "BOOM",
                 "natthawit",
-                profileImage,
                 "quarXZ",
-                "191245ing");
+                "191245ing",
+                profileImage);
 
         DataList dataList = new DataList();
         dataList.addUser(consumerUser);
         dataList.addUser(consumerUser1);
 
-        System.out.println(consumerUser.getFileCallBack());
-        System.out.println(consumerUser1.getFileCallBack());
+        System.out.println(consumerUser.getModelCallBack());
+        System.out.println(consumerUser1.getModelCallBack());
         DataSourceCSV dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
         dataSourceListCSV.writeData(dataList);
 

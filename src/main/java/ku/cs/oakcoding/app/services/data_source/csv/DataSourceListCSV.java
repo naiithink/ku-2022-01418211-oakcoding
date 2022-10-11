@@ -15,15 +15,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.DataList;
-import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.services.DataBase;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.callback.FileCallBack;
+import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
 
 /**
  * DataSourceListCSV
@@ -132,7 +130,7 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             writer = new BufferedWriter(fileWriter);
 
             for (User entry : usersSet.getUsers()) {
-                String line = DataBase.writeData(entry, FileCallBack.USER);
+                String line = DataBase.writeData(entry, ModelCallBack.USER);
                 DataSourceCSV userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE, entry.getUserName());
                 userSourceCSV.writeData(entry);
                 writer.append(line);

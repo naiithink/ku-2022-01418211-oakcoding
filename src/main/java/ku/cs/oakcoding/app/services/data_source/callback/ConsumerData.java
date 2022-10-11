@@ -27,9 +27,9 @@ public class ConsumerData implements ManageDataType<ConsumerUser> {
         ConsumerUser consumer = new ConsumerUser(Roles.valueOf(data[0].trim()),
                 data[1].trim(),
                 data[2].trim(),
-                new ProfileImage(),
+                data[3].trim(),
                 data[4].trim(),
-                data[5].trim());
+                new ProfileImage());
         return consumer;
     }
 

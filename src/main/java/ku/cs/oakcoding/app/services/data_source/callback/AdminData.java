@@ -11,6 +11,9 @@
 package ku.cs.oakcoding.app.services.data_source.callback;
 
 import ku.cs.oakcoding.app.models.AdminUser;
+import ku.cs.oakcoding.app.models.ConsumerUser;
+import ku.cs.oakcoding.app.models.Roles;
+import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
 public class AdminData implements ManageDataType<AdminUser> {
 
@@ -18,7 +21,14 @@ public class AdminData implements ManageDataType<AdminUser> {
 
     @Override
     public AdminUser instanceCreate(String[] data) {
-        return null;
+
+        AdminUser admin = new AdminUser(Roles.valueOf(data[0].trim()),
+                data[1].trim(),
+                data[2].trim(),
+                data[3].trim(),
+                data[4].trim(),
+                new ProfileImage());
+        return admin;
     }
 
     @Override
