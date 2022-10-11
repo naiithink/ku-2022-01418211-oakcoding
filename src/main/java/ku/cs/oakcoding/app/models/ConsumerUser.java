@@ -30,5 +30,18 @@ public final class ConsumerUser
         return dataFile;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "role=" + role +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", profileImage=" + profileImage +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", dataFile=" + dataFile +
+                '}';
+    }
+
 
 }

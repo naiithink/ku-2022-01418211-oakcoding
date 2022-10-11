@@ -17,22 +17,30 @@ import ku.cs.oakcoding.app.services.data_source.callback.*;
  */
 public class DataBase {
 
-    public static Object readData(String[] data) {
-        Roles roleType = Roles.valueOf(data[0]);
-        switch (roleType) {
-            case CONSUMER:
-                return DataCallback.readData(new ConsumerData(), data);
-            default:
-                return null;
+    public static Object readData(String[] data, DataFile reader) {
+        if (reader == DataFile.USER) {
+            return DataCallback.readData(new UserData(), data);
         }
+        else if (reader == DataFile.USERPROFILE){
+            return DataCallback.readData(new UserProfileData(), data);
+        }
+        else if (reader == DataFile.COMPLAINT){
+            return DataCallback.readData(new ConsumerData(), data);
+        }
+        else if (reader == DataFile.SUSPENDED){
+            return DataCallback.readData(new SuspendedData(), data);
+        }
+        else {
+            return null;
+        }
+
+
     }
-
-
     public static String writeData(Object obj, DataFile writer) {
         if (writer == DataFile.USER) {
             return DataCallback.writeData(new UserData(), obj);
         }
-        if (writer == DataFile.USERPROFILE) {
+        else if (writer == DataFile.USERPROFILE) {
             return DataCallback.writeData(new UserProfileData(), obj);
         }
         else if (writer == DataFile.COMPLAINT) {

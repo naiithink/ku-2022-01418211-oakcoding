@@ -10,11 +10,11 @@ package ku.cs.oakcoding.app.services.data_source.callback;
 
 import ku.cs.oakcoding.app.models.StaffUser;
 
-public class StaffData implements ManageDataType<StaffData>{
+public class StaffData implements ManageDataType<StaffUser>{
     public StaffData(){}
 
     @Override
-    public StaffData instanceCreate(String[] data) {
+    public StaffUser instanceCreate(String[] data) {
         return null;
     }
 

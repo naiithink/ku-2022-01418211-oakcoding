@@ -1,6 +1,7 @@
 package ku.cs.oakcoding.app.services.data_source.csv;
 
 import javafx.scene.chart.PieChart;
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.DataList;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
@@ -53,11 +54,10 @@ public class UserSourceCSV implements DataSourceCSV<User>{
 
     @Override
     public User readData() {
-        String filePath = dirName + File.separator + fileFolder + File.separator + fileName;
+        String filePath = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
         BufferedReader buffer = null;
-
         try {
             reader = new FileReader(file);
             buffer = new BufferedReader(reader);
@@ -65,7 +65,7 @@ public class UserSourceCSV implements DataSourceCSV<User>{
             if ((line = buffer.readLine()) != null) {
                 String [] data = line.split(",");
                 String [] dataTrim = trimData(data);
-                User user = (User) DataBase.readData(dataTrim);
+                User user = (User) DataBase.readData(dataTrim, DataFile.USERPROFILE);
                 return user;
             }
 
@@ -76,8 +76,12 @@ public class UserSourceCSV implements DataSourceCSV<User>{
         } finally {
 
             try {
-                buffer.close();
-                reader.close();
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (reader != null) {
+                    reader.close();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

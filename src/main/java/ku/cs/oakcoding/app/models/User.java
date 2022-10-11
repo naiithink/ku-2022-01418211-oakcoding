@@ -15,19 +15,19 @@ import java.nio.file.Path;
 
 public abstract class User {
 
-    private Roles role;
+    protected Roles role;
 
-    private String firstName;
+    protected String firstName;
 
-    private String lastName;
+    protected String lastName;
 
-    private ProfileImage profileImage;
+    protected ProfileImage profileImage;
 
-    private String userName;
+    protected String userName;
 
-    private String password;
+    protected String password;
 
-    private DataFile dataFile;
+    protected DataFile dataFile;
 
     public User(Roles role,
                 String firstName,
@@ -97,4 +97,16 @@ public abstract class User {
         return dataFile;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "role=" + role +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", profileImage=" + profileImage +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", dataFile=" + dataFile +
+                '}';
+    }
 }

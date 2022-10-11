@@ -1,14 +1,13 @@
 package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.ConsumerUser;
-import ku.cs.oakcoding.app.models.DataList;
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.models.StaffUser;
+import ku.cs.oakcoding.app.models.*;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TestWriter {
     public static void main(String[] args) throws IOException {
@@ -20,7 +19,7 @@ public class TestWriter {
                 "191245ing",
                 profileImage);
 
-        StaffUser consumerUser1 = new StaffUser(Roles.STAFF,
+        ConsumerUser consumerUser1 = new ConsumerUser(Roles.CONSUMER,
                 "BOOM",
                 "natthawit",
                 "quarXZ",
@@ -35,6 +34,17 @@ public class TestWriter {
         System.out.println(consumerUser1.getDataFile());
         DataSourceCSV dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
         dataSourceListCSV.writeData(dataList);
+
+        DataList newDataList = (DataList) dataSourceListCSV.readData();
+        Set<User> hashSet = newDataList.getUsers();
+        for (User user : hashSet){
+            System.out.println(user.toString());
+            if (user instanceof ConsumerUser){
+                System.out.println("yeah");
+            }
+        }
+
+
 
 
 

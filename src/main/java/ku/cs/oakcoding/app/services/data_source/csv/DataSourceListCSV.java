@@ -102,8 +102,12 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
         } finally {
 
             try {
-                buffer.close();
-                reader.close();
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (reader != null) {
+                    reader.close();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
