@@ -1,11 +1,10 @@
-package ku.cs.oakcoding.app.services.data_source.callback;
+package ku.cs.oakcoding.app.services.data_source.services_models;
 
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.*;
 
-import java.nio.file.Path;
-
-public class UserProfileData implements ManageDataType<User>{
+public class UserProfileData implements ManageDataType<User> {
     public UserProfileData(){}
     @Override
     public User instanceCreate(String[] data) {
@@ -40,18 +39,4 @@ public class UserProfileData implements ManageDataType<User>{
         }
     }
 
-
-    @Override
-    public String getQuoteFormat(Object o) {
-        String line = o + "";
-        String result = "\"" + line + "\"";
-        return result;
-    }
-
-    @Override
-    public String formatCSV(Object o) {
-        User user = (User) o;
-        return getQuoteFormat(user.getUserName()) + ","
-                + getQuoteFormat(user.getRole());
-    }
 }

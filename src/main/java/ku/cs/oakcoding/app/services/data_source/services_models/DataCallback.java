@@ -6,7 +6,9 @@
  *      1. (CASE) naiithink, 2022-10-05
  */
 
-package ku.cs.oakcoding.app.services.data_source.callback;
+package ku.cs.oakcoding.app.services.data_source.services_models;
+
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.ManageDataType;
 
 /**
  * @todo Avoid using raw type <https://dev.java/learn/introducing-generics/#anchor_3>

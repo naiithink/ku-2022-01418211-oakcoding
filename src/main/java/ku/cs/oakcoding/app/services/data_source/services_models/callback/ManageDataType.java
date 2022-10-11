@@ -6,7 +6,7 @@
  *      1. (CASE) naiithink, 2022-10-05
  */
 
-package ku.cs.oakcoding.app.services.data_source.callback;
+package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 public interface ManageDataType<T> {
 
@@ -17,7 +17,4 @@ public interface ManageDataType<T> {
 
         public String instanceWrite(Object obj);
 
-        public String getQuoteFormat(Object o);
-
-        public String formatCSV(Object o);
 }

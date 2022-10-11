@@ -6,11 +6,11 @@
  *      1. (CASE) naiithink, 2022-10-05
  */
 
-package ku.cs.oakcoding.app.services.data_source.callback;
+package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 import ku.cs.oakcoding.app.models.StaffUser;
 
-public class StaffData implements ManageDataType<StaffUser>{
+public class StaffData implements ManageDataType<StaffUser>,FormatCSV{
     public StaffData(){}
 
     @Override

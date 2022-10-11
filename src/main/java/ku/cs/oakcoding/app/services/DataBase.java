@@ -9,8 +9,11 @@
 package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.services.data_source.callback.*;
+import ku.cs.oakcoding.app.services.data_source.services_models.*;
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.ConsumerData;
+import ku.cs.oakcoding.app.services.data_source.services_models.DataCallback;
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.SuspendedData;
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.UserData;
 
 /**
  * @todo Assert null before Array[subscription]

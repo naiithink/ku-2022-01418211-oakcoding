@@ -6,11 +6,11 @@
  *      1. (CASE) naiithink, 2022-10-05
  */
 
-package ku.cs.oakcoding.app.services.data_source.callback;
+package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 import ku.cs.oakcoding.app.models.ban.Ban;
 
-public class SuspendedData implements ManageDataType<Ban> {
+public class SuspendedData implements ManageDataType<Ban>,FormatCSV {
 
     public SuspendedData() {}
 

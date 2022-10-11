@@ -6,15 +6,13 @@
  *      1. (CASE) naiithink, 2022-10-05
  */
 
-package ku.cs.oakcoding.app.services.data_source.callback;
-
-import java.nio.file.Paths;
+package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 import ku.cs.oakcoding.app.models.ConsumerUser;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
-public class ConsumerData implements ManageDataType<ConsumerUser> {
+public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
 
     public ConsumerData() {}
 
