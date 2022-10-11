@@ -17,7 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.DataList;
+import ku.cs.oakcoding.app.models.UsersList;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.services.DataBase;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
@@ -27,14 +27,13 @@ import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
  * 
  * @todo Verbose name 'directoryName' -> 'dirName'
  */
-public class DataSourceListCSV implements DataSourceCSV<DataList> {
+public class UsersListCSV implements DataSourceCSV<UsersList> {
 
-    private String dirName;
+    private final String dirName = "data";
 
     private String fileName;
 
-    public DataSourceListCSV(String dirName, String fileName) {
-        this.dirName = dirName;
+    public UsersListCSV(String fileName) {
         this.fileName = fileName;
         checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
         checkFileIsExisted(dirName + File.separator + fileName,MakeFileType.FILE);
@@ -77,8 +76,8 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
      *       <https://dev.java/learn/catching-and-handling-exceptions/#anchor_6>
      */
     @Override
-    public DataList readData() {
-        DataList users = new DataList();
+    public UsersList readData() {
+        UsersList users = new UsersList();
         String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
         FileReader reader = null;
@@ -91,8 +90,8 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
             while ((line = buffer.readLine()) != null) {
                 String[] data = line.split(",");
                 String[] dataTrim = trimData(data);
-                DataSourceCSV userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE,dataTrim[0]);
-                users.addUser((User) userSourceCSV.readData());
+                DataSourceCSV<User> userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE,dataTrim[0]);
+                users.addUser(userSourceCSV.readData());
             }
 
         } catch (FileNotFoundException e) {
@@ -121,7 +120,7 @@ public class DataSourceListCSV implements DataSourceCSV<DataList> {
      * @todo Use try-with-resources?
      */
     @Override
-    public void writeData(DataList usersSet) {
+    public void writeData(UsersList usersSet) {
         String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 

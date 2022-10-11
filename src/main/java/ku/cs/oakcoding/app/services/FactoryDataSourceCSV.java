@@ -24,16 +24,16 @@ public class FactoryDataSourceCSV {
 
         switch (file) {
             case USER -> {
-                dataSourceCSV = new DataSourceListCSV("data", fileName);
+                dataSourceCSV = new UsersListCSV(fileName);
             }
             case USERPROFILE -> {
-                dataSourceCSV = new UserSourceCSV(fileName);
+                dataSourceCSV = new UserProfileCSV(fileName);
             }
             case SUSPENDED -> {
-                dataSourceCSV = new DataSourceListCSV("data", fileName);
+                dataSourceCSV = new UsersListCSV(fileName);
             }
             case COMPLAINT -> {
-                dataSourceCSV = new DataSourceListCSV("data", fileName);
+                dataSourceCSV = new UsersListCSV(fileName);
             }
             case PICTURE -> {
                 dataSourceCSV = new PictureRefactoring(fileName);

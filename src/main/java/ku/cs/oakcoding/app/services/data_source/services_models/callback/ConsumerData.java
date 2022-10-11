@@ -9,6 +9,7 @@
 package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 import ku.cs.oakcoding.app.models.ConsumerUser;
+import ku.cs.oakcoding.app.models.ProfileImageState;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
@@ -27,7 +28,7 @@ public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
                 data[2].trim(),
                 data[3].trim(),
                 data[4].trim(),
-                new ProfileImage());
+                ProfileImageState.valueOf(data[5]));
         return consumer;
     }
 
@@ -55,7 +56,7 @@ public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
                 + getQuoteFormat(consumerUser.getPassword()) + ","
                 + getQuoteFormat(consumerUser.getFirstName()) + ","
                 + getQuoteFormat(consumerUser.getLastName()) + ","
-                + getQuoteFormat(consumerUser.getProfileImagePath());
+                + getQuoteFormat(consumerUser.getProfileImageState());
 
         return line;
     }

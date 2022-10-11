@@ -1,16 +1,12 @@
 package ku.cs.oakcoding.app.services.data_source.csv;
 
-import javafx.scene.chart.PieChart;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.DataList;
-import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.services.DataBase;
 
 import java.io.*;
-import java.util.Map;
 
-public class UserSourceCSV implements DataSourceCSV<User>{
+public class UserProfileCSV implements DataSourceCSV<User>{
 
     private final String dirName = "data";
     private final String subDirName = "users";
@@ -18,7 +14,7 @@ public class UserSourceCSV implements DataSourceCSV<User>{
 
     private final String fileName = "info.csv";
 
-    public UserSourceCSV(String fileFolder) {
+    public UserProfileCSV(String fileFolder) {
         this.fileFolder = fileFolder;
         checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
         checkFileIsExisted(dirName + File.separator + subDirName,MakeFileType.DIRECTORY);
@@ -114,7 +110,7 @@ public class UserSourceCSV implements DataSourceCSV<User>{
 
     @Override
     public void clearData() {
-        String filePath = dirName + File.separator + fileFolder + File.separator + fileName;
+        String filePath = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
         File file = new File(filePath);
 
         FileWriter fileWriter = null;

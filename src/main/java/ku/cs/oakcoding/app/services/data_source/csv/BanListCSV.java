@@ -20,6 +20,7 @@ import java.util.Map;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.UsersList;
 import ku.cs.oakcoding.app.models.ban.Ban;
 import ku.cs.oakcoding.app.models.ban.BanList;
 import ku.cs.oakcoding.app.services.DataBase;
@@ -33,13 +34,14 @@ import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
  */
 public class BanListCSV implements DataSourceCSV<BanList> {
 
-    private String directoryName;
+    private final String dirName = "data";
 
     private String fileName;
 
-    public BanListCSV(String directoryName, String fileName) {
-        this.directoryName = directoryName;
+    public BanListCSV(String fileName) {
         this.fileName = fileName;
+        checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + fileName,MakeFileType.FILE);
     }
 
     /**
@@ -78,40 +80,41 @@ public class BanListCSV implements DataSourceCSV<BanList> {
      */
     @Override
     public BanList readData() {
-        BanList banList = new BanList();
-//        String filePath = directoryName + File.separator + fileName;
-//        File file = new File(filePath);
-//        FileReader reader = null;
-//        BufferedReader buffer = null;
-//
-//        try {
-//            reader = new FileReader(file);
-//            buffer = new BufferedReader(reader);
-//            String line = "";
-//            while ((line = buffer.readLine()) != null) {
-//                String[] data = line.split(",");
-//                String[] dataTrim = trimData(data);
-//                String key = dataTrim[0];
-//                Ban newBan = new Ban(dataTrim[0], dataTrim[1]);
-//                banList.addBanMap(key, newBan);
-//
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//
-//            try {
-//                buffer.close();
-//                reader.close();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//        }
-        return banList;
+        BanList suspendedUsers = new BanList();
+        String filePath = dirName + File.separator + fileName;
+        File file = new File(filePath);
+        FileReader reader = null;
+        BufferedReader buffer = null;
+
+        try {
+            reader = new FileReader(file);
+            buffer = new BufferedReader(reader);
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                String[] data = line.split(",");
+                String[] dataTrim = trimData(data);
+                suspendedUsers.addBan( (Ban) DataBase.readData(dataTrim,DataFile.SUSPENDED));
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+            try {
+                if (buffer != null) {
+                    buffer.close();
+                }
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        return suspendedUsers;
 
     }
 
@@ -120,7 +123,7 @@ public class BanListCSV implements DataSourceCSV<BanList> {
      */
     @Override
     public void writeData(BanList banMap) {
-        String filePath = directoryName + File.separator + fileName;
+        String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 
         FileWriter fileWriter = null;
@@ -149,7 +152,7 @@ public class BanListCSV implements DataSourceCSV<BanList> {
      */
     @Override
     public void clearData() {
-        String filePath = directoryName + File.separator + fileName;
+        String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 
         FileWriter fileWriter = null;

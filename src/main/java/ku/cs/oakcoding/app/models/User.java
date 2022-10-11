@@ -21,7 +21,7 @@ public abstract class User {
 
     protected String lastName;
 
-    protected ProfileImage profileImage;
+    protected ProfileImageState profileImageState;
 
     protected String userName;
 
@@ -34,12 +34,12 @@ public abstract class User {
                 String lastName,
                 String userName,
                 String password,
-                ProfileImage profileImage) {
+                ProfileImageState profileImageState) {
 
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.profileImage = profileImage;
+        this.profileImageState = profileImageState;
         this.userName = userName;
         this.password = password;
     }
@@ -56,8 +56,8 @@ public abstract class User {
         return lastName;
     }
 
-    public Path getProfileImagePath() {
-        return profileImage.getProFileImagePath();
+    public ProfileImageState getProfileImageState() {
+        return profileImageState;
     }
 
     public String getUserName() { return userName;}
@@ -103,7 +103,7 @@ public abstract class User {
                 "role=" + role +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", profileImage=" + profileImage +
+                ", profileImage=" + profileImageState +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", dataFile=" + dataFile +

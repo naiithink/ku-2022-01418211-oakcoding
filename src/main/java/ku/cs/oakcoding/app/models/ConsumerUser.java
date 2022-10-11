@@ -21,9 +21,9 @@ public final class ConsumerUser
                         String lastName,
                         String userName,
                         String password,
-                        ProfileImage profileImagePath) {
+                        ProfileImageState profileImageState) {
 
-        super(role, firstName, lastName, userName, password,profileImagePath);
+        super(role, firstName, lastName, userName, password,profileImageState);
     }
 
     public DataFile getDataFile (){
@@ -36,7 +36,7 @@ public final class ConsumerUser
                 "role=" + role +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", profileImage=" + profileImage +
+                ", profileImage=" + profileImageState +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", dataFile=" + dataFile +

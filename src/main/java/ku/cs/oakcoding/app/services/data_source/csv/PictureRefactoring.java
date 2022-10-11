@@ -1,6 +1,10 @@
 package ku.cs.oakcoding.app.services.data_source.csv;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.ProfileImageState;
+import ku.cs.oakcoding.app.models.User;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class PictureRefactoring implements DataSourceCSV{
+public class PictureRefactoring implements DataSourceCSV<Path>{
 
     private final String dirName = "data";
     private final String subDirName = "users";
@@ -58,14 +62,21 @@ public class PictureRefactoring implements DataSourceCSV{
 
 
     @Override
-    public Object readData() {
-        ProfileImage profileImage = new ProfileImage();
-        return profileImage;
+    public Path readData() {
+        DataSourceCSV<User> userDataSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE,fileFolder);
+        User user = userDataSourceCSV.readData();
+        if (user.getProfileImageState() == ProfileImageState.CUSTOM){
+            String path = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
+            return Paths.get(path);
+        }
+
+        String path = "src/main/resources/images/DefaultProfile.jpg";
+        return Paths.get(path);
+
     }
 
     @Override
-    public void writeData(Object o) throws IOException {
-        Path oldPath = (Path) o;
+    public void writeData(Path oldPath) throws IOException {
         String path = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
         Path newPath = Paths.get(path);
         Files.copy(oldPath,newPath, StandardCopyOption.REPLACE_EXISTING);
@@ -73,6 +84,12 @@ public class PictureRefactoring implements DataSourceCSV{
 
     @Override
     public void clearData() {
+        String path = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
+        try {
+            Files.deleteIfExists(Paths.get(path));
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
 
     }
 }

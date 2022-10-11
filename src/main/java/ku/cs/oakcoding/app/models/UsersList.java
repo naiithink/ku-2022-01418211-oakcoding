@@ -9,18 +9,16 @@
 package ku.cs.oakcoding.app.models;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
-public class DataList {
+public class UsersList {
     private Set<User> dataSet;
 
-    public DataList(){
+    public UsersList(){
         dataSet = new HashSet<>();
     }
 
-    public DataList(HashSet<User> dataHashSet){
+    public UsersList(HashSet<User> dataHashSet){
         this.dataSet = dataHashSet;
     }
 

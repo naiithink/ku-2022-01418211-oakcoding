@@ -11,6 +11,7 @@
 package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
 import ku.cs.oakcoding.app.models.AdminUser;
+import ku.cs.oakcoding.app.models.ProfileImageState;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
@@ -26,7 +27,7 @@ public class AdminData implements ManageDataType<AdminUser>,FormatCSV {
                 data[2].trim(),
                 data[3].trim(),
                 data[4].trim(),
-                new ProfileImage());
+                ProfileImageState.valueOf(data[5]));
         return admin;
     }
 

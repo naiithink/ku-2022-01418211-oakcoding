@@ -21,9 +21,9 @@ public final class AdminUser
                      String lastName,
                      String userName,
                      String password,
-                     ProfileImage profileImagePath) {
+                     ProfileImageState profileImageState) {
 
-        super(role, firstName, lastName, userName, password,profileImagePath);
+        super(role, firstName, lastName, userName, password,profileImageState);
     }
 
     public DataFile getDataFile (){
