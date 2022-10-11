@@ -9,10 +9,7 @@
 package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceListCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.PictureSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.UserSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.*;
 
 public class FactoryDataSourceCSV {
 
@@ -39,7 +36,7 @@ public class FactoryDataSourceCSV {
                 dataSourceCSV = new DataSourceListCSV("data", fileName);
             }
             case PICTURE -> {
-                dataSourceCSV = new PictureSourceCSV(fileName);
+                dataSourceCSV = new PictureRefactoring(fileName);
             }
 
         }

@@ -11,12 +11,18 @@ import java.nio.file.StandardCopyOption;
 
 public class PictureRefactoring implements DataSourceCSV{
 
-    private String dirName;
-    private ProfileImage profileImage;
+    private final String dirName = "data";
+    private final String subDirName = "users";
+    private String fileFolder;
 
-    public PictureRefactoring(String directoryName) {
-        this.dirName = directoryName;
-        checkFileIsExisted();
+    private final String fileName = "profile.jpg";
+
+    public PictureRefactoring(String fileFolder) {
+        this.fileFolder = fileFolder;
+        checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + subDirName,MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + subDirName + File.separator + fileFolder,MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName,MakeFileType.FILE);
 
     }
 
@@ -26,11 +32,28 @@ public class PictureRefactoring implements DataSourceCSV{
      *       - Files::exists(Path, LinkOption...)
      *       - Files::createDirectory(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
      */
-    private void checkFileIsExisted() {
-        File file = new File(dirName);
-        if (!file.exists()) {
-            file.mkdir();
+    private void checkFileIsExisted(String filePath, MakeFileType makeFileType) {
+
+        if (makeFileType == MakeFileType.DIRECTORY) {
+
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
         }
+
+        if (makeFileType == MakeFileType.FILE) {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
     }
 
 
@@ -42,10 +65,10 @@ public class PictureRefactoring implements DataSourceCSV{
 
     @Override
     public void writeData(Object o) throws IOException {
-        ProfileImage profileImage = (ProfileImage) o;
-        String path = "picture/" + profileImage.getFileName();
+        Path oldPath = (Path) o;
+        String path = dirName + File.separator + subDirName + File.separator + fileFolder + File.separator + fileName;
         Path newPath = Paths.get(path);
-        Files.move(profileImage.getProFileImagePath(),newPath, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(oldPath,newPath, StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Override
