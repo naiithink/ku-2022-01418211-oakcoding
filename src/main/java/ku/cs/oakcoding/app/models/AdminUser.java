@@ -8,13 +8,13 @@
 
 package ku.cs.oakcoding.app.models;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
-import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
 
 public final class AdminUser
         extends User {
 
-    private final ModelCallBack modelCallBack = ModelCallBack.USERPROFILE;
+    private final DataFile dataFile = DataFile.USERPROFILE;
 
     public AdminUser(Roles role,
                      String firstName,
@@ -26,7 +26,7 @@ public final class AdminUser
         super(role, firstName, lastName, userName, password,profileImagePath);
     }
 
-    public ModelCallBack getModelCallBack(){
-        return modelCallBack;
+    public DataFile getDataFile (){
+        return dataFile;
     }
 }

@@ -8,13 +8,13 @@
 
 package ku.cs.oakcoding.app.models.ban;
 
-import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 
 public class Ban {
     private String userName;
     private String reasonBan;
 
-    private final ModelCallBack modelCallBack = ModelCallBack.BAN;
+    private final DataFile dataFile = DataFile.SUSPENDED;
 
     public Ban(String userName,
                String reasonBan){
@@ -32,9 +32,8 @@ public class Ban {
         return userName;
     }
 
-    public ModelCallBack getFileCallBack(){
-        return modelCallBack;
+    public DataFile getDataFile (){
+        return dataFile;
     }
-
 
 }

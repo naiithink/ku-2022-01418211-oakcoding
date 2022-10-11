@@ -31,8 +31,8 @@ public class TestWriter {
         dataList.addUser(consumerUser);
         dataList.addUser(consumerUser1);
 
-        System.out.println(consumerUser.getModelCallBack());
-        System.out.println(consumerUser1.getModelCallBack());
+        System.out.println(consumerUser.getDataFile());
+        System.out.println(consumerUser1.getDataFile());
         DataSourceCSV dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
         dataSourceListCSV.writeData(dataList);
 

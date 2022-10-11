@@ -8,8 +8,8 @@
 
 package ku.cs.oakcoding.app.models;
 
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.picture.ProfileImage;
-import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
 
 import java.nio.file.Path;
 
@@ -27,7 +27,7 @@ public abstract class User {
 
     private String password;
 
-    private final ModelCallBack modelCallBack = ModelCallBack.USER;
+    private DataFile dataFile;
 
     public User(Roles role,
                 String firstName,
@@ -93,8 +93,8 @@ public abstract class User {
 
     }
 
-    public ModelCallBack getModelCallBack(){
-        return modelCallBack;
+    public DataFile getDataFile (){
+        return dataFile;
     }
 
 }

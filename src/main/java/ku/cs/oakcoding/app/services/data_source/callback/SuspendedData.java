@@ -10,9 +10,9 @@ package ku.cs.oakcoding.app.services.data_source.callback;
 
 import ku.cs.oakcoding.app.models.ban.Ban;
 
-public class BanData implements ManageDataType<Ban> {
+public class SuspendedData implements ManageDataType<Ban> {
 
-    public BanData() {}
+    public SuspendedData() {}
 
     @Override
     public Ban instanceCreate(String[] data) {

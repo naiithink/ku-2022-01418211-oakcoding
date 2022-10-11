@@ -131,7 +131,7 @@ public class BanListCSV implements DataSourceCSV<BanList> {
             writer = new BufferedWriter(fileWriter);
 
             for (Ban entry : banMap.getUsersSet()) {
-                String line = DataBase.writeData(entry,entry.getFileCallBack());
+                String line = DataBase.writeData(entry,entry.getDataFile());
                 writer.append(line);
                 writer.newLine();
             }

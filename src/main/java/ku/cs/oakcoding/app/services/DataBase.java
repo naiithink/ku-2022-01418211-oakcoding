@@ -8,7 +8,7 @@
 
 package ku.cs.oakcoding.app.services;
 
-import ku.cs.oakcoding.app.helpers.hotspot.ModelCallBack;
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.models.Roles;
 import ku.cs.oakcoding.app.services.data_source.callback.*;
 
@@ -28,18 +28,18 @@ public class DataBase {
     }
 
 
-    public static String writeData(Object obj, ModelCallBack writer) {
-        if (writer == ModelCallBack.USER) {
+    public static String writeData(Object obj, DataFile writer) {
+        if (writer == DataFile.USER) {
             return DataCallback.writeData(new UserData(), obj);
         }
-        if (writer == ModelCallBack.USERPROFILE) {
+        if (writer == DataFile.USERPROFILE) {
             return DataCallback.writeData(new UserProfileData(), obj);
         }
-        else if (writer == ModelCallBack.COMPLAINT) {
+        else if (writer == DataFile.COMPLAINT) {
             return DataCallback.writeData(new ConsumerData(), obj); // fix later
         }
-        else if (writer == ModelCallBack.BAN) {
-            return DataCallback.writeData(new BanData(), obj);
+        else if (writer == DataFile.SUSPENDED) {
+            return DataCallback.writeData(new SuspendedData(), obj);
         }
         else {
             return null;
