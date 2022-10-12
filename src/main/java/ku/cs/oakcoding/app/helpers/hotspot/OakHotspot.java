@@ -14,4 +14,8 @@ public final class OakHotspot {
     public static long getStartTime() {
         return START_TIME.toEpochMilli();
     }
+
+    public static long getCurrentTime() {
+        return Instant.now().toEpochMilli();
+    }
 }
