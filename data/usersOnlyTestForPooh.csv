@@ -1,0 +1,9 @@
+"User","Thanet","Jinseekhong","dfdfgng
+
+
+        //this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.profileImageState = profileImageState;
+        this.userName = userName;
+        this.password = password;

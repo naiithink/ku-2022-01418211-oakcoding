@@ -25,4 +25,6 @@ module oakcoding.app {
      * com.github.saacsos.fxrouter
      */
     opens ku.cs.oakcoding.app.services to javafx.fxml;
+
+    opens ku.cs.oakcoding.app.models to javafx.base;
 }

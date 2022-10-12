@@ -8,6 +8,11 @@
 
 package ku.cs.oakcoding.app.models;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+
 import java.util.HashSet;
 import java.util.Set;
 

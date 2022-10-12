@@ -9,9 +9,6 @@
 package ku.cs.oakcoding.app.models;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.picture.ProfileImage;
-
-import java.nio.file.Path;
 
 public abstract class User {
 
@@ -41,6 +38,30 @@ public abstract class User {
         this.lastName = lastName;
         this.profileImageState = profileImageState;
         this.userName = userName;
+        this.password = password;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setProfileImageState(ProfileImageState profileImageState) {
+        this.profileImageState = profileImageState;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 

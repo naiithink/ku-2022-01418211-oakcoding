@@ -9,7 +9,6 @@
 package ku.cs.oakcoding.app.models;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.picture.ProfileImage;
 
 public final class StaffUser
         extends User {
