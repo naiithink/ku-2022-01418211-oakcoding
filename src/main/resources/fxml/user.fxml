@@ -13,16 +13,6 @@
     <children>
       <Pane fx:id="welcomeUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
                <children>
                   <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้องรับสู่" textFill="#0a141f" />
@@ -101,54 +91,20 @@
       </Pane>
       <Pane fx:id="createReportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="245.0" layoutY="48.0" text="หน้าแจ้งเรื่อง" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="reportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
+
             <Label layoutX="292.0" layoutY="80.0" text="รีพอร์ต" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="settingUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="571.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="542.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Pane fx:id="welcomeUserPane11" layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
                   <Label fx:id="numberReportOfUser1" layoutX="158.0" layoutY="46.0" prefHeight="62.0" prefWidth="97.0" styleClass="text-large-bold" textAlignment="CENTER" textFill="WHITE" />
-                  <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="139.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/chart-line-up.png" />
-                     </image>
-                  </ImageView>
                   <Label fx:id="UsernameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="LeonelMessi@username" textFill="#e0e0e1">
                      <font>
                         <Font size="16.0" />
@@ -204,11 +160,6 @@
                      </children>
                   </Pane>
                   <Button fx:id="AccountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
-                  <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/avatar2.jpg" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />

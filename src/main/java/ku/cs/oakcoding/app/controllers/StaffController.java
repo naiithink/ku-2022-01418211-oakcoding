@@ -88,10 +88,6 @@ public class StaffController implements Initializable {
 
 
 
-    public void handleMinimizeButton(MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.setIconified(true);
-    }
 
     public void handleClickReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
@@ -99,23 +95,22 @@ public class StaffController implements Initializable {
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         reportButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         reportsUserOfStaffPane.setVisible(true);
         welcomeStaffPane.setVisible(false);
         settingStaffPane.setVisible(false);
     }
 
-    public void handleCloseButton(MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.close();
-    }
 
     public void handleClickLogoutButton(ActionEvent actionEvent) {
     }
@@ -126,13 +121,16 @@ public class StaffController implements Initializable {
         settingImageView.setImage(new Image(getClass().getResource("/images/settings-seleted.png").toExternalForm()));
         settingButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         reportsUserOfStaffPane.setVisible(false);
         welcomeStaffPane.setVisible(false);
@@ -147,13 +145,16 @@ public class StaffController implements Initializable {
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         dashboardButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
+        settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         reportsUserOfStaffPane.setVisible(false);
         welcomeStaffPane.setVisible(true);

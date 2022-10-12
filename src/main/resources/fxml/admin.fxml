@@ -11,18 +11,8 @@
 
 <AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AdminController">
     <children>
-      <Pane fx:id="welcomePane" layoutX="209.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="welcomePane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
                <children>
                   <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้อนรับสู่" textFill="#0a141f" />
@@ -84,7 +74,7 @@
       </Pane>
       <Pane prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
-            <Button fx:id="userButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickUser" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="ผู้ใช้งาน" textFill="#e0e0e1" />
+            <Button fx:id="userButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickUser" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="ผู้ใช้งาน" textFill="#e0e0e1" />
             <ImageView fx:id="userImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/flag.png" />
@@ -110,37 +100,37 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="settingButton" layoutX="6.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="การตั้งค่า" textFill="#e0e0e1" />
+            <Button fx:id="settingButton" layoutX="6.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="การตั้งค่า" textFill="#e0e0e1" />
             <ImageView fx:id="settingImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/settings.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="แดชบอร์ด" textFill="#e0e0e1" />
+            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="แดชบอร์ด" textFill="#e0e0e1" />
             <ImageView fx:id="dashboardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="complaintsButton" layoutX="6.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleClickComplaints" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="แจ้งเรื่อง" textFill="#e0e0e1" />
+            <Button fx:id="complaintsButton" layoutX="6.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleClickComplaints" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="แจ้งเรื่อง" textFill="#e0e0e1" />
             <ImageView fx:id="complaintsImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/comment-alt-middle.png" />
                </image>
             </ImageView>
-            <Button fx:id="organizationsButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClickOrganizations" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="องค์กร" textFill="#e0e0e1" />
+            <Button fx:id="organizationsButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClickOrganizations" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="องค์กร" textFill="#e0e0e1" />
             <ImageView fx:id="organizationsImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/building.png" />
                </image>
             </ImageView>
-            <Button fx:id="reportButton" layoutX="3.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1" />
+            <Button fx:id="reportButton" layoutX="3.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1" />
             <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/calendar-lines.png" />
                </image>
             </ImageView>
-            <Button fx:id="requestButton" layoutX="3.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClickRequest" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="ร้องขอ" textFill="#e0e0e1" />
+            <Button fx:id="requestButton" layoutX="3.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClickRequest" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="ร้องขอ" textFill="#e0e0e1" />
             <ImageView fx:id="requestImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/envelope.png" />
@@ -150,96 +140,36 @@
       </Pane>
       <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="74.0" layoutY="225.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
       <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="74.0" layoutY="225.0" text="แจ้งเรื่อง" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
       <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="74.0" layoutY="225.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="reportPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="reportPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="74.0" layoutY="225.0" text="รายงาน" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
       <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/cross.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/minus.png" />
-               </image>
-            </ImageView>
             <Label layoutX="74.0" layoutY="225.0" text="ร้องขอ" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
        <Pane fx:id="settingPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
           <children>
-             <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="625.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                <image>
-                   <Image url="@../images/cross.png" />
-                </image>
-             </ImageView>
-             <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="602.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                <image>
-                   <Image url="@../images/minus.png" />
-                </image>
-             </ImageView>
              <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                 <children>
                    <Label fx:id="userNameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="PeterParker@username" textFill="#e0e0e1">

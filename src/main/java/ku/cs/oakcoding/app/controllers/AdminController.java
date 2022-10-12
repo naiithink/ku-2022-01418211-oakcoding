@@ -146,26 +146,32 @@ public class AdminController implements Initializable {
 
         complaintsButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(true);
@@ -173,7 +179,6 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
-
     }
 
     @FXML
@@ -187,26 +192,32 @@ public class AdminController implements Initializable {
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         dashboardButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         welcomePane.setVisible(true);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -232,30 +243,34 @@ public class AdminController implements Initializable {
         reportImageView.setImage(new Image(getClass().getResource("/images/calendar-lines.png").toExternalForm()));
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
-
-
         organizationsButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -279,26 +294,32 @@ public class AdminController implements Initializable {
 
         reportButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -318,29 +339,34 @@ public class AdminController implements Initializable {
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope-seleted.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
 
-
         requestButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -360,28 +386,34 @@ public class AdminController implements Initializable {
         requestImageView.setImage(new Image(getClass().getResource("/images/envelope.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings-seleted.png").toExternalForm()));
 
-
         settingButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         userButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
@@ -406,25 +438,32 @@ public class AdminController implements Initializable {
 
         userButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         complaintsButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        organizationsButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         requestButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         welcomePane.setVisible(false);
         userPane.setVisible(true);
@@ -434,18 +473,6 @@ public class AdminController implements Initializable {
         requestPane.setVisible(false);
         settingPane.setVisible(false);
 
-    }
-
-    @FXML
-    void handleCloseButton(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    void handleMinimizeButton(MouseEvent event) {
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
-        stage.setIconified(true);
     }
     public void initPane(){
         welcomePane.setVisible(true);

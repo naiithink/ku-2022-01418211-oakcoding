@@ -66,18 +66,6 @@ public class UserController implements Initializable{
 
 
 
-
-    public void handleCloseButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.close();
-    }
-    public void handleMinimizeButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.setIconified(true);
-    }
-
-
-
     public void handleClickReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
@@ -85,16 +73,20 @@ public class UserController implements Initializable{
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         reportButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         createReportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
 
         reportsUserPane.setVisible(true);
         createReportsUserPane.setVisible(false);
@@ -110,16 +102,20 @@ public class UserController implements Initializable{
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         createReportButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(true);
         welcomeUserPane.setVisible(false);
@@ -133,16 +129,20 @@ public class UserController implements Initializable{
         settingImageView.setImage(new Image(getClass().getResource("/images/settings-seleted.png").toExternalForm()));
         settingButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
-        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         createReportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);
@@ -163,16 +163,20 @@ public class UserController implements Initializable{
 
         dashboardButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;");
-        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-border-radius: 5px;" +
+                "-fx-cursor: hand;");
         createReportButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
-        settingImageView.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
                 "-fx-font-size:18;" +
-                "-fx-background-color:transparent;");
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
+        reportButton.setStyle("-fx-text-fill: #C0C0C9;" +
+                "-fx-font-size:18;" +
+                "-fx-background-color:transparent;" +
+                "-fx-cursor: hand;");
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(true);

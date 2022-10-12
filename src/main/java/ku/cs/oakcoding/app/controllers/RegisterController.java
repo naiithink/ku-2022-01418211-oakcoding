@@ -10,6 +10,7 @@ package ku.cs.oakcoding.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -22,10 +23,20 @@ import javafx.stage.Stage;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
-public class RegisterController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RegisterController implements Initializable {
 // User Register
+
     @FXML
-    private Label messageWhenRegisterLabel;
+    private Pane addOrganizationPane;
+
+    @FXML
+    private Pane addStaffRegisterPane;
+
+    @FXML
+    private TextField bossOfOrganizationField;
 
     @FXML
     private CheckBox confirmStudentCheckbox;
@@ -34,64 +45,104 @@ public class RegisterController {
     private TextField firstNameField;
 
     @FXML
+    private TextField firstnameStaffField;
+
+    @FXML
     private TextField lastNameField;
+
+    @FXML
+    private TextField lastnameStaffField;
+
+    @FXML
+    private TextField memberOfOrganizationField;
+
+    @FXML
+    private Label messageWhenRegisterLabel;
+
+    @FXML
+    private Label messageWhenRegisterOrganizationLabel;
+
+    @FXML
+    private Label messageWhenRegisterStaffLabel;
+
+    @FXML
+    private Label nameLogoUploadOrganizationLabel;
 
     @FXML
     private Label nameProfileUploadLabel;
 
     @FXML
+    private Label nameProfileUploadStaffLabel;
+
+    @FXML
+    private TextField organizationNameField;
+
+    @FXML
     private PasswordField passwordConfirmField;
+
+    @FXML
+    private PasswordField passwordConfirmStaffField;
 
     @FXML
     private PasswordField passwordField;
 
     @FXML
-    private Button registerButton;
+    private PasswordField passwordStaffField;
+
+    @FXML
+    private Button registerOrganizationButton;
+
+    @FXML
+    private Button registerStaffButton;
+
+    @FXML
+    private Button registerUserButton;
 
     @FXML
     private TextField userNameField;
 
-//  Add Staff
     @FXML
-    private Pane addStaffRegisterPane;
+    private Pane userRegisterPane;
 
+    @FXML
+    private TextField usernameStaffField;
 
+    @FXML
+    void handleBackButtonGoToAdminPage(MouseEvent event) {
 
+    }
 
+    @FXML
+    void handleBackButtonGoToLoginPage(MouseEvent event) {
+
+    }
 
     @FXML
     void handleProfileUpload(MouseEvent event) {
-//        ตรงตัวเลยคือ อัพโหลดรูปภาพของแต่ละ register
+
     }
 
-    public void handleCloseButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.close();
+    @FXML
+    void handleRegisterOrganizationButton(ActionEvent event) {
+
     }
 
-    public void handleMinimizeButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.setIconified(true);
+    @FXML
+    void handleRegisterStaffButton(ActionEvent event) {
+
     }
 
-    public void handleBackButtonGoToLoginPage(javafx.scene.input.MouseEvent mouseEvent) {
-        try {
-            OldStageManager.getStageManager().setPage("authentication");
-        } catch (PageNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    @FXML
+    void handleRegisterUserButton(ActionEvent event) {
 
-    public void handleRegisterUserButton(ActionEvent actionEvent) {
-        //        ว่า กด register ได้ไหม ว่าติดปัญหาชื่อ username ซ้ำไรงี้ป่าวต้องเช็คก่อนถึงจะให้ record ได้
     }
-
-    public void handleBackButtonGoToAdminPage(MouseEvent mouseEvent) {
+    public void initPane(){
+        userRegisterPane.setVisible(true);
+        addOrganizationPane.setVisible(false);
+        addStaffRegisterPane.setVisible(false);
     }
-
-    public void handleRegisterStaffButton(ActionEvent actionEvent) {
-    }
-
-    public void handleRegisterOrganizationButton(ActionEvent actionEvent) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initPane();
     }
 }
