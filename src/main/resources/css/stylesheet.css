@@ -49,7 +49,7 @@
 
 .text-bold {
     -fx-font-family: "Sukhumvit Set";
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder;
 }
 
 .text-secondary-font {
@@ -58,12 +58,12 @@
 
 .text-secondary-font-bold {
     -fx-font-family: "Sukhumvit Set";
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder;
 }
 
 .text-large-bold {
     -fx-font-family: "Sukhumvit Set";
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder;
     -fx-font-size: 40;
 }
 
@@ -88,7 +88,9 @@
     -fx-background-color: linear-gradient(to right, #F9678A, #9855FF);
     -fx-background-radius: 200;
     -fx-font-family: "Sukhumvit Set";
-    -fx-font-size: 13;
+    -fx-font-size: 16;
+    -fx-font-weight: bolder;
+
 }
 
 .sign-in:hover {
@@ -146,6 +148,7 @@
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #7986CD;
     -fx-border-radius: 5px;
+    -fx-cursor: hand;
 }
 
 .welcome-user-pane {

@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
-        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
+        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
             <children>
             <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
                <children>
@@ -42,17 +42,8 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                      <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                          <image>
-                              <Image url="@../images/minus.png" />
-                          </image>
-                      </ImageView>
-                      <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                          <image>
-                          <Image url="@../images/cross.png" />
-                          </image>
-                      </ImageView>
-                      <Button fx:id="registerUserButton" layoutX="229.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleRegisterUserButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                   <Button fx:id="registerUserButton" layoutX="229.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleRegisterUserButton" prefHeight="26.0" prefWidth="109.0" style="-fx-cursor: hand;" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
                      </font>
@@ -69,10 +60,10 @@
                   </Label>
                   <CheckBox fx:id="confirmStudentCheckbox" layoutX="14.0" layoutY="420.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="28.0" stylesheets="@../css/style.css" textFill="WHITE">
                      <font>
-                        <Font name="Kanit" size="14.0" />
+                        <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" style="-fx-cursor: hand;" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -88,19 +79,19 @@
                   </Label>
                       <Label layoutX="18.0" layoutY="225.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password" textFill="#d0d0d0">
                      <font>
-                        <Font name="Kanit Regular" size="16.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                       <TextField fx:id="userNameField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                       <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
                      <font>
-                        <Font name="Kanit Regular" size="16.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                       <TextField fx:id="firstNameField" layoutX="16.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                       <Label layoutX="17.0" layoutY="114.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Firstname" textFill="#d0d0d0">
                      <font>
-                        <Font name="Kanit Regular" size="16.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                       <TextField fx:id="lastNameField" layoutX="292.0" layoutY="138.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
@@ -111,12 +102,12 @@
                   </Label>
                       <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สมัครสมาชิก" textFill="WHITE">
                      <font>
-                        <Font name="Kanit" size="21.0" />
+                        <Font size="21.0" />
                      </font>
                   </Label>
                   <PasswordField fx:id="passwordField" layoutX="16.0" layoutY="247.0" prefHeight="26.0" prefWidth="215.0" />
                   <PasswordField fx:id="passwordConfirmField" layoutX="17.0" layoutY="297.0" prefHeight="26.0" prefWidth="215.0" />
-                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
                      <image>
                         <Image url="@../images/upload.png" />
                      </image>
@@ -163,16 +154,6 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                     <image>
-                        <Image url="@../images/minus.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                     <image>
-                        <Image url="@../images/cross.png" />
-                     </image>
-                  </ImageView>
                   <Button fx:id="registerStaffButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterStaffButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
@@ -222,7 +203,7 @@
                   </Label>
                   <PasswordField fx:id="passwordStaffField" layoutX="16.0" layoutY="247.0" prefHeight="26.0" prefWidth="215.0" />
                   <PasswordField fx:id="passwordConfirmStaffField" layoutX="17.0" layoutY="297.0" prefHeight="26.0" prefWidth="215.0" />
-                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
                      <image>
                         <Image url="@../images/upload.png" />
                      </image>
@@ -241,7 +222,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="addOrganizationPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
+      <Pane fx:id="addOrganizationPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
          <children>
             <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
                <children>
@@ -269,16 +250,6 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="518.0" layoutY="8.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar" visible="false">
-                     <image>
-                        <Image url="@../images/minus.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="547.0" layoutY="8.0" onMouseClicked="#handleCloseButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-                     <image>
-                        <Image url="@../images/cross.png" />
-                     </image>
-                  </ImageView>
                   <Button fx:id="registerOrganizationButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterOrganizationButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
@@ -315,7 +286,7 @@
                         <Font name="Kanit" size="21.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="413.0" onMouseClicked="#handleMinimizeButton" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
+                  <ImageView fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
                      <image>
                         <Image url="@../images/upload.png" />
                      </image>

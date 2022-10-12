@@ -10,6 +10,7 @@ package ku.cs.oakcoding.app.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -21,7 +22,10 @@ import javafx.stage.Stage;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
-public class AuthenticationController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AuthenticationController implements Initializable {
     @FXML
     private AnchorPane anchorPane;
 
@@ -78,13 +82,16 @@ public class AuthenticationController {
         }
     }
 
-    public void handleCloseButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.close();
-    }
-    public void handleMinimizeButton(javafx.scene.input.MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((ImageView) mouseEvent.getSource()).getScene().getWindow();
-        stage.setIconified(true);
-    }
 
+    public void initPane(){
+        getStartedPane.setVisible(true);
+        loginPane.setVisible(false);
+
+
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initPane();
+
+    }
 }
