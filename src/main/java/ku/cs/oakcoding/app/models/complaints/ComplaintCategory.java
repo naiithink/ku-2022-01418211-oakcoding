@@ -12,7 +12,7 @@ import javafx.beans.property.ReadOnlySetProperty;
 import javafx.beans.property.ReadOnlySetWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import ku.cs.oakcoding.app.models.AdminUser;
+import ku.cs.oakcoding.app.models.users.AdminUser;
 
 public final class ComplaintCategory {
 

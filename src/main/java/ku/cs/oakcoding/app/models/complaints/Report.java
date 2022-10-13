@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import ku.cs.oakcoding.app.models.AdminUser;
+import ku.cs.oakcoding.app.models.users.AdminUser;
 
 public non-sealed class Report
         extends Issue
