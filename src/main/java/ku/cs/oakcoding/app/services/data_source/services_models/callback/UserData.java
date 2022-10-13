@@ -1,6 +1,6 @@
 package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
-import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.users.User;
 
 public class UserData implements ManageDataType<User>,FormatCSV{
     public UserData(){}

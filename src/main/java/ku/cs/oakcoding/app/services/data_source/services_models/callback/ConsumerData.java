@@ -8,10 +8,9 @@
 
 package ku.cs.oakcoding.app.services.data_source.services_models.callback;
 
-import ku.cs.oakcoding.app.models.ConsumerUser;
-import ku.cs.oakcoding.app.models.ProfileImageState;
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.models.picture.ProfileImage;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
+import ku.cs.oakcoding.app.models.users.ProfileImageState;
+import ku.cs.oakcoding.app.models.users.Roles;
 
 public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
 
