@@ -15,10 +15,12 @@ public enum OakAppDefaults {
     APP_NAME                        ("app.name",                    "OakCoding"),
     DEVELOPER                       ("app.developer",               "ku.cs.oakcoding"),
     VERSION                         ("app.version",                 "NIL"),
+    ID_SEPARATOR                    ("app.id.separator",            "-"),
     LOG_FILE_DIR                    ("app.resource.log.dir",        "logs"),
     USE_TEMP_DIR                    ("app.resource.useTmpDir",      "true"),
     USE_EXPERIMENTAL_FEATURES       ("app.useExperimentalFeatures", "false"),
     FONT_DIR                        ("app.resource.fonts.dir",      "fonts"),
+    IMAGE_DIR                       ("app.resource.images.dir",     "images"),
     FXML_DIR                        ("dir.fxml",                    "fxml"),
     FXML_INDEX_DIR                  ("index.dir.fxml",              "indices"),
     FXML_INDEX_FILE                 ("index.file.fxml",             "fxml.index.properties");

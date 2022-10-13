@@ -9,9 +9,12 @@
 package ku.cs.oakcoding.app.models;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.complaints.Report;
+import ku.cs.oakcoding.app.models.complaints.Resolver;
 
 public final class AdminUser
-        extends User {
+        extends User
+        implements Resolver<Report> {
 
     private final DataFile dataFile = DataFile.USERPROFILE;
 

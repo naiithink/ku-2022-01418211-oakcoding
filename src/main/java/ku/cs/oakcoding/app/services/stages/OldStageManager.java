@@ -75,10 +75,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -95,6 +99,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
+import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 
 /**
  * Manager for the primary application Stage
@@ -730,6 +737,7 @@ public final class OldStageManager {
             Set<String> parentEntries = resourceIndexProperties.stringPropertyNames();
 
             for (String pageNick : parentEntries) {
+                // Special symbol record
                 if (pageNick.charAt(0) == SpecialNick.SPECIAL_NICK_SYMBOL) {
 
                     if (resourceIndexProperties.get(pageNick) == null) {
@@ -768,6 +776,7 @@ public final class OldStageManager {
                     )
                 );
 
+                // Controller declared in FXML
                 if (parentProperty.controllerClassName.isPresent() == false) {
                     controllerClassName = Optional.ofNullable(getRootXMLAttribute(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName),
                                                               FXMLLoader.FX_NAMESPACE_PREFIX,
@@ -789,9 +798,13 @@ public final class OldStageManager {
                                                         parentProperty.inheritWidth,
                                                         parentProperty.inheritHeight));
 
+                    StackPane.setAlignment(pageTable.get(pageNick).parent, Pos.CENTER);
+
                     logger.log(Level.INFO, "Page added: '" + pageNick + "' ::= '**/" + parentProperty.pageNickResourceName + "' -> '" + controllerClassName.get() + "'"); 
 
                     continue;
+
+                // Controller declared in resource index property file
                 } else {
                     controllerClassName = Optional.ofNullable(parentProperty.controllerClassName)
                                                   .orElseThrow(MalformedFXMLIndexFileException::new);
@@ -826,6 +839,8 @@ public final class OldStageManager {
                 loader.setLocation(fxmlResourcePrefixPath.resolve(parentProperty.pageNickResourceName).toUri().toURL());
                 loader.setController(controllerInstance);
                 parent = loader.load();
+
+                // StackPane.setAlignment(parent, Pos.CENTER);
 
                 pageTable.put(pageNick, new PageMap(parent,
                                                     controllerClass,
@@ -1415,12 +1430,14 @@ public final class OldStageManager {
 
                 stage.setWidth(prefWidth);
             }
-        
+
             if (mapOfPageToSet.inheritHeight == false) {
                 double prefHeight = mapOfPageToSet.prefHeight.get();
                 stage.setHeight(this.titleBarHeight + prefHeight);
             }
         }
+
+        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
 
         if (this.primaryStageStyle == null
             || this.primaryStageStyle == StageStyle.DECORATED) {
@@ -1430,12 +1447,12 @@ public final class OldStageManager {
             /**
              * Children management for Stage with custom layout
              */
-            this.primaryStageScenePage.getChildren().remove(this.currentPrimaryStageScenePage);
             this.primaryStageScenePage.getChildren().add(pageTable.get(pageNick).parent);
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
+
+            StackPane.setAlignment(pageTable.get(pageNick).parent, Pos.CENTER);
         }
 
-        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
         this.primaryStageTitleBar.toFront();
 
         if (this.alwaysCenteredStage) {
@@ -1969,6 +1986,21 @@ public final class OldStageManager {
 
         clipChildren(rootNode, CUSTOM_STAGE_CORNER_ARC);
 
+        this.primaryStage.fullScreenProperty().addListener((observer, oldValue, newValue) -> {
+            Rectangle clipper = (Rectangle) primaryStageScenePage.getClip();
+
+            if (newValue) {
+                clipper.setArcWidth(0);
+                clipper.setArcHeight(0);
+            } else {
+                clipper.setArcWidth(CUSTOM_STAGE_CORNER_ARC);
+                clipper.setArcHeight(CUSTOM_STAGE_CORNER_ARC);
+            }
+
+            currentPrimaryStageScenePageContent.setPrefWidth(visualBounds.getWidth());
+            currentPrimaryStageScenePageContent.setPrefHeight(primaryStageHeight - titleBarHeight);
+        });
+
         HBox titleBar;
 
         if (this.specialNickPool.containsNick(SpecialNick.SpecialNicks.CUSTOM_TITLE_BAR.nick)) {
@@ -2012,14 +2044,12 @@ public final class OldStageManager {
             } else {
                 titleBar.setPrefWidth((double) newValue);
             }
-        });
 
-        rootNode.widthProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageScenePage.setPrefWidth((double) newValue);
+            this.currentPrimaryStageScenePageContent.setPrefWidth((double) newValue);
         });
 
         rootNode.heightProperty().addListener((observer, oldValue, newValue) -> {
-            this.primaryStageScenePage.setPrefHeight((double) newValue - titleBarHeight);
+            this.currentPrimaryStageScenePageContent.setPrefHeight((double) newValue - titleBarHeight);
         });
 
         this.primaryStageTitleBar = titleBar;
@@ -2050,6 +2080,8 @@ public final class OldStageManager {
         rootScene.setFill(Color.TRANSPARENT);
         rootScene.setRoot(rootNode);
 
+        mainPageContent.setBackground(new Background(new BackgroundFill(Color.valueOf("#000000"), null, null)));
+
         this.currentPrimaryStageScenePageContent = mainPageContent;
         this.currentPrimaryStageScenePage = pageTable.get(homePageNick).parent;
         this.primaryStageScene = rootScene;
@@ -2066,15 +2098,6 @@ public final class OldStageManager {
         private final double BUTTON_PADDING = 8.0;
 
         private final Insets TITLE_BAR_ELEMENT_INSETS = new Insets(0, 10, 0, 10);
-
-        private final String BUTTON_STYLE = """
-            -fx-focus-color: transparent;
-            -fx-background-radius: 150;
-            -fx-pref-width: 12;
-            -fx-pref-height: 12;
-            -fx-min-width: 1;
-            -fx-min-height: 1;
-        """;
 
         private class StageControlButton
                 extends Button {
@@ -2125,11 +2148,25 @@ public final class OldStageManager {
 
         private static final double STAGE_CONTROL_BUTTON_RADIUS;
 
+        private StackPane closeButtonStack;
+
+        private StackPane minimizeButtonStack;
+
+        private StackPane fullScreenToggleButtonStack;
+
         private Circle closeButton;
 
         private Circle minimizeButton;
 
         private Circle fullScreenToggleButton;
+
+        private ImageView closeButtonLabel;
+
+        private ImageView minimizeButtonLabel;
+
+        private ImageView goFullScreenToggleButtonLabel;
+
+        private ImageView goNormalScreenToggleButtonLabel;
 
         private final StageDragContext stageDragContext;
 
@@ -2316,6 +2353,35 @@ public final class OldStageManager {
             }
         }
 
+        private EventHandler<MouseEvent> handleStageControlButtonBoxEnterHovering = e -> {
+            closeButtonStack.getChildren().get(1).setVisible(true);
+            minimizeButtonStack.getChildren().get(1).setVisible(true);
+            if (OldStageManager.this.primaryStage.isFullScreen()) {
+                fullScreenToggleButtonStack.getChildren().get(1).setVisible(true);
+            } else {
+                fullScreenToggleButtonStack.getChildren().get(2).setVisible(true);
+            }
+        };
+
+        private EventHandler<MouseEvent> handleStageControlButtonBoxExitHovering = e -> {
+            closeButtonStack.getChildren().get(1).setVisible(false);
+            minimizeButtonStack.getChildren().get(1).setVisible(false);
+            fullScreenToggleButtonStack.getChildren().get(1).setVisible(false);
+            fullScreenToggleButtonStack.getChildren().get(2).setVisible(false);
+        };
+
+        private EventHandler<MouseEvent> handlePressCloseButton = e -> {
+            closeButton.setOpacity(60);
+        };
+
+        private EventHandler<MouseEvent> handlePressMinimizeButton = e -> {
+            minimizeButton.setOpacity(60);
+        };
+
+        private EventHandler<MouseEvent> handlePressFullScreenToggleButton = e -> {
+            fullScreenToggleButton.setOpacity(60);
+        };
+
         private EventHandler<MouseEvent> handleOnCloseRequest = e -> {
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         };
@@ -2325,20 +2391,12 @@ public final class OldStageManager {
         };
 
         private EventHandler<MouseEvent> handleOnFullScreenToggleRequest = e -> {
-            Rectangle clipper = (Rectangle) primaryStageScenePage.getClip();
-
             if (stage.isFullScreen()) {
-                clipper.setArcWidth(CUSTOM_STAGE_CORNER_ARC);
-                clipper.setArcHeight(CUSTOM_STAGE_CORNER_ARC);
-
                 stage.setFullScreen(false);
                 stage.getScene().getRoot().setStyle(CUSTOM_STAGE_STYLE);
             } else {
                 currentPrimaryStageScenePageContent.setPrefWidth(visualBounds.getWidth());
                 currentPrimaryStageScenePageContent.setPrefHeight(primaryStageHeight - titleBarHeight);
-
-                clipper.setArcWidth(0);
-                clipper.setArcHeight(0);
 
                 stage.setFullScreen(true);
                 stage.getScene().getRoot().setStyle(null);
@@ -2402,6 +2460,54 @@ public final class OldStageManager {
         private HBox createStageControlButtonBox() {
             HBox stageControlButtonBox = new HBox();
 
+            closeButtonStack = new StackPane();
+            minimizeButtonStack = new StackPane();
+            fullScreenToggleButtonStack = new StackPane();
+
+            Image closeButtonLabelImage = null;
+            Image minimizeButtonLabelImage = null;
+            Image goFullScreenToggleButtonLabelImage = null;
+            Image goNormalScreenToggleButtonLabelImage = null;
+
+            try (
+                InputStream closeButtonLabelImageIn = Files.newInputStream(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.IMAGE_DIR.key())).resolve(OakAppConfigs.getProperty("app.ui.icon.closeButtonLabelImage")));
+                InputStream minimizeButtonLabelImageIn = Files.newInputStream(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.IMAGE_DIR.key())).resolve(OakAppConfigs.getProperty("app.ui.icon.minimizeButtonLabelImage")));
+                InputStream goFullScreenToggleButtonLabelImageIn = Files.newInputStream(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.IMAGE_DIR.key())).resolve(OakAppConfigs.getProperty("app.ui.icon.goFullScreenToggleButtonLabelImage")));
+                InputStream goNormalScreenToggleButtonLabelImageIn = Files.newInputStream(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.IMAGE_DIR.key())).resolve(OakAppConfigs.getProperty("app.ui.icon.goNormalScreenToggleButtonLabelImage")))
+            ) {
+                closeButtonLabelImage = new Image(closeButtonLabelImageIn);
+                minimizeButtonLabelImage = new Image(minimizeButtonLabelImageIn);
+                goFullScreenToggleButtonLabelImage = new Image(goFullScreenToggleButtonLabelImageIn);
+                goNormalScreenToggleButtonLabelImage = new Image(goNormalScreenToggleButtonLabelImageIn);
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Got 'IOException' while attempting to load Stage control button label");
+            }
+
+            closeButtonLabel = new ImageView();
+            minimizeButtonLabel = new ImageView();
+            goFullScreenToggleButtonLabel = new ImageView();
+            goNormalScreenToggleButtonLabel = new ImageView();
+
+            closeButtonLabel.setImage(closeButtonLabelImage);
+            minimizeButtonLabel.setImage(minimizeButtonLabelImage);
+            goFullScreenToggleButtonLabel.setImage(goFullScreenToggleButtonLabelImage);
+            goNormalScreenToggleButtonLabel.setImage(goNormalScreenToggleButtonLabelImage);
+
+            closeButtonLabel.setOpacity(90);
+            minimizeButtonLabel.setOpacity(90);
+            goFullScreenToggleButtonLabel.setOpacity(90);
+            goNormalScreenToggleButtonLabel.setOpacity(90);
+
+            closeButtonLabel.setFitWidth(STAGE_CONTROL_BUTTON_RADIUS - 0.5);
+            minimizeButtonLabel.setFitWidth(STAGE_CONTROL_BUTTON_RADIUS - 0.5);
+            goFullScreenToggleButtonLabel.setFitWidth(STAGE_CONTROL_BUTTON_RADIUS);
+            goNormalScreenToggleButtonLabel.setFitWidth(STAGE_CONTROL_BUTTON_RADIUS);
+
+            closeButtonLabel.setPreserveRatio(true);
+            minimizeButtonLabel.setPreserveRatio(true);
+            goFullScreenToggleButtonLabel.setPreserveRatio(true);
+            goNormalScreenToggleButtonLabel.setPreserveRatio(true);
+
             closeButton = new Circle();
             minimizeButton = new Circle();
             fullScreenToggleButton = new Circle();
@@ -2414,20 +2520,70 @@ public final class OldStageManager {
             minimizeButton.setFill(Color.valueOf(MINIMIZE_BUTTON_COLOR));
             fullScreenToggleButton.setFill(Color.valueOf(FULL_SCREEN_TOGGLE_BUTTON_COLOR));
 
-            closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnCloseRequest);
+            closeButtonStack.getChildren().add(0, closeButton);
+            closeButtonStack.getChildren().add(1, closeButtonLabel);
 
-            minimizeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnMinimizeRequest);
+            minimizeButtonStack.getChildren().add(0, minimizeButton);
+            minimizeButtonStack.getChildren().add(1, minimizeButtonLabel);
 
-            fullScreenToggleButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnFullScreenToggleRequest);
+            fullScreenToggleButtonStack.getChildren().add(0, fullScreenToggleButton);
+            fullScreenToggleButtonStack.getChildren().add(1, goNormalScreenToggleButtonLabel);
+            fullScreenToggleButtonStack.getChildren().add(2, goFullScreenToggleButtonLabel);
+
+            closeButtonStack.getChildren().get(1).setVisible(false);
+            minimizeButtonStack.getChildren().get(1).setVisible(false);
+            fullScreenToggleButtonStack.getChildren().get(1).setVisible(false);
+            fullScreenToggleButtonStack.getChildren().get(2).setVisible(false);
+
+            stageControlButtonBox.addEventHandler(MouseEvent.MOUSE_ENTERED, handleStageControlButtonBoxEnterHovering);
+            stageControlButtonBox.addEventHandler(MouseEvent.MOUSE_EXITED, handleStageControlButtonBoxExitHovering);
+
+            closeButtonStack.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnCloseRequest);
+            minimizeButtonStack.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnMinimizeRequest);
+            fullScreenToggleButtonStack.addEventHandler(MouseEvent.MOUSE_CLICKED, handleOnFullScreenToggleRequest);
+
+            closeButtonStack.addEventHandler(MouseEvent.MOUSE_PRESSED, handlePressCloseButton);
+            minimizeButtonStack.addEventHandler(MouseEvent.MOUSE_PRESSED, handlePressMinimizeButton);
+            fullScreenToggleButtonStack.addEventHandler(MouseEvent.MOUSE_PRESSED, handlePressFullScreenToggleButton);
+
+            closeButtonStack.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    closeButton.setFill(Color.valueOf(CLOSE_BUTTON_COLOR));
+                }
+            });
+
+            minimizeButtonStack.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    minimizeButton.setFill(Color.valueOf(MINIMIZE_BUTTON_COLOR));
+                }
+            });
+
+            fullScreenToggleButtonStack.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent event) {
+                    fullScreenToggleButton.setFill(Color.valueOf(FULL_SCREEN_TOGGLE_BUTTON_COLOR));
+                }
+            });
 
             stageControlButtonBox.setPadding(TITLE_BAR_ELEMENT_INSETS);
 
             stageControlButtonBox.setAlignment(Pos.CENTER);
 
             // Whether to use custom or default
-            stageControlButtonBox.getChildren().add(closeButton);
-            stageControlButtonBox.getChildren().add(minimizeButton);
-            stageControlButtonBox.getChildren().add(fullScreenToggleButton);
+            if (stageControlButtonBoxPositionLeft) {
+                stageControlButtonBox.getChildren().add(closeButtonStack);
+                stageControlButtonBox.getChildren().add(minimizeButtonStack);
+                stageControlButtonBox.getChildren().add(fullScreenToggleButtonStack);
+            } else {
+                stageControlButtonBox.getChildren().add(minimizeButtonStack);
+                stageControlButtonBox.getChildren().add(fullScreenToggleButtonStack);
+                stageControlButtonBox.getChildren().add(closeButtonStack);
+            }
 
             stageControlButtonBox.setSpacing(BUTTON_PADDING);
 
