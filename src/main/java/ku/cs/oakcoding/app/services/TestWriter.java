@@ -34,7 +34,6 @@ public class TestWriter {
         System.out.println(consumerUser1.getDataFile());
         DataSourceCSV<UsersList> dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
         dataSourceListCSV.writeData(usersList);
-
         UsersList newUsersList = dataSourceListCSV.readData();
         Set<User> hashSet = newUsersList.getUsers();
         for (User user : hashSet){

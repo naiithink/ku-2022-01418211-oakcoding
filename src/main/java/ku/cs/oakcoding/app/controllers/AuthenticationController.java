@@ -8,10 +8,13 @@
 
 package ku.cs.oakcoding.app.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -19,11 +22,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.models.ConsumerUser;
+import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.UsersList;
+import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
+import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class AuthenticationController implements Initializable {
     @FXML
@@ -54,8 +65,22 @@ public class AuthenticationController implements Initializable {
     private Button registerUserHereButton;
 
     @FXML
+    private Label loginSuccessfulLabel;
+    @FXML
+    private Label tryAgianLabel;
+
+
+    private DataSourceCSV<UsersList> dataSourceCSV;
+    //    private UsersList usersList = new UsersList();
+    private ObservableSet<User> observableUserSet = FXCollections.observableSet();
+
+    @FXML
     void handleLoginButton(ActionEvent event) {
-//        ส่วนของ ปุ่ม login ต้อง implement user ให้ตรง
+        DataSourceCSV<UsersList> dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
+        UsersList newUsersList = dataSourceListCSV.readData();
+        Set<User> hashSet = newUsersList.getUsers();
+        String username = usernameTextField.getText();
+//        emergency !!!!!!!!!!!
     }
 
     @FXML
@@ -86,12 +111,16 @@ public class AuthenticationController implements Initializable {
     public void initPane(){
         getStartedPane.setVisible(true);
         loginPane.setVisible(false);
-
-
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
+        loginSuccessfulLabel.setVisible(false);
+        tryAgianLabel.setVisible(false);
+
+
 
     }
 }

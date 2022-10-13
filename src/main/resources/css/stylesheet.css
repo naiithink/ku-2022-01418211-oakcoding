@@ -111,6 +111,7 @@
     -fx-text-fill: #412f2f;
     -fx-background-color: #da9e9f;
     -fx-border-radius: 80px;
+    -fx-cursor: hand;
 }
 
 .button-red:hover {
@@ -216,3 +217,16 @@
     -fx-text-fill: White;
     -fx-background-color: #2A2C32;
 }
+
+/* table view  */
+
+.table-view {
+    -fx-fill: #FFFFFF;
+    -fx-background-color: #2A2C32;
+    -fx-background-radius: 5;
+}
+.table-view-column-header-background {
+    -fx-text-fill: #412f2f;
+    -fx-background-color: #2A2C32;
+}
+
