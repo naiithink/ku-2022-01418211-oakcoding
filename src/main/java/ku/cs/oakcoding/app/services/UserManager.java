@@ -10,7 +10,6 @@ package ku.cs.oakcoding.app.services;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -18,7 +17,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.models.users.*;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
+import ku.cs.oakcoding.app.models.users.ProfileImageState;
+import ku.cs.oakcoding.app.models.users.Roles;
+import ku.cs.oakcoding.app.models.users.StaffUser;
+import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.UserInfo;
+import ku.cs.oakcoding.app.models.users.UsersList;
+import ku.cs.oakcoding.app.models.users.UsersMap;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 public final class UserManager {
@@ -26,56 +32,71 @@ public final class UserManager {
     }
 
     // data/users.csv
-    private static ObservableMap<String, UserInfo> registeredUser = FXCollections.observableMap(((UsersMap)FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,"users.csv")
-                                                                    .readData())
-                                                                    .getUsersMap());
-
+    private static ObservableMap<String, UserInfo> registeredUser = FXCollections
+            .observableMap(((UsersMap) FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO, "users.csv")
+                    .readData())
+                    .getUsersMap());
 
     public static boolean isRegistered(String userName) {
         return registeredUser.containsKey(userName);
     }
 
     public static <T extends User> void register(Roles role,
-                                                 String firstName,
-                                                 String lastName,
-                                                 String userName,
-                                                 String password,
-                                                 String confirmPassword,
-                                                 Path profileImagePath) throws IOException {
+            String firstName,
+            String lastName,
+            String userName,
+            String password,
+            String confirmPassword,
+            Path profileImagePath) {
 
-        if (!isRegistered(userName) && password.equals(confirmPassword)) {
-            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
+        T newUser = null;
 
-            ProfileImageState profileImageState;
+        try {
+            if (!isRegistered(userName) && password.equals(confirmPassword)) {
+                DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER, "users.csv");
 
-            if (Objects.isNull(profileImagePath)){
-                profileImageState = ProfileImageState.DEFAULT;
-            }
-            else {
-                profileImageState = ProfileImageState.CUSTOM;
-                DataSourceCSV profileImage = FactoryDataSourceCSV.getDataSource(DataFile.PICTURE,userName);
-                profileImage.writeData(profileImagePath);
-            }
+                ProfileImageState profileImageState;
 
-            T newUser = switch (role) {
-                case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState);
-                case STAFF -> (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
-                default -> {
-                    OakLogger.log(Level.SEVERE, "Attempting to register new user with an unknown or invalid role");
-                    System.exit(1);
+                if (Objects.isNull(profileImagePath)) {
+                    profileImageState = ProfileImageState.DEFAULT;
+                } else {
+                    profileImageState = ProfileImageState.CUSTOM;
+                    DataSourceCSV profileImage = FactoryDataSourceCSV.getDataSource(DataFile.PICTURE, userName);
+
+                    profileImage.writeData(profileImagePath);
+
                 }
-            };
 
-            UsersList usersList = (UsersList) userCSV.readData();
-            usersList.addUser(newUser);
-            userCSV.clearData();
-            userCSV.writeData(usersList);
+                switch (role) {
+                    case CONSUMER:
+                        newUser = (T) new ConsumerUser(role, firstName, lastName, userName, password,
+                                profileImageState);
+                        break;
+
+                    case STAFF:
+                        newUser = (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
+                        break;
+
+                    default:
+                        OakLogger.log(Level.SEVERE, "Attempting to register new user with an unknown or invalid role");
+                        System.exit(1);
+                }
+                ;
+
+                UsersList usersList = (UsersList) userCSV.readData();
+                usersList.addUser(newUser);
+                userCSV.clearData();
+                userCSV.writeData(usersList);
+            }
+        } catch (IOException e) {
+            OakLogger.log(Level.SEVERE, "Got 'IOException' while saving image");
+            System.exit(1);
         }
 
     }
 
     public static <T extends User> T login(String userName,
-                                           String password) {
+            String password) {
 
         if (isRegistered(userName)
                 && passwordCheck(userName, password)) {
@@ -87,20 +108,31 @@ public final class UserManager {
     }
 
     public static <T extends User> T getUser(String userName) {
+        T newUser = null;
+
         if (isRegistered(userName)) {
 
             UserInfo userInfo = registeredUser.get(userName);
             Roles role = userInfo.role();
 
-            T newUser = (T) switch (role) {
-                case CONSUMER -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
-                case STAFF -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
-                case ADMIN -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
-                default -> {
+            switch (role) {
+                case CONSUMER:
+                    newUser = (T) FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, userName);
+                    break;
+
+                case STAFF:
+                    newUser = (T) FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, userName);
+                    break;
+
+                case ADMIN:
+                    newUser = (T) FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, userName);
+                    break;
+
+                default:
                     OakLogger.log(Level.SEVERE, "Attempting to login with no ID");
                     System.exit(1);
-                }
-            };
+            }
+            ;
             return newUser;
 
             // ResourceObject userInfoObject = ResourceManager.getData(String userName);
@@ -126,10 +158,10 @@ public final class UserManager {
      *
      */
     public static Boolean passwordCheck(String userName,
-                                        String password) {
+            String password) {
 
         if (isRegistered(userName)) {
-            DataSourceCSV userDataSource = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
+            DataSourceCSV userDataSource = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, userName);
 
             User checker = (User) userDataSource.readData();
             return (checker.verifyPassword(password));

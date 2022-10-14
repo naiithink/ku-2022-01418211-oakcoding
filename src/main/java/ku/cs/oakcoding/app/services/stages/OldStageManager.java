@@ -665,6 +665,10 @@ public final class OldStageManager {
         return instance;
     }
 
+    public Stage getPrimaryStage() {
+        return this.primaryStage;
+    }
+
     /**
      * Binds the application Stage with StageManager's Stage
      * 
