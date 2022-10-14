@@ -68,16 +68,7 @@ public final class UserManager {
         if (isRegistered(userName)
                 && passwordCheck(userName, password)) {
 
-
-            T newUser = switch (role) {
-                case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState);
-                case STAFF -> (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
-                default -> {
-                    OakLogger.log(Level.SEVERE, "Attempting to register new user with an unknown or invalid role");
-                    System.exit(1);
-                }
-            };
-            return result;
+            return getUser(userName);
         }
 
         return null;
@@ -86,7 +77,19 @@ public final class UserManager {
     public static <T extends User> T getUser(String userName) {
         if (isRegistered(userName)) {
 
-            T result = (T) registeredUser.get(userName);
+            UserInfo userInfo = registeredUser.get(userName);
+            Roles role = userInfo.role();
+
+            T newUser = (T) switch (role) {
+                case CONSUMER -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
+                case STAFF -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
+                case ADMIN -> FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
+                default -> {
+                    OakLogger.log(Level.SEVERE, "Attempting to login with no ID");
+                    System.exit(1);
+                }
+            };
+            return newUser;
 
             // ResourceObject userInfoObject = ResourceManager.getData(String userName);
 
@@ -103,7 +106,6 @@ public final class UserManager {
 
             // User result = new User(userRole, firstName, lastName, hasCustomImage);
 
-            return result;
         }
         return null;
     }
@@ -115,7 +117,9 @@ public final class UserManager {
                                         String password) {
 
         if (isRegistered(userName)) {
-            User checker = (User) registeredUser.get(userName);
+            DataSourceCSV userDataSource = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE,userName);
+
+            User checker = (User) userDataSource.readData();
             return (checker.verifyPassword(password));
 
         }
