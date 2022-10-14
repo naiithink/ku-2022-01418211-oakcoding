@@ -10,7 +10,8 @@ package ku.cs.oakcoding.app.helpers.hotspot;
 
 public enum DataFile {
     USER,
-    USERPROFILE,
+    USER_INFO,
+    USER_PROFILE,
     COMPLAINT,
     SUSPENDED,
     PICTURE;

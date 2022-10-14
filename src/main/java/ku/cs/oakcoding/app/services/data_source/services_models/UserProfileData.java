@@ -1,7 +1,7 @@
 package ku.cs.oakcoding.app.services.data_source.services_models;
 
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.users.Roles;
+import ku.cs.oakcoding.app.models.users.User;
 import ku.cs.oakcoding.app.services.data_source.services_models.callback.*;
 
 public class UserProfileData implements ManageDataType<User> {

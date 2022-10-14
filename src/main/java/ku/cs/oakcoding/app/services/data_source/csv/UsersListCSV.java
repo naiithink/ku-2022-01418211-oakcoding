@@ -1,9 +1,9 @@
 /**
  * @file DataSourceListCSV.java
- * 
+ * <p>
  * Reviews:
- *  - Naming
- *      1. (CASE) naiithink, 2022-10-05
+ * - Naming
+ * 1. (CASE) naiithink, 2022-10-05
  */
 
 package ku.cs.oakcoding.app.services.data_source.csv;
@@ -15,16 +15,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.UsersList;
-import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.users.UserInfo;
+import ku.cs.oakcoding.app.models.users.UsersList;
+import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.UsersMap;
 import ku.cs.oakcoding.app.services.DataBase;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 
 /**
  * DataSourceListCSV
- * 
+ *
  * @todo Verbose name 'directoryName' -> 'dirName'
  */
 public class UsersListCSV implements DataSourceCSV<UsersList> {
@@ -35,8 +38,8 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
 
     public UsersListCSV(String fileName) {
         this.fileName = fileName;
-        checkFileIsExisted(dirName,MakeFileType.DIRECTORY);
-        checkFileIsExisted(dirName + File.separator + fileName,MakeFileType.FILE);
+        checkFileIsExisted(dirName, MakeFileType.DIRECTORY);
+        checkFileIsExisted(dirName + File.separator + fileName, MakeFileType.FILE);
     }
 
     /**
@@ -44,7 +47,7 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
      *       <https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html>
      *       - Files::exists(Path, LinkOption...)
      *       - Files::createFile(Path, FileAttribute<?>...); FileAttribute<?> can be omitted
-     * 
+     *
      */
     private void checkFileIsExisted(String filePath, MakeFileType makeFileType) {
 
@@ -78,40 +81,18 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
     @Override
     public UsersList readData() {
         UsersList users = new UsersList();
-        String filePath = dirName + File.separator + fileName;
-        File file = new File(filePath);
-        FileReader reader = null;
-        BufferedReader buffer = null;
 
         try {
-            reader = new FileReader(file);
-            buffer = new BufferedReader(reader);
-            String line = "";
-            while ((line = buffer.readLine()) != null) {
-                String[] data = line.split(",");
-                String[] dataTrim = trimData(data);
-                DataSourceCSV<User> userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE,dataTrim[0]);
-                users.addUser(userSourceCSV.readData());
-            }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-
-            try {
-                if (buffer != null) {
-                    buffer.close();
+                UsersMap usersMap = (UsersMap) FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,"users.csv").readData();
+                for (Map.Entry<String, UserInfo> entry : usersMap.getUsersMap().entrySet()) {
+                    DataSourceCSV<User> userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, entry.getKey());
+                    users.addUser(userSourceCSV.readData());
                 }
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
         return users;
 
     }
@@ -121,25 +102,20 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
      */
     @Override
     public void writeData(UsersList usersSet) {
-        String filePath = dirName + File.separator + fileName;
-        File file = new File(filePath);
-
-        FileWriter fileWriter = null;
-        BufferedWriter writer = null;
 
         try {
-            fileWriter = new FileWriter(file, true);
-            writer = new BufferedWriter(fileWriter);
 
+            UsersMap usersMap = new UsersMap();
             for (User entry : usersSet.getUsers()) {
-                String line = DataBase.writeData(entry, DataFile.USER);
-                DataSourceCSV userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USERPROFILE, entry.getUserName());
-                userSourceCSV.writeData(entry);
-                writer.append(line);
-                writer.newLine();
+                UserInfo userInfo = new UserInfo(entry.getUserName(),entry.getRole(), entry.getRegisteredTime());
+                usersMap.addUserMap(entry.getUserName(), userInfo);
+
+                DataSourceCSV userProfileCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, entry.getUserName());
+                userProfileCSV.writeData(entry);
             }
 
-            writer.close();
+            DataSourceCSV userInfoCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,"users.csv");
+            userInfoCSV.writeData(usersMap);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -150,7 +126,7 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
      * @todo Use try-with-resources?
      */
     @Override
-    public void clearData() {
+    public void clearData() { // fix later
         String filePath = dirName + File.separator + fileName;
         File file = new File(filePath);
 

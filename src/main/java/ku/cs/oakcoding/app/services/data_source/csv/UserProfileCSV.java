@@ -1,7 +1,7 @@
 package ku.cs.oakcoding.app.services.data_source.csv;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.User;
+import ku.cs.oakcoding.app.models.users.User;
 import ku.cs.oakcoding.app.services.DataBase;
 
 import java.io.*;
@@ -61,7 +61,7 @@ public class UserProfileCSV implements DataSourceCSV<User>{
             if ((line = buffer.readLine()) != null) {
                 String [] data = line.split(",");
                 String [] dataTrim = trimData(data);
-                User user = (User) DataBase.readData(dataTrim, DataFile.USERPROFILE);
+                User user = (User) DataBase.readData(dataTrim, DataFile.USER_PROFILE);
                 return user;
             }
 

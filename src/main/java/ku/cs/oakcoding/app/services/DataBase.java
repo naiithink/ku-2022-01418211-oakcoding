@@ -24,8 +24,11 @@ public class DataBase {
         if (reader == DataFile.USER) {
             return DataCallback.readData(new UserData(), data);
         }
-        else if (reader == DataFile.USERPROFILE){
+        else if (reader == DataFile.USER_PROFILE){
             return DataCallback.readData(new UserProfileData(), data);
+        }
+        else if (reader == DataFile.USER_INFO){
+            return null;
         }
         else if (reader == DataFile.COMPLAINT){
             return DataCallback.readData(new ConsumerData(), data);
@@ -43,8 +46,11 @@ public class DataBase {
         if (writer == DataFile.USER) {
             return DataCallback.writeData(new UserData(), obj);
         }
-        else if (writer == DataFile.USERPROFILE) {
+        else if (writer == DataFile.USER_PROFILE) {
             return DataCallback.writeData(new UserProfileData(), obj);
+        }
+        else if (writer == DataFile.USER_INFO) {
+            return null;
         }
         else if (writer == DataFile.COMPLAINT) {
             return DataCallback.writeData(new ConsumerData(), obj); // fix later

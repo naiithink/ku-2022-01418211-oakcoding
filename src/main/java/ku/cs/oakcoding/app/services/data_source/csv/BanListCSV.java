@@ -15,17 +15,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.UsersList;
 import ku.cs.oakcoding.app.models.ban.Ban;
 import ku.cs.oakcoding.app.models.ban.BanList;
 import ku.cs.oakcoding.app.services.DataBase;
-import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 /**
  * BanListCSV

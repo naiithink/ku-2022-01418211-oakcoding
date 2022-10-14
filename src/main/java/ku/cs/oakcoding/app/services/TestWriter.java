@@ -1,8 +1,8 @@
 package ku.cs.oakcoding.app.services;
 
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.*;
-import ku.cs.oakcoding.app.models.picture.ProfileImage;
+
+import ku.cs.oakcoding.app.models.users.*;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 
 import java.io.IOException;
@@ -11,7 +11,6 @@ import java.util.Set;
 
 public class TestWriter {
     public static void main(String[] args) throws IOException {
-        ProfileImage profileImage = new ProfileImage();
         ConsumerUser consumerUser = new ConsumerUser(Roles.CONSUMER,
                 "INK",
                 "panachai",
@@ -26,9 +25,17 @@ public class TestWriter {
                 "191245ing",
                 ProfileImageState.DEFAULT);
 
+        ConsumerUser consumerUser2 = new ConsumerUser(Roles.CONSUMER,
+                "POOH",
+                "THanet",
+                "Pooh",
+                "191245ing",
+                ProfileImageState.DEFAULT);
+
         UsersList usersList = new UsersList();
         usersList.addUser(consumerUser);
         usersList.addUser(consumerUser1);
+        usersList.addUser(consumerUser2);
 
         System.out.println(consumerUser.getDataFile());
         System.out.println(consumerUser1.getDataFile());
