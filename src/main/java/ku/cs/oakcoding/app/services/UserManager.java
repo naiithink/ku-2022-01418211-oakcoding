@@ -42,7 +42,7 @@ public final class UserManager {
     }
 
     public static <T extends User> void register(Roles role,
-                                                 String firstName,
+            String firstName,
             String lastName,
             String userName,
             String password,
@@ -65,27 +65,32 @@ public final class UserManager {
 
                     profileImage.writeData(profileImagePath);
 
-                    newUser = switch (role) {
-                        case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState, true);
-                        case STAFF -> (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
-                        default -> {
-                            OakLogger.log(Level.SEVERE, "Attempting to register new user with an unknown or invalid role");
+                    switch (role) {
+                        case CONSUMER:
+                            newUser = (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState, true);
+                            break;
+                        case STAFF:
+                            newUser = (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
+                            break;
+                        default:
+                            OakLogger.log(Level.SEVERE,
+                                    "Attempting to register new user with an unknown or invalid role");
                             System.exit(1);
-
-
-                            UsersList usersList = (UsersList) userCSV.readData();
-                            usersList.addUser(newUser);
-                            userCSV.clearData();
-                            userCSV.writeData(usersList);
-                        }
-                    };
-                }}}
-                    catch(IOException e){
-                        OakLogger.log(Level.SEVERE, "Got 'IOException' while saving image");
-                        System.exit(1);
                     }
-        }
+                }
 
+                UsersList usersList = (UsersList) userCSV.readData();
+                usersList.addUser(newUser);
+                userCSV.clearData();
+                userCSV.writeData(usersList);
+            }
+        } catch (
+
+        IOException e) {
+            OakLogger.log(Level.SEVERE, "Got 'IOException' while saving image");
+            System.exit(1);
+        }
+    }
 
     public static <T extends User> T login(String userName,
             String password) {
@@ -99,7 +104,7 @@ public final class UserManager {
         return null;
     }
 
-    public static boolean isActive(String userName){
+    public static boolean isActive(String userName) {
         UserInfo userInfo = registeredUser.get(userName);
         return userInfo.isActive();
     }

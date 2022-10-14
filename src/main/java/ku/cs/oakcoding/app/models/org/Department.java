@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
-import ku.cs.oakcoding.app.models.StaffUser;
 import ku.cs.oakcoding.app.models.complaints.CaseAssignable;
+import ku.cs.oakcoding.app.models.users.StaffUser;
 
 public class Department
         implements CaseAssignable {

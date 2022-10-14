@@ -28,11 +28,11 @@ public abstract class User {
     protected DataFile dataFile;
 
     public User(Roles role,
-                String firstName,
-                String lastName,
-                String userName,
-                String password,
-                ProfileImageState profileImageState) {
+            String firstName,
+            String lastName,
+            String userName,
+            String password,
+            ProfileImageState profileImageState) {
 
         this.role = role;
         this.firstName = firstName;
@@ -41,7 +41,6 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
     }
-
 
     public void setRole(Roles role) {
         this.role = role;
@@ -83,13 +82,13 @@ public abstract class User {
         return profileImageState;
     }
 
-    public String getUserName() { return userName;}
+    public String getUserName() {
+        return userName;
+    }
 
-    public String getPassword() { return password;}
-
-    public long getRegisteredTime() { return registeredTime; }
-
-
+    public String getPassword() {
+        return password;
+    }
 
     public boolean verifyPassword(String seed) {
         if (password.equals(seed)) {
@@ -99,30 +98,32 @@ public abstract class User {
         return false;
     }
 
-    public void setNewPassword(String password){
+    public void setNewPassword(String password) {
         this.password = password;
     }
 
-    public void changePassword(String newPassword){
-//        if (UserManager.changePassword(this.userName, newPassword)) {
-//            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
-//            DataList users = (DataList) userCSV.readData();
-//            User user = users.getUser(this.userName);
-//
-//
-//            users.removeUserMap(this.userName);
-//            user.setNewPassword(newPassword);
-//            users.addUserMap(this.userName, user);
-//
-//            userCSV.clearData();
-//            userCSV.writeData(users);
-//        }
+    public void changePassword(String newPassword) {
+        // if (UserManager.changePassword(this.userName, newPassword)) {
+        // DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
+        // DataList users = (DataList) userCSV.readData();
+        // User user = users.getUser(this.userName);
+        //
+        //
+        // users.removeUserMap(this.userName);
+        // user.setNewPassword(newPassword);
+        // users.addUserMap(this.userName, user);
+        //
+        // userCSV.clearData();
+        // userCSV.writeData(users);
+        // }
 
     }
 
-    public boolean getIsActive() { return isActive;}
+    public boolean getIsActive() {
+        return isActive;
+    }
 
-    public DataFile getDataFile (){
+    public DataFile getDataFile() {
         return dataFile;
     }
 

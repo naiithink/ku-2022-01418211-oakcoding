@@ -10,9 +10,6 @@ package ku.cs.oakcoding.app.controllers;
 
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -20,14 +17,15 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -36,9 +34,8 @@ import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.models.Roles;
-import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.UsersList;
+import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.UsersList;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 

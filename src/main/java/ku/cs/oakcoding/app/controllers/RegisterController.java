@@ -8,6 +8,11 @@
 
 package ku.cs.oakcoding.app.controllers;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Path;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,18 +21,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import ku.cs.oakcoding.app.models.users.Roles;
+import ku.cs.oakcoding.app.services.UserManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
-// User Register
+    // User Register
 
     @FXML
     private Pane addOrganizationPane;
@@ -107,6 +110,8 @@ public class RegisterController implements Initializable {
     @FXML
     private TextField usernameStaffField;
 
+    private Path profileImagePath;
+
     @FXML
     void handleBackButtonGoToAdminPage(MouseEvent event) {
 
@@ -119,7 +124,20 @@ public class RegisterController implements Initializable {
 
     @FXML
     void handleProfileUpload(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("อัพโหลดรูปโปรไฟล์");
+        fileChooser.getExtensionFilters().add(
+            new ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+        );
 
+        File selectedFile = fileChooser.showOpenDialog(OldStageManager.getStageManager().getPrimaryStage());
+
+        if (selectedFile == null) {
+
+            return;
+        }
+
+        this.profileImagePath = selectedFile.toPath();
     }
 
     @FXML
@@ -134,13 +152,22 @@ public class RegisterController implements Initializable {
 
     @FXML
     void handleRegisterUserButton(ActionEvent event) {
+        String fName = firstNameField.getText();
+        String lName = lastNameField.getText();
+        String userName = userNameField.getText();
+        String password = passwordField.getText();
+        String passwordConfirm = passwordConfirmField.getText();
+
+        UserManager.register(Roles.CONSUMER, fName, lName, userName, password, passwordConfirm, profileImagePath);
 
     }
-    public void initPane(){
+
+    public void initPane() {
         userRegisterPane.setVisible(true);
         addOrganizationPane.setVisible(false);
         addStaffRegisterPane.setVisible(false);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();

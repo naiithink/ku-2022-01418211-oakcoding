@@ -13,8 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.models.StaffUser;
 import ku.cs.oakcoding.app.models.complaints.CaseAssignable;
+import ku.cs.oakcoding.app.models.users.StaffUser;
 
 public class Organization
         implements CaseAssignable {

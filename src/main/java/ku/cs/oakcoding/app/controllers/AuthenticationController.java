@@ -8,6 +8,10 @@
 
 package ku.cs.oakcoding.app.controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
@@ -21,20 +25,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
-import ku.cs.oakcoding.app.models.ConsumerUser;
-import ku.cs.oakcoding.app.models.User;
-import ku.cs.oakcoding.app.models.UsersList;
+import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.UsersList;
 import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
 import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
-
-import java.net.URL;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
 
 public class AuthenticationController implements Initializable {
     @FXML
