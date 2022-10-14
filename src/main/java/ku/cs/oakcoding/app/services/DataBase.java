@@ -14,6 +14,7 @@ import ku.cs.oakcoding.app.services.data_source.services_models.callback.Consume
 import ku.cs.oakcoding.app.services.data_source.services_models.DataCallback;
 import ku.cs.oakcoding.app.services.data_source.services_models.callback.SuspendedData;
 import ku.cs.oakcoding.app.services.data_source.services_models.callback.UserData;
+import ku.cs.oakcoding.app.services.data_source.services_models.callback.UserInfoData;
 
 /**
  * @todo Assert null before Array[subscription]
@@ -28,7 +29,7 @@ public class DataBase {
             return DataCallback.readData(new UserProfileData(), data);
         }
         else if (reader == DataFile.USER_INFO){
-            return null;
+            return DataCallback.readData(new UserInfoData(), data);
         }
         else if (reader == DataFile.COMPLAINT){
             return DataCallback.readData(new ConsumerData(), data);
@@ -50,7 +51,7 @@ public class DataBase {
             return DataCallback.writeData(new UserProfileData(), obj);
         }
         else if (writer == DataFile.USER_INFO) {
-            return null;
+            return DataCallback.writeData(new UserInfoData(), obj);
         }
         else if (writer == DataFile.COMPLAINT) {
             return DataCallback.writeData(new ConsumerData(), obj); // fix later

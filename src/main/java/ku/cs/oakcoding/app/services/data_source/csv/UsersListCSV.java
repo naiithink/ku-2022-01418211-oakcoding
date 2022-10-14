@@ -84,7 +84,7 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
 
         try {
 
-                UsersMap usersMap = (UsersMap) FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,"users.csv").readData();
+                UsersMap usersMap = (UsersMap) FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,fileName).readData();
                 for (Map.Entry<String, UserInfo> entry : usersMap.getUsersMap().entrySet()) {
                     DataSourceCSV<User> userSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, entry.getKey());
                     users.addUser(userSourceCSV.readData());
@@ -114,7 +114,7 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
                 userProfileCSV.writeData(entry);
             }
 
-            DataSourceCSV userInfoCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,"users.csv");
+            DataSourceCSV userInfoCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO,fileName);
             userInfoCSV.writeData(usersMap);
 
         } catch (IOException e) {

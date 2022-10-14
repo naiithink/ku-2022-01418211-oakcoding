@@ -8,6 +8,7 @@
 
 package ku.cs.oakcoding.app.services;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.logging.Level;
@@ -39,10 +40,10 @@ public final class UserManager {
                                                  String userName,
                                                  String password,
                                                  String confirmPassword,
-                                                 ProfileImageState profileImageState) {
+                                                 ProfileImageState profileImageState) throws IOException {
 
         if (!isRegistered(userName) && password.equals(confirmPassword)) {
-            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
+            DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
 
             T newUser = switch (role) {
                 case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState);
@@ -53,13 +54,10 @@ public final class UserManager {
                 }
             };
 
-            T newUser = new User(role,
-                    registeredUser.put(userName, newUser);
+            UsersList usersList = (UsersList) userCSV.readData();
+            usersList.addUser(newUser);
             userCSV.clearData();
-
-            DataList newData = new DataList(registeredUser);
-            userCSV.writeData(newData);
-
+            userCSV.writeData(usersList);
         }
 
     }
@@ -70,8 +68,15 @@ public final class UserManager {
         if (isRegistered(userName)
                 && passwordCheck(userName, password)) {
 
-            User result = getUser(userName);
 
+            T newUser = switch (role) {
+                case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState);
+                case STAFF -> (T) new StaffUser(role, firstName, lastName, userName, password, profileImageState);
+                default -> {
+                    OakLogger.log(Level.SEVERE, "Attempting to register new user with an unknown or invalid role");
+                    System.exit(1);
+                }
+            };
             return result;
         }
 

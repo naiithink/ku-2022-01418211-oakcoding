@@ -29,6 +29,9 @@ public class FactoryDataSourceCSV {
             case USER_PROFILE -> {
                 dataSourceCSV = new UserProfileCSV(fileName);
             }
+            case USER_INFO -> {
+                dataSourceCSV = new UserInfoCSV(fileName);
+            }
             case SUSPENDED -> {
                 dataSourceCSV = new UsersListCSV(fileName);
             }
