@@ -23,7 +23,7 @@ import javafx.collections.FXCollections;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.StaffUser;
 
-public non-sealed final class Complaint
+public non-sealed class Complaint
         extends Issue
         implements Resolvable<Complaint> {
 

@@ -12,7 +12,7 @@ import ku.cs.oakcoding.app.services.OakID;
 /**
  * @todo Consider using singleton?
  */
-public non-sealed final class ComplaintManager
+public non-sealed class ComplaintManager
         extends IssueManager<Complaint> {
 
     private ReportManager reportManager;
