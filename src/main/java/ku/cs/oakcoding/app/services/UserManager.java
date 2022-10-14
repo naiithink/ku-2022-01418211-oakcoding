@@ -11,6 +11,7 @@ package ku.cs.oakcoding.app.services;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
@@ -40,10 +41,21 @@ public final class UserManager {
                                                  String userName,
                                                  String password,
                                                  String confirmPassword,
-                                                 ProfileImageState profileImageState) throws IOException {
+                                                 Path profileImagePath) throws IOException {
 
         if (!isRegistered(userName) && password.equals(confirmPassword)) {
             DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
+
+            ProfileImageState profileImageState;
+
+            if (Objects.isNull(profileImagePath)){
+                profileImageState = ProfileImageState.DEFAULT;
+            }
+            else {
+                profileImageState = ProfileImageState.CUSTOM;
+                DataSourceCSV profileImage = FactoryDataSourceCSV.getDataSource(DataFile.PICTURE,userName);
+                profileImage.writeData(profileImagePath);
+            }
 
             T newUser = switch (role) {
                 case CONSUMER -> (T) new ConsumerUser(role, firstName, lastName, userName, password, profileImageState);
