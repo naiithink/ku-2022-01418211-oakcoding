@@ -10,7 +10,7 @@ public class UserInfoData implements ManageDataType<UserInfo>,FormatCSV{
     public UserInfo instanceCreate(String[] data) {
         UserInfo userInfo = new UserInfo(data[0],
                                 Roles.valueOf(data[1]),
-                                Long.parseLong(data[2]));
+                                Boolean.getBoolean(data[2]));
 
         return userInfo;
     }
@@ -33,6 +33,6 @@ public class UserInfoData implements ManageDataType<UserInfo>,FormatCSV{
         UserInfo user = (UserInfo) o;
         return getQuoteFormat(user.userName()) + ","
                 + getQuoteFormat(user.role()) + ","
-                + getQuoteFormat(user.registeredTime());
+                + getQuoteFormat(user.isActive());
     }
 }

@@ -107,7 +107,7 @@ public class UsersListCSV implements DataSourceCSV<UsersList> {
 
             UsersMap usersMap = new UsersMap();
             for (User entry : usersSet.getUsers()) {
-                UserInfo userInfo = new UserInfo(entry.getUserName(),entry.getRole(), entry.getRegisteredTime());
+                UserInfo userInfo = new UserInfo(entry.getUserName(),entry.getRole(), entry.getIsActive());
                 usersMap.addUserMap(entry.getUserName(), userInfo);
 
                 DataSourceCSV userProfileCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER_PROFILE, entry.getUserName());

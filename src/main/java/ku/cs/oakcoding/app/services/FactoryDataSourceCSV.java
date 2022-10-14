@@ -33,7 +33,7 @@ public class FactoryDataSourceCSV {
                 dataSourceCSV = new UserInfoCSV(fileName);
             }
             case SUSPENDED -> {
-                dataSourceCSV = new UsersListCSV(fileName);
+                dataSourceCSV = new BanListCSV(fileName);
             }
             case COMPLAINT -> {
                 dataSourceCSV = new UsersListCSV(fileName);

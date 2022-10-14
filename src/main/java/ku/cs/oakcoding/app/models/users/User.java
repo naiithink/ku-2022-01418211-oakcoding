@@ -23,8 +23,7 @@ public abstract class User {
     protected String userName;
 
     protected String password;
-
-    protected long registeredTime;
+    protected boolean isActive;
 
     protected DataFile dataFile;
 
@@ -42,6 +41,7 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
     }
+
 
     public void setRole(Roles role) {
         this.role = role;
@@ -119,6 +119,8 @@ public abstract class User {
 //        }
 
     }
+
+    public boolean getIsActive() { return isActive;}
 
     public DataFile getDataFile (){
         return dataFile;

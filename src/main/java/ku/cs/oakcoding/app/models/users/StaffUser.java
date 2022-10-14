@@ -16,6 +16,8 @@ public final class StaffUser
         extends User
         implements Resolver<Complaint> {
 
+    private final boolean isActive = true;
+
     private final DataFile dataFile = DataFile.USER_PROFILE;
 
     public StaffUser(Roles role,

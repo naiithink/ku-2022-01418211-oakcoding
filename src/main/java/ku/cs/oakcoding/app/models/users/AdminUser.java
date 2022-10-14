@@ -16,6 +16,8 @@ public final class AdminUser
         extends User
         implements Resolver<Report> {
 
+    private final boolean isActive = true;
+
     private final DataFile dataFile = DataFile.USER_PROFILE;
 
     public AdminUser(Roles role,

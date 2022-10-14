@@ -20,9 +20,11 @@ public final class ConsumerUser
                         String lastName,
                         String userName,
                         String password,
-                        ProfileImageState profileImageState) {
+                        ProfileImageState profileImageState,
+                        boolean isActive) {
 
         super(role, firstName, lastName, userName, password,profileImageState);
+        this.isActive = isActive;
     }
 
     public DataFile getDataFile (){

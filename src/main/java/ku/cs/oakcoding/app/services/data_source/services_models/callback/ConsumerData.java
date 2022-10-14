@@ -27,7 +27,8 @@ public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
                 data[2].trim(),
                 data[3].trim(),
                 data[4].trim(),
-                ProfileImageState.valueOf(data[5]));
+                ProfileImageState.valueOf(data[5]),
+                Boolean.getBoolean(data[6]));
         return consumer;
     }
 
@@ -55,7 +56,8 @@ public class ConsumerData implements ManageDataType<ConsumerUser>,FormatCSV {
                 + getQuoteFormat(consumerUser.getPassword()) + ","
                 + getQuoteFormat(consumerUser.getFirstName()) + ","
                 + getQuoteFormat(consumerUser.getLastName()) + ","
-                + getQuoteFormat(consumerUser.getProfileImageState());
+                + getQuoteFormat(consumerUser.getProfileImageState()) + ","
+                + getQuoteFormat(consumerUser.getIsActive());
 
         return line;
     }
