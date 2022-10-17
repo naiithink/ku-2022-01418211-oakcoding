@@ -9,7 +9,17 @@
 package ku.cs.oakcoding.app.models.users;
 
 public enum Roles {
-    ADMIN,
-    STAFF,
-    CONSUMER;
+    ADMIN               ("Admin"),
+    STAFF               ("Staff"),
+    CONSUMER            ("Consumer");
+
+    private final String prettyPrinted;
+
+    private Roles(String prettyPrinted) {
+        this.prettyPrinted = prettyPrinted;
+    }
+
+    public String getPrettyPrinted() {
+        return prettyPrinted;
+    }
 }
