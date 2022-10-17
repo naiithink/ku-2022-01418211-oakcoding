@@ -1474,25 +1474,26 @@ public final class OldStageManager {
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
 
             StackPane.setAlignment(pageTable.get(pageNick).parent, Pos.CENTER);
+
+            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefWidth(this.primaryStageWidth);
+            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefHeight(this.primaryStageHeight);
+
+            AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
+            this.primaryStageTitleBar.toFront();
         }
 
-        ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefWidth(this.primaryStageWidth);
-        ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefHeight(this.primaryStageHeight);
-
-
         // System.out.println("!! " + this.primaryStageScenePage.getChildren().get(0).getClass().getName());
-        System.out.println("!!!" + this.primaryStageScenePage.getChildren().get(1).getClass().getName());
-        System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefWidth());
-        System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefHeight());
-        System.out.println("!!!" + this.primaryStageWidth);
 
-        StackPane.setAlignment(this.primaryStageScenePage.getChildren().get(1), Pos.CENTER);
+        // System.out.println("!!!" + this.primaryStageScenePage.getChildren().get(1).getClass().getName());
+        // System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefWidth());
+        // System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefHeight());
+        // System.out.println("!!!" + this.primaryStageWidth);
 
-        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
+        // StackPane.setAlignment(this.primaryStageScenePage.getChildren().get(1), Pos.CENTER);
 
-        this.primaryStageTitleBar.toFront();
 
         if (this.alwaysCenteredStage) {
+            System.out.println("!!!");
             this.primaryStage.centerOnScreen();
         }
 
