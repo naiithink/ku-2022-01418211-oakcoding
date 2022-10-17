@@ -219,6 +219,11 @@ public final class OldStageManager {
     private Object mainApp;
 
     /**
+     * An object to keep throughout Page transitions
+     */
+    private Object context;
+
+    /**
      * The primary Stage of the application
      */
     private Stage primaryStage;
@@ -1374,11 +1379,20 @@ public final class OldStageManager {
         return pageTable.get(pageNick).parent;
     }
 
+    public void clearContext() {
+        this.context = null;
+    }
+
+    public Object getContext() {
+        return context;
+    }
+
     /**
      * Sets the current page
      * 
      * @param       stage                         Stage for page to be set
      * @param       pageNick                      NickName for a page in the page table to be used
+     * @param       context                     An object to keep throughout Page transitions
      * 
      * @throws      PageNotFoundException         when pageNick is not in the page table
      * 
@@ -1390,7 +1404,8 @@ public final class OldStageManager {
      * @bug Smooth Stage resizing animation task cancellation
      */
     public void setPage(Stage stage,
-                        String pageNick) throws PageNotFoundException {
+                        String pageNick, 
+                        Object context) throws PageNotFoundException {
 
         if (pageNick == null) {
             logger.log(Level.SEVERE, "Home page has not been set");
@@ -1400,6 +1415,8 @@ public final class OldStageManager {
         if (pageTable.containsKey(pageNick) == false) {
             logger.log(Level.SEVERE, "Attempting to set unrecognized page pageNick '" + pageNick + "', current page will not be changed");
         }
+
+        this.context = context;
 
         PageMap mapOfPageToSet = pageTable.get(pageNick);
 
@@ -1433,15 +1450,15 @@ public final class OldStageManager {
                  */
 
                 stage.setWidth(prefWidth);
+                this.primaryStageWidth = prefWidth;
             }
 
             if (mapOfPageToSet.inheritHeight == false) {
                 double prefHeight = mapOfPageToSet.prefHeight.get();
                 stage.setHeight(this.titleBarHeight + prefHeight);
+                this.primaryStageHeight = this.titleBarHeight + prefHeight;
             }
         }
-
-        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
 
         if (this.primaryStageStyle == null
             || this.primaryStageStyle == StageStyle.DECORATED) {
@@ -1451,11 +1468,27 @@ public final class OldStageManager {
             /**
              * Children management for Stage with custom layout
              */
+            this.primaryStageScenePage.getChildren().remove(this.currentPrimaryStageScenePage);
             this.primaryStageScenePage.getChildren().add(pageTable.get(pageNick).parent);
+
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
 
             StackPane.setAlignment(pageTable.get(pageNick).parent, Pos.CENTER);
         }
+
+        ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefWidth(this.primaryStageWidth);
+        ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefHeight(this.primaryStageHeight);
+
+
+        // System.out.println("!! " + this.primaryStageScenePage.getChildren().get(0).getClass().getName());
+        System.out.println("!!!" + this.primaryStageScenePage.getChildren().get(1).getClass().getName());
+        System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefWidth());
+        System.out.println("!!!" + ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getPrefHeight());
+        System.out.println("!!!" + this.primaryStageWidth);
+
+        StackPane.setAlignment(this.primaryStageScenePage.getChildren().get(1), Pos.CENTER);
+
+        AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
 
         this.primaryStageTitleBar.toFront();
 
@@ -1470,6 +1503,7 @@ public final class OldStageManager {
      * Sets the current page
      * 
      * @param       pageNick                      NickName for a page in the page table to be used
+     * @param       context                     An object to keep throughout Page transitions
      * 
      * @throws      PageNotFoundException         when pageNick is not in the page table
      * 
@@ -1480,8 +1514,8 @@ public final class OldStageManager {
      * @todo option to perform smooth Stage resizing
      * @bug Smooth Stage resizing animation task cancellation
      */
-    public void setPage(String pageNick) throws PageNotFoundException {
-        setPage(this.primaryStage, pageNick);
+    public void setPage(String pageNick, Object context) throws PageNotFoundException {
+        setPage(this.primaryStage, pageNick, context);
     }
 
     /**
@@ -1500,12 +1534,14 @@ public final class OldStageManager {
     /**
      * Shows the primary Stage containing the home page
      * 
+     * @param       context                     An object to keep throughout Page transitions
+     * 
      * @throws      PageNotFoundException       when the home page has not been set
      * 
      * @see pageNick
      * @see defineHomeSceneTo
      */
-    public void activate() throws PageNotFoundException {
+    public void activate(Object context) throws PageNotFoundException {
         if (homePageNick == null) {
             logger.log(Level.SEVERE, "Cannot set initial page, home page has not been set");
 
@@ -1517,6 +1553,8 @@ public final class OldStageManager {
 
             return;
         }
+
+        this.context = context;
 
         if (primaryStageStyle == null
             || primaryStageStyle == StageStyle.DECORATED) {
@@ -1958,7 +1996,7 @@ public final class OldStageManager {
         if (stageStyle != StageStyle.UNDECORATED
             && stageStyle != StageStyle.TRANSPARENT) {
 
-            logger.log(Level.SEVERE, "Attempted to craft Stage with invalid StageStyle: " + stageStyle.name());
+            logger.log(Level.SEVERE, "Attempted to craft Stage with invalid StageStyle: '" + stageStyle.name() + "'");
 
             System.exit(1);
         }
@@ -2067,6 +2105,9 @@ public final class OldStageManager {
         // Page content
         mainPageContent.getChildren().add(pageTable.get(homePageNick).parent);
 
+        /**
+         * @important THIS IS IT!
+         */
         StackPane.setAlignment(pageTable.get(homePageNick).parent, Pos.CENTER);
 
         rootNode.getChildren().add(mainPageContent);

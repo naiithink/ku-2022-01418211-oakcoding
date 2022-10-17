@@ -29,6 +29,8 @@ public final class OakResourcePrefix {
 
     private static Path prefix;
 
+    private static Path dataDirPrefix;
+
     static {
         try {
             final URI uri = OakResourcePrefix.class.getClassLoader().getResource(OakAppDefaults.CONFIG_FILE.get("app.default.config.file")).toURI();
@@ -65,6 +67,8 @@ public final class OakResourcePrefix {
 
             System.exit(1);
         }
+
+        dataDirPrefix = prefix.resolve(OakAppDefaults.APP_INSTALL_DIR.value()).normalize();
     }
 
     public static Path getPrefix() {
@@ -87,5 +91,13 @@ public final class OakResourcePrefix {
 
     public static String getAbsolutePathString(Path path) {
         return path.toAbsolutePath().toString();
+    }
+
+    public static Path getDataDirPrefix() {
+        return dataDirPrefix;
+    }
+
+    public static void setDataDirPrefix(Path path) {
+        dataDirPrefix = path;
     }
 }

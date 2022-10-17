@@ -6,20 +6,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
 
-public class AutoUpdateCSV implements CSVBase<CSV> {
+import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 
-    private CSVBase<CSV> data;
+public class AutoUpdateCSV implements CSVBase<CSV>,
+                                      TableBaseData {
+
+    private CSV data;
 
     private CSVDataSource dataSource;
-
-    private Path path;
 
     public AutoUpdateCSV(String tableName, String primaryKey, String resourceName, Path path) throws FileNotFoundException {
         if (!Files.exists(path) || !Files.isRegularFile(path))
             throw new FileNotFoundException(path.toString());
 
-        this.path = path;
         this.dataSource = new CSVDataSource(tableName, primaryKey, resourceName, path);
         this.data = this.dataSource.readAll();
     }
@@ -63,6 +64,39 @@ public class AutoUpdateCSV implements CSVBase<CSV> {
                     continue;
             }
         }
+    }
+
+    public String getResourceName() {
+        return dataSource.getResourceName();
+    }
+
+    public void setResourceName(String resourceName) {
+        dataSource.setResourceName(resourceName);
+    }
+
+    public Path getPath() {
+        return dataSource.getPath();
+    }
+
+    public void setPath(Path path) {
+        dataSource.setPath(path);
+    }
+
+    public CSVDataSource getDataSource() {
+        return dataSource;
+    }
+
+    public boolean writeAll(CSVBase<CSV> data) {
+        return this.dataSource.writeAll(data);
+    }
+
+    public CSV readAll() {
+        return this.dataSource.readAll();
+    }
+
+    @Override
+    public Set<List<String>> getEntrySet() {
+        return this.data.getEntrySet();
     }
 
     @Override
@@ -141,6 +175,61 @@ public class AutoUpdateCSV implements CSVBase<CSV> {
     }
 
     @Override
+    public String getTableName() {
+        return data.getTableName();
+    }
+
+    @Override
+    public void setTableName(String tableName) {
+        data.setTableName(tableName);
+    }
+
+    @Override
+    public void renameTable(String tableName) {
+        data.renameTable(tableName);
+    }
+
+    @Override
+    public Set<String> getPrimaryKeySet() {
+        return data.getPrimaryKeySet();
+    }
+
+    @Override
+    public String getPrimaryKey() {
+        return data.getPrimaryKey();
+    }
+
+    @Override
+    public void setPrimaryKey(String primaryKey) {
+        data.setPrimaryKey(primaryKey);
+    }
+
+    @Override
+    public void changePrimaryKey(String primaryKey) {
+        data.changePrimaryKey(primaryKey);
+    }
+
+    @Override
+    public void changePrimaryKey(String oldPrimaryKey, String newPrimaryKey) {
+        data.changePrimaryKey(oldPrimaryKey, newPrimaryKey);
+    }
+
+    @Override
+    public boolean containsKey(String primaryKey) {
+        return data.containsKey(primaryKey);
+    }
+
+    @Override
+    public int getColumnIndex(String column) {
+        return data.getColumnIndex(column);
+    }
+
+    @Override
+    public String[] getTableHeader() {
+        return data.getTableHeader();
+    }
+
+    @Override
     public String toCSV(boolean upperCaseHeader, char enclosure) {
         return this.data.toCSV(upperCaseHeader, enclosure);
     }
@@ -151,11 +240,16 @@ public class AutoUpdateCSV implements CSVBase<CSV> {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        AutoUpdateCSV data = new AutoUpdateCSV("test", "name", "test", Paths.get("/Users/naiithink/projects/Gen/oakcoding/data/users/naiithink/info.csv"));
+        OakUserResource.newUserDirectory("naiithink");
+        AutoUpdateCSV data = new AutoUpdateCSV("test", "NAME", "test", Paths.get("/Users/naiithink/projects/Gen/oakcoding/test.csv"));
 
-        System.out.println(data);
+        // System.out.println(data);
 
-        System.out.println(data.getDataWhere("naiithink", "FIRST_NAME"));
+        // data.removeRecordWhere("NUMBER", "zzz", 2);
+
+        data.editRecord("ax", "A", "DFGHJK", false);
+
+        // System.out.println(data.getDataWhere("naiithink", "FIRST_NAME"));
         // data.startInteractiveShell();
     }
 }

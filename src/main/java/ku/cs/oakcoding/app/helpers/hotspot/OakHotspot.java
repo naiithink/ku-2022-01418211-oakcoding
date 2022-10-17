@@ -18,4 +18,12 @@ public final class OakHotspot {
     public static long getCurrentTime() {
         return Instant.now().toEpochMilli();
     }
+
+    public static boolean validUserName(String string) {
+        for (char c : string.toCharArray())
+            if (!(c >= 'a' && c <= 'z') && c != '_' && !(c >= 48 && c <= 57))
+                return false;
+
+        return true;
+    }
 }

@@ -10,6 +10,7 @@ package ku.cs.oakcoding.app.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +20,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
-public class UserController implements Initializable{
+public class UserController implements Initializable {
     @FXML
     private Pane createReportsUserPane;
 
@@ -63,8 +67,6 @@ public class UserController implements Initializable{
     @FXML
     private Pane settingUserPane;
 
-
-
     public void handleClickReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
@@ -91,13 +93,13 @@ public class UserController implements Initializable{
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
-        }
-
+    }
 
     public void handleClickCreateReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
-        createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane-seleted.png").toExternalForm()));
+        createReportImageView
+                .setImage(new Image(getClass().getResource("/images/paper-plane-seleted.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         createReportButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
@@ -120,6 +122,7 @@ public class UserController implements Initializable{
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
     }
+
     public void handleClickSetting(ActionEvent actionEvent) {
 
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
@@ -149,7 +152,12 @@ public class UserController implements Initializable{
     }
 
     public void handleClickLogoutButton(ActionEvent actionEvent) {
-//        ไว้จัดการการ logout ของ user
+        // ไว้จัดการการ logout ของ user
+        try {
+            OldStageManager.getStageManager().setPage("authentication", null);
+        } catch (PageNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
+        }
     }
 
     public void handleClickDashboard(ActionEvent actionEvent) {
@@ -158,7 +166,6 @@ public class UserController implements Initializable{
         createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane.png").toExternalForm()));
         settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home-seleted.png").toExternalForm()));
-
 
         dashboardButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
@@ -182,13 +189,13 @@ public class UserController implements Initializable{
         settingUserPane.setVisible(false);
     }
 
-
-    public void initPane(){
+    public void initPane() {
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
         settingUserPane.setVisible(false);
         welcomeUserPane.setVisible(true);
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();

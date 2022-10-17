@@ -11,7 +11,9 @@ package ku.cs.oakcoding.app.controllers;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,9 +27,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.Roles;
-import ku.cs.oakcoding.app.services.UserManager;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
 public class RegisterController implements Initializable {
     // User Register
@@ -132,12 +136,11 @@ public class RegisterController implements Initializable {
 
         File selectedFile = fileChooser.showOpenDialog(OldStageManager.getStageManager().getPrimaryStage());
 
-        if (selectedFile == null) {
-
-            return;
+        if (Objects.nonNull(selectedFile)) {
+            this.profileImagePath = selectedFile.toPath();
+            nameProfileUploadLabel.setText(this.profileImagePath.getFileName().toString());
+            nameProfileUploadLabel.setVisible(true);
         }
-
-        this.profileImagePath = selectedFile.toPath();
     }
 
     @FXML
@@ -152,20 +155,33 @@ public class RegisterController implements Initializable {
 
     @FXML
     void handleRegisterUserButton(ActionEvent event) {
-        String fName = firstNameField.getText();
-        String lName = lastNameField.getText();
         String userName = userNameField.getText();
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
         String password = passwordField.getText();
         String passwordConfirm = passwordConfirmField.getText();
 
-        UserManager.register(Roles.CONSUMER, fName, lName, userName, password, passwordConfirm, profileImagePath);
+        userNameField.clear();
+        firstNameField.clear();
+        lastNameField.clear();
+        passwordField.clear();
+        passwordConfirmField.clear();
+        nameProfileUploadLabel.setText("");
+        nameProfileUploadLabel.setVisible(false);
 
+        AccountService.getUserManager().register(null, userName, Roles.CONSUMER, firstName, lastName, profileImagePath, password, passwordConfirm);
+        try {
+            OldStageManager.getStageManager().setPage("authentication", null);
+        } catch (PageNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Page not found");
+        }
     }
 
     public void initPane() {
         userRegisterPane.setVisible(true);
         addOrganizationPane.setVisible(false);
         addStaffRegisterPane.setVisible(false);
+        nameProfileUploadLabel.setVisible(false);
     }
 
     @Override

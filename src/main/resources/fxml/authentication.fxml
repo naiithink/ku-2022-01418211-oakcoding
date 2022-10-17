@@ -69,7 +69,7 @@
                   <Font name="Kanit" size="34.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameTextField" layoutX="53.0" layoutY="180.0" prefHeight="31.0" prefWidth="199.0" styleClass="text-field">
+            <TextField fx:id="userNameTextField" layoutX="53.0" layoutY="180.0" prefHeight="31.0" prefWidth="199.0" styleClass="text-field">
                <font>
                   <Font size="14.0" />
                </font>

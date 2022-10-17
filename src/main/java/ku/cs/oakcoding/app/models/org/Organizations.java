@@ -7,6 +7,7 @@ public final class Organizations {
     private Organizations() {}
 
     public static Organization newOrganization(String organizationName) {
+        
         return new Organization(OakID.generate(Organization.class.getSimpleName()), organizationName);
     }
 }

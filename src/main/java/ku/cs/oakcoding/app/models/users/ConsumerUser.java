@@ -8,41 +8,20 @@
 
 package ku.cs.oakcoding.app.models.users;
 
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import java.nio.file.Path;
 
 public final class ConsumerUser
         extends User {
 
-    private final DataFile dataFile = DataFile.USER_PROFILE;
-
-    public ConsumerUser(Roles role,
+    public ConsumerUser(final String UID,
+                        String userName,
+                        Roles role,
                         String firstName,
                         String lastName,
-                        String userName,
-                        String password,
-                        ProfileImageState profileImageState,
-                        boolean isActive) {
+                        boolean usingDefaultProfileImage,
+                        String profileImageExtension,
+                        Path profileImagePath) {
 
-        super(role, firstName, lastName, userName, password,profileImageState);
-        this.isActive = isActive;
+        super(UID, userName, role, firstName, lastName, usingDefaultProfileImage, profileImageExtension, profileImagePath);
     }
-
-    public DataFile getDataFile (){
-        return dataFile;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "role=" + role +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", profileImage=" + profileImageState +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", dataFile=" + dataFile +
-                '}';
-    }
-
-
 }

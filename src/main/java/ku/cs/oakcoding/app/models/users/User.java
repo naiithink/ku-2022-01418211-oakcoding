@@ -8,9 +8,15 @@
 
 package ku.cs.oakcoding.app.models.users;
 
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class User {
+
+    protected final String UID;
+
+    protected String userName;
 
     protected Roles role;
 
@@ -18,52 +24,41 @@ public abstract class User {
 
     protected String lastName;
 
-    protected ProfileImageState profileImageState;
+    protected boolean usingDefaultProfileImage;
 
-    protected String userName;
+    protected String profileImageExtension;
 
-    protected String password;
-    protected boolean isActive;
+    protected Path profileImagePath;
 
-    protected DataFile dataFile;
+    public User(final String UID,
+                String userName,
+                Roles role,
+                String firstName,
+                String lastName,
+                boolean usingDefaultProfileImage,
+                String profileImageExtension,
+                Path profileImagePath) {
 
-    public User(Roles role,
-            String firstName,
-            String lastName,
-            String userName,
-            String password,
-            ProfileImageState profileImageState) {
-
-        this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profileImageState = profileImageState;
+        this.UID = UID;
         this.userName = userName;
-        this.password = password;
-    }
-
-    public void setRole(Roles role) {
         this.role = role;
-    }
-
-    public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.usingDefaultProfileImage = usingDefaultProfileImage;
+        this.profileImageExtension = profileImageExtension;
+        this.profileImagePath = profileImagePath;
     }
 
-    public void setProfileImageState(ProfileImageState profileImageState) {
-        this.profileImageState = profileImageState;
+    public String getUID() {
+        return UID;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Roles getRole() {
@@ -74,69 +69,44 @@ public abstract class User {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
-    public ProfileImageState getProfileImageState() {
-        return profileImageState;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public Path getProfileImagePath() {
+        return profileImagePath;
     }
 
-    public String getPassword() {
-        return password;
+    public void setProfileImagePath(Path profileImagePath) {
+        this.profileImagePath = profileImagePath;
     }
 
-    public boolean verifyPassword(String seed) {
-        if (password.equals(seed)) {
-            return true;
-        }
+    public List<String> toCSVList() {
+        List<String> res = new ArrayList<>();
 
-        return false;
-    }
+        res.add(UID);
+        res.add(userName);
+        res.add(role.name());
+        res.add(firstName);
+        res.add(lastName);
+        res.add(String.valueOf(usingDefaultProfileImage));
+        res.add(profileImageExtension);
 
-    public void setNewPassword(String password) {
-        this.password = password;
-    }
-
-    public void changePassword(String newPassword) {
-        // if (UserManager.changePassword(this.userName, newPassword)) {
-        // DataSourceCSV userCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER);
-        // DataList users = (DataList) userCSV.readData();
-        // User user = users.getUser(this.userName);
-        //
-        //
-        // users.removeUserMap(this.userName);
-        // user.setNewPassword(newPassword);
-        // users.addUserMap(this.userName, user);
-        //
-        // userCSV.clearData();
-        // userCSV.writeData(users);
-        // }
-
-    }
-
-    public boolean getIsActive() {
-        return isActive;
-    }
-
-    public DataFile getDataFile() {
-        return dataFile;
+        return res;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "role=" + role +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", profileImage=" + profileImageState +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", dataFile=" + dataFile +
-                '}';
+        return "User [UID=" + UID + ", userName=" + userName + ", role=" + role + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", usingDefaultProfileImage=" + usingDefaultProfileImage
+                + ", profileImageExtension=" + profileImageExtension + ", profileImagePath=" + profileImagePath + "]";
     }
 }

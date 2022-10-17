@@ -1,5 +1,7 @@
 package ku.cs.oakcoding.app.services.data_source;
 
+import java.util.Set;
+
 public interface TableBaseData {
 
     String getTableName();
@@ -7,6 +9,8 @@ public interface TableBaseData {
     void setTableName(String tableName);
 
     void renameTable(String tableName);
+
+    Set<String> getPrimaryKeySet();
 
     String getPrimaryKey();
 

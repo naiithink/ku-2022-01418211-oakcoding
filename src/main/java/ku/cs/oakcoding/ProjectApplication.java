@@ -9,6 +9,7 @@
 package ku.cs.oakcoding;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.NotDirectoryException;
 import java.util.logging.Level;
 
@@ -20,8 +21,10 @@ import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.configurations.OakSystemDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResource;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.MalformedFXMLIndexFileException;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.NoControllerSpecifiedException;
@@ -30,14 +33,22 @@ import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException
 public class ProjectApplication extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws NotDirectoryException,
-                                                 FileNotFoundException {
+    public void start(Stage primaryStage) throws IOException {
 
         OakLogger.log(Level.INFO, "App is loading...");
+
+        OakResource.fixDataDirectoryMissingNodes();
+
+        startServices();
 
         configStageManager(primaryStage);
 
         OakLogger.log(Level.INFO, "Welcome to " + OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()));
+    }
+
+    private void startServices() {
+        AccountService accountService = new AccountService();
+        accountService.start();
     }
 
     private void configStageManager(Stage primaryStage) throws NotDirectoryException,
@@ -55,7 +66,6 @@ public class ProjectApplication extends Application {
                                    OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
                                    this,
                                    primaryStage,
-                                   true,
                                    OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
@@ -69,7 +79,7 @@ public class ProjectApplication extends Application {
 
             stageManager.autoDefineHomePage();
 
-            stageManager.activate();
+            stageManager.activate(null);
         } catch (MalformedFXMLIndexFileException e) {
             OakLogger.log(Level.SEVERE, "Malformed FXML index file");
         } catch (PageNotFoundException e) {

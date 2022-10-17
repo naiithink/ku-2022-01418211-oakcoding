@@ -9,8 +9,9 @@
 package ku.cs.oakcoding.app.controllers;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
@@ -25,11 +26,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.User;
-import ku.cs.oakcoding.app.models.users.UsersList;
-import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
 
@@ -53,7 +52,7 @@ public class AuthenticationController implements Initializable {
     private PasswordField passwordField;
 
     @FXML
-    private TextField usernameTextField;
+    private TextField userNameTextField;
 
     @FXML
     private ImageView backButtonGoToGetStartedPage;
@@ -67,16 +66,31 @@ public class AuthenticationController implements Initializable {
     private Label tryAgianLabel;
 
 
-    private DataSourceCSV<UsersList> dataSourceCSV;
+    // private DataSourceCSV<UsersList> dataSourceCSV;
     //    private UsersList usersList = new UsersList();
     private ObservableSet<User> observableUserSet = FXCollections.observableSet();
 
     @FXML
     void handleLoginButton(ActionEvent event) {
-        DataSourceCSV<UsersList> dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
-        UsersList newUsersList = dataSourceListCSV.readData();
-        Set<User> hashSet = newUsersList.getUsers();
-        String username = usernameTextField.getText();
+        // DataSourceCSV<UsersList> dataSourceListCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
+        // UsersList newUsersList = dataSourceListCSV.readData();
+        // Set<User> hashSet = newUsersList.getUsers();
+        String userName = userNameTextField.getText();
+        String password = passwordField.getText();
+
+        User user = AccountService.getUserManager().login(userName, password);
+
+        if (Objects.nonNull(user)) {
+            try {
+                switch (user.getRole()) {
+                    case CONSUMER -> OldStageManager.getStageManager().setPage("user", user);
+                    case STAFF -> OldStageManager.getStageManager().setPage("staff", user);
+                    case ADMIN -> OldStageManager.getStageManager().setPage("admin", user);
+                }
+            } catch (PageNotFoundException e) {
+                OakLogger.log(Level.SEVERE, "Page not found");
+            }
+        }
 //        emergency !!!!!!!!!!!
     }
 
@@ -90,7 +104,7 @@ public class AuthenticationController implements Initializable {
 
     public void handleRegisterUserHereToRegisterPage(ActionEvent actionEvent) {
         try {
-            OldStageManager.getStageManager().setPage("register");
+            OldStageManager.getStageManager().setPage("register", null);
         } catch (PageNotFoundException e) {
             e.printStackTrace();
         }

@@ -8,7 +8,6 @@
 
 package ku.cs.oakcoding.app.controllers;
 
-
 import java.io.BufferedWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,12 +31,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.User;
-import ku.cs.oakcoding.app.models.users.UsersList;
-import ku.cs.oakcoding.app.services.FactoryDataSourceCSV;
-import ku.cs.oakcoding.app.services.data_source.csv.DataSourceCSV;
+import ku.cs.oakcoding.app.models.users.UserEntry;
+import ku.cs.oakcoding.app.services.AccountService;
 
 public class AdminController implements Initializable {
 
@@ -150,7 +147,7 @@ public class AdminController implements Initializable {
     private ImageView userImageView;
 
     @FXML
-    private TableView<User> userListTableView;
+    private TableView<UserEntry> userListTableView;
 
     @FXML
     private TableColumn<User, String> firstNameCol;
@@ -163,14 +160,22 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<User, String> userNameCol;
 
-    private DataSourceCSV<UsersList> dataSourceCSV;
-//    private UsersList usersList = new UsersList();
-    private ObservableSet<User> observableUserSet = FXCollections.observableSet();
+    // private DataSourceCSV<UsersList> dataSourceCSV;
+    // private UsersList usersList = new UsersList();
+    private ObservableSet<UserEntry> observableUserSet = FXCollections.observableSet();
+
     private void initTableView() {
 
-        dataSourceCSV = FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
-        observableUserSet.addAll(dataSourceCSV.readData().getUsers());
-//        usersList = dataSourceCSV.readData();
+        // dataSourceCSV =
+        // FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
+
+        /**
+         * @todo Read AdminUser instance
+         */
+        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager()
+                .login("_ROOT", "admin")) /* dataSourceCSV.readData().getUsers() */);
+
+        // usersList = dataSourceCSV.readData();
         userListTableView.setEditable(true);
         roleCol.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
         firstNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
@@ -189,24 +194,32 @@ public class AdminController implements Initializable {
         showListView();
 
     }
+
     private void showListView() {
         userListTableView.getItems().addAll(observableUserSet);
         userListTableView.refresh();
     }
+
     @FXML
     void handleClickComplaints(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle-seleted.png").toUri().toURL().toString()));
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle-seleted.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
-
 
         complaintsButton.setStyle("-fx-text-fill: #FFFFFF;" +
                 "-fx-background-color: #7986CD;" +
@@ -248,13 +261,20 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickDashboard(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home-seleted.png").toUri().toURL().toString()));
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home-seleted.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -294,7 +314,6 @@ public class AdminController implements Initializable {
         requestPane.setVisible(false);
         settingPane.setVisible(false);
 
-
     }
 
     @FXML
@@ -305,19 +324,26 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickOrganizations(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
 
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
 
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
 
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building-seleted.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building-seleted.png").toUri().toURL().toString()));
 
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
 
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
 
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -362,19 +388,26 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickReport(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
 
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
 
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
 
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
 
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines-seleted.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines-seleted.png").toUri().toURL().toString()));
 
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
 
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -414,24 +447,31 @@ public class AdminController implements Initializable {
         reportPane.setVisible(true);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
-            }
+    }
 
     @FXML
     void handleClickRequest(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
 
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
 
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
 
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
 
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
 
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope-seleted.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope-seleted.png").toUri().toURL().toString()));
 
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -475,19 +515,26 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickSetting(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
 
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag.png").toUri().toURL().toString()));
 
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
 
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
 
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
 
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
 
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings-seleted.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings-seleted.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -534,13 +581,20 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickUser(ActionEvent event) {
         try {
-            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("home.png").toUri().toURL().toString()));
-            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("flag-seleted.png").toUri().toURL().toString()));
-            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("comment-alt-middle.png").toUri().toURL().toString()));
-            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("building.png").toUri().toURL().toString()));
-            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("calendar-lines.png").toUri().toURL().toString()));
-            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("envelope.png").toUri().toURL().toString()));
-            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images").resolve("settings.png").toUri().toURL().toString()));
+            dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("home.png").toUri().toURL().toString()));
+            userImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("flag-seleted.png").toUri().toURL().toString()));
+            complaintsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("comment-alt-middle.png").toUri().toURL().toString()));
+            organizationsImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("building.png").toUri().toURL().toString()));
+            reportImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("calendar-lines.png").toUri().toURL().toString()));
+            requestImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("envelope.png").toUri().toURL().toString()));
+            settingImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
+                    .resolve("settings.png").toUri().toURL().toString()));
         } catch (MalformedURLException e) {
             OakLogger.log(Level.SEVERE, "Got 'MalformedURLException' while loading menu icons");
         }
@@ -583,7 +637,8 @@ public class AdminController implements Initializable {
         settingPane.setVisible(false);
 
     }
-    public void initPane(){
+
+    public void initPane() {
         welcomePane.setVisible(true);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -593,31 +648,33 @@ public class AdminController implements Initializable {
         settingPane.setVisible(false);
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
         initTableView();
     }
-    public void handleSave(ActionEvent actionEvent) throws Exception{
+
+    public void handleSave(ActionEvent actionEvent) throws Exception {
         // Writer writer = null;
 
         System.out.println(OakResourcePrefix.getPrefix().getParent().toString());
-        System.out.println(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data").resolve("loveJava.csv").toAbsolutePath().toString());
+        System.out.println(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data")
+                .resolve("loveJava.csv").toAbsolutePath().toString());
 
-        try (BufferedWriter writer = Files.newBufferedWriter(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data").resolve("loveJava.csv"))) {
-            for (User user : observableUserSet) {
+        try (BufferedWriter writer = Files.newBufferedWriter(OakResourcePrefix.getPrefix().getParent()
+                .getParent().resolve("data").resolve("loveJava.csv"))) {
+            for (UserEntry user : observableUserSet) {
                 String text = user.getFirstName() + ";" + user.getLastName() + ";" + "\n";
                 writer.write(text);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
 
             // writer.flush();
             // writer.close();
         }
     }
-
 
 }

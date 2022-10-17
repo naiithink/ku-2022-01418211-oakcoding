@@ -8,6 +8,6 @@ public final class OakID {
     private OakID() {}
 
     public static String generate(String suffix) {
-        return Long.toString(Instant.now().toEpochMilli()) + OakAppConfigs.getProperty("app.id.separator") + suffix;
+        return Long.toString(Instant.now().toEpochMilli()) + OakAppConfigs.getProperty("app.id.separator") + suffix.toLowerCase();
     }
 }

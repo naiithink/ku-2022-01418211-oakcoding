@@ -68,7 +68,7 @@ public class CSV
     public <T extends List<String>> CSV(String tableName, T header, String primaryKey) {
 
         if (header.contains(primaryKey) == false) {
-            System.err.println("the given header does not contain primaryKey");
+            logger.log(Level.SEVERE, "The given header does not contain primaryKey");
             System.exit(1);
         }
 
@@ -102,7 +102,7 @@ public class CSV
                 this.primaryKeyIndex = i;
                 break;
             } else if (i == u) {
-                System.err.println("the given header does not contain primaryKey");
+                logger.log(Level.SEVERE, "The given header does not contain primaryKey");
                 System.exit(1);
             }
         }
@@ -136,6 +136,11 @@ public class CSV
     }
 
     @Override
+    public Set<String> getPrimaryKeySet() {
+        return this.data.keySet();
+    }
+
+    @Override
     public String getPrimaryKey() {
         return primaryKey;
     }
@@ -160,7 +165,7 @@ public class CSV
     @Override
     public void changePrimaryKey(String oldPrimaryKey, String newPrimaryKey) {
         if (this.primaryKey.equals(oldPrimaryKey) == false) {
-            System.err.println("Failed to check the current primary key");
+            logger.log(Level.SEVERE, "Failed to check the current primary key");
             return;
         }
 
@@ -183,12 +188,23 @@ public class CSV
     }
 
     @Override
+    public Set<List<String>> getEntrySet() {
+        Set<List<String>> res = new HashSet<>();
+
+        for (String key : this.data.keySet()) {
+            res.add(this.data.get(key));
+        }
+
+        return res;
+    }
+
+    @Override
     public int addRecord(String[] record) {
         if (Objects.isNull(record)) {
-            System.err.println("record is null");
+            logger.log(Level.SEVERE, "Record is null");
             return 0;
         } else if (record.length != header.size()) {
-            System.err.println("record length does not match the header");
+            logger.log(Level.SEVERE, "Record length does not match the header");
             return 0;
         }
 
@@ -209,10 +225,10 @@ public class CSV
     @Override
     public <T extends List<String>> int addRecord(T record) {
         if (Objects.isNull(record)) {
-            System.err.println("record is null");
+            logger.log(Level.SEVERE, "Record is null");
             return 0;
         } else if (record.size() != header.size()) {
-            System.err.println("record length does not match the header");
+            logger.log(Level.SEVERE, "record length does not match the header");
             return 0;
         }
 
@@ -265,10 +281,10 @@ public class CSV
     @Override
     public boolean removeRecordWhere(String primaryKeyEqualsTo) {
         if (Objects.isNull(primaryKeyEqualsTo)) {
-            System.err.println("Invalid argument");
+            logger.log(Level.SEVERE, "Invalid argument");
             return false;
         } else if (this.data.containsKey(primaryKeyEqualsTo) == false) {
-            System.err.println("Non existing record");
+            logger.log(Level.SEVERE, "Non existing record");
             return false;
         }
 
@@ -280,7 +296,7 @@ public class CSV
     @Override
     public int removeRecordWhere(String column, String equalsTo, int limit) {
         if (Objects.isNull(column) || Objects.isNull(equalsTo)) {
-            System.err.println("Invalid argument");
+            logger.log(Level.SEVERE, "Invalid argument");
             return 0;
         }
 
@@ -290,18 +306,16 @@ public class CSV
 
         Iterator<Entry<String, List<String>>> recordEntries = this.data.entrySet().iterator();
 
-        while (recordEntries.hasNext()) {
+        while (limit > 0 && recordEntries.hasNext()) {
             Entry<String, List<String>> record = recordEntries.next();
 
             if (this.data.get(record.getKey()).get(index).equals(equalsTo)
                 || this.data.get(record.getKey()).get(index).equals(equalsTo.replaceAll(this.CONTENT_NL_REPLACEMENT, "\n"))) {
 
                 markedPrimaryKeys.add(record.getKey());
+                limit--;
                 res++;
             }
-
-            if (limit > 0 && res >= limit)
-                break;
         }
 
         for (String primaryKey : markedPrimaryKeys) {
@@ -338,7 +352,7 @@ public class CSV
     @Override
     public String getDataWhere(String primaryKey, String column) {
         if (this.data.containsKey(primaryKey) == false) {
-            System.err.println("Key does not exist.");
+            logger.log(Level.SEVERE, "Key does not exist");
             return null;
         }
 
@@ -350,15 +364,15 @@ public class CSV
         boolean isUpperCased = false;
 
         if (this.data.containsKey(primaryKey) == false) {
-            System.err.println("Record does not exist.");
+            logger.log(Level.SEVERE, "Record does not exist");
             return false;
         } else if (getColumnIndex(column) == this.primaryKeyIndex && !overridePrimaryKey) {
-            System.err.println("Attempting to edit primary key, check argument to allow overriding.");
+            logger.log(Level.SEVERE, "Attempting to edit primary key, check argument to allow overriding.");
             return false;
         } else if (this.header.contains(column) == false
                    && (isUpperCased = this.header.contains(column.toUpperCase())) == false) {
 
-            OakLogger.log(Level.SEVERE, "Attempting to edit non existing column");
+            logger.log(Level.SEVERE, "Attempting to edit non existing column");
             return false;
         }
 

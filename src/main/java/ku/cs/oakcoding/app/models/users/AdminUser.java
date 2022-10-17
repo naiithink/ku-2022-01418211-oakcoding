@@ -8,7 +8,8 @@
 
 package ku.cs.oakcoding.app.models.users;
 
-import ku.cs.oakcoding.app.helpers.hotspot.DataFile;
+import java.nio.file.Path;
+
 import ku.cs.oakcoding.app.models.complaints.Report;
 import ku.cs.oakcoding.app.models.complaints.Resolver;
 
@@ -16,21 +17,17 @@ public final class AdminUser
         extends User
         implements Resolver<Report> {
 
-    private final boolean isActive = true;
+    private final Roles role = Roles.ADMIN;
 
-    private final DataFile dataFile = DataFile.USER_PROFILE;
+    public AdminUser(final String UID,
+                     final String userName,
+                     final String firstName,
+                     final String lastName,
+                     final boolean usingDefaultProfileImage,
+                     final String profileImageExtension,
+                     final Path profileImagePath) {
 
-    public AdminUser(Roles role,
-                     String firstName,
-                     String lastName,
-                     String userName,
-                     String password,
-                     ProfileImageState profileImageState) {
-
-        super(role, firstName, lastName, userName, password,profileImageState);
-    }
-
-    public DataFile getDataFile (){
-        return dataFile;
+        super(UID, userName, Roles.ADMIN, firstName, lastName, usingDefaultProfileImage, profileImageExtension, profileImagePath);
+        // super("0000000000000-adminuser", "_ROOT", Roles.ADMIN, "admin", "oakcoding", true, "png", OakUserResource.getDefaultProfileImagePath());
     }
 }

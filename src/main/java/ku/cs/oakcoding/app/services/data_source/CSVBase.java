@@ -1,8 +1,11 @@
 package ku.cs.oakcoding.app.services.data_source;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CSVBase<T> {
+
+    Set<List<String>> getEntrySet();
 
     int addRecord(String[] record);
 
