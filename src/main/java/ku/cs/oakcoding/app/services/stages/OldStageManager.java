@@ -60,7 +60,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.event.EventType;
@@ -264,6 +266,8 @@ public final class OldStageManager {
      * Current root page/Node/Parent of the primary Stage
      */
     private Parent currentPrimaryStageScenePage;
+
+    private ObjectProperty<String> currentPrimaryStageScenePageNick = new SimpleObjectProperty<>("DNE");
 
     private StackPane currentPrimaryStageScenePageContent;
 
@@ -672,6 +676,17 @@ public final class OldStageManager {
 
     public Stage getPrimaryStage() {
         return this.primaryStage;
+    }
+
+    public ObjectProperty<String> getCurrentPrimaryStageScenePageNickProperty() {
+        return this.currentPrimaryStageScenePageNick;
+    }
+
+    public boolean checkCurrentPage(String pageNick) {
+        if (this.currentPrimaryStageScenePageNick.isNull().get())
+            return false;
+        else
+            return this.currentPrimaryStageScenePageNick.get().equals(pageNick);
     }
 
     /**
@@ -1491,11 +1506,12 @@ public final class OldStageManager {
 
         // StackPane.setAlignment(this.primaryStageScenePage.getChildren().get(1), Pos.CENTER);
 
-
         if (this.alwaysCenteredStage) {
             System.out.println("!!!");
             this.primaryStage.centerOnScreen();
         }
+
+        this.currentPrimaryStageScenePageNick.set(pageNick);
 
         logger.log(Level.INFO, "Current page has been set to '" + pageNick + "'");
     }
@@ -1579,6 +1595,7 @@ public final class OldStageManager {
 
         this.primaryStage.setFullScreenExitHint("กด ESC เพื่อออกจากโหมด Full-screen");
         this.primaryStage.setResizable(true);
+        this.currentPrimaryStageScenePageNick.set(homePageNick);
 
         logger.log(Level.INFO, "Activated Stage");
     }
