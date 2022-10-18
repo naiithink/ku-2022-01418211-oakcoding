@@ -37,7 +37,8 @@ import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.User;
 import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
-import ku.cs.oakcoding.app.services.stages.OldStageManager;
+import ku.cs.oakcoding.app.services.stages.StageManager;
+
 
 public class AdminController implements Initializable {
 
@@ -330,8 +331,8 @@ public class AdminController implements Initializable {
             firstNameLabelAccount.setText("");
             lastNameLabel.setText("");
             picProfileSettingLabel.setImage(null);
-            OldStageManager.getStageManager().setPage("authentication", null);
-        } catch (OldStageManager.PageNotFoundException e) {
+            StageManager.getStageManager().setPage("authentication", null);
+        } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -596,7 +597,7 @@ public class AdminController implements Initializable {
 
 
     void setProfileLabel(){
-        AdminUser admin = (AdminUser) OldStageManager.getStageManager().getContext();
+        AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
         userNameLabel.setText(admin.getUserName());
         statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
         firstNameLabelAccount.setText(admin.getFirstName());
@@ -679,7 +680,7 @@ public class AdminController implements Initializable {
 
     }
     public void setMyPane() {
-            AdminUser admin = (AdminUser) OldStageManager.getStageManager().getContext();
+            AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
             fullNameLabelAccountSetting.setText(admin.getFirstName());
             statusLabel.setText(admin.getRole().getPrettyPrinted());
 
@@ -690,10 +691,10 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
-        initTableView();
 
-        OldStageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("admin")) {
+                initTableView();
                 setMyPane();
             }
         });
@@ -701,24 +702,24 @@ public class AdminController implements Initializable {
 
     public void handleSave(ActionEvent actionEvent) throws Exception {
         // Writer writer = null;
-
-        System.out.println(OakResourcePrefix.getPrefix().getParent().toString());
-        System.out.println(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data")
-                .resolve("loveJava.csv").toAbsolutePath().toString());
-
-        try (BufferedWriter writer = Files.newBufferedWriter(OakResourcePrefix.getPrefix().getParent()
-                .getParent().resolve("data").resolve("loveJava.csv"))) {
-            for (UserEntry user : observableUserSet) {
-                String text = user.getFirstName() + ";" + user.getLastName() + ";" + "\n";
-                writer.write(text);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-
-            // writer.flush();
-            // writer.close();
-        }
+//
+//        System.out.println(OakResourcePrefix.getPrefix().getParent().toString());
+//        System.out.println(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data")
+//                .resolve("loveJava.csv").toAbsolutePath().toString());
+//
+//        try (BufferedWriter writer = Files.newBufferedWriter(OakResourcePrefix.getPrefix().getParent()
+//                .getParent().resolve("data").resolve("loveJava.csv"))) {
+//            for (UserEntry user : observableUserSet) {
+//                String text = user.getFirstName() + ";" + user.getLastName() + ";" + "\n";
+//                writer.write(text);
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        } finally {
+//
+//            // writer.flush();
+//            // writer.close();
+//        }
     }
 
 }

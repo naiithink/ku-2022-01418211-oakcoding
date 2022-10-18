@@ -26,11 +26,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.User;
 import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
-import ku.cs.oakcoding.app.services.stages.OldStageManager;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.StageManager;
 
 public class AuthenticationController implements Initializable {
     @FXML
@@ -77,8 +77,8 @@ public class AuthenticationController implements Initializable {
         // Set<User> hashSet = newUsersList.getUsers();
         String userName = userNameTextField.getText();
         String password = passwordField.getText();
-        Set<UserEntry> entries = AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager().login("_ROOT","admin"));
-        for (UserEntry entry: entries) {
+        Set<FullUserEntry> entries = AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager().login("_ROOT","admin"));
+        for (FullUserEntry entry: entries) {
             OakLogger.log(Level.SEVERE, entry.getFirstName());
 
         }
@@ -89,11 +89,11 @@ public class AuthenticationController implements Initializable {
         if (Objects.nonNull(user)) {
             try {
                 switch (user.getRole()) {
-                    case CONSUMER -> OldStageManager.getStageManager().setPage("user", user);
-                    case STAFF -> OldStageManager.getStageManager().setPage("staff", user);
-                    case ADMIN -> OldStageManager.getStageManager().setPage("admin", user);
+                    case CONSUMER -> StageManager.getStageManager().setPage("user", user);
+                    case STAFF -> StageManager.getStageManager().setPage("staff", user);
+                    case ADMIN -> StageManager.getStageManager().setPage("admin", user);
                 }
-            } catch (PageNotFoundException e) {
+            } catch (StageManager.PageNotFoundException e) {
                 OakLogger.log(Level.SEVERE, "Page not found");
             }
         }
@@ -117,8 +117,8 @@ public class AuthenticationController implements Initializable {
 
     public void handleRegisterUserHereToRegisterPage(ActionEvent actionEvent) {
         try {
-            OldStageManager.getStageManager().setPage("register", null);
-        } catch (PageNotFoundException e) {
+            StageManager.getStageManager().setPage("register", null);
+        } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
         }
     }

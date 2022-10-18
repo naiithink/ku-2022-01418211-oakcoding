@@ -95,7 +95,7 @@
             </Label>
             <Button fx:id="logoutButton" layoutX="142.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleClickLogoutButton" prefHeight="17.0" prefWidth="23.0" styleClass="button-third-dashboard-nav" textFill="#e0e0e1">
                <graphic>
-                  <ImageView  fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/sign-out-alt.png" />
                      </image>
@@ -140,16 +140,16 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
             <TableView fx:id="userListTableView" layoutX="14.0" layoutY="76.0" prefHeight="298.0" prefWidth="630.0" stylesheets="@../css/table-view.css">
               <columns>
-                <TableColumn fx:id="roleCol" prefWidth="94.0" text="role" />
+                <TableColumn fx:id="profileImageCol" prefWidth="94.0" text="ProfileImage" />
                 <TableColumn fx:id="firstNameCol" prefWidth="186.0" text="firstName" />
                   <TableColumn fx:id="lastNameCol" prefWidth="138.0" text="lastName" />
-                  <TableColumn fx:id="userNameCol" prefWidth="211.0" text="userName" />
+                  <TableColumn fx:id="lastNameCol" prefWidth="211.0" text="LastLogin" />
               </columns>
             </TableView>
             <Button layoutX="303.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleSave" styleClass="button-red" text="อัปเดท" />
@@ -191,7 +191,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="57.0" layoutY="39.0" text="ร้องขอ" textFill="WHITE" />
             <Line endX="405.0" layoutX="158.0" layoutY="75.0" startX="-100.0" stroke="#2a2c32" />

@@ -27,8 +27,8 @@ import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.AccountService;
-import ku.cs.oakcoding.app.services.stages.OldStageManager;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.StageManager;
+
 
 public class RegisterController implements Initializable {
     // User Register
@@ -121,8 +121,8 @@ public class RegisterController implements Initializable {
     @FXML
     void handleBackButtonGoToLoginPage(MouseEvent event) {
         try {
-            OldStageManager.getStageManager().setPage("authentication", null);
-        } catch (OldStageManager.PageNotFoundException e) {
+            StageManager.getStageManager().setPage("authentication", null);
+        } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -136,7 +136,7 @@ public class RegisterController implements Initializable {
             new ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
         );
 
-        File selectedFile = fileChooser.showOpenDialog(OldStageManager.getStageManager().getPrimaryStage());
+        File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
 
         if (Objects.nonNull(selectedFile)) {
             this.profileImagePath = selectedFile.toPath();
@@ -176,8 +176,8 @@ public class RegisterController implements Initializable {
             handleAlertSuccess();
         AccountService.getUserManager().register(null, userName, Roles.CONSUMER, firstName, lastName, profileImagePath, password, passwordConfirm);
         try {
-            OldStageManager.getStageManager().setPage("authentication", null);
-        } catch (PageNotFoundException e) {
+            StageManager.getStageManager().setPage("authentication", null);
+        } catch (StageManager.PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Page not found");
         }
     }
