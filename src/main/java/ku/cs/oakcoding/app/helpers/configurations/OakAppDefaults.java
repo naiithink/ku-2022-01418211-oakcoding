@@ -39,6 +39,8 @@ public enum OakAppDefaults {
     APP_ORG_FILE                    ("app.orgs.file",               "orgs.csv"),
     APP_DEP_DIR                     ("app.deps.dir",                "deps"),
     APP_DEP_FILE                    ("app.deps.file",               "deps.csv"),
+    APP_DEP_MEMBERS_FILE            ("app.deps.members.file",       "members.csv"),
+    APP_DEP_TAGS_FILE               ("app.deps.tags.file",          "tags.csv"),
     APP_USER_PROFILE_IMAGE_NAME     ("app.users.profile",           "profile"),
     ID_SEPARATOR                    ("app.id.separator",            "-"),
     LOG_FILE_DIR                    ("app.resource.log.dir",        "logs"),

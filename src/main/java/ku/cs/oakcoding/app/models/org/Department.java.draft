@@ -1,0 +1,107 @@
+package ku.cs.oakcoding.app.models.org;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.logging.Level;
+
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+import javafx.collections.ObservableSet;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.complaints.CaseAssignable;
+import ku.cs.oakcoding.app.models.users.StaffUser;
+
+public class Department
+        implements CaseAssignable {
+
+    private final String ORG_ID;
+
+    protected final String DEP_ID;
+
+    protected final ReadOnlyStringWrapper departmentName;
+
+    protected final ObservableMap<String, StaffUser> departmentStaffMembers;
+
+    private final ObservableSet<String> asssignedCategories;
+
+    public Department(String organizationID,
+                      String departmentID,
+                      String departmentName,
+                      Set<StaffUser> departmentStaffMembers,
+                      Set<String> asssignedCategories) {
+
+        this.ORG_ID = organizationID;
+        this.DEP_ID = departmentID;
+        this.departmentName = new ReadOnlyStringWrapper(departmentName);
+        this.departmentStaffMembers = FXCollections.observableHashMap();
+        this.asssignedCategories = FXCollections.observableSet();
+
+        if (Objects.nonNull(departmentStaffMembers))
+            for (StaffUser staff : departmentStaffMembers)
+                this.departmentStaffMembers.put(staff.getUID(), staff);
+
+        if (Objects.nonNull(asssignedCategories))
+            this.asssignedCategories.addAll(asssignedCategories);
+    }
+
+    public final String getSuperOrganizationID() {
+        return ORG_ID;
+    }
+
+    public final String getDepartmentID() {
+        return DEP_ID;
+    }
+
+    public String getDepartmentName() {
+        return this.departmentName.get();
+    }
+
+    public ReadOnlyStringProperty getDepartmentNamePropertyReadOnly() {
+        return this.departmentName.getReadOnlyProperty();
+    }
+
+    public final boolean renameDepartmentTo(final String newDepartmentName) {
+        if (Objects.isNull(newDepartmentName)) {
+            OakLogger.log(Level.SEVERE, "'newDepartmentName' is null");
+
+            return false;
+        }
+
+        this.departmentName.set(newDepartmentName);
+
+        return true;
+    }
+
+    public ObservableMap<String, StaffUser> getStaffMemberTableUnmodifiable() {
+        return FXCollections.unmodifiableObservableMap(this.departmentStaffMembers);
+    }
+
+    public void addStaffMember(StaffUser staffUser) {
+        this.departmentStaffMembers.put(staffUser.getUID(), staffUser);
+    }
+
+    public void removeStaffMember(String staffUID) {
+        this.departmentStaffMembers.remove(staffUID);
+    }
+
+    public ObservableSet<String> getAsssignedCategoriesSetUnmodifiable() {
+        return FXCollections.unmodifiableObservableSet(asssignedCategories);
+    }
+
+    @Override
+    public boolean wasAssigned(String categoryName) {
+        return this.asssignedCategories.contains(categoryName);
+    }
+
+    @Override
+    public void assign(String categoryName) {
+        this.asssignedCategories.add(categoryName);
+    }
+
+    @Override
+    public void removeAssignment(String categoryName) {
+        this.asssignedCategories.remove(categoryName);
+    }
+}

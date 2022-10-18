@@ -1,0 +1,25 @@
+package ku.cs.oakcoding.app.models.org;
+
+import java.util.Set;
+
+import ku.cs.oakcoding.app.helpers.id.OakID;
+import ku.cs.oakcoding.app.models.users.StaffUser;
+
+public final class Departments {
+    private Departments() {}
+
+    public static Department newDepartment(String organizationID,
+                                           String departmentName) {
+
+        return new Department(organizationID, OakID.generate(Department.class.getSimpleName()), departmentName, null, null);
+    }
+
+    public static Department restoreDepartment(String organizationID,
+                                               String departmentID,
+                                               String departmentName,
+                                               Set<StaffUser> departmentStaffMembers,
+                                               Set<String> asssignedCategories) {
+
+        return new Department(organizationID, departmentID, departmentName, departmentStaffMembers, asssignedCategories);
+    }
+}

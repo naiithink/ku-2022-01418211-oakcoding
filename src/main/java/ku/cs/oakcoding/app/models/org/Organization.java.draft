@@ -1,0 +1,179 @@
+package ku.cs.oakcoding.app.models.org;
+
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.logging.Level;
+
+import javafx.beans.property.ReadOnlyStringProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableMap;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.AccountService;
+
+public class Organization {
+
+    protected final String ORG_ID;
+
+    protected final ReadOnlyStringWrapper organizationName;
+
+    protected final ReadOnlyStringWrapper leaderStaffMemberID;
+
+    protected final ObservableMap<String, Department> departmentTable;
+
+    public Organization(String organizationID,
+                        String organizationName) {
+
+        this.ORG_ID = organizationID;
+        this.organizationName = new ReadOnlyStringWrapper(this, "organizationName", organizationName);
+        this.leaderStaffMemberID = new ReadOnlyStringWrapper();
+        this.departmentTable = FXCollections.observableHashMap();
+    }
+
+    /**
+     * @note Restore
+     */
+    public Organization(String organizationID,
+                        String organizationName,
+                        String leaderStaffMemberID,
+                        Collection<? extends Department> departments) {
+
+        this.ORG_ID = organizationID;
+        this.organizationName = new ReadOnlyStringWrapper(this, "organizationName", organizationName);
+        this.leaderStaffMemberID = new ReadOnlyStringWrapper(this, "leaderStaffMemberID", leaderStaffMemberID);
+        this.departmentTable = FXCollections.observableHashMap();
+
+        for (Department dep : departments)
+            this.departmentTable.put(dep.getDepartmentID(), dep);
+    }
+
+    public Organization(String organizationID,
+                        String organizationName,
+                        String leaderStaffMemberID,
+                        Department... departments) {
+
+        this.ORG_ID = organizationID;
+        this.organizationName = new ReadOnlyStringWrapper(this, "organizationName", organizationName);
+        this.leaderStaffMemberID = new ReadOnlyStringWrapper(this, "leaderStaffMemberID", leaderStaffMemberID);
+        this.departmentTable = FXCollections.observableHashMap();
+
+        for (Department dep : departments)
+            this.departmentTable.put(dep.getDepartmentID(), dep);
+    }
+
+    public final String getOrganizationID() {
+        return ORG_ID;
+    }
+
+    public String getOrganizationName() {
+        return this.organizationName.get();
+    }
+
+    public String getLeaderStaffMemberID() {
+        if (this.leaderStaffMemberID.isEmpty().get()) {
+            OakLogger.log(Level.WARNING, "This organization's leader has not been assigned, null is returned");
+            return null;
+        }
+
+        return this.leaderStaffMemberID.get();
+    }
+
+    public boolean hasLeaderStaffMember() {
+        return this.leaderStaffMemberID.isNotEmpty().get();
+    }
+
+    public boolean assignLeaderStaffMemberTo(String staffID) {
+        if (!AccountService.getUserManager().userExists(staffID)) {
+            OakLogger.log(Level.SEVERE, "'staffID' does not exist");
+            return false;
+        }
+
+        this.leaderStaffMemberID.set(staffID);
+
+        return true;
+    }
+
+    public boolean changeLeaderStaffMemberTo(String staffID) {
+        return assignLeaderStaffMemberTo(staffID);
+    }
+
+    public ReadOnlyStringProperty getLeaderStaffMemberIDPropertyReadOnly() {
+        return this.leaderStaffMemberID.getReadOnlyProperty();
+    }
+
+    public ReadOnlyStringProperty getOrganizationNamePropertyReadOnly() {
+        return this.organizationName.getReadOnlyProperty();
+    }
+
+    public boolean renameOrganizationTo(final String newOrganizationName) {
+        if (Objects.isNull(newOrganizationName)) {
+            OakLogger.log(Level.SEVERE, "'newOrganizationName' is null");
+
+            return false;
+        }
+
+        this.organizationName.set(newOrganizationName);
+
+        return true;
+    }
+
+    public long countDepartmentWithName(String depName) {
+        long res = 0;
+        Set<String> depIDs = this.departmentTable.keySet();
+
+        for (String depID : depIDs)
+            if (this.departmentTable.get(depID).getDepartmentName().equals(depName))
+                res++;
+
+        return res;
+    }
+
+    public boolean isUniqueDepartmentName(final String depName) {
+        return countDepartmentWithName(depName) < 2 ? true
+                                                    : false;
+    }
+
+    public String getDepartmentIDOfName(String depName) {
+        if (!isUniqueDepartmentName(depName)) {
+            OakLogger.log(Level.SEVERE, "Not a unique department name, null is returned");
+            return null;
+        }
+
+        Set<String> depKeys = this.departmentTable.keySet();
+
+        for (String depKey : depKeys)
+            if (this.departmentTable.get(depKey).getDepartmentName().equals(depName))
+                return depKey;
+
+        return null;
+    }
+
+    public boolean containsDepartment(String DEP_UID) {
+        return this.departmentTable.containsKey(DEP_UID);
+    }
+
+    public Department getDepartment(String DEP_UID) {
+        return this.departmentTable.get(DEP_UID);
+    }
+
+    public ObservableMap<String, Department> getDepartmentTableUnmodifiable() {
+        return FXCollections.unmodifiableObservableMap(departmentTable);
+    }
+
+    public void addDepartment(final String departmentID) {
+        this.departmentTable.put(departmentID, getDepartment(departmentID));
+    }
+
+    public void addDepartment(final Department department) {
+        this.departmentTable.put(department.getDepartmentID(), department);
+    }
+
+    public void removeDepartment(final String departmentID) {
+        this.departmentTable.remove(departmentID);
+    }
+
+    public void removeDepartment(final Department department) {
+        this.departmentTable.remove(department.getDepartmentID());
+    }
+}

@@ -1,0 +1,22 @@
+package ku.cs.oakcoding.app.models.org;
+
+import java.util.Set;
+
+import ku.cs.oakcoding.app.helpers.id.OakID;
+
+public final class Organizations {
+    private Organizations() {}
+
+    public static Organization newOrganization(String organizationName) {
+
+        return new Organization(OakID.generate(Organization.class.getSimpleName()), organizationName);
+    }
+
+    public static Organization restoreOrganization(String organizationID,
+                                                   String organizationName,
+                                                   String leaderStaffMemberID,
+                                                   Set<Department> departments) {
+
+        return new Organization(organizationID, organizationName, leaderStaffMemberID, departments);
+    }
+}

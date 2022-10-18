@@ -32,6 +32,7 @@ import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
@@ -91,6 +92,10 @@ public final class UserManager {
 
     public boolean isActive(String userName) {
         return briefUserTable.get(getUIDOf(userName)).getIsActive();
+    }
+
+    public boolean userExists(String UID) {
+        return this.briefUserTable.containsKey(UID);
     }
 
     public Set<FullUserEntry> getAllUsersSet(AdminUser adminUser) {
@@ -378,6 +383,17 @@ public final class UserManager {
         OakUserResource.removeUserDirectory(userName);
         sessionFile.removeRecordWhere(getUIDOf(userName));
         briefUserFile.removeRecordWhere(getUIDOf(userName));
+
+        Iterator<FullUserEntry> users = userEntrySet.iterator();
+
+        while (users.hasNext()) {
+            FullUserEntry user = users.next();
+            if (user.getUserName().equals(userName)) {
+                userEntrySet.remove(user);
+                break;
+            }
+        }
+
         briefUserTable.remove(userName);
 
         return UserManagerStatus.SUCCESSFUL;
@@ -408,5 +424,14 @@ public final class UserManager {
 
     public ObservableMap<String, UserEntry> getBriefUserTableProperty() {
         return briefUserTable;
+    }
+
+    public static void main(String[] args) {
+        AccountService acc = new AccountService();
+        acc.start();
+
+        AdminUser admin = AccountService.getUserManager().login("_ROOT", "admin");
+
+        AccountService.getUserManager().deleteUser(admin, "naiithink", "eiei");
     }
 }
