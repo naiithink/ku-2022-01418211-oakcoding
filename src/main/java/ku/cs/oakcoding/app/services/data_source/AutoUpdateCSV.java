@@ -4,11 +4,8 @@ import java.io.Console;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
-
-import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 
 public class AutoUpdateCSV implements CSVBase<CSV>,
                                       TableBaseData {
@@ -237,19 +234,5 @@ public class AutoUpdateCSV implements CSVBase<CSV>,
     @Override
     public String toString() {
         return this.data.toString();
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        OakUserResource.newUserDirectory("naiithink");
-        AutoUpdateCSV data = new AutoUpdateCSV("test", "NAME", "test", Paths.get("/Users/naiithink/projects/Gen/oakcoding/test.csv"));
-
-        // System.out.println(data);
-
-        // data.removeRecordWhere("NUMBER", "zzz", 2);
-
-        data.editRecord("ax", "A", "DFGHJK", false);
-
-        // System.out.println(data.getDataWhere("naiithink", "FIRST_NAME"));
-        // data.startInteractiveShell();
     }
 }
