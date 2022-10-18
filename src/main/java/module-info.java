@@ -9,22 +9,25 @@ module oakcoding.app {
      * 
      * - ku.cs.oakcoding.ProjectApplication.launch()
      */
-    exports ku.cs.oakcoding                     to  javafx.graphics;
+    exports ku.cs.oakcoding                         to  javafx.graphics;
 
     /* 
      * ku.cs.oakcoding.ProjectController
      */
-    opens   ku.cs.oakcoding                     to  javafx.fxml;
+    opens ku.cs.oakcoding                           to  javafx.fxml;
 
     /* 
      * ku.cs.oakcoding.app.controllers.*
      */
-    opens   ku.cs.oakcoding.app.controllers     to  javafx.fxml;
+    opens ku.cs.oakcoding.app.controllers           to  javafx.fxml;
 
     /* 
-     * com.github.saacsos.fxrouter
+     * ku.cs.oakcoding.app.services.stages.StageManager -- FXML
      */
-    opens ku.cs.oakcoding.app.services to javafx.fxml;
+    opens ku.cs.oakcoding.app.services              to javafx.fxml;
 
-     opens ku.cs.oakcoding.app.models.users to javafx.base;
+    /**
+     * ku.cs.oakcoding.app.models.users.FullUserEntry -- TableView<S>
+     */
+    opens ku.cs.oakcoding.app.models.users          to javafx.base;
 }
