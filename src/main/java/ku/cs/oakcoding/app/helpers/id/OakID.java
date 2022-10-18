@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.services;
+package ku.cs.oakcoding.app.helpers.id;
 
 import java.time.Instant;
 
