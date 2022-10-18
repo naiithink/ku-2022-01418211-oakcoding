@@ -18,11 +18,12 @@ public final class AccountService implements AppService {
 
     private static UserManager userManager;
 
+    private static AutoUpdateCSV userEntriesDataSource;
+
+    private static AutoUpdateCSV sessionFile;
+
     @Override
     public void start() {
-        AutoUpdateCSV userEntriesDataSource = null;
-        AutoUpdateCSV sessionFile = null;
-
         try {
             userEntriesDataSource = new AutoUpdateCSV("briefUserEntries", "UID", "briefUserEntries", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_ENTRIES.value()));
         } catch (FileNotFoundException e) {

@@ -76,11 +76,6 @@ public final class UserManager {
         return null;
     }
 
-    // data/users.csv
-    // private static ObservableMap<String, UserInfo> registeredUser = FXCollections.observableMap(((UsersMap) FactoryDataSourceCSV.getDataSource(DataFile.USER_INFO, "users.csv")
-    //                                                                         .readData())
-    //                                                                         .getUsersMap());
-
     public boolean isRegistered(String userName) {
         Iterator<Entry<String, UserEntry>> entries = briefUserTable.entrySet().iterator();
 
