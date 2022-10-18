@@ -14,6 +14,8 @@ import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -155,7 +157,7 @@ public class AdminController implements Initializable {
     private TableColumn<FullUserEntry, String> lastNameCol;
 
     @FXML
-    private TableColumn<FullUserEntry, Path> profileImageCol;
+    private TableColumn<FullUserEntry, ImageView> profileImageCol;
 
     @FXML
     private TableColumn<FullUserEntry, Long> lastLoginCol;
@@ -178,7 +180,18 @@ public class AdminController implements Initializable {
 
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        profileImageCol.setCellValueFactory(new PropertyValueFactory<>("profileImagePath"));
+        profileImageCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(100);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
         lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
         observableList.addAll(observableUserSet);
 

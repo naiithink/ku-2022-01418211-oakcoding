@@ -1,8 +1,12 @@
 package ku.cs.oakcoding.app.models.users;
 
+import javafx.scene.image.Image;
+
 import javax.swing.text.Element;
 import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
 public class FullUserEntry
@@ -13,7 +17,6 @@ public class FullUserEntry
     protected String lastName;
 
     protected Path profileImagePath;
-    protected ImageView profileImage;
 
     protected long lastLogin;
 
@@ -25,6 +28,7 @@ public class FullUserEntry
         this.lastName = lastName;
         this.profileImagePath = profileImagePath;
         this.lastLogin = lastLogin;
+//        this.profileImage = new ProfileImage(new Image())
 
     }
 

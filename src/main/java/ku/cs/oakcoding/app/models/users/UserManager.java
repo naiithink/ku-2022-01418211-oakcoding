@@ -272,7 +272,7 @@ public final class UserManager {
                 if (Boolean.parseBoolean(userInfo.getDataWhere(briefUserInfo.getUID(), "USING_DEFAULT_PROFILE_IMAGE")))
                     profileImagePath = OakUserResource.getDefaultProfileImagePath();
                 else
-                    profileImagePath = OakResourcePrefix.getDataDirPrefix().resolve(briefUserInfo.getUserName()).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + userInfo.getDataWhere(briefUserInfo.getUID(), "PROFILE_IMAGE_EXT"));
+                    profileImagePath = OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_DIR.value()).resolve(briefUserInfo.getUserName()).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + userInfo.getDataWhere(briefUserInfo.getUID(), "PROFILE_IMAGE_EXT"));
 
                 userEntrySet.add(new FullUserEntry(briefUserInfo.getUID(),
                                            briefUserInfo.getRole(),
