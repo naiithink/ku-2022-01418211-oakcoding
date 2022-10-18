@@ -140,7 +140,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
@@ -173,10 +173,17 @@
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
-            <Label layoutX="74.0" layoutY="225.0" text="ร้องขอ" textFill="WHITE" />
-            <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
+            <Label layoutX="75.0" layoutY="58.0" text="ร้องขอ" textFill="WHITE" />
+            <Line endX="405.0" layoutX="176.0" layoutY="86.0" startX="-100.0" stroke="#2a2c32" />
+            <TableView layoutX="43.0" layoutY="123.0" prefHeight="381.0" prefWidth="570.0">
+              <columns>
+                <TableColumn prefWidth="153.0" text="C1" />
+                <TableColumn minWidth="0.0" prefWidth="183.0" text="C2" />
+                  <TableColumn prefWidth="233.0" text="Column X" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
        <Pane fx:id="settingPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">

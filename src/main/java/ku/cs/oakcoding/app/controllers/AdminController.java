@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.User;
 import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
@@ -43,7 +44,7 @@ public class AdminController implements Initializable {
     private Button accountChangeInfoButton;
 
     @FXML
-    private Label fullNameLabel;
+    private Label uidLabel;
 
     @FXML
     private Label userNameLabel;
@@ -151,24 +152,20 @@ public class AdminController implements Initializable {
     private TableView<UserEntry> userListTableView;
 
     @FXML
-    private TableColumn<User, String> firstNameCol;
+    private TableColumn<UserEntry, String> firstNameCol;
 
     @FXML
-    private TableColumn<User, String> lastNameCol;
+    private TableColumn<UserEntry, String> lastNameCol;
     @FXML
-    private TableColumn<User, String> roleCol;
+    private TableColumn<UserEntry, String> roleCol;
 
     @FXML
-    private TableColumn<User, String> userNameCol;
+    private TableColumn<UserEntry, String> userNameCol;
 
-    // private DataSourceCSV<UsersList> dataSourceCSV;
-    // private UsersList usersList = new UsersList();
     private ObservableSet<UserEntry> observableUserSet = FXCollections.observableSet();
 
     private void initTableView() {
 
-        // dataSourceCSV =
-        // FactoryDataSourceCSV.getDataSource(DataFile.USER,"users.csv");
 
         /**
          * @todo Read AdminUser instance
@@ -176,21 +173,28 @@ public class AdminController implements Initializable {
         observableUserSet.addAll(AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager()
                 .login("_ROOT", "admin")) /* dataSourceCSV.readData().getUsers() */);
 
-        // usersList = dataSourceCSV.readData();
         userListTableView.setEditable(true);
-        roleCol.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+        roleCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("role"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("firstName"));
         firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        firstNameCol.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<User, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<User, String> event) {
-                User user = event.getRowValue();
-                user.setFirstName(event.getNewValue());
-            }
-        });
-        lastNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+
+
+//        firstNameCol.setOnEditCommit(event -> {
+//            UserEntry user = event.getRowValue();
+//            AccountService.getUserManager().setActiveStatus()
+////            user.setFirstName(event.getNewValue());
+//        });
+
+//        new EventHandler<TableColumn.CellEditEvent<UserEntry, String>>() {
+//            @Override
+//            public void handle(TableColumn.CellEditEvent<UserEntry, String> event) {
+//
+//            }
+//        }
+
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("lastName"));
         lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        userNameCol.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
+        userNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("userName"));
         userNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         showListView();
 
@@ -576,6 +580,21 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(true);
+        setProfileLabel();
+
+    }
+
+
+    void setProfileLabel(){
+        AdminUser admin = (AdminUser) OldStageManager.getStageManager().getContext();
+        userNameLabel.setText(admin.getUserName());
+        statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
+        firstNameLabelAccount.setText(admin.getFirstName());
+        lastNameLabel.setText(admin.getLastName());
+        uidLabel.setText(admin.getUID());
+        Image image = new Image(admin.getProfileImagePath().toUri().toString());
+        picProfileSettingLabel.setImage(image);
+
 
     }
 
@@ -649,11 +668,25 @@ public class AdminController implements Initializable {
         settingPane.setVisible(false);
 
     }
+    public void setMyPane() {
+            AdminUser admin = (AdminUser) OldStageManager.getStageManager().getContext();
+            fullNameLabelAccountSetting.setText(admin.getFirstName());
+            statusLabel.setText(admin.getRole().getPrettyPrinted());
+
+
+//        OakLogger.log(Level.SEVERE,"no admin");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
         initTableView();
+
+        OldStageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("admin")) {
+                setMyPane();
+            }
+        });
     }
 
     public void handleSave(ActionEvent actionEvent) throws Exception {
