@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
@@ -159,10 +160,10 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<UserEntry, String> lastNameCol;
     @FXML
-    private TableColumn<UserEntry, String> roleCol;
+    private TableColumn<UserEntry, Path> profileImageCol;
 
     @FXML
-    private TableColumn<UserEntry, String> userNameCol;
+    private TableColumn<UserEntry, String> lastLoginCol;
 
     private ObservableSet<UserEntry> observableUserSet = FXCollections.observableSet();
 
@@ -172,8 +173,7 @@ public class AdminController implements Initializable {
         /**
          * @todo Read AdminUser instance
          */
-        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager()
-                .login("_ROOT", "admin")) /* dataSourceCSV.readData().getUsers() */);
+        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSet((AdminUser) StageManager.getStageManager().getContext()) /* dataSourceCSV.readData().getUsers() */);
 
         userListTableView.setEditable(true);
         roleCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("role"));
