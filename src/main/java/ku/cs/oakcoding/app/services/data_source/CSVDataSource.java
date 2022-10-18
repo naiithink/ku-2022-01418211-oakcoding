@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -115,32 +114,5 @@ public class CSVDataSource
         }
 
         return res;
-    }
-
-    public static void main(String[] args) {
-        CSVDataSource data = new CSVDataSource("test", "NAME", "test", Paths.get("/Users/naiithink/projects/Gen/oakcoding/src/main/java/ku/cs/oakcoding/app/services/test.csv"));
-        // CSVDataSource data1 = new CSVDataSource("test1", "NAME", "test1", Paths.get("/Users/naiithink/projects/Gen/oakcoding/src/main/java/ku/cs/oakcoding/app/services/test1.csv"));
-
-        CSV read = data.readAll();
-
-        System.out.println(read);
-
-        read.editRecord("one", "message", "zzzzzzzzzzz", false);
-
-        data.writeAll(read);
-
-        read.removeRecordWhere("MESSAGE", "zzz", 2);
-
-        data.writeAll(read);
-
-        // data1.writeAll(read);
-
-        // CSV read1 = data1.readAll();
-
-        // read1.editRecord("one", "message", "", false);
-
-        // data1.writeAll(read1);
-
-        // System.out.println(read.toCSV(true, '"'));
     }
 }

@@ -21,8 +21,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.services.stages.OldStageManager;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.StageManager;
+import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
 public class UserController implements Initializable {
     @FXML
@@ -154,7 +154,7 @@ public class UserController implements Initializable {
     public void handleClickLogoutButton(ActionEvent actionEvent) {
         // ไว้จัดการการ logout ของ user
         try {
-            OldStageManager.getStageManager().setPage("authentication", null);
+            StageManager.getStageManager().setPage("authentication", null);
         } catch (PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
         }

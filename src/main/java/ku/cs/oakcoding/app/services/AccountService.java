@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.models.users.BriefUserEntry;
+import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.models.users.UserManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
@@ -37,11 +37,11 @@ public final class AccountService implements AppService {
             System.exit(1);
         }
 
-        Set<BriefUserEntry> userEntrySet = new HashSet<>();
+        Set<UserEntry> userEntrySet = new HashSet<>();
         Set<String> primaryKeySet = userEntriesDataSource.getPrimaryKeySet();
 
         for (String primaryKey : primaryKeySet) {
-            userEntrySet.add(new BriefUserEntry(primaryKey, Enum.valueOf(Roles.class, userEntriesDataSource.getDataWhere(primaryKey, "ROLE")), userEntriesDataSource.getDataWhere(primaryKey, "USER_NAME"), Boolean.parseBoolean(userEntriesDataSource.getDataWhere(primaryKey, "IS_ACTIVE")), Integer.parseInt(userEntriesDataSource.getDataWhere(primaryKey, "LOGIN_ATTEMPT"))));
+            userEntrySet.add(new UserEntry(primaryKey, Enum.valueOf(Roles.class, userEntriesDataSource.getDataWhere(primaryKey, "ROLE")), userEntriesDataSource.getDataWhere(primaryKey, "USER_NAME"), Boolean.parseBoolean(userEntriesDataSource.getDataWhere(primaryKey, "IS_ACTIVE")), Integer.parseInt(userEntriesDataSource.getDataWhere(primaryKey, "LOGIN_ATTEMPT"))));
         }
 
         userManager = new UserManager(userEntriesDataSource, sessionFile, userEntrySet);

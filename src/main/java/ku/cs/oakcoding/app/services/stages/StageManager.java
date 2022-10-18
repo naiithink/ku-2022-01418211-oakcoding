@@ -145,7 +145,7 @@ import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
  * - Event Processing
  *   https://docs.oracle.com/javafx/2/events/processing.htm
  */
-public final class OldStageManager {
+public final class StageManager {
 
     /**
      * Logger instance for this StageManager
@@ -181,7 +181,7 @@ public final class OldStageManager {
      */
     private static final double DEFAULT_STAGE_HEIGHT;
 
-    private static OldStageManager instance;
+    private static StageManager instance;
 
     /**
      * Configuration file for this StageManager
@@ -639,7 +639,7 @@ public final class OldStageManager {
     /**
      * Contructor is kept private, singleton
      */
-    private OldStageManager() {
+    private StageManager() {
         logger = Logger.getLogger(getClass().getName());
 
         specialNickPool = new SpecialNick();
@@ -662,11 +662,11 @@ public final class OldStageManager {
     /**
      * Gets the instance of StageManager
      */
-    public static OldStageManager getStageManager() {
+    public static StageManager getStageManager() {
         if (instance == null) {
-            synchronized (OldStageManager.class) {
+            synchronized (StageManager.class) {
                 if (instance == null) {
-                    instance = new OldStageManager();
+                    instance = new StageManager();
                 }
             }
         }
@@ -838,12 +838,12 @@ public final class OldStageManager {
 
                 controllerClass = Class.forName(controllerClassName.get());
 
-                if (controllerClass.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + parentProperty.pageNickResourceName + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -852,7 +852,7 @@ public final class OldStageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);
@@ -1309,12 +1309,12 @@ public final class OldStageManager {
 
                 controllerClass = Class.forName(controllerClassName);
 
-                if (controllerClass.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
+                if (controllerClass.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     /**
                      * @danger DO NOT pass any message read from file to any string formatter
                      */
                     String cannotValidateDeclaredControllerMessage = "Singleton controller: cannot check if the controller of file '" + sceneResourcePathString + "' with declared controller name '" + controllerClassName + "' is valid.\n"
-                                                                     + "FXML controller MUST be annotated with '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + OldStageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
+                                                                     + "FXML controller MUST be annotated with '@" + StageManager.TheStageManager.class.getCanonicalName() + "' interface and define a static method '" + GET_INSTANCE_METHOD_NAME + "' with an annotation '@" + StageManager.TheStageManager.class.getCanonicalName() + "' which returns the singleton instance of the controller itself";
 
                     logger.log(Level.SEVERE, cannotValidateDeclaredControllerMessage);
 
@@ -1323,7 +1323,7 @@ public final class OldStageManager {
 
                 getInstanceMethod = controllerClass.getMethod(GET_INSTANCE_METHOD_NAME);
 
-                if (getInstanceMethod.isAnnotationPresent(OldStageManager.TheStageManager.class) == false) {
+                if (getInstanceMethod.isAnnotationPresent(StageManager.TheStageManager.class) == false) {
                     logger.log(Level.SEVERE, "Cannot find a valid static annotated method '" + GET_INSTANCE_METHOD_NAME + "'");
 
                     System.exit(1);
@@ -2419,7 +2419,7 @@ public final class OldStageManager {
         private EventHandler<MouseEvent> handleStageControlButtonBoxEnterHovering = e -> {
             closeButtonStack.getChildren().get(1).setVisible(true);
             minimizeButtonStack.getChildren().get(1).setVisible(true);
-            if (OldStageManager.this.primaryStage.isFullScreen()) {
+            if (StageManager.this.primaryStage.isFullScreen()) {
                 fullScreenToggleButtonStack.getChildren().get(1).setVisible(true);
             } else {
                 fullScreenToggleButtonStack.getChildren().get(2).setVisible(true);

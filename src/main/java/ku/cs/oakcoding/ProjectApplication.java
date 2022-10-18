@@ -25,10 +25,10 @@ import ku.cs.oakcoding.app.helpers.file.OakResource;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.services.AccountService;
-import ku.cs.oakcoding.app.services.stages.OldStageManager;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.MalformedFXMLIndexFileException;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.NoControllerSpecifiedException;
-import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
+import ku.cs.oakcoding.app.services.stages.StageManager;
+import ku.cs.oakcoding.app.services.stages.StageManager.MalformedFXMLIndexFileException;
+import ku.cs.oakcoding.app.services.stages.StageManager.NoControllerSpecifiedException;
+import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
 public class ProjectApplication extends Application {
 
@@ -54,7 +54,7 @@ public class ProjectApplication extends Application {
     private void configStageManager(Stage primaryStage) throws NotDirectoryException,
                                                                FileNotFoundException {
 
-        OldStageManager stageManager = OldStageManager.getStageManager();
+        StageManager stageManager = StageManager.getStageManager();
 
         stageManager.setLogger(OakLogger.getLogger());
         stageManager.loadFontsFrom(OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FONT_DIR.key())), 14.0);

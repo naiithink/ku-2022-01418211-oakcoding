@@ -31,39 +31,38 @@ import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.OakID;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
 public final class UserManager {
 
-    private final ObservableMap<String, BriefUserEntry> briefUserTable;
+    private final ObservableMap<String, UserEntry> briefUserTable;
 
-    private final ObservableSet<UserEntry> userList;
+    private final ObservableSet<FullUserEntry> userEntrySet;
 
     private AutoUpdateCSV briefUserFile;
 
     private AutoUpdateCSV sessionFile;
 
-    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, BriefUserEntry... briefUserEntries) {
+    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, UserEntry... briefUserEntries) {
         this.briefUserTable = FXCollections.observableHashMap();
         this.briefUserFile = briefUserFile;
         this.sessionFile = sessionFile;
-        this.userList = FXCollections.observableSet();
+        this.userEntrySet = FXCollections.observableSet();
 
-        for (BriefUserEntry entry : briefUserEntries) {
+        for (UserEntry entry : briefUserEntries) {
             this.briefUserTable.put(entry.getUID(), entry);
         }
     }
 
-    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, Collection<BriefUserEntry> briefUserEntries) {
+    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, Collection<UserEntry> briefUserEntries) {
         this.briefUserTable = FXCollections.observableHashMap();
         this.briefUserFile = briefUserFile;
         this.sessionFile = sessionFile;
-        this.userList = FXCollections.observableSet();
+        this.userEntrySet = FXCollections.observableSet();
 
-        for (BriefUserEntry entry : briefUserEntries) {
+        for (UserEntry entry : briefUserEntries) {
             this.briefUserTable.put(entry.getUID(), entry);
         }
     }
@@ -83,10 +82,10 @@ public final class UserManager {
     //                                                                         .getUsersMap());
 
     public boolean isRegistered(String userName) {
-        Iterator<Entry<String, BriefUserEntry>> entries = briefUserTable.entrySet().iterator();
+        Iterator<Entry<String, UserEntry>> entries = briefUserTable.entrySet().iterator();
 
         while (entries.hasNext()) {
-            Entry<String, BriefUserEntry> entry = entries.next();
+            Entry<String, UserEntry> entry = entries.next();
 
             if (userName.equals(entry.getValue().getUserName()))
                 return true;
@@ -99,22 +98,22 @@ public final class UserManager {
         return briefUserTable.get(getUIDOf(userName)).getIsActive();
     }
 
-    public Set<UserEntry> getAllUsersSet(AdminUser adminUser) {
+    public Set<FullUserEntry> getAllUsersSet(AdminUser adminUser) {
         if (Objects.isNull(adminUser)) {
             OakLogger.log(Level.SEVERE, "Attempting to get all users list with out AdminUser access, null is returned");
             return null;
         }
 
-        return userList;
+        return userEntrySet;
     }
 
-    public ObservableSet<UserEntry> getAllUsersSetProperty(AdminUser adminUser) {
+    public ObservableSet<FullUserEntry> getAllUsersSetProperty(AdminUser adminUser) {
         if (Objects.isNull(adminUser)) {
             OakLogger.log(Level.SEVERE, "Attempting to get all users list property with out AdminUser access, null is returned");
             return null;
         }
 
-        return userList;
+        return userEntrySet;
     }
 
     @SuppressWarnings("unchecked")
@@ -213,7 +212,7 @@ public final class UserManager {
 
         userInfo.addRecord(newUser.toCSVList());
 
-        BriefUserEntry userEntry = new BriefUserEntry(newUser.getUID(), newUser.getRole(), newUser.getUserName(), true, 0);
+        UserEntry userEntry = new UserEntry(newUser.getUID(), newUser.getRole(), newUser.getUserName(), true, 0);
 
         briefUserTable.put(newUser.getUID(), userEntry);
 
@@ -251,16 +250,16 @@ public final class UserManager {
 
         T user = getUser(userName);
 
-        if (user instanceof AdminUser) {
-            Set<Entry<String, BriefUserEntry>> briefEntries = briefUserTable.entrySet();
+        if (userEntrySet.isEmpty() && (user instanceof AdminUser)) {
+            Set<Entry<String, UserEntry>> briefEntries = briefUserTable.entrySet();
 
-            for (Entry<String, BriefUserEntry> entry : briefEntries) {
+            for (Entry<String, UserEntry> entry : briefEntries) {
                 if (entry.getValue().getRole().equals(Roles.ADMIN))
                     continue;
 
                 Path profileImagePath = null;
 
-                BriefUserEntry briefUserInfo = entry.getValue();
+                UserEntry briefUserInfo = entry.getValue();
 
                 AutoUpdateCSV userInfo = null;
 
@@ -275,7 +274,7 @@ public final class UserManager {
                 else
                     profileImagePath = OakResourcePrefix.getDataDirPrefix().resolve(briefUserInfo.getUserName()).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + userInfo.getDataWhere(briefUserInfo.getUID(), "PROFILE_IMAGE_EXT"));
 
-                userList.add(new UserEntry(briefUserInfo.getUID(),
+                userEntrySet.add(new FullUserEntry(briefUserInfo.getUID(),
                                            briefUserInfo.getRole(),
                                            briefUserInfo.getUserName(),
                                            briefUserInfo.getIsActive(),
@@ -412,57 +411,7 @@ public final class UserManager {
         return false;
     }
 
-    public ObservableMap<String, BriefUserEntry> getBriefUserTableProperty() {
+    public ObservableMap<String, UserEntry> getBriefUserTableProperty() {
         return briefUserTable;
-    }
-
-    public static void main(String[] args) {
-        AccountService acc = new AccountService();
-
-        acc.start();
-
-        AdminUser admin = AccountService.getUserManager().login("_ROOT", "admin");
-
-        // AccountService.getUserManager().setActiveStatus(admin, "naiithink", true);
-
-        // ConsumerUser user = null;
-
-        // for (int i = 0; i < 10000; ++i)
-            // user = AccountService.getUserManager().login("naiithink", "eiei");
-
-        AccountService.getUserManager().deleteUser(admin, "c", "d");
-
-        // ObservableSet<UserEntry> allUsers = AccountService.getUserManager().getAllUsersSetProperty(admin);
-
-        // for (UserEntry user : allUsers) {
-        //     System.out.println("---");
-        //     System.out.println(user.getUserName());
-        //     System.out.println(user.getFirstName());
-        //     System.out.println("---");
-        // }
-
-        // AccountService.getUserManager().register(null, "naiithink", Roles.CONSUMER, "Potsawat", "Thinkanwatthana", Paths.get("/Users/naiithink/Downloads/pexels-agnese-lunecka-13957041.jpg"), "eiei", "eiei");
-        // AccountService.getUserManager().register(null, "naiithink1", Roles.CONSUMER, "Potsawat", "Thinkanwatthana", Paths.get("/Users/naiithink/Downloads/pexels-agnese-lunecka-13957041.jpg"), "eiei", "eiei");
-        // AccountService.getUserManager().register(null, "naiithink2", Roles.CONSUMER, "Potsawat", "Thinkanwatthana", Paths.get("/Users/naiithink/Downloads/pexels-agnese-lunecka-13957041.jpg"), "eiei", "eiei");
-
-        // Set<UserEntry> all = AccountService.getUserManager().getAllUsersList(admin);
-
-        // for (UserEntry info : all)
-        //     System.out.println(info);
-
-        // AccountService.getUserManager().setActiveStatus(AccountService.getUserManager().getUser("_ROOT"), "naiithink", true);
-
-        // System.out.println(AccountService.getUserManager().getBriefUserTableProperty());
-        
-        // AccountService.getUserManager().changePassword("naiithink", "ahiahi", "eiei", "eiei");
-
-        // AccountService.getUserManager().register(null, "naiithink", Roles.CONSUMER, "Potsawat", "Thinkanwatthana", Paths.get("/Users/naiithink/Downloads/pexels-agnese-lunecka-13957041.jpg"), "eiei", "eiei");
-        // System.out.println(AccountService.getUserManager().login("naiithink", "eiei"));
-
-
-
-        // AccountService.getUserManager().deleteUser(AccountService.getUserManager().getUser("_ROOT"), "naiithink", "eiei");
-        // AccountService.getUserManager().deleteUser(AccountService.getUserManager().getUser("_ROOT"), "naiithink1", "eiei");
-        // AccountService.getUserManager().deleteUser(AccountService.getUserManager().getUser("_ROOT"), "naiithink2", "eiei");
     }
 }
