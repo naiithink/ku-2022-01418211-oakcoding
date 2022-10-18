@@ -142,8 +142,5 @@ public final class OakResource {
 
     public static void main(String[] args) throws IOException {
         OakResource.fixDataDirectoryMissingNodes();
-        // System.out.println(OakResource.fixDataDirectoryMissingNodes());
-
-        // OakResource.recursiveCopyDirectory(Paths.get("/Users/naiithink/projects/Gen/oakcoding/test"), Paths.get("/Users/naiithink/projects/Gen/oakcoding/test1"));
     }
 }

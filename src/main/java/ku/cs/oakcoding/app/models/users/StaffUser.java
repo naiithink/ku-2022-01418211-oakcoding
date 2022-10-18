@@ -1,5 +1,5 @@
 /**
- * @file AdminUser.java
+ * @file StaffUser.java
  * 
  * Reviews:
  *  - Naming
@@ -10,16 +10,16 @@ package ku.cs.oakcoding.app.models.users;
 
 import java.nio.file.Path;
 
-import ku.cs.oakcoding.app.models.complaints.Report;
+import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.complaints.Resolver;
 
-public final class AdminUser
+public final class StaffUser
         extends User
-        implements Resolver<Report> {
+        implements Resolver<Complaint> {
 
-    private final Roles ROLE = Roles.ADMIN;
+    private final Roles ROLE = Roles.STAFF;
 
-    public AdminUser(final String UID,
+    public StaffUser(final String UID,
                      final String userName,
                      final String firstName,
                      final String lastName,
@@ -27,6 +27,6 @@ public final class AdminUser
                      final String profileImageExtension,
                      final Path profileImagePath) {
 
-        super(UID, userName, Roles.ADMIN, firstName, lastName, usingDefaultProfileImage, profileImageExtension, profileImagePath);
+        super(UID, userName, Roles.STAFF, firstName, lastName, usingDefaultProfileImage, profileImageExtension, profileImagePath);
     }
 }
