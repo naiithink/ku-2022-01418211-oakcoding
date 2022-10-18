@@ -26,5 +26,5 @@ module oakcoding.app {
      */
     opens ku.cs.oakcoding.app.services to javafx.fxml;
 
-    // opens ku.cs.oakcoding.app.models to javafx.base;
+     opens ku.cs.oakcoding.app.models.users to javafx.base;
 }

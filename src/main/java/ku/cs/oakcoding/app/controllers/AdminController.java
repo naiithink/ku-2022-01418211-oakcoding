@@ -1,6 +1,6 @@
 /**
  * @file AdminController.java
- * 
+ *
  * Reviews:
  *  - Naming
  *      1. (CASE) naiithink, 2022-10-05
@@ -8,34 +8,28 @@
 
 package ku.cs.oakcoding.app.controllers;
 
-import java.io.BufferedWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.AdminUser;
-import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
@@ -152,20 +146,24 @@ public class AdminController implements Initializable {
     private ImageView userImageView;
 
     @FXML
-    private TableView<UserEntry> userListTableView;
+    private TableView<FullUserEntry> usersListTableView;
 
     @FXML
-    private TableColumn<UserEntry, String> firstNameCol;
+    private TableColumn<FullUserEntry, String> firstNameCol;
 
     @FXML
-    private TableColumn<UserEntry, String> lastNameCol;
-    @FXML
-    private TableColumn<UserEntry, Path> profileImageCol;
+    private TableColumn<FullUserEntry, String> lastNameCol;
 
     @FXML
-    private TableColumn<UserEntry, String> lastLoginCol;
+    private TableColumn<FullUserEntry, Path> profileImageCol;
 
-    private ObservableSet<UserEntry> observableUserSet = FXCollections.observableSet();
+    @FXML
+    private TableColumn<FullUserEntry, Long> lastLoginCol;
+
+    private ObservableSet<FullUserEntry> observableUserSet = FXCollections.observableSet();
+
+    private ObservableList<FullUserEntry> observableList = FXCollections.observableArrayList();
+
 
     private void initTableView() {
 
@@ -173,12 +171,25 @@ public class AdminController implements Initializable {
         /**
          * @todo Read AdminUser instance
          */
-        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSet((AdminUser) StageManager.getStageManager().getContext()) /* dataSourceCSV.readData().getUsers() */);
 
-        userListTableView.setEditable(true);
-        roleCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("role"));
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("firstName"));
-        firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSetProperty(AccountService.getUserManager().login("_ROOT","admin")) /* dataSourceCSV.readData().getUsers() */);
+        usersListTableView.setEditable(true);
+
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        profileImageCol.setCellValueFactory(new PropertyValueFactory<>("profileImagePath"));
+        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
+        observableList.addAll(observableUserSet);
+
+        usersListTableView.getItems().addAll(observableList);
+//        usersListTableView.refresh();
+
+
+//
+
+
+
 
 
 //        firstNameCol.setOnEditCommit(event -> {
@@ -194,18 +205,12 @@ public class AdminController implements Initializable {
 //            }
 //        }
 
-        lastNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("lastName"));
-        lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        userNameCol.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("userName"));
-        userNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        showListView();
+
+//        showListView();
 
     }
 
-    private void showListView() {
-        userListTableView.getItems().addAll(observableUserSet);
-        userListTableView.refresh();
-    }
+
 
     @FXML
     void handleClickComplaints(ActionEvent event) {
@@ -680,18 +685,20 @@ public class AdminController implements Initializable {
 
     }
     public void setMyPane() {
-            AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
-            fullNameLabelAccountSetting.setText(admin.getFirstName());
-            statusLabel.setText(admin.getRole().getPrettyPrinted());
+        AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
+        fullNameLabelAccountSetting.setText(admin.getFirstName());
+        statusLabel.setText(admin.getRole().getPrettyPrinted());
 
 
 //        OakLogger.log(Level.SEVERE,"no admin");
     }
 
-    @Override
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initPane();
 
+
+        initPane();
+//        initTableView();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("admin")) {
                 initTableView();

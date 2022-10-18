@@ -144,15 +144,15 @@
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="userListTableView" layoutX="14.0" layoutY="76.0" prefHeight="298.0" prefWidth="630.0" stylesheets="@../css/table-view.css">
+            <Button layoutX="303.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleSave" styleClass="button-red" text="อัปเดท" />
+            <TableView fx:id="usersListTableView" layoutX="51.0" layoutY="76.0" prefHeight="284.0" prefWidth="580.0">
               <columns>
-                <TableColumn fx:id="profileImageCol" prefWidth="94.0" text="ProfileImage" />
-                <TableColumn fx:id="firstNameCol" prefWidth="186.0" text="firstName" />
-                  <TableColumn fx:id="lastNameCol" prefWidth="138.0" text="lastName" />
-                  <TableColumn fx:id="lastLoginCol" prefWidth="211.0" text="LastLogin" />
+                  <TableColumn fx:id="profileImageCol" prefWidth="129.80538940429688" text="ProfileImage" />
+                  <TableColumn fx:id="lastLoginCol" minWidth="0.0" prefWidth="140.09552001953125" text="LastLogin" />
+                <TableColumn fx:id="firstNameCol" minWidth="0.0" prefWidth="135.40444946289062" text="FirstName" />
+                  <TableColumn fx:id="lastNameCol" prefWidth="174.2286376953125" text="LastName" />
               </columns>
             </TableView>
-            <Button layoutX="303.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleSave" styleClass="button-red" text="อัปเดท" />
          </children>
       </Pane>
       <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
