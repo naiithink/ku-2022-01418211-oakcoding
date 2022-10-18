@@ -29,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
@@ -323,7 +324,16 @@ public class AdminController implements Initializable {
 
     @FXML
     void handleClickLogoutButton(ActionEvent event) {
-
+        try {
+            userNameLabel.setText("");
+            statusAccountLabel.setText("");
+            firstNameLabelAccount.setText("");
+            lastNameLabel.setText("");
+            picProfileSettingLabel.setImage(null);
+            OldStageManager.getStageManager().setPage("authentication", null);
+        } catch (OldStageManager.PageNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

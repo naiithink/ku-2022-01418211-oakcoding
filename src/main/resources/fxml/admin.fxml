@@ -95,7 +95,7 @@
             </Label>
             <Button fx:id="logoutButton" layoutX="142.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleClickLogoutButton" prefHeight="17.0" prefWidth="23.0" styleClass="button-third-dashboard-nav" textFill="#e0e0e1">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView  fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/sign-out-alt.png" />
                      </image>

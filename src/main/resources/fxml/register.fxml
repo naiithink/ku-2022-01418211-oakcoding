@@ -117,11 +117,6 @@
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="messageWhenRegisterLabel" layoutX="179.0" layoutY="521.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการสมัครสมาชิกเรียบร้อย" textFill="#da9e9f">
-                     <font>
-                        <Font name="Kanit Regular" size="16.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
             </children>

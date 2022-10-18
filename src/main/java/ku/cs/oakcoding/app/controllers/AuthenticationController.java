@@ -11,6 +11,7 @@ package ku.cs.oakcoding.app.controllers;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
@@ -18,16 +19,15 @@ import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.User;
+import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.OldStageManager;
 import ku.cs.oakcoding.app.services.stages.OldStageManager.PageNotFoundException;
@@ -77,8 +77,14 @@ public class AuthenticationController implements Initializable {
         // Set<User> hashSet = newUsersList.getUsers();
         String userName = userNameTextField.getText();
         String password = passwordField.getText();
+        Set<UserEntry> entries = AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager().login("_ROOT","admin"));
+        for (UserEntry entry: entries) {
+            OakLogger.log(Level.SEVERE, entry.getFirstName());
 
+        }
         User user = AccountService.getUserManager().login(userName, password);
+
+
 
         if (Objects.nonNull(user)) {
             try {
@@ -91,8 +97,15 @@ public class AuthenticationController implements Initializable {
                 OakLogger.log(Level.SEVERE, "Page not found");
             }
         }
-//        emergency !!!!!!!!!!!
-    }
+        else{
+            {       Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("WARNING");
+                    alert.setContentText("โปรดตรวจสอบรหัสผ่านของคุณอีกครั้ง");
+                    alert.showAndWait();
+                }
+            }
+        }
+
 
     @FXML
     void handleGetStartedButtonToLoginPage(ActionEvent event) {
@@ -129,7 +142,6 @@ public class AuthenticationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
         loginSuccessfulLabel.setVisible(false);
-        tryAgianLabel.setVisible(false);
 
 
 

@@ -1,2 +1,3 @@
 "UID","USER_NAME","ROLE","IS_ACTIVE","LOGIN_ATTEMPT"
 "0000000000000-adminuser","_ROOT","ADMIN","true","0"
+"1666069684850-consumeruser","hihihima","CONSUMER","true","0"

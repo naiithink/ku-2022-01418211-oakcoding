@@ -101,7 +101,6 @@
                </font>
             </Button>
             <Label fx:id="loginSuccessfulLabel" layoutX="102.0" layoutY="410.0" prefHeight="34.0" prefWidth="104.0" text="Login SuccessFul" textFill="#56ffc4" visible="false" />
-            <Label fx:id="tryAgianLabel" layoutX="114.0" layoutY="410.0" prefHeight="34.0" prefWidth="104.0" text="Try Agian" textFill="#ff4322" />
          </children>
       </Pane>
     </children>

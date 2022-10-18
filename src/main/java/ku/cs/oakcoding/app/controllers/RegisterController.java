@@ -18,15 +18,12 @@ import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.AccountService;
@@ -123,6 +120,11 @@ public class RegisterController implements Initializable {
 
     @FXML
     void handleBackButtonGoToLoginPage(MouseEvent event) {
+        try {
+            OldStageManager.getStageManager().setPage("authentication", null);
+        } catch (OldStageManager.PageNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -161,6 +163,7 @@ public class RegisterController implements Initializable {
         String password = passwordField.getText();
         String passwordConfirm = passwordConfirmField.getText();
 
+
         userNameField.clear();
         firstNameField.clear();
         lastNameField.clear();
@@ -169,6 +172,8 @@ public class RegisterController implements Initializable {
         nameProfileUploadLabel.setText("");
         nameProfileUploadLabel.setVisible(false);
 
+        if (handleAlertUserName()){
+            handleAlertSuccess();
         AccountService.getUserManager().register(null, userName, Roles.CONSUMER, firstName, lastName, profileImagePath, password, passwordConfirm);
         try {
             OldStageManager.getStageManager().setPage("authentication", null);
@@ -176,7 +181,27 @@ public class RegisterController implements Initializable {
             OakLogger.log(Level.SEVERE, "Page not found");
         }
     }
+    }
 
+    private void handleAlertSuccess() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("INFORMATION");
+        alert.setContentText(userNameField.getText() + "คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
+        alert.showAndWait();
+    }
+
+    private boolean handleAlertUserName() {
+
+        if (!OakHotspot.validUserName(userNameField.getText())){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจาก username ต้องเป็นตัวเล็กและ" +
+                    "ห้ามใช้สัญลักษณ์พิเศษ");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
     public void initPane() {
         userRegisterPane.setVisible(true);
         addOrganizationPane.setVisible(false);
