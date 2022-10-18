@@ -103,6 +103,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.configurations.OakSystemDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 
 /**
@@ -2891,7 +2892,9 @@ public final class StageManager {
         try (DirectoryStream<Path> dirs = Files.newDirectoryStream(fontDirPath)) {
 
             for (Path entry : dirs) {
-                if (FONT_CONTENT_TYPE_ARRAY.contains(Files.probeContentType(entry)) == false) {
+                if (!OakSystemDefaults.OS_NAME.value().toLowerCase().contains("windows")
+                     && FONT_CONTENT_TYPE_ARRAY.contains(Files.probeContentType(entry)) == false) {
+
                     continue;
                 }
 
