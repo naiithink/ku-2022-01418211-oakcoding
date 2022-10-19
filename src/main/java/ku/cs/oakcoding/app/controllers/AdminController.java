@@ -229,7 +229,6 @@ public class AdminController implements Initializable {
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 format.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
                 String formatted = format.format(date);
-                System.out.println(formatted);
                 dateLastlogin = new SimpleObjectProperty<>(new String(formatted));
 
             } catch (IllegalArgumentException e) {
@@ -279,7 +278,7 @@ public class AdminController implements Initializable {
         leaderStaffCol.setCellValueFactory(new PropertyValueFactory<>("leaderStaffMemberID"));
 
         observableDepartmentList.addAll(observableDepartmentSet);
-        usersListTableView.getItems().addAll(observableUserList);
+        departmentsListTableView.getItems().addAll(observableDepartmentList);
 
 
     }
