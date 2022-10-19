@@ -275,14 +275,14 @@ public final class UserManager {
                     profileImagePath = OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_DIR.value()).resolve(briefUserInfo.getUserName()).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + userInfo.getDataWhere(briefUserInfo.getUID(), "PROFILE_IMAGE_EXT"));
 
                 userEntrySet.add(new FullUserEntry(briefUserInfo.getUID(),
-                                           briefUserInfo.getRole(),
-                                           briefUserInfo.getUserName(),
-                                           briefUserInfo.getIsActive(),
-                                           briefUserInfo.getLoginAttempt(),
-                                           userInfo.getDataWhere(briefUserInfo.getUID(), "USER_NAME"),
-                                           userInfo.getDataWhere(briefUserInfo.getUID(), "LAST_NAME"),
-                                           profileImagePath,
-                                           Long.parseLong(sessionFile.getDataWhere(briefUserInfo.getUID(), "TIME"))));
+                                                   briefUserInfo.getRole(),
+                                                   briefUserInfo.getUserName(),
+                                                   briefUserInfo.getIsActive(),
+                                                   briefUserInfo.getLoginAttempt(),
+                                                   userInfo.getDataWhere(briefUserInfo.getUID(), "FIRST_NAME"),
+                                                   userInfo.getDataWhere(briefUserInfo.getUID(), "LAST_NAME"),
+                                                   profileImagePath,
+                                                   Long.parseLong(sessionFile.getDataWhere(briefUserInfo.getUID(), "TIME"))));
             }
         }
 
