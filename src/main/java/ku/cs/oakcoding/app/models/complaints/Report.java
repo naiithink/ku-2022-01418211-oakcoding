@@ -1,53 +1,81 @@
 package ku.cs.oakcoding.app.models.complaints;
 
+import java.util.logging.Level;
+
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import ku.cs.oakcoding.app.models.users.AdminUser;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
-public non-sealed class Report
-        extends Issue
-        implements Resolvable<Report> {
+public class Report {
 
-    private final ObjectProperty<ReportType> type = new SimpleObjectProperty<>();
+    private final String REPORT_ID;
 
-    private final Object target;
+    private final String AUTHOR_UID;
 
-    private final ReadOnlyObjectWrapper<ReportStatus> status = new ReadOnlyObjectWrapper<>();
+    private final String TARGET_ID;
 
-    public Report(ReportType type, String reportID, String authorUID, String subject, String description, Object target, ReportStatus status) {
-        super(reportID, authorUID, subject, description);
+    private final ObjectProperty<ReportType> type;
 
-        this.type.set(type);
-        this.target = target;
-        this.status.set(status);
+    private final StringProperty description;
+
+    private final ObjectProperty<ReportStatus> status;
+
+    private final StringProperty result;
+
+    private final ReportResolveStrategy resolvingStrategy;
+
+    public Report(String reportID, String authorID, String targetID, ReportType type,
+            StringProperty description, ReportStatus status, String result, ReportResolveStrategy resolvingStrategy) {
+
+        REPORT_ID = reportID;
+        AUTHOR_UID = authorID;
+        TARGET_ID = targetID;
+        this.type = new SimpleObjectProperty<>(type);
+        this.description = description;
+        this.status = new SimpleObjectProperty<>(status);
+        this.result = new SimpleStringProperty(result);
+        this.resolvingStrategy = resolvingStrategy;
     }
 
     public String getReportID() {
-        return super.getIssueId();
+        return REPORT_ID;
     }
 
-    public ReadOnlyObjectProperty<ReportType> getType() {
+    public String getAuthorID() {
+        return AUTHOR_UID;
+    }
+
+    public String getTargetID() {
+        return TARGET_ID;
+    }
+
+    public ObjectProperty<ReportType> getType() {
         return type;
     }
 
-    public Object getTarget() {
-        return target;
+    public StringProperty getDescription() {
+        return description;
     }
 
-    public ReportStatus getStatus() {
-        return status.get();
+    public ObjectProperty<ReportStatus> getStatus() {
+        return status;
     }
 
-    public ReadOnlyObjectProperty<ReportStatus> getReadOnlyStatusProperty() {
-        return status.getReadOnlyProperty();
-    }
-
-    @Override
-    public void resolve(Resolver<Report> resolver, IssueStatus<Report> status) {
-        if (resolver.getClass().isAssignableFrom(AdminUser.class)) {
-            this.status.set((ReportStatus) status);
+    public ReportStatus setStatus(ReportStatus status, String result) {
+        if (this.status.get().equals(ReportStatus.RESOLVED)) {
+            OakLogger.log(Level.WARNING, "This report had been marked as resolved, its status is no longer be modifiable");
+            return this.status.get();
+        } else if (!result.isEmpty()) {
+            OakLogger.log(Level.WARNING, "Report result can only be set when a report is about to be marked as resolved");
         }
+
+        if (status.equals(ReportStatus.RESOLVED))
+            this.result.set(result);
+
+        this.status.set(status);
+
+        return this.status.get();
     }
 }

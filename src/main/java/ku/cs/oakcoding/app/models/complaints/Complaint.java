@@ -1,254 +1,119 @@
-/**
- * @file Complaint.java
- * 
- * Reviews:
- *  - Naming
- *      1. (CASE) naiithink, 2022-10-05
- */
-
 package ku.cs.oakcoding.app.models.complaints;
 
-import java.util.Collection;
 import java.util.Objects;
-import java.util.logging.Level;
+import java.util.Set;
 
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.property.ReadOnlyMapWrapper;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.ReadOnlySetProperty;
-import javafx.beans.property.ReadOnlySetWrapper;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.models.users.StaffUser;
 
-public non-sealed class Complaint
-        extends Issue
-        implements Resolvable<Complaint> {
+public class Complaint {
 
-    private final ReadOnlySetWrapper<String> categories;
+    private final String COMPLAINT_ID;
 
-    private final ReadOnlyObjectWrapper<StaffUser> caseManager;
+    private final String AUTHOR_UID;
 
-    private final ReadOnlyObjectWrapper<ComplaintStatus> caseStatus;
+    private final StringProperty category;
 
-    private final BooleanBinding isResolved;
+    private final StringProperty subject;
 
-    private final ReadOnlyMapWrapper<Integer, Evidence> evidence;
+    private final StringProperty description;
 
-    private final IntegerBinding evidenceCount;
+    private final ObjectProperty<Object> evidence;
 
-    private final ReadOnlySetWrapper<String> voters;
+    private final ObservableSet<String> voters;
 
-    public Complaint(String issueID, String authorUID, String subject, String description, ComplaintStatus status) {
-        super(issueID, authorUID, subject, description);
+    private final ObjectProperty<ComplaintStatus> status;
 
-        this.categories = new ReadOnlySetWrapper<>();
-        this.caseManager = new ReadOnlyObjectWrapper<>();
-        this.caseStatus = new ReadOnlyObjectWrapper<>(this, "status");
-        this.evidence = new ReadOnlyMapWrapper<>();
-        this.voters = new ReadOnlySetWrapper<>(this, "voters", FXCollections.observableSet());
+    private final BooleanProperty isResolved;
 
-        if (Objects.nonNull(status)) {
-            this.caseStatus.set(status);
-        }  else {
-            this.caseStatus.set(ComplaintStatus.getDefault());
-            OakLogger.log(Level.WARNING, "Attempting to create new Complaint with null status");
-        }
+    private final StringProperty caseManagerUID;
 
-        this.isResolved = new BooleanBinding() {
+    public Complaint(String complaintID, String authorUID, String category, String subject,
+            String description, Object evidence, Set<String> voters,
+            ComplaintStatus status, String caseManagerUID) {
 
-            {
-                super.bind(caseStatus);
-            }
-
-            @Override
-            public boolean computeValue() {
-                if (caseStatus.get().equals(ComplaintStatus.CLOSED)) {
-                    return true;
-                }
-
-                return false;
-            }
-        };
-
-        this.evidenceCount = new IntegerBinding() {
-
-            {
-                super.bind(evidence);
-            }
-
-            @Override
-            public int computeValue() {
-                return evidence.getSize();
-            }
-        };
-    }
-
-    public Complaint(String issueID, String authorUID, String subject, String description, ComplaintStatus status, Collection<? extends String> voters) {
-        super(issueID, authorUID, subject, description);
-
-        this.categories = new ReadOnlySetWrapper<>();
-        this.caseManager = new ReadOnlyObjectWrapper<>();
-        this.caseStatus = new ReadOnlyObjectWrapper<>(this, "status");
-        this.evidence = new ReadOnlyMapWrapper<>();
-        this.voters = new ReadOnlySetWrapper<>(this, "voters", FXCollections.observableSet());
-
-        if (Objects.nonNull(status)) {
-            this.caseStatus.set(status);
-        }  else {
-            this.caseStatus.set(ComplaintStatus.getDefault());
-            OakLogger.log(Level.WARNING, "Attempting to create new Complaint with null status");
-        }
-
-        if (Objects.nonNull(voters))
-            this.voters.addAll(voters);
-
-        this.isResolved = new BooleanBinding() {
-
-            {
-                super.bind(caseStatus);
-            }
-
-            @Override
-            public boolean computeValue() {
-                if (caseStatus.get().equals(ComplaintStatus.CLOSED)) {
-                    return true;
-                }
-
-                return false;
-            }
-        };
-
-        this.evidenceCount = new IntegerBinding() {
-
-            {
-                super.bind(evidence);
-            }
-
-            @Override
-            public int computeValue() {
-                return evidence.getSize();
-            }
-        };
-    }
-
-    public Complaint(String id, String authorUserName, String subject, String description, ComplaintStatus status, String... voters) {
-        super(id, authorUserName, subject, description);
-
-        this.categories = new ReadOnlySetWrapper<>();
-        this.caseManager = new ReadOnlyObjectWrapper<>();
-        this.caseStatus = new ReadOnlyObjectWrapper<>(this, "status");
-        this.evidence = new ReadOnlyMapWrapper<>();
-        this.voters = new ReadOnlySetWrapper<>(this, "voters", FXCollections.observableSet());
-
-        if (Objects.nonNull(status) == false) {
-            OakLogger.log(Level.SEVERE, "Attempting to create new Complaint with null status");
-
-            System.exit(1);
-        }
-
-        this.caseStatus.set(status);
-
-        if (Objects.nonNull(voters)) {
-            for (String voter : voters) {
-                this.voters.add(voter);
-            }
-        }
-
-        this.isResolved = new BooleanBinding() {
-
-            {
-                super.bind(caseStatus);
-            }
-
-            @Override
-            public boolean computeValue() {
-                if (caseStatus.get().equals(ComplaintStatus.CLOSED)) {
-                    return true;
-                }
-
-                return false;
-            }
-        };
-
-        this.evidenceCount = new IntegerBinding() {
-
-            {
-                super.bind(evidence);
-            }
-
-            @Override
-            public int computeValue() {
-                return evidence.getSize();
-            }
-        };
+        COMPLAINT_ID = complaintID;
+        AUTHOR_UID = authorUID;
+        this.category = new SimpleStringProperty(category);
+        this.subject = new SimpleStringProperty(subject);
+        this.description = new SimpleStringProperty(description);
+        this.evidence = new SimpleObjectProperty<>(evidence);
+        this.voters = FXCollections.observableSet(voters);
+        this.status = new SimpleObjectProperty<>(status);
+        this.isResolved = new SimpleBooleanProperty(status.equals(ComplaintStatus.RESOLVED));
+        this.caseManagerUID = new SimpleStringProperty(caseManagerUID);
     }
 
     public String getComplaintID() {
-        return super.getIssueId();
+        return COMPLAINT_ID;
+    }
+
+    public String getAuthorUID() {
+        return AUTHOR_UID;
+    }
+
+    public String getTags() {
+        return category.get();
+    }
+
+    public String getSubject() {
+        return subject.get();
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public Object getEvidence() {
+        return evidence.get();
+    }
+
+    public Set<String> getVoters() {
+        return voters;
+    }
+
+    public ComplaintStatus getStatus() {
+        return status.get();
+    }
+
+    public String getCaseManagerUID() {
+        return caseManagerUID.get();
+    }
+
+    public boolean vote(String UID) {
+        return this.voters.add(UID);
+    }
+
+    public boolean unVote(String UID) {
+        return this.voters.remove(UID);
+    }
+
+    public long getVoteCount() {
+        return this.voters.size();
+    }
+
+    public boolean setStatus(StaffUser caseManager, ComplaintStatus status) {
+        if (Objects.isNull(caseManager)
+            || Objects.isNull(status)
+            || this.status.get().equals(status)) {
+
+            return false;
+        }
+
+        this.caseManagerUID.set(caseManager.getUID());
+        this.status.set(status);
+
+        return true;
     }
 
     public boolean isResolved() {
         return isResolved.get();
-    }
-
-    public ReadOnlySetProperty<String> getReadOnlyCategoriesProperty() {
-        return categories.getReadOnlyProperty();
-    }
-
-    public int getNumVote() {
-        return voters.size();
-    }
-
-    public ReadOnlySetProperty<String> getVoters() {
-        return this.voters.getReadOnlyProperty();
-    }
-
-    /**
-     * @return      true if the voter has not already vote. Otherwise, false is returned.
-     */
-    public int vote(String userName) {
-        if (super.AUTHOR_UID.equals(userName)) {
-            return voters.size();
-        }
-
-        voters.add(userName);
-        return voters.size();
-    }
-
-    /**
-     * @return      true if the voter has not already vote. Otherwise, false is returned.
-     * 
-     * @see vote
-     */
-    public int unVote(String userName) {
-        if (super.AUTHOR_UID.equals(userName)) {
-            return voters.size();
-        }
-
-        voters.remove(userName);
-        return voters.size();
-    }
-
-    public ComplaintStatus getStatus() {
-        return caseStatus.get();
-    }
-
-    public ReadOnlyObjectProperty<ComplaintStatus> getReadOnlyStatusProperty() {
-        return caseStatus.getReadOnlyProperty();
-    }
-
-    public ReadOnlySetProperty<String> getReadOnlyVotersProperty() {
-        return voters.getReadOnlyProperty();
-    }
-
-    @Override
-    public void resolve(Resolver<Complaint> resolver, IssueStatus<Complaint> resolveStatus) {
-        if (resolver.getClass().isAssignableFrom(StaffUser.class)) {
-            caseManager.set((StaffUser) resolver);
-            caseStatus.set((ComplaintStatus) resolveStatus);
-        }
     }
 }

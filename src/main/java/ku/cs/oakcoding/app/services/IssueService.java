@@ -1,31 +1,49 @@
 package ku.cs.oakcoding.app.services;
 
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
-import ku.cs.oakcoding.app.models.complaints.ComplaintManager;
-import ku.cs.oakcoding.app.models.complaints.ReportManager;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
 
-public final class IssueService {
+import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
+
+public class IssueService implements AppService {
     private IssueService() {}
 
-    private static final ReadOnlyBooleanWrapper isActive = new ReadOnlyBooleanWrapper(false);
+    private static IssueManager issueManager;
 
-    private static ReportManager reportManager;
+    @Override
+    public void start() {
+        AutoUpdateCSV complaintCategoryDB = null;
+        AutoUpdateCSV complaintDB = null;
+        AutoUpdateCSV reportDB = null;
 
-    private static ComplaintManager complaintManager;
+        try {
+            complaintCategoryDB = new AutoUpdateCSV("complaintCategoryDB", "CATEGORY", "complaintCategoryDB", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_COMPLAINT_CATEGORIES_FILE.value()));
+        } catch (FileNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Complaint data file not found");
+            System.exit(1);
+        }
 
-    public static void start() {
-        complaintManager = new ComplaintManager();
-        reportManager = new ReportManager(complaintManager);
+        try {
+            complaintDB = new AutoUpdateCSV("complaintDB", "COMPLAINT_ID", "complaintDB", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_COMPLAINT_FILE.value()));
+        } catch (FileNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Complaint data file not found");
+            System.exit(1);
+        }
 
-        isActive.set(true);
+        try {
+            reportDB = new AutoUpdateCSV("reportDB", "REPORT_ID", "reportDB", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_REPORT_FILE.value()));
+        } catch (FileNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Complaint data file not found");
+            System.exit(1);
+        }
+
+        issueManager = new IssueManager(complaintCategoryDB, complaintDB, reportDB);
     }
 
-    public static boolean isActive() {
-        return isActive.get();
-    }
-
-    public static ReadOnlyBooleanProperty getReadOnlyIsActiveProperty() {
-        return isActive.getReadOnlyProperty();
+    public static IssueManager getIssueManager() {
+        return issueManager;
     }
 }

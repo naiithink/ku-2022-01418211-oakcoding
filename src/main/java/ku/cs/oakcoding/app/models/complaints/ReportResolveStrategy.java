@@ -1,7 +1,7 @@
 package ku.cs.oakcoding.app.models.complaints;
 
 @FunctionalInterface
-public interface Resolvable<T> {
+public interface ReportResolveStrategy {
 
-    void resolve(T t);
+    void resolve();
 }
