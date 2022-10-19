@@ -10,12 +10,8 @@ package ku.cs.oakcoding.app.models.users;
 
 import java.nio.file.Path;
 
-import ku.cs.oakcoding.app.models.complaints.Complaint;
-import ku.cs.oakcoding.app.models.complaints.Resolver;
-
 public final class StaffUser
-        extends User
-        implements Resolver<Complaint> {
+        extends User {
 
     private final Roles ROLE = Roles.STAFF;
 

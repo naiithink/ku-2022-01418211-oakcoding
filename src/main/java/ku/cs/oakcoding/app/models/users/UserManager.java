@@ -32,7 +32,6 @@ import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
@@ -424,14 +423,5 @@ public final class UserManager {
 
     public ObservableMap<String, UserEntry> getBriefUserTableProperty() {
         return briefUserTable;
-    }
-
-    public static void main(String[] args) {
-        AccountService acc = new AccountService();
-        acc.start();
-
-        AdminUser admin = AccountService.getUserManager().login("_ROOT", "admin");
-
-        AccountService.getUserManager().deleteUser(admin, "naiithink", "eiei");
     }
 }

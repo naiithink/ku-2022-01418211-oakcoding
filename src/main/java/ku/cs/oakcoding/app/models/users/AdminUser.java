@@ -10,12 +10,8 @@ package ku.cs.oakcoding.app.models.users;
 
 import java.nio.file.Path;
 
-import ku.cs.oakcoding.app.models.complaints.Report;
-import ku.cs.oakcoding.app.models.complaints.Resolver;
-
 public final class AdminUser
-        extends User
-        implements Resolver<Report> {
+        extends User {
 
     private final Roles ROLE = Roles.ADMIN;
 
