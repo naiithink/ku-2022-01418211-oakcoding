@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -189,6 +191,12 @@ public class AdminController implements Initializable {
 
     private ObservableList<Department> observableDepartmentList = FXCollections.observableArrayList();
 
+
+    /**
+     *
+     * DetailUserName page
+     *
+     */
     @FXML
     private Pane userDetailPane;
 
@@ -212,6 +220,9 @@ public class AdminController implements Initializable {
 
 
 
+
+
+
     private void initUsersTableView() {
 
 
@@ -222,6 +233,7 @@ public class AdminController implements Initializable {
 
         observableUserSet.addAll(AccountService.getUserManager().getAllUsersSetProperty(AccountService.getUserManager().login("_ROOT","admin")) /* dataSourceCSV.readData().getUsers() */);
         usersListTableView.setEditable(true);
+
 
 
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -261,32 +273,47 @@ public class AdminController implements Initializable {
 
         observableUserList.addAll(observableUserSet);
         usersListTableView.getItems().addAll(observableUserList);
-//        usersListTableView.refresh();
-
-
-//
-
-
-
-
-
-//        firstNameCol.setOnEditCommit(event -> {
-//            UserEntry user = event.getRowValue();
-//            AccountService.getUserManager().setActiveStatus()
-////            user.setFirstName(event.getNewValue());
-//        });
-
-//        new EventHandler<TableColumn.CellEditEvent<UserEntry, String>>() {
-//            @Override
-//            public void handle(TableColumn.CellEditEvent<UserEntry, String> event) {
-//
-//            }
-//        }
-
-
-//        showListView();
 
     }
+
+    private void handleSelectedUsersTableView() {
+
+        usersListTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = usersListTableView.getSelectionModel().getSelectedIndex();
+                FullUserEntry fullUserEntry = usersListTableView.getItems().get(index);
+                showSelectedUser(fullUserEntry);
+            }
+        });
+
+
+
+
+    }
+
+    private void showSelectedUser(FullUserEntry userEntry){
+        welcomePane.setVisible(false);
+        userPane.setVisible(false);
+        complaintsPane.setVisible(false);
+        organizationsPane.setVisible(false);
+        reportPane.setVisible(false);
+        requestPane.setVisible(false);
+        settingPane.setVisible(false);
+        userDetailPane.setVisible(true);
+
+        detailUserNameLabel.setText(userEntry.getUserName());
+        detailUserStatusAccountLabel.setText(userEntry.getRole().getPrettyPrinted());
+        detailUserFirstNameLabelAccount.setText(userEntry.getFirstName());
+        detailUserLastNameLabel.setText(userEntry.getLastName());
+        Image image = new Image(userEntry.getProfileImagePath().toUri().toString());
+        detailUserPicProfileSettingLabel.setImage(image);
+
+
+
+
+    }
+
+
 
 
     private void initDepartmentTableView(){
@@ -705,7 +732,6 @@ public class AdminController implements Initializable {
         statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
         firstNameLabelAccount.setText(admin.getFirstName());
         lastNameLabel.setText(admin.getLastName());
-        uidLabel.setText(admin.getUID());
         Image image = new Image(admin.getProfileImagePath().toUri().toString());
         picProfileSettingLabel.setImage(image);
 
@@ -804,6 +830,7 @@ public class AdminController implements Initializable {
                 initUsersTableView();
                 initDepartmentTableView();
                 setMyPane();
+                handleSelectedUsersTableView();
             }
         });
     }

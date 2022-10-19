@@ -21,6 +21,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.users.AdminUser;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
@@ -29,7 +31,10 @@ public class UserController implements Initializable {
     private Pane createReportsUserPane;
 
     @FXML
-    private Label fullNameLabel;
+    private Label userNameHomeLabel;
+
+    @FXML
+    private Label statusHomeLabel;
 
     @FXML
     private Button createReportButton;
@@ -56,9 +61,6 @@ public class UserController implements Initializable {
     private ImageView settingImageView;
 
     @FXML
-    private Label statusLabel;
-
-    @FXML
     private ImageView dashboardImageView;
 
     @FXML
@@ -66,6 +68,26 @@ public class UserController implements Initializable {
 
     @FXML
     private Pane settingUserPane;
+
+    @FXML
+    private Label userNameLabel;
+
+    @FXML
+    private Label statusAccountLabel;
+
+    @FXML
+    private Label firstNameAccountLabel;
+
+    @FXML
+    private Label lastNameAccountLabel;
+
+    @FXML
+    private Label profileImageNameLabel;
+
+    @FXML
+    private ImageView profileImageView;
+
+
 
     public void handleClickReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
@@ -149,6 +171,18 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(true);
+        setProfileLabel();
+    }
+
+    private void setProfileLabel(){
+        ConsumerUser consumerUser = (ConsumerUser) StageManager.getStageManager().getContext();
+        userNameLabel.setText(consumerUser.getUserName());
+        statusAccountLabel.setText(consumerUser.getRole().getPrettyPrinted());
+        firstNameAccountLabel.setText(consumerUser.getFirstName());
+        lastNameAccountLabel.setText(consumerUser.getLastName());
+        Image image = new Image(consumerUser.getProfileImagePath().toUri().toString());
+        profileImageNameLabel.setText(consumerUser.getProfileImagePath().toUri().toString());
+        profileImageView.setImage(image);
     }
 
     public void handleClickLogoutButton(ActionEvent actionEvent) {
@@ -189,6 +223,15 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
     }
 
+    public void setMyPane() {
+        ConsumerUser consumerUser = (ConsumerUser) StageManager.getStageManager().getContext();
+        userNameHomeLabel.setText(consumerUser.getFirstName());
+        statusHomeLabel.setText(consumerUser.getRole().getPrettyPrinted());
+
+
+//        OakLogger.log(Level.SEVERE,"no admin");
+    }
+
     public void initPane() {
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
@@ -199,5 +242,10 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("user")) {
+                setMyPane();
+            }
+        });
     }
 }
