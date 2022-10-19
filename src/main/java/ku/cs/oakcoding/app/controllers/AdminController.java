@@ -10,18 +10,15 @@ package ku.cs.oakcoding.app.controllers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Formatter;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import java.util.logging.Level;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,17 +28,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
+import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
-import ku.cs.oakcoding.app.models.users.UserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.services.WorkspaceService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 
 
@@ -175,18 +172,22 @@ public class AdminController implements Initializable {
 
     private ObservableSet<FullUserEntry> observableUserSet = FXCollections.observableSet();
 
-    private ObservableList<FullUserEntry> observableList = FXCollections.observableArrayList();
+    private ObservableList<FullUserEntry> observableUserList = FXCollections.observableArrayList();
 
     /**
      * @organizationTableView
      */
 
-//    @FXML
-//    private TableView<Organization> organizationListTableView;
-//    @FXML
-//    private TableColumn<FullUserEntry, String> organizationCol;
-//    @FXML
-//    private TableColumn<FullUserEntry, String> departmentCol;
+    @FXML
+    private TableView<Department> departmentsListTableView;
+    @FXML
+    private TableColumn<Department, ReadOnlyStringWrapper> departmentCol;
+    @FXML
+    private TableColumn<Department, ReadOnlyStringWrapper> leaderStaffCol;
+
+    private ObservableSet<Department> observableDepartmentSet = FXCollections.observableSet();
+
+    private ObservableList<Department> observableDepartmentList = FXCollections.observableArrayList();
 
 
 
@@ -238,8 +239,8 @@ public class AdminController implements Initializable {
             }
         });
 
-        observableList.addAll(observableUserSet);
-        usersListTableView.getItems().addAll(observableList);
+        observableUserList.addAll(observableUserSet);
+        usersListTableView.getItems().addAll(observableUserList);
 //        usersListTableView.refresh();
 
 
@@ -267,11 +268,19 @@ public class AdminController implements Initializable {
 
     }
 
-    public static void main(String[] args) {
 
-    }
+    private void initDepartmentTableView(){
 
-    private void initOrganizationsTableView(){
+        observableDepartmentSet.addAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
+        departmentsListTableView.setEditable(true);
+
+
+        departmentCol.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
+        leaderStaffCol.setCellValueFactory(new PropertyValueFactory<>("leaderStaffMemberID"));
+
+        observableDepartmentList.addAll(observableDepartmentSet);
+        usersListTableView.getItems().addAll(observableUserList);
+
 
     }
 
@@ -765,7 +774,7 @@ public class AdminController implements Initializable {
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("admin")) {
                 initUsersTableView();
-                initOrganizationsTableView();
+                initDepartmentTableView();
                 setMyPane();
             }
         });

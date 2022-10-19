@@ -167,14 +167,14 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView layoutX="50.0" layoutY="84.0" prefHeight="417.0" prefWidth="548.0">
+            <TableView fx:id="departmentsListTableView" layoutX="50.0" layoutY="84.0" prefHeight="417.0" prefWidth="548.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="departmentCol" prefWidth="262.0" text="DepartMent" />
+                <TableColumn fx:id="leaderStaffCol" prefWidth="285.0" text="LeaderStaff" />
               </columns>
             </TableView>
          </children>
