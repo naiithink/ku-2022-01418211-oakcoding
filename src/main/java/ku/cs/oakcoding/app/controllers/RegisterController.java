@@ -135,7 +135,7 @@ public class RegisterController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("อัพโหลดรูปโปรไฟล์");
         fileChooser.getExtensionFilters().add(
-            new ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+                new ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
         );
 
         File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
@@ -166,70 +166,53 @@ public class RegisterController implements Initializable {
         String passwordConfirm = passwordConfirmField.getText();
 
 
-
         Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
         alertInformation.setTitle("INFORMATION");
         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
         alertWarning.setTitle("WARNING");
-         UserManagerStatus status = AccountService.getUserManager().register(null, userName, Roles.CONSUMER, firstName, lastName, profileImagePath, password, passwordConfirm);
-        if (!password.equals(passwordConfirm)) {
+        UserManagerStatus status = AccountService.getUserManager().register(null, userName, Roles.CONSUMER, firstName, lastName, profileImagePath, password, passwordConfirm);
+        if (password.equals(passwordConfirm)) {
+            if (confirmStudentCheckbox.isSelected()) {
+        switch (status) {
+            case SUCCESSFUL:
+                alertInformation.setContentText(userNameField.getText() + " คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
+                alertInformation.showAndWait();
+                userNameField.clear();
+                firstNameField.clear();
+                lastNameField.clear();
+                passwordField.clear();
+                passwordConfirmField.clear();
+                nameProfileUploadLabel.setText("");
+                nameProfileUploadLabel.setVisible(false);
+                try {
+                    StageManager.getStageManager().setPage("authentication", null);
+                } catch (StageManager.PageNotFoundException e) {
+                    OakLogger.log(Level.SEVERE, "Page not found");
+                }
+                break;
+            case INVALID_ACCESS:
+                alertWarning.setContentText(" คุณไม่มีสิทธิ์เข้าถึงผู้ผู้แลระบบ");
+                alertWarning.showAndWait();
+                break;
+            case USER_NAME_ALREADY_EXIST:
+                alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้บัญชีผู้ใช้นี้มีคนใช้งานแล้ว");
+                alertWarning.showAndWait();
+                break;
+            case USER_NAME_CONTAINS_UPPER_CASE:
+                alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจากบัญชีต้องมีตัวเล็กทั้งหมด a-z");
+                alertWarning.showAndWait();
+                break;
+        }
+    }
+}
+        if (!password.equals(passwordConfirm)){
             alertWarning.setContentText(userNameField.getText() + " กรุณากรอกรหัสผ่านตรงกับยืนยันรหัสผ่าน");
             alertWarning.showAndWait();
         }
-        if (confirmStudentCheckbox.isSelected()) {
+        if (!confirmStudentCheckbox.isSelected()){
             alertWarning.setContentText(" คุณจำเป็นต้องเลือกว่าคุณเป็นนิสิต");
             alertWarning.showAndWait();
         }
-        switch (status){
-             case SUCCESSFUL:
-                 alertInformation.setContentText(userNameField.getText() + " คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
-                 alertInformation.showAndWait();
-                 userNameField.clear();
-                 firstNameField.clear();
-                 lastNameField.clear();
-                 passwordField.clear();
-                 passwordConfirmField.clear();
-                 nameProfileUploadLabel.setText("");
-                 nameProfileUploadLabel.setVisible(false);
-                 try {
-                     StageManager.getStageManager().setPage("authentication", null);
-                 } catch (StageManager.PageNotFoundException e) {
-                     OakLogger.log(Level.SEVERE, "Page not found");
-                 }
-                 break;
-             case INVALID_ACCESS:
-                 alertWarning.setContentText(" คุณไม่มีสิทธิ์เข้าถึงผู้ผู้แลระบบ");
-                 alertWarning.showAndWait();
-                 break;
-             case USER_NAME_ALREADY_EXIST:
-                 alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้บัญชีผู้ใช้นี้มีคนใช้งานแล้ว");
-                 alertWarning.showAndWait();
-                 break;
-             case USER_NAME_CONTAINS_UPPER_CASE:
-                 alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจากบัญชีต้องมีตัวเล็กทั้งหมด a-z");
-                 alertWarning.showAndWait();
-                 break;
-         }
-
-
-    }
-    private void handleAlertSuccess() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("INFORMATION");
-        alert.setContentText(userNameField.getText() + " คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
-        alert.showAndWait();
-    }
-    private boolean handleAlertUserName() {
-
-        if (!OakHotspot.validUserName(userNameField.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("WARNING");
-            alert.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจาก username ต้องเป็นตัวเล็กและ" +
-                    "ห้ามใช้สัญลักษณ์พิเศษ");
-            alert.showAndWait();
-            return false;
-        }
-        return true;
     }
     public void initPane() {
         userRegisterPane.setVisible(true);
