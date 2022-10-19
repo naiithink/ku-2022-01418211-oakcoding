@@ -1,5 +1,6 @@
 # OakCoding
-data/logs/
+# data/logs/
+data/
 
 # Maven
 target/
