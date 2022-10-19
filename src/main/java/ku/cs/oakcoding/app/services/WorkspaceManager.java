@@ -10,6 +10,7 @@ import java.util.logging.Level;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.file.OakWorkspaceResource;
@@ -72,6 +73,18 @@ public class WorkspaceManager {
     /**
      * @section Department
      */
+
+    public ObservableSet<Department> getAllDepartmentsSet() {
+        ObservableSet<Department> deps = FXCollections.observableSet();
+
+        Set<String> depKeys = this.departmentTable.keySet();
+
+        for (String depKey : depKeys) {
+            deps.add(this.departmentTable.get(depKey));
+        }
+
+        return deps;
+    }
 
     public Department newDepartment(String departmentName) {
         if (containsDepartmentWithName(departmentName)) {
