@@ -7,7 +7,7 @@ import javafx.beans.property.ReadOnlyMapWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import ku.cs.oakcoding.app.models.users.AdminUser;
-import ku.cs.oakcoding.app.services.OakID;
+import ku.cs.oakcoding.app.helpers.id.OakID;
 
 /**
  * @todo Consider using singleton?
