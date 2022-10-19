@@ -140,7 +140,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
@@ -167,7 +167,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
@@ -273,5 +273,61 @@
              <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
           </children>
        </Pane>
+      <Pane fx:id="userDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+         <children>
+            <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
+               <children>
+                  <Label fx:id="detailUserNameLabel" layoutX="81.0" layoutY="35.0" prefHeight="23.0" prefWidth="181.0" styleClass="yellow-color-font" text="PeterParker@username" textFill="#e0e0e1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="detailUserStatusAccountLabel" layoutX="81.0" layoutY="50.0" prefHeight="53.0" prefWidth="181.0" styleClass="purple-color-font" text="Staff" textFill="#e0e0e1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
+                  <Line endX="355.0" layoutX="140.0" layoutY="93.0" startX="-100.0" />
+                  <Label layoutX="81.0" layoutY="93.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Firstname" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="137.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
+                     <children>
+                        <Label fx:id="detailUserFirstNameLabelAccount" layoutY="-12.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label layoutX="81.0" layoutY="162.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Lastname" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="199.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
+                     <children>
+                        <Label fx:id="detailUserLastNameLabel" layoutY="-8.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="detailUserBanButton" layoutX="221.0" layoutY="334.0" mnemonicParsing="false" styleClass="button-blue" text="แบน" />
+                  <ImageView fx:id="detailUserPicProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

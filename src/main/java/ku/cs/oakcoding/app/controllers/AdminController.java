@@ -189,6 +189,27 @@ public class AdminController implements Initializable {
 
     private ObservableList<Department> observableDepartmentList = FXCollections.observableArrayList();
 
+    @FXML
+    private Pane userDetailPane;
+
+    @FXML
+    private Label detailUserNameLabel;
+
+    @FXML
+    private Label detailUserStatusAccountLabel;
+
+    @FXML
+    private Label detailUserFirstNameLabelAccount;
+
+    @FXML
+    private Label detailUserLastNameLabel;
+
+    @FXML
+    private Button detailUserBanButton;
+
+    @FXML
+    private ImageView detailUserPicProfileSettingLabel;
+
 
 
     private void initUsersTableView() {
@@ -339,6 +360,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
     }
 
     @FXML
@@ -396,6 +418,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
 
     }
 
@@ -474,6 +497,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
 
     }
 
@@ -539,6 +563,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(true);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
     }
 
     @FXML
@@ -602,6 +627,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(true);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
     }
 
     @FXML
@@ -667,6 +693,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(true);
+        userDetailPane.setVisible(false);
         setProfileLabel();
 
     }
@@ -742,6 +769,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
 
     }
 
@@ -753,6 +781,7 @@ public class AdminController implements Initializable {
         reportPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
 
     }
     public void setMyPane() {
