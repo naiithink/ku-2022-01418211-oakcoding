@@ -11,7 +11,14 @@ package ku.cs.oakcoding.app.controllers;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import java.util.logging.Level;
 
 import javafx.beans.property.ObjectProperty;
@@ -30,6 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.UserEntry;
@@ -147,6 +155,9 @@ public class AdminController implements Initializable {
     @FXML
     private ImageView userImageView;
 
+    /**
+     * @userslistTableView
+     */
     @FXML
     private TableView<FullUserEntry> usersListTableView;
 
@@ -160,14 +171,26 @@ public class AdminController implements Initializable {
     private TableColumn<FullUserEntry, ImageView> profileImageCol;
 
     @FXML
-    private TableColumn<FullUserEntry, Long> lastLoginCol;
+    private TableColumn<FullUserEntry, String> lastLoginCol;
 
     private ObservableSet<FullUserEntry> observableUserSet = FXCollections.observableSet();
 
     private ObservableList<FullUserEntry> observableList = FXCollections.observableArrayList();
 
+    /**
+     * @organizationTableView
+     */
 
-    private void initTableView() {
+//    @FXML
+//    private TableView<Organization> organizationListTableView;
+//    @FXML
+//    private TableColumn<FullUserEntry, String> organizationCol;
+//    @FXML
+//    private TableColumn<FullUserEntry, String> departmentCol;
+
+
+
+    private void initUsersTableView() {
 
 
         /**
@@ -177,6 +200,7 @@ public class AdminController implements Initializable {
 
         observableUserSet.addAll(AccountService.getUserManager().getAllUsersSetProperty(AccountService.getUserManager().login("_ROOT","admin")) /* dataSourceCSV.readData().getUsers() */);
         usersListTableView.setEditable(true);
+
 
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -192,9 +216,29 @@ public class AdminController implements Initializable {
                 return res;
             }
         });
-        lastLoginCol.setCellValueFactory(new PropertyValueFactory<>("lastLogin"));
-        observableList.addAll(observableUserSet);
+        lastLoginCol.setCellValueFactory(p -> {
+            ObjectProperty<String> dateLastlogin = null;
+            try {
+                /**
+                 *
+                 * https://stackoverflow.com/questions/7740972/convert-epoch-time-to-date
+                 */
+                long millis = p.getValue().getLastLogin();
+                Date date = new Date(millis);
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                format.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
+                String formatted = format.format(date);
+                System.out.println(formatted);
+                dateLastlogin = new SimpleObjectProperty<>(new String(formatted));
 
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return dateLastlogin;
+            }
+        });
+
+        observableList.addAll(observableUserSet);
         usersListTableView.getItems().addAll(observableList);
 //        usersListTableView.refresh();
 
@@ -223,7 +267,13 @@ public class AdminController implements Initializable {
 
     }
 
+    public static void main(String[] args) {
 
+    }
+
+    private void initOrganizationsTableView(){
+
+    }
 
     @FXML
     void handleClickComplaints(ActionEvent event) {
@@ -714,7 +764,8 @@ public class AdminController implements Initializable {
 //        initTableView();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("admin")) {
-                initTableView();
+                initUsersTableView();
+                initOrganizationsTableView();
                 setMyPane();
             }
         });
