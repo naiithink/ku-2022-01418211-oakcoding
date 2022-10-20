@@ -14,11 +14,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.beans.binding.MapBinding;
+import javafx.beans.binding.SetBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
-import ku.cs.oakcoding.app.helpers.configurations.OakSystemDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResource;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
@@ -412,6 +412,30 @@ public class IssueManager {
         this.reportDB.removeRecordWhere(reportID);
 
         return IssueManagerStatus.SUCCESS;
+    }
+
+    public ObservableSet<Report> getAllReportsSet() {
+        ObservableSet<Report> res = new SetBinding<>() {
+
+            {
+                super.bind(reportTable);
+            }
+
+            @Override
+            public ObservableSet<Report> computeValue() {
+                ObservableSet<Report> res = FXCollections.observableSet();
+
+                Iterator<Entry<String, Report>> allReports = reportTable.entrySet().iterator();
+
+                while (allReports.hasNext()) {
+                    res.add(allReports.next().getValue());
+                }
+
+                return res;
+            }
+        };
+
+        return res;
     }
 
     public IssueManagerStatus reviewReport(AdminUser admin, String reportID, boolean approve) {
