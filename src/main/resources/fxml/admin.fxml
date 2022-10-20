@@ -203,7 +203,7 @@
             </TableView>
          </children>
       </Pane>
-       <Pane fx:id="settingPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+       <Pane fx:id="settingPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
           <children>
              <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                 <children>
@@ -247,20 +247,6 @@
                          </Label>
                       </children>
                    </Pane>
-                   <Label fx:id="fullNameLabel" layoutX="81.0" layoutY="224.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Profile" textFill="WHITE">
-                      <font>
-                         <Font size="16.0" />
-                      </font>
-                   </Label>
-                   <Pane layoutX="81.0" layoutY="261.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
-                      <children>
-                         <Label fx:id="nameProfileSettingLabel" layoutY="-8.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text=" MeWithMarryJane.png" textFill="WHITE">
-                            <font>
-                               <Font size="16.0" />
-                            </font>
-                         </Label>
-                      </children>
-                   </Pane>
                    <Button fx:id="accountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
                    <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                       <image>
@@ -273,7 +259,7 @@
              <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
           </children>
        </Pane>
-      <Pane fx:id="userDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="userDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
