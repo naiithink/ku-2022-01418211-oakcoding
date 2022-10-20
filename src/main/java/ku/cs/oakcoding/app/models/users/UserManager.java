@@ -76,6 +76,10 @@ public final class UserManager {
         return null;
     }
 
+    public String getUserNameOf(final String UID) {
+        return this.briefUserTable.get(UID).getUserName();
+    }
+
     public boolean isRegistered(String userName) {
         Iterator<Entry<String, UserEntry>> entries = briefUserTable.entrySet().iterator();
 
