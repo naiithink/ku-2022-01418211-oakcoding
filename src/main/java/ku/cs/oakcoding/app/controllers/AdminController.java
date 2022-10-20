@@ -178,6 +178,9 @@ public class AdminController implements Initializable {
     @FXML
     private PasswordField confirmPasswordField;
 
+    @FXML
+    private Pane sideBarPane;
+
     /**
      * @userslistTableView
      */
@@ -312,6 +315,7 @@ public class AdminController implements Initializable {
      * Admin Setting
      */
     public void handleChangePaneToChangeDetailPane(ActionEvent actionEvent) {
+        sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -324,6 +328,13 @@ public class AdminController implements Initializable {
         surroundingTableView.setVisible(false);
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(true);
+
+    }
+
+    @FXML
+    private void handleBackUserSettingPictureButton(){
+        sideBarPane.setDisable(false);
+        handleClickSetting();
 
     }
 
@@ -461,6 +472,7 @@ public class AdminController implements Initializable {
     }
 
     private void showSelectedUser(FullUserEntry userEntry){
+        sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -482,6 +494,12 @@ public class AdminController implements Initializable {
 
 
 
+
+    }
+    @FXML
+    private void handleBackUserPictureButton(){
+        sideBarPane.setDisable(false);
+        handleClickUser();
 
     }
 
@@ -572,6 +590,7 @@ public class AdminController implements Initializable {
 
     @FXML
     private void handleChangeLeaderStaffButton(){
+        sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -591,7 +610,12 @@ public class AdminController implements Initializable {
 
 
     }
+    @FXML
+    private void handleSaveLeaderStaffButton(){
+        sideBarPane.setDisable(false);
+        handleClickOrganizations();
 
+    }
     private void clearDepartmentPageData(){
         observableDepartmentSet.clear();
         observableDepartmentList.clear();
