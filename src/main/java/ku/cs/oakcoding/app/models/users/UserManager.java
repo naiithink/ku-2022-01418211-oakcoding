@@ -268,6 +268,19 @@ public final class UserManager {
 
         PasswordManager.addPassword(getUIDOf(userName), password);
 
+        if (Objects.nonNull(dispatcher) && (dispatcher instanceof AdminUser) && (role.equals(Roles.STAFF))) {
+            userEntrySet.add(new FullUserEntry(newUser.getUID(),
+                                               newUser.getRole(),
+                                               newUser.getUserName(),
+                                               isActive(newUser.getUserName()),
+                                               0,
+                                               newUser.getFirstName(),
+                                               newUser.getLastName(),
+                                               newUser.getProfileImagePath(),
+                                               0)
+            );
+        }
+
         return UserManagerStatus.SUCCESSFUL;
     }
 
@@ -441,6 +454,14 @@ public final class UserManager {
         }
 
         briefUserTable.remove(userName);
+
+        FullUserEntry[] fullUserEntryArray = new FullUserEntry[] {};
+        fullUserEntryArray = userEntrySet.toArray(fullUserEntryArray);
+
+        for (FullUserEntry entry : fullUserEntryArray) {
+            if (entry.getUserName().equals(userName))
+                userEntrySet.remove(entry);
+        }
 
         return UserManagerStatus.SUCCESSFUL;
     }
