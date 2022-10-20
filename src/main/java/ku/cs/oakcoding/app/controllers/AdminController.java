@@ -369,12 +369,6 @@ public class AdminController implements Initializable {
     }
 
 
-
-
-
-
-
-
     void setProfileLabel(){
         AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
         userNameLabel.setText(admin.getUserName());
@@ -394,8 +388,29 @@ public class AdminController implements Initializable {
         complaintChoiceBox.getItems().addAll(complaintChoiceBoxSelected);
     }
 
+    private void handleSelectedComplaintChoiceBox(){
+        complaintChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(newValue + "speech is selected");
+                if (newValue.equals("Personnel")){
+                    handleClickComplaints();
+                }
+                else {
+
+                }
+
+            }
+        });
+    }
+
+
+
+
+
+
     @FXML
-    void handleClickComplaints(ActionEvent event) {
+    void handleClickComplaints() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
@@ -454,7 +469,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickDashboard(ActionEvent event) {
+    void handleClickDashboard() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home-seleted.png").toUri().toURL().toString()));
@@ -513,7 +528,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickLogoutButton(ActionEvent event) {
+    void handleClickLogoutButton() {
         try {
             userNameLabel.setText("");
             statusAccountLabel.setText("");
@@ -527,7 +542,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickOrganizations(ActionEvent event) {
+    void handleClickOrganizations() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
@@ -592,7 +607,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickReport(ActionEvent event) {
+    void handleClickReport() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
@@ -657,7 +672,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickRequest(ActionEvent event) {
+    void handleClickRequest() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
@@ -721,7 +736,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickSetting(ActionEvent event) {
+    void handleClickSetting() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
@@ -789,7 +804,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void handleClickUser(ActionEvent event) {
+    void handleClickUser() {
         try {
             dashboardImageView.setImage(new Image(OakResourcePrefix.getPrefix().resolve("images")
                     .resolve("home.png").toUri().toURL().toString()));
