@@ -39,6 +39,7 @@ public final class AccountService implements AppService {
         }
 
         try {
+            System.out.println(OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_DIR.value()).resolve(OakAppDefaults.APP_USER_REQUESTS.value()));
             userRequestDB = new AutoUpdateCSV("userRequests", "UID", "userRequests", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_DIR.value()).resolve(OakAppDefaults.APP_USER_REQUESTS.value()));
         } catch (FileNotFoundException e) {
             OakLogger.log(Level.SEVERE, "User request file not found");
