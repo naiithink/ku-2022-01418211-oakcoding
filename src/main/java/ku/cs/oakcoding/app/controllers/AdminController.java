@@ -36,6 +36,7 @@ import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
+import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
@@ -229,6 +230,12 @@ public class AdminController implements Initializable {
     @FXML
     private ChoiceBox<String> complaintChoiceBox;
 
+    @FXML
+    private TableView<Complaint>PersonalTableView;
+
+    @FXML
+    private TableView<Complaint>SurroundingTableView;
+
 
 
 
@@ -251,6 +258,7 @@ public class AdminController implements Initializable {
                 initDepartmentTableView();
                 setMyPane();
                 handleSelectedUsersTableView();
+                handleSelectedComplaintChoiceBox();
             }
         });
     }
@@ -397,7 +405,8 @@ public class AdminController implements Initializable {
                     handleClickComplaints();
                 }
                 else {
-
+                PersonalTableView.setVisible(false);
+                SurroundingTableView.setVisible(true);
                 }
 
             }
