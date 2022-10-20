@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -156,11 +157,11 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="44.0" layoutY="28.0" text="แจ้งเรื่อง" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="70.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="personalTableView" layoutX="44.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0" visible="false">
+            <TableView fx:id="PersonalTableView" layoutX="44.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0">
               <columns>
                 <TableColumn fx:id="categoryCol" prefWidth="124.0" text="Category" />
                 <TableColumn fx:id="subjectCol" prefWidth="160.0" text="Subject" />
@@ -169,7 +170,7 @@
               </columns>
             </TableView>
             <ChoiceBox fx:id="complaintChoiceBox" layoutX="43.0" layoutY="62.0" prefWidth="150.0" />
-            <TableView fx:id="surroundingTableView" layoutX="46.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0">
+            <TableView fx:id="SurroundingTableView" layoutX="46.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0" visible="false">
                <columns>
                   <TableColumn fx:id="categorySurroundCol" prefWidth="124.0" text="Category" />
                   <TableColumn fx:id="subjectSurroundCol" prefWidth="160.0" text="Subject" />
@@ -179,16 +180,19 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="departmentsListTableView" layoutX="50.0" layoutY="84.0" prefHeight="417.0" prefWidth="548.0">
+            <TableView fx:id="departmentsListTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
               <columns>
                 <TableColumn fx:id="departmentCol" prefWidth="262.0" text="DepartMent" />
                 <TableColumn fx:id="leaderStaffCol" prefWidth="285.0" text="LeaderStaff" />
               </columns>
             </TableView>
+            <Button fx:id="createDepartmentButton" layoutX="381.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleRegisterDepartment" text="สร้าง" />
+            <TextField fx:id="nameDepartmentTextField" layoutX="93.0" layoutY="489.0" prefWidth="250.0" />
+            <Label layoutX="96.0" layoutY="459.0" text="ชื่อองค์กร" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="reportPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">

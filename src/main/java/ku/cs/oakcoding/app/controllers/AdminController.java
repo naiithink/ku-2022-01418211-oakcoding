@@ -39,7 +39,11 @@ import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
+import ku.cs.oakcoding.app.models.users.Roles;
+import ku.cs.oakcoding.app.models.users.UserManagerStatus;
 import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.services.WorkspaceManager;
+import ku.cs.oakcoding.app.services.WorkspaceManagerStatus;
 import ku.cs.oakcoding.app.services.WorkspaceService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 
@@ -218,6 +222,12 @@ public class AdminController implements Initializable {
     @FXML
     private ImageView detailUserPicProfileSettingLabel;
 
+    @FXML
+    private TextField nameDepartmentTextField;
+
+    @FXML
+    private Button createDepartmentButton;
+
 
     /**
      *
@@ -371,6 +381,26 @@ public class AdminController implements Initializable {
 
         observableDepartmentList.addAll(observableDepartmentSet);
         departmentsListTableView.getItems().addAll(observableDepartmentList);
+
+
+
+    }
+    @FXML
+    private void handleRegisterDepartment(){
+        String nameDepartment = nameDepartmentTextField.getText();
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+        Department department = WorkspaceService.getWorkspaceManager().newDepartment(nameDepartment);
+        if (department == null){
+            alertWarning.setContentText("ชื่อองค์กรนี้ถูกใช้งานแล้ว กรุณาใช้ชื่อใหม่" + nameDepartment + "'");
+            alertWarning.showAndWait();
+        }
+        else{
+            alertWarning.setContentText("คุณได้ทำการสมัครองค์กรเป็นที่เรียบร้อยแล้ว" + "'");
+            alertWarning.showAndWait();
+        }
 
 
     }
