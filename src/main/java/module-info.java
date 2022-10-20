@@ -27,7 +27,10 @@ module oakcoding.app {
     opens ku.cs.oakcoding.app.services              to javafx.fxml;
 
     /**
-     * ku.cs.oakcoding.app.models.users.FullUserEntry -- TableView<S>
+     * ku.cs.oakcoding.app.models.* -- TableView<S>
      */
+    opens ku.cs.oakcoding.app.models.complaints     to javafx.base;
+    opens ku.cs.oakcoding.app.models.org            to javafx.base;
+    opens ku.cs.oakcoding.app.models.reports        to javafx.base;
     opens ku.cs.oakcoding.app.models.users          to javafx.base;
 }
