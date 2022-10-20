@@ -865,8 +865,6 @@ public final class StageManager {
                 loader.setController(controllerInstance);
                 parent = loader.load();
 
-                // StackPane.setAlignment(parent, Pos.CENTER);
-
                 pageTable.put(pageNick, new PageMap(parent,
                                                     controllerClass,
                                                     prefWidth,
@@ -1467,6 +1465,7 @@ public final class StageManager {
 
                 stage.setWidth(prefWidth);
                 this.primaryStageWidth = prefWidth;
+                // ((Node) this.primaryStageScenePage).prefWidth(prefWidth);
             }
 
             if (mapOfPageToSet.inheritHeight == false) {
@@ -1484,21 +1483,17 @@ public final class StageManager {
             /**
              * Children management for Stage with custom layout
              */
-            this.primaryStageScenePage.getChildren().remove(this.currentPrimaryStageScenePage);
-            this.primaryStageScenePage.getChildren().add(pageTable.get(pageNick).parent);
+            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getChildren().remove(this.currentPrimaryStageScenePage);
+            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).getChildren().add(pageTable.get(pageNick).parent);
 
             this.currentPrimaryStageScenePage = pageTable.get(pageNick).parent;
 
-            StackPane.setAlignment(pageTable.get(pageNick).parent, Pos.CENTER);
-
-            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefWidth(this.primaryStageWidth);
-            ((StackPane) this.primaryStageScenePage.getChildren().get(1)).setPrefHeight(this.primaryStageHeight);
+            // 
+            StackPane.setAlignment(((StackPane) this.primaryStageScenePage.getChildren().get(1)).getChildren().get(0), Pos.CENTER);
 
             AnchorPane.setBottomAnchor(pageTable.get(pageNick).parent, 0.0);
             this.primaryStageTitleBar.toFront();
         }
-
-        // StackPane.setAlignment(this.primaryStageScenePage.getChildren().get(1), Pos.CENTER);
 
         if (this.alwaysCenteredStage) {
             this.primaryStage.centerOnScreen();
@@ -2119,17 +2114,19 @@ public final class StageManager {
         /**
          * @important THIS IS IT!
          */
+
+        /**
+         * AnchorPane > StackPane
+         */
+
         StackPane.setAlignment(pageTable.get(homePageNick).parent, Pos.CENTER);
 
         rootNode.getChildren().add(mainPageContent);
-        // rootNode.getChildren().add(pageTable.get(homePageNick).parent);
 
         this.primaryStageTitleBar.toFront();
 
         AnchorPane.setTopAnchor(this.primaryStageTitleBar, 0.0);
         AnchorPane.setBottomAnchor(mainPageContent, 0.0);
-
-        // AnchorPane.setBottomAnchor(pageTable.get(homePageNick).parent, 0.0);
 
         Scene rootScene = new Scene(rootNode);
 

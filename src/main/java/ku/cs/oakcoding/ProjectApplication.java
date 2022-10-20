@@ -74,6 +74,7 @@ public class ProjectApplication extends Application {
                                    OakResourcePrefix.getPrefix().resolve(OakAppConfigs.getProperty(OakAppDefaults.FXML_DIR.key())),
                                    this,
                                    primaryStage,
+                                   true,
                                    OakAppConfigs.getProperty(OakAppDefaults.APP_NAME.key()),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.width")),
                                    Double.parseDouble(OakAppConfigs.getProperty("app.ui.height"))
