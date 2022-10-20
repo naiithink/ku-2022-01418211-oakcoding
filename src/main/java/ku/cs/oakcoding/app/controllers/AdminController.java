@@ -292,10 +292,7 @@ public class AdminController implements Initializable {
         lastLoginCol.setCellValueFactory(p -> {
             ObjectProperty<String> dateLastlogin = null;
             try {
-                /**
-                 *
-                 * https://stackoverflow.com/questions/7740972/convert-epoch-time-to-date
-                 */
+
                 long millis = p.getValue().getLastLogin();
                 Date date = new Date(millis);
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
