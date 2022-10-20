@@ -29,8 +29,8 @@ module oakcoding.app {
     /**
      * ku.cs.oakcoding.app.models.* -- TableView<S>
      */
-    opens ku.cs.oakcoding.app.models.complaints     to javafx.base;
+    // opens ku.cs.oakcoding.app.models.complaints     to javafx.base;
     opens ku.cs.oakcoding.app.models.org            to javafx.base;
-    opens ku.cs.oakcoding.app.models.reports        to javafx.base;
+    // opens ku.cs.oakcoding.app.models.reports        to javafx.base;
     opens ku.cs.oakcoding.app.models.users          to javafx.base;
 }
