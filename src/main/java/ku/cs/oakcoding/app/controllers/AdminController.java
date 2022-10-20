@@ -219,9 +219,41 @@ public class AdminController implements Initializable {
     private ImageView detailUserPicProfileSettingLabel;
 
 
+    /**
+     *
+     *
+     * Complaint Page
+     *
+     */
+
+    @FXML
+    private ChoiceBox<String> complaintChoiceBox;
 
 
 
+
+
+    /**
+     *  UserPage
+     */
+
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        initPane();
+        initComplaintChoiceBox();
+//        initTableView();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("admin")) {
+                initUsersTableView();
+                initDepartmentTableView();
+                setMyPane();
+                handleSelectedUsersTableView();
+            }
+        });
+    }
 
     private void initUsersTableView() {
 
@@ -314,6 +346,11 @@ public class AdminController implements Initializable {
     }
 
 
+    /**
+     *  Department page
+     */
+
+
 
 
     private void initDepartmentTableView(){
@@ -329,6 +366,32 @@ public class AdminController implements Initializable {
         departmentsListTableView.getItems().addAll(observableDepartmentList);
 
 
+    }
+
+
+
+
+
+
+
+
+    void setProfileLabel(){
+        AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
+        userNameLabel.setText(admin.getUserName());
+        statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
+        firstNameLabelAccount.setText(admin.getFirstName());
+        lastNameLabel.setText(admin.getLastName());
+        Image image = new Image(admin.getProfileImagePath().toUri().toString());
+        picProfileSettingLabel.setImage(image);
+
+
+    }
+
+
+    public void initComplaintChoiceBox(){
+        String [] complaintChoiceBoxSelected = {"Personnel","Surrounding"};
+        complaintChoiceBox.setValue("Personnel");
+        complaintChoiceBox.getItems().addAll(complaintChoiceBoxSelected);
     }
 
     @FXML
@@ -725,19 +788,6 @@ public class AdminController implements Initializable {
 
     }
 
-
-    void setProfileLabel(){
-        AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
-        userNameLabel.setText(admin.getUserName());
-        statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
-        firstNameLabelAccount.setText(admin.getFirstName());
-        lastNameLabel.setText(admin.getLastName());
-        Image image = new Image(admin.getProfileImagePath().toUri().toString());
-        picProfileSettingLabel.setImage(image);
-
-
-    }
-
     @FXML
     void handleClickUser(ActionEvent event) {
         try {
@@ -814,47 +864,8 @@ public class AdminController implements Initializable {
         AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
         fullNameLabelAccountSetting.setText(admin.getFirstName());
         statusLabel.setText(admin.getRole().getPrettyPrinted());
-
-
-//        OakLogger.log(Level.SEVERE,"no admin");
     }
 
-    @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-        initPane();
-//        initTableView();
-        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
-            if (newValue.equals("admin")) {
-                initUsersTableView();
-                initDepartmentTableView();
-                setMyPane();
-                handleSelectedUsersTableView();
-            }
-        });
-    }
-
-    public void handleSave(ActionEvent actionEvent) throws Exception {
-        // Writer writer = null;
-//
-//        System.out.println(OakResourcePrefix.getPrefix().getParent().toString());
-//        System.out.println(OakResourcePrefix.getPrefix().getParent().getParent().resolve("data")
-//                .resolve("loveJava.csv").toAbsolutePath().toString());
-//
-//        try (BufferedWriter writer = Files.newBufferedWriter(OakResourcePrefix.getPrefix().getParent()
-//                .getParent().resolve("data").resolve("loveJava.csv"))) {
-//            for (UserEntry user : observableUserSet) {
-//                String text = user.getFirstName() + ";" + user.getLastName() + ";" + "\n";
-//                writer.write(text);
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        } finally {
-//
-//            // writer.flush();
-//            // writer.close();
-//        }
-    }
 
 }

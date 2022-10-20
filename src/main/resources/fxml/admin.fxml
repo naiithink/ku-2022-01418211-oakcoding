@@ -145,7 +145,7 @@
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
-            <Button layoutX="303.0" layoutY="389.0" mnemonicParsing="false" onAction="#handleSave" styleClass="button-red" text="อัปเดท" />
+            <Button layoutX="303.0" layoutY="389.0" mnemonicParsing="false"  styleClass="button-red" text="อัปเดท" />
             <TableView fx:id="usersListTableView" layoutX="51.0" layoutY="76.0" prefHeight="284.0" prefWidth="580.0">
               <columns>
                   <TableColumn fx:id="profileImageCol" prefWidth="129.80538940429688" text="ProfileImage" />
@@ -168,7 +168,7 @@
                   <TableColumn fx:id="evidenceCol" prefWidth="146.0" text="Evidence" />
               </columns>
             </TableView>
-            <ChoiceBox layoutX="43.0" layoutY="62.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="complaintChoiceBox" layoutX="43.0" layoutY="62.0" prefWidth="150.0" />
          </children>
       </Pane>
       <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
