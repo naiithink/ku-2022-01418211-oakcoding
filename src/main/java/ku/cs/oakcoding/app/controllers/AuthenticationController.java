@@ -88,6 +88,8 @@ public class AuthenticationController implements Initializable {
 
         if (Objects.nonNull(user)) {
             try {
+                userNameTextField.clear();
+                passwordField.clear();
                 switch (user.getRole()) {
                     case CONSUMER -> StageManager.getStageManager().setPage("user", user);
                     case STAFF -> StageManager.getStageManager().setPage("staff", user);
@@ -98,7 +100,10 @@ public class AuthenticationController implements Initializable {
             }
         }
         else{
-            {       Alert alert = new Alert(Alert.AlertType.WARNING);
+            {
+                    userNameTextField.clear();
+                    passwordField.clear();
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("WARNING");
                     alert.setContentText("โปรดตรวจสอบรหัสผ่านของคุณอีกครั้ง");
                     alert.showAndWait();
