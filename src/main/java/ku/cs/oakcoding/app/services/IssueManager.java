@@ -32,6 +32,7 @@ import ku.cs.oakcoding.app.models.reports.ReportStatus;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.ConsumerUser;
+import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.models.users.StaffUser;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
@@ -415,7 +416,7 @@ public class IssueManager {
     }
 
     public ObservableSet<Report> getAllReportsSet() {
-        ObservableSet<Report> res = new SetBinding<>() {
+        SetBinding<Report> res = new SetBinding<>() {
 
             {
                 super.bind(reportTable);
@@ -435,7 +436,7 @@ public class IssueManager {
             }
         };
 
-        return res;
+        return res.get();
     }
 
     public IssueManagerStatus reviewReport(AdminUser admin, String reportID, boolean approve) {
@@ -470,5 +471,26 @@ public class IssueManager {
         }
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        AccountService accountService = new AccountService();
+        accountService.start();
+
+        WorkspaceService workspaceService = new WorkspaceService();
+        workspaceService.start();
+
+        IssueService issueService = new IssueService();
+        issueService.start();
+
+        AdminUser admin = AccountService.getUserManager().login("_ROOT", "admin");
+
+        AccountService.getUserManager().register(admin, "naiithink", Roles.CONSUMER, "pot", "wat", null, "eiei", "eiei");
+
+        ConsumerUser naiithink = AccountService.getUserManager().login("naiithink", "eiei");
+
+        IssueService.getIssueManager().newReport(ReportType.BEHAVIOR, admin.getUID(), naiithink.getUID(), "eiei");
+
+        System.out.println(IssueService.getIssueManager().getAllReportsSet());
     }
 }
