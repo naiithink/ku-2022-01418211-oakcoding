@@ -1,4 +1,4 @@
-package ku.cs.oakcoding.app.models.complaints;
+package ku.cs.oakcoding.app.models.reports;
 
 public enum ReportType {
     BEHAVIOR,

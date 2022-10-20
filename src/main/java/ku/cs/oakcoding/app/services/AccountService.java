@@ -18,34 +18,41 @@ public final class AccountService implements AppService {
 
     private static UserManager userManager;
 
-    private static AutoUpdateCSV userEntriesDataSource;
-
-    private static AutoUpdateCSV sessionFile;
-
     @Override
     public void start() {
+        AutoUpdateCSV userEntriesDB = null;
+        AutoUpdateCSV sessionDB = null;
+        AutoUpdateCSV userRequestDB = null;
+
         try {
-            userEntriesDataSource = new AutoUpdateCSV("briefUserEntries", "UID", "briefUserEntries", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_ENTRIES.value()));
+            userEntriesDB = new AutoUpdateCSV("briefUserEntries", "UID", "briefUserEntries", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_ENTRIES.value()));
         } catch (FileNotFoundException e) {
             OakLogger.log(Level.SEVERE, "User account entry file not found");
             System.exit(1);
         }
 
         try {
-            sessionFile = new AutoUpdateCSV("sessions", "UID", "sessions", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_SESSION_FILE.value()));
+            sessionDB = new AutoUpdateCSV("sessions", "UID", "sessions", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_SESSION_FILE.value()));
         } catch (FileNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Session file not found");
             System.exit(1);
         }
 
-        Set<UserEntry> userEntrySet = new HashSet<>();
-        Set<String> primaryKeySet = userEntriesDataSource.getPrimaryKeySet();
-
-        for (String primaryKey : primaryKeySet) {
-            userEntrySet.add(new UserEntry(primaryKey, Enum.valueOf(Roles.class, userEntriesDataSource.getDataWhere(primaryKey, "ROLE")), userEntriesDataSource.getDataWhere(primaryKey, "USER_NAME"), Boolean.parseBoolean(userEntriesDataSource.getDataWhere(primaryKey, "IS_ACTIVE")), Integer.parseInt(userEntriesDataSource.getDataWhere(primaryKey, "LOGIN_ATTEMPT"))));
+        try {
+            userRequestDB = new AutoUpdateCSV("userRequests", "UID", "userRequests", OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_USER_DIR.value()).resolve(OakAppDefaults.APP_USER_REQUESTS.value()));
+        } catch (FileNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "User request file not found");
+            System.exit(1);
         }
 
-        userManager = new UserManager(userEntriesDataSource, sessionFile, userEntrySet);
+        Set<UserEntry> userEntrySet = new HashSet<>();
+        Set<String> primaryKeySet = userEntriesDB.getPrimaryKeySet();
+
+        for (String primaryKey : primaryKeySet) {
+            userEntrySet.add(new UserEntry(primaryKey, Enum.valueOf(Roles.class, userEntriesDB.getDataWhere(primaryKey, "ROLE")), userEntriesDB.getDataWhere(primaryKey, "USER_NAME"), Boolean.parseBoolean(userEntriesDB.getDataWhere(primaryKey, "IS_ACTIVE")), Integer.parseInt(userEntriesDB.getDataWhere(primaryKey, "LOGIN_ATTEMPT"))));
+        }
+
+        userManager = new UserManager(userEntriesDB, sessionDB, userRequestDB, userEntrySet);
     }
 
     public static UserManager getUserManager() {

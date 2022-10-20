@@ -25,6 +25,7 @@ import ku.cs.oakcoding.app.helpers.file.OakResource;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.services.IssueService;
 import ku.cs.oakcoding.app.services.WorkspaceService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import ku.cs.oakcoding.app.services.stages.StageManager.MalformedFXMLIndexFileException;
@@ -53,6 +54,9 @@ public class ProjectApplication extends Application {
 
         WorkspaceService workspaceService = new WorkspaceService();
         workspaceService.start();
+
+        IssueService issueService = new IssueService();
+        issueService.start();
     }
 
     private void configStageManager(Stage primaryStage) throws NotDirectoryException,

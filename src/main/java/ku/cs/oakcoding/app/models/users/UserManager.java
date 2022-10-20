@@ -14,7 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
@@ -22,6 +24,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.beans.binding.SetBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;
@@ -32,10 +35,11 @@ import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.models.reports.Report;
+import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequest;
+import ku.cs.oakcoding.app.services.IssueService;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
-import ku.cs.oakcoding.app.services.filter.Filterer;
 import ku.cs.oakcoding.app.services.filter.UserRolesFilter;
 
 public final class UserManager {
@@ -44,29 +48,51 @@ public final class UserManager {
 
     private final ObservableSet<FullUserEntry> userEntrySet;
 
-    private AutoUpdateCSV briefUserFile;
+    private final ObservableMap<String, UserUnsuspendRequest> userRequestTable;
 
-    private AutoUpdateCSV sessionFile;
+    private AutoUpdateCSV briefUserDB;
 
-    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, UserEntry... briefUserEntries) {
+    private AutoUpdateCSV sessionDB;
+
+    private AutoUpdateCSV userRequestDB;
+
+    public UserManager(AutoUpdateCSV briefUserDB, AutoUpdateCSV sessionDB, AutoUpdateCSV userRequestDB, UserEntry... briefUserEntries) {
         this.briefUserTable = FXCollections.observableHashMap();
-        this.briefUserFile = briefUserFile;
-        this.sessionFile = sessionFile;
+        this.briefUserDB = briefUserDB;
+        this.sessionDB = sessionDB;
+        this.userRequestDB = userRequestDB;
+
+        this.userRequestTable = FXCollections.observableHashMap();
         this.userEntrySet = FXCollections.observableSet();
 
         for (UserEntry entry : briefUserEntries) {
             this.briefUserTable.put(entry.getUID(), entry);
         }
+
+        Set<String> requesterUIDs = this.userRequestDB.getPrimaryKeySet();
+
+        for (String requesterUID :requesterUIDs) {
+            this.userRequestTable.put(requesterUID, new UserUnsuspendRequest(requesterUID, this.userRequestDB.getDataWhere(requesterUID, "REPORT_ID"), this.userRequestDB.getDataWhere(requesterUID, "MESSAGE")));
+        }
     }
 
-    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, Collection<UserEntry> briefUserEntries) {
+    public UserManager(AutoUpdateCSV briefUserFile, AutoUpdateCSV sessionFile, AutoUpdateCSV userRequestDB, Collection<UserEntry> briefUserEntries) {
         this.briefUserTable = FXCollections.observableHashMap();
-        this.briefUserFile = briefUserFile;
-        this.sessionFile = sessionFile;
+        this.briefUserDB = briefUserFile;
+        this.sessionDB = sessionFile;
+        this.userRequestDB = userRequestDB;
+
+        this.userRequestTable = FXCollections.observableHashMap();
         this.userEntrySet = FXCollections.observableSet();
 
         for (UserEntry entry : briefUserEntries) {
             this.briefUserTable.put(entry.getUID(), entry);
+        }
+
+        Set<String> requesterUIDs = this.userRequestDB.getPrimaryKeySet();
+
+        for (String requesterUID :requesterUIDs) {
+            this.userRequestTable.put(requesterUID, new UserUnsuspendRequest(requesterUID, this.userRequestDB.getDataWhere(requesterUID, "REPORT_ID"), this.userRequestDB.getDataWhere(requesterUID, "MESSAGE")));
         }
     }
 
@@ -236,9 +262,9 @@ public final class UserManager {
 
         briefUserTable.put(newUser.getUID(), userEntry);
 
-        briefUserFile.addRecord(new String[] { newUser.getUID(), newUser.getUserName(), newUser.getRole().name(), String.valueOf(true), String.valueOf(0) });
+        briefUserDB.addRecord(new String[] { newUser.getUID(), newUser.getUserName(), newUser.getRole().name(), String.valueOf(true), String.valueOf(0) });
 
-        sessionFile.addRecord(new String[] { newUser.getUID(), "0" });
+        sessionDB.addRecord(new String[] { newUser.getUID(), "0" });
 
         PasswordManager.addPassword(getUIDOf(userName), password);
 
@@ -258,7 +284,7 @@ public final class UserManager {
 
         if (!isActive(userName)) {
             briefUserTable.get(getUIDOf(userName)).addLoginAttempt();
-            briefUserFile.editRecord(getUIDOf(userName), "LOGIN_ATTEMPT", String.valueOf(briefUserTable.get(getUIDOf(userName)).getLoginAttempt()), false);
+            briefUserDB.editRecord(getUIDOf(userName), "LOGIN_ATTEMPT", String.valueOf(briefUserTable.get(getUIDOf(userName)).getLoginAttempt()), false);
             OakLogger.log(Level.SEVERE, "User is being suspended");
             return null;
         } else if (!PasswordManager.verifyPassword(getUIDOf(userName), password)) {
@@ -266,7 +292,7 @@ public final class UserManager {
             return null;
         }
 
-        sessionFile.editRecord(getUIDOf(userName), "TIME", String.valueOf(Instant.now().toEpochMilli()), false);
+        sessionDB.editRecord(getUIDOf(userName), "TIME", String.valueOf(Instant.now().toEpochMilli()), false);
 
         T user = getUser(userName);
 
@@ -302,7 +328,7 @@ public final class UserManager {
                                                    userInfo.getDataWhere(briefUserInfo.getUID(), "FIRST_NAME"),
                                                    userInfo.getDataWhere(briefUserInfo.getUID(), "LAST_NAME"),
                                                    profileImagePath,
-                                                   Long.parseLong(sessionFile.getDataWhere(briefUserInfo.getUID(), "TIME"))));
+                                                   Long.parseLong(sessionDB.getDataWhere(briefUserInfo.getUID(), "TIME"))));
             }
         }
 
@@ -377,11 +403,11 @@ public final class UserManager {
         }
 
         briefUserTable.get(getUIDOf(userName)).setIsActive(isActive);
-        briefUserFile.editRecord(getUIDOf(userName), "IS_ACTIVE", String.valueOf(isActive), false);
+        briefUserDB.editRecord(getUIDOf(userName), "IS_ACTIVE", String.valueOf(isActive), false);
 
         if (isActive) {
             briefUserTable.get(getUIDOf(userName)).resetLoginAttempt();
-            briefUserFile.editRecord(getUIDOf(userName), "LOGIN_ATTEMPT", String.valueOf(0), false);
+            briefUserDB.editRecord(getUIDOf(userName), "LOGIN_ATTEMPT", String.valueOf(0), false);
         }
 
         return UserManagerStatus.SUCCESSFUL;
@@ -401,8 +427,8 @@ public final class UserManager {
 
         PasswordManager.removePassword(getUIDOf(userName), password);
         OakUserResource.removeUserDirectory(userName);
-        sessionFile.removeRecordWhere(getUIDOf(userName));
-        briefUserFile.removeRecordWhere(getUIDOf(userName));
+        sessionDB.removeRecordWhere(getUIDOf(userName));
+        briefUserDB.removeRecordWhere(getUIDOf(userName));
 
         Iterator<FullUserEntry> users = userEntrySet.iterator();
 
@@ -444,5 +470,69 @@ public final class UserManager {
 
     public ObservableMap<String, UserEntry> getBriefUserTableProperty() {
         return briefUserTable;
+    }
+
+    public UserManagerStatus newUserRequest(String userName, String message) {
+        ObservableSet<Report> relatedReportSet = IssueService.getIssueManager().getBehavioralReportsRelatedToTarget(getUIDOf(userName));
+
+        if (relatedReportSet.isEmpty())
+            return UserManagerStatus.USER_REPORT_REFERENCE_NOT_FOUND;
+
+        Map<Long, Report> reportTimeline = new HashMap<>();
+
+        for (Report report : relatedReportSet) {
+            reportTimeline.put(OakID.getGenerateTimeOf(report.getReportID()), report);
+        }
+
+        Set<Long> reportTimestampSet = reportTimeline.keySet();
+        Long latestTimestamp = 0L;
+
+        for (Long timestamp : reportTimestampSet)
+            if (timestamp > latestTimestamp)
+                latestTimestamp = timestamp;
+
+        UserUnsuspendRequest request = new UserUnsuspendRequest(OakID.of(latestTimestamp, Report.class.getSimpleName()),
+                                                                userName,
+                                                                message);
+
+        this.userRequestTable.put(getUIDOf(userName), request);
+        this.userRequestDB.addRecord(new String[] { request.getUID(), request.getReportID(), request.getMessage() });
+
+        return UserManagerStatus.SUCCESSFUL;
+    }
+
+    public ObservableSet<UserUnsuspendRequest> getUserUnsuspendRequestSet() {
+        ObservableSet<UserUnsuspendRequest> res = new SetBinding<UserUnsuspendRequest>() {
+
+            {
+                super.bind(userRequestTable);
+            }
+
+            @Override
+            public ObservableSet<UserUnsuspendRequest> computeValue() {
+                ObservableSet<UserUnsuspendRequest> res = FXCollections.observableSet();
+
+                Iterator<Entry<String, UserUnsuspendRequest>> requestEntries = userRequestTable.entrySet().iterator();
+
+                while (requestEntries.hasNext()) {
+                    res.add(requestEntries.next().getValue());
+                }
+
+                return res;
+            }
+        };
+
+        Iterator<Entry<String, UserUnsuspendRequest>> requests = this.userRequestTable.entrySet().iterator();
+
+        while (requests.hasNext()) {
+            res.add(requests.next().getValue());
+        }
+
+        return res;
+    }
+
+    public void deleteUserUnsuspendRequest(String UID) {
+        this.userRequestTable.remove(UID);
+        this.userRequestDB.removeRecordWhere(UID);
     }
 }

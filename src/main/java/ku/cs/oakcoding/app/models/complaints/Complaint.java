@@ -1,5 +1,6 @@
 package ku.cs.oakcoding.app.models.complaints;
 
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class Complaint {
 
     private final StringProperty description;
 
-    private final ObjectProperty<Object> evidence;
+    private final ObjectProperty<Path> evidencePath;
 
     private final ObservableSet<String> voters;
 
@@ -35,20 +36,35 @@ public class Complaint {
 
     private final StringProperty caseManagerUID;
 
-    public Complaint(String complaintID, String authorUID, String category, String subject,
-            String description, Object evidence, Set<String> voters,
-            ComplaintStatus status, String caseManagerUID) {
+    public Complaint(String complaintID,
+                     String authorUID,
+                     String category,
+                     String subject,
+                     String description,
+                     Path evidencePath,
+                     Set<String> voters,
+                     ComplaintStatus status,
+                     String caseManagerUID) {
 
         COMPLAINT_ID = complaintID;
         AUTHOR_UID = authorUID;
         this.category = new SimpleStringProperty(category);
         this.subject = new SimpleStringProperty(subject);
         this.description = new SimpleStringProperty(description);
-        this.evidence = new SimpleObjectProperty<>(evidence);
-        this.voters = FXCollections.observableSet(voters);
+        this.evidencePath = new SimpleObjectProperty<>();
+        this.voters = FXCollections.observableSet();
         this.status = new SimpleObjectProperty<>(status);
         this.isResolved = new SimpleBooleanProperty(status.equals(ComplaintStatus.RESOLVED));
-        this.caseManagerUID = new SimpleStringProperty(caseManagerUID);
+        this.caseManagerUID = new SimpleStringProperty();
+
+        if (Objects.nonNull(evidencePath))
+            this.evidencePath.set(evidencePath);
+
+        if (Objects.nonNull(voters))
+            this.voters.addAll(voters);
+
+        if (Objects.nonNull(caseManagerUID))
+            this.caseManagerUID.set(caseManagerUID);
     }
 
     public String getComplaintID() {
@@ -59,7 +75,7 @@ public class Complaint {
         return AUTHOR_UID;
     }
 
-    public String getTags() {
+    public String getCategory() {
         return category.get();
     }
 
@@ -71,8 +87,8 @@ public class Complaint {
         return description.get();
     }
 
-    public Object getEvidence() {
-        return evidence.get();
+    public Path getEvidencePath() {
+        return evidencePath.get();
     }
 
     public Set<String> getVoters() {
