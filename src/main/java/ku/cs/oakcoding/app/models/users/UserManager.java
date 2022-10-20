@@ -32,8 +32,11 @@ import ku.cs.oakcoding.app.helpers.file.OakUserResource;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
+import ku.cs.oakcoding.app.services.filter.Filterer;
+import ku.cs.oakcoding.app.services.filter.UserRolesFilter;
 
 public final class UserManager {
 
@@ -117,6 +120,20 @@ public final class UserManager {
         }
 
         return userEntrySet;
+    }
+
+    public ObservableSet<FullUserEntry> getFilteredUsersSetProperty(AdminUser adminUser, Roles roles){
+        ObservableSet<FullUserEntry> allUsers = getAllUsersSetProperty(adminUser);
+        ObservableSet<FullUserEntry> filteredUsers = FXCollections.observableSet();
+        UserRolesFilter userRolesFilter = new UserRolesFilter();
+        userRolesFilter.setRoles(roles);
+
+        for (FullUserEntry fullUserEntry: allUsers) {
+            if (userRolesFilter.check(fullUserEntry))
+                filteredUsers.add(fullUserEntry);
+        }
+
+        return filteredUsers;
     }
 
     @SuppressWarnings("unchecked")
