@@ -1,21 +1,29 @@
 package ku.cs.oakcoding.app.services;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.beans.binding.MapBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
+import ku.cs.oakcoding.app.helpers.configurations.OakSystemDefaults;
+import ku.cs.oakcoding.app.helpers.file.OakResource;
+import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.id.OakID;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
 import ku.cs.oakcoding.app.models.reports.Report;
@@ -71,7 +79,7 @@ public class IssueManager {
             String caseManagerUID = null;
 
             if (!this.complaintDB.getDataWhere(complaintKey, "EVIDENCE_PATH").equals(OakAppDefaults.NIL))
-                evidencePath = Paths.get(this.complaintDB.getDataWhere(complaintKey, "EVIDENCE_PATH"));
+                evidencePath = OakResourcePrefix.getPrefix().resolve(OakAppDefaults.APP_COMPLAINT_EVIDENCES_DIR.value()).resolve(this.complaintDB.getDataWhere(complaintKey, "EVIDENCE_PATH"));
 
             if (!this.complaintDB.getDataWhere(complaintKey, "VOTERS").equals(OakAppDefaults.NIL)) {
                 List<String> voterList = OakHotspot.separateColonValues(this.complaintDB.getDataWhere(complaintKey, "VOTERS"));
@@ -120,7 +128,6 @@ public class IssueManager {
                     res.put(complaintCategories.next(), FXCollections.observableSet());
                 }
 
-
                 Iterator<Entry<String, Complaint>> complaintEntries = allComplaintTable.entrySet().iterator();
 
                 while (complaintEntries.hasNext()) {
@@ -167,6 +174,8 @@ public class IssueManager {
 
         if (!this.complaintCategorySet.contains(category))
             return IssueManagerStatus.CATEGORY_NOT_FOUND;
+        else if (Objects.nonNull(evidencePath) &&  !Files.exists(evidencePath))
+            return IssueManagerStatus.EVIDENCE_PATH_DOES_NOT_EXIST;
 
         ComplaintStatus statusArg = ComplaintStatus.PENDING;
 
@@ -183,16 +192,32 @@ public class IssueManager {
                                             statusArg,
                                             null);
 
+        String evidenceFileName = null;
+
+        if (Objects.nonNull(evidencePath)) {
+            String evidenceFileExtension = null;
+            Pattern extensionPattern = Pattern.compile("[^\\\\]*\\.(\\w+)$");
+            Matcher extensionMatcher = extensionPattern.matcher(evidencePath.getFileName().toString());
+
+            if (extensionMatcher.find() && extensionMatcher.groupCount() == 1)
+                evidenceFileExtension = extensionMatcher.group(1);
+
+            try {
+                OakResource.copyFile(evidencePath, OakResourcePrefix.getDataDirPrefix().resolve(OakAppDefaults.APP_COMPLAINT_EVIDENCES_DIR.value()).resolve(complaint.getComplaintID() + "." + evidenceFileExtension));
+            } catch (IOException e) {
+                OakLogger.log(Level.SEVERE, "Got 'IOException' while saving evidence file");
+                System.exit(1);
+            }
+
+            evidenceFileName = complaint.getComplaintID() + "." + evidenceFileExtension;
+        } else {
+            evidenceFileName = OakAppDefaults.NIL;
+        }
+
         this.allComplaintTable.put(complaint.getComplaintID(), complaint);
 
-        String evidencePathString = null;
         String voterSerial = null;
         String caseManagerUID = null;
-
-        if (Objects.nonNull(complaint.getEvidencePath()))
-            evidencePathString = complaint.getEvidencePath().toString();
-        else
-            evidencePathString = OakAppDefaults.NIL;
 
         if (complaint.getVoters().isEmpty())
             voterSerial = OakAppDefaults.NIL;
@@ -210,7 +235,7 @@ public class IssueManager {
             complaint.getCategory(),
             complaint.getSubject(),
             complaint.getDescription(),
-            evidencePathString,
+            evidenceFileName,
             voterSerial,
             complaint.getStatus().name(),
             caseManagerUID

@@ -39,6 +39,7 @@ public enum OakAppDefaults {
     APP_COMPLAINT_DIR               ("app.issues.complaints.dir",               "complaints"),
     APP_COMPLAINT_FILE              ("app.issues.complaints.file",              "complaints.csv"),
     APP_COMPLAINT_CATEGORIES_FILE   ("app.issues.complaints.categories.file",   "categories.csv"),
+    APP_COMPLAINT_EVIDENCES_DIR     ("app.evidences.dir",                       "issues/complaints/evidences"),
     APP_REPORT_DIR                  ("app.issues.reports.dir",                  "reports"),
     APP_REPORT_FILE                 ("app.issues.reports.file",                 "reports.csv"),
     APP_USER_DIR                    ("app.users.dir",                           "users"),

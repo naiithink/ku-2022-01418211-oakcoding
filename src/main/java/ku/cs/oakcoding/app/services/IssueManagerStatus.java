@@ -8,6 +8,7 @@ public enum IssueManagerStatus {
     COMPLAINT_NOT_FOUND,
     REPORT_NOT_FOUND,
     TARGET_NOT_FOUND,
+    EVIDENCE_PATH_DOES_NOT_EXIST,
     /* when a user report themself */   SELF_REPORTING_ERROR,
     WRONG_REPORT_TYPE,
     NO_REPORT_TYPE_SPECIFIED,
