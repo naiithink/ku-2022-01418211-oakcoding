@@ -100,7 +100,10 @@ public class UserController implements Initializable {
     @FXML
     private TextField usernameTextField;
 
-    public void handleChangeDetail(ActionEvent actionEvent) {
+    @FXML
+    private Pane sideBarPane;
+
+    public void handleChangeDetail() {
         String username = usernameTextField.getText();
         String oldPassword = oldPasswordField.getText();
         String newPassword = newPasswordField.getText();
@@ -134,7 +137,7 @@ public class UserController implements Initializable {
         }
     }
 
-    public void handleClickReport(ActionEvent actionEvent) {
+    public void handleClickReport() {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
         createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane.png").toExternalForm()));
@@ -163,7 +166,7 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
     }
 
-    public void handleClickCreateReport(ActionEvent actionEvent) {
+    public void handleClickCreateReport() {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
         createReportImageView
@@ -192,7 +195,7 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
     }
 
-    public void handleClickSetting(ActionEvent actionEvent) {
+    public void handleClickSetting() {
 
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
@@ -233,7 +236,7 @@ public class UserController implements Initializable {
         profileImageView.setImage(image);
     }
 
-    public void handleClickLogoutButton(ActionEvent actionEvent) {
+    public void handleClickLogoutButton() {
         // ไว้จัดการการ logout ของ user
         oldPasswordField.clear();
         newPasswordField.clear();
@@ -247,7 +250,7 @@ public class UserController implements Initializable {
         }
     }
 
-    public void handleClickDashboard(ActionEvent actionEvent) {
+    public void handleClickDashboard() {
 
         reportImageView.setImage(new Image(getClass().getResource("/images/flag.png").toExternalForm()));
         createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane.png").toExternalForm()));
@@ -304,8 +307,14 @@ public class UserController implements Initializable {
         });
     }
 
+    public void handleBackUserPictureButton(){
+        sideBarPane.setDisable(false);
+        handleClickSetting();
+    }
+
 
     public void handleChangePaneToChangeDetailPane(ActionEvent actionEvent) {
+        sideBarPane.setDisable(true);
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);

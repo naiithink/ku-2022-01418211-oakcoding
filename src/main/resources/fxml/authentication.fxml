@@ -40,16 +40,6 @@
                   <Image url="@../images/ku-logo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="40.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/users-alt.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="14.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" styleClass="util-bar">
-               <image>
-                  <Image url="@../images/document-signed.png" />
-               </image>
-            </ImageView>
             </children>
         </Pane>
       <Pane fx:id="loginPane" prefHeight="500.0" prefWidth="300.0" styleClass="theme" stylesheets="@../css/stylesheet.css">

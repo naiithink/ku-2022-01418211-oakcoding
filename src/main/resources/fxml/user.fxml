@@ -41,7 +41,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
+      <Pane fx:id="sideBarPane" prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
             <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1" />
             <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="39.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
@@ -100,7 +100,7 @@
             <Label layoutX="292.0" layoutY="80.0" text="รีพอร์ต" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="settingUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="settingUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane fx:id="welcomeUserPane11" layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -166,7 +166,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Pane fx:id="welcomeUserPane111" layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -200,6 +200,11 @@
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+            <ImageView fx:id="backPicture" fitHeight="42.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleBackUserPictureButton">
+               <image>
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
     </children>
