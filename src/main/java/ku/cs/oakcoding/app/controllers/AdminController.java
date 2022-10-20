@@ -342,13 +342,15 @@ public class AdminController implements Initializable {
     }
 
     private void clearUsersPageData(){
-       usersListTableView = null;
+
        firstNameCol.setText("");
        lastNameCol.setText("");
-       profileImageCol = null;
+       profileImageCol.setText("");
        lastLoginCol.setText("");
-       observableUserSet = null;
-       observableUserList = null;
+       observableUserSet = FXCollections.observableSet();
+       observableUserList = FXCollections.observableArrayList();
+       usersListTableView.getItems().clear();
+       usersListTableView.refresh();
 
     }
 
@@ -413,15 +415,22 @@ public class AdminController implements Initializable {
         else{
             alertWarning.setContentText("คุณได้ทำการสมัครองค์กรเป็นที่เรียบร้อยแล้ว" + "'");
             alertWarning.showAndWait();
+            clearDepartmentPageData();
+            initDepartmentTableView();
+            departmentsListTableView.refresh();
+
+
         }
 
 
     }
 
     private void clearDepartmentPageData(){
-        departmentsListTableView = null;
-        observableDepartmentSet = null;
-        observableDepartmentList = null;
+        observableDepartmentSet.clear();
+        observableDepartmentList.clear();
+        departmentsListTableView.getItems().clear();
+        departmentsListTableView.refresh();
+
     }
 
 
@@ -447,7 +456,7 @@ public class AdminController implements Initializable {
         statusAccountLabel.setText("");
         firstNameLabelAccount.setText("");
         lastNameLabel.setText("");
-        picProfileSettingLabel.setImage(null);
+        picProfileSettingLabel = new ImageView();
     }
 
     /**
@@ -482,9 +491,11 @@ public class AdminController implements Initializable {
     }
 
     private void clearComplaintPageData(){
-        complaintChoiceBox = null;
-        personalTableView = null;
-        surroundingTableView = null;
+        complaintChoiceBox.setValue("");
+        personalTableView.getItems().clear();
+        personalTableView.refresh();
+        surroundingTableView.getItems().clear();
+        surroundingTableView.refresh();
     }
 
 
