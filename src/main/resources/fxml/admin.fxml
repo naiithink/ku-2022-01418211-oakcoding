@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -264,7 +265,7 @@
                          </Label>
                       </children>
                    </Pane>
-                   <Button fx:id="accountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                   <Button layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangePaneToChangeDetailPane" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
                    <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                          <Image url="@../images/peter-parker.png" />
@@ -332,7 +333,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -384,6 +385,26 @@
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
+            <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+      <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+         <children>
+            <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
+               <children>
+                  <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
+                  <Button layoutX="223.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangePassword" styleClass="button-blue" text="ยืนยัน" />
+                  <PasswordField fx:id="oldPasswordField" layoutX="62.0" layoutY="139.0" style="-fx-background-color: #121212;" />
+                  <PasswordField fx:id="newPasswordField" layoutX="61.0" layoutY="197.0" style="-fx-background-color: #121212;" />
+                  <Label layoutX="62.0" layoutY="54.0" styleClass="text-regular" text="Username" textFill="WHITE" />
+                  <Label layoutX="62.0" layoutY="112.0" styleClass="text-regular" text="Old Password" textFill="WHITE" />
+                  <Label layoutX="62.0" layoutY="170.0" styleClass="text-regular" text="New Password" textFill="WHITE" />
+                  <PasswordField fx:id="confirmPasswordField" layoutX="61.0" layoutY="255.0" style="-fx-background-color: #121212;" />
+                  <Label layoutX="62.0" layoutY="228.0" styleClass="text-regular" text="Confirm Password" textFill="WHITE" />
+                  <TextField fx:id="usernameTextField" layoutX="62.0" layoutY="81.0" style="-fx-background-color: #121212;" />
+               </children>
+            </Pane>
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>

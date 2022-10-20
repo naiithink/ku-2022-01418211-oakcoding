@@ -205,6 +205,10 @@
     -fx-text-fill: #a8a8a8;
     -fx-font-size: 16;
 }
+.password-field{
+    -fx-text-fill: White;
+    -fx-background-color: #121212;
+}
 
 /* util bar */
 

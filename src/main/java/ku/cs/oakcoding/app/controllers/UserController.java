@@ -15,14 +15,13 @@ import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
-import ku.cs.oakcoding.app.models.users.AdminUser;
-import ku.cs.oakcoding.app.models.users.ConsumerUser;
+import ku.cs.oakcoding.app.models.users.*;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
@@ -86,8 +85,54 @@ public class UserController implements Initializable {
 
     @FXML
     private ImageView profileImageView;
+    @FXML
+    private Pane settingDetailChangeUserPane;
 
+    @FXML
+    private PasswordField oldPasswordField;
 
+    @FXML
+    private PasswordField newPasswordField;
+
+    @FXML
+    private PasswordField confirmPasswordField;
+
+    @FXML
+    private TextField usernameTextField;
+
+    public void handleChangeDetail(ActionEvent actionEvent) {
+        String username = usernameTextField.getText();
+        String oldPassword = oldPasswordField.getText();
+        String newPassword = newPasswordField.getText();
+        String confirmNewPassword = confirmPasswordField.getText();
+
+        boolean isChangePassword = AccountService.getUserManager().changePassword(username,oldPassword,newPassword,confirmNewPassword);
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+
+        if (isChangePassword){
+            alertInformation.setContentText("รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อย");
+            alertInformation.showAndWait();
+            oldPasswordField.clear();
+            newPasswordField.clear();
+            usernameTextField.clear();
+            confirmPasswordField.clear();
+
+            try {
+
+                StageManager.getStageManager().setPage("authentication", null);
+            } catch (PageNotFoundException e) {
+                OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
+            }
+
+        }
+        else {
+            alertWarning.setContentText("คุณไม่สามารถเปลี่ยนรหัสได้ กรุณาตรวจสอบอีกครั้ง");
+            alertWarning.showAndWait();
+        }
+    }
 
     public void handleClickReport(ActionEvent actionEvent) {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
@@ -115,6 +160,7 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
     }
 
     public void handleClickCreateReport(ActionEvent actionEvent) {
@@ -143,6 +189,7 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(true);
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
     }
 
     public void handleClickSetting(ActionEvent actionEvent) {
@@ -171,6 +218,7 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(true);
+        settingDetailChangeUserPane.setVisible(false);
         setProfileLabel();
     }
 
@@ -187,7 +235,12 @@ public class UserController implements Initializable {
 
     public void handleClickLogoutButton(ActionEvent actionEvent) {
         // ไว้จัดการการ logout ของ user
+        oldPasswordField.clear();
+        newPasswordField.clear();
+        usernameTextField.clear();
+        confirmPasswordField.clear();
         try {
+
             StageManager.getStageManager().setPage("authentication", null);
         } catch (PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
@@ -221,6 +274,7 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(false);
         welcomeUserPane.setVisible(true);
         settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
     }
 
     public void setMyPane() {
@@ -237,6 +291,7 @@ public class UserController implements Initializable {
         createReportsUserPane.setVisible(false);
         settingUserPane.setVisible(false);
         welcomeUserPane.setVisible(true);
+        settingDetailChangeUserPane.setVisible(false);
     }
 
     @Override
@@ -247,5 +302,15 @@ public class UserController implements Initializable {
                 setMyPane();
             }
         });
+    }
+
+
+    public void handleChangePaneToChangeDetailPane(ActionEvent actionEvent) {
+        reportsUserPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        welcomeUserPane.setVisible(false);
+        settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(true);
+
     }
 }
