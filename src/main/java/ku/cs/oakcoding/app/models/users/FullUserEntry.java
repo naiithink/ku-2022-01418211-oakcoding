@@ -13,8 +13,15 @@ public class FullUserEntry
 
     protected long lastLogin;
 
-    public FullUserEntry(String UID, Roles role, String userName, boolean isActive, int loginAttempt, String firstName,
-            String lastName, Path profileImagePath, long lastLogin) {
+    public FullUserEntry(String UID,
+                         Roles role,
+                         String userName,
+                         boolean isActive,
+                         int loginAttempt,
+                         String firstName,
+                         String lastName,
+                         Path profileImagePath,
+                         long lastLogin) {
 
         super(UID, role, userName, isActive, loginAttempt);
         this.firstName = firstName;
