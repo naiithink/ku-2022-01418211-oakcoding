@@ -160,7 +160,7 @@
          <children>
             <Label layoutX="44.0" layoutY="28.0" text="แจ้งเรื่อง" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="70.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="PersonalTableView" layoutX="44.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0" visible="false">
+            <TableView fx:id="personalTableView" layoutX="44.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0" visible="false">
               <columns>
                 <TableColumn fx:id="categoryCol" prefWidth="124.0" text="Category" />
                 <TableColumn fx:id="subjectCol" prefWidth="160.0" text="Subject" />
@@ -169,7 +169,7 @@
               </columns>
             </TableView>
             <ChoiceBox fx:id="complaintChoiceBox" layoutX="43.0" layoutY="62.0" prefWidth="150.0" />
-            <TableView fx:id="SurroundingTableView" layoutX="46.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0">
+            <TableView fx:id="surroundingTableView" layoutX="46.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0">
                <columns>
                   <TableColumn fx:id="categorySurroundCol" prefWidth="124.0" text="Category" />
                   <TableColumn fx:id="subjectSurroundCol" prefWidth="160.0" text="Subject" />

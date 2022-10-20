@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.CreatorController">
+   <children>
+      <Pane fx:id="userDetailPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Pane layoutX="30.0" layoutY="67.0" prefHeight="295.0" prefWidth="543.0" styleClass="account-setting-pane">
+               <children>
+                  <ImageView fx:id="creator2" fitHeight="116.0" fitWidth="125.0" layoutX="282.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="creator1" fitHeight="116.0" fitWidth="125.0" layoutX="120.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="creator3" fitHeight="116.0" fitWidth="125.0" layoutX="120.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="creator4" fitHeight="116.0" fitWidth="125.0" layoutX="281.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label layoutX="274.0" layoutY="28.0" styleClass="text-regular" text="ผู้จัดทำ" textFill="WHITE" />
+            <Line endX="405.0" layoutX="151.0" layoutY="55.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+      <Pane fx:id="userDetailPane1" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;">
+         <children>
+            <Pane layoutX="43.0" layoutY="85.0" prefHeight="261.0" prefWidth="506.0" styleClass="account-setting-pane">
+               <children>
+                  <Label layoutX="32.0" layoutY="18.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Firstname" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="81.0" layoutY="137.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button" />
+                  <Label layoutX="33.0" layoutY="89.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Lastname" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="picProfileSettingLabel" fitHeight="184.0" fitWidth="202.0" layoutX="239.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/peter-parker.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="firstNameLabelAccount" layoutX="32.0" layoutY="55.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lastNameLabel" layoutX="33.0" layoutY="123.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="33.0" layoutY="156.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Student-ID" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="studentIDLabel" layoutX="34.0" layoutY="191.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="80.0" layoutY="36.0" styleClass="text-regular" text="ข้อมูลผู้จัดทำ" textFill="WHITE" />
+            <Line endX="405.0" layoutX="146.0" layoutY="60.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

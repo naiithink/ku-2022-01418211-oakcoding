@@ -25,7 +25,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -231,10 +230,10 @@ public class AdminController implements Initializable {
     private ChoiceBox<String> complaintChoiceBox;
 
     @FXML
-    private TableView<Complaint>PersonalTableView;
+    private TableView<Complaint> personalTableView;
 
     @FXML
-    private TableView<Complaint>SurroundingTableView;
+    private TableView<Complaint> surroundingTableView;
 
 
 
@@ -400,13 +399,13 @@ public class AdminController implements Initializable {
         complaintChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println(newValue + "speech is selected");
                 if (newValue.equals("Personnel")){
-                    handleClickComplaints();
+                    personalTableView.setVisible(true);
+                    surroundingTableView.setVisible(false);
                 }
-                else {
-                PersonalTableView.setVisible(false);
-                SurroundingTableView.setVisible(true);
+                else if (newValue.equals("Surrounding")) {
+                    personalTableView.setVisible(false);
+                    surroundingTableView.setVisible(true);
                 }
 
             }
@@ -475,6 +474,9 @@ public class AdminController implements Initializable {
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
+        personalTableView.setVisible(true);
+        surroundingTableView.setVisible(false);
+
     }
 
     @FXML
