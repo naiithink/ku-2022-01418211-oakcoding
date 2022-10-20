@@ -103,6 +103,14 @@ public class Complaint {
         return caseManagerUID.get();
     }
 
+    public void setCaseManager(String staffUID) {
+        this.caseManagerUID.set(staffUID);
+    }
+
+    public void setCaseManager(StaffUser staffUser) {
+        this.caseManagerUID.set(staffUser.getUID());
+    }
+
     public boolean vote(String UID) {
         return this.voters.add(UID);
     }
@@ -131,5 +139,13 @@ public class Complaint {
 
     public boolean isResolved() {
         return isResolved.get();
+    }
+
+    @Override
+    public String toString() {
+        return "Complaint [COMPLAINT_ID=" + COMPLAINT_ID + ", AUTHOR_UID=" + AUTHOR_UID + ", category=" + category
+                + ", subject=" + subject + ", description=" + description + ", evidencePath=" + evidencePath
+                + ", voters=" + voters + ", status=" + status + ", isResolved=" + isResolved + ", caseManagerUID="
+                + caseManagerUID + "]";
     }
 }

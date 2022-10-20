@@ -18,7 +18,7 @@ public class ContentReportReviewStrategy
         if (!verifyAccess(admin))
             return false;
 
-        if (IssueService.getIssueManager().deleteComplaint(admin, REPORT_ID).equals(IssueManagerStatus.SUCCESS)) {
+        if (IssueService.getIssueManager().deleteComplaint(admin,  IssueService.getIssueManager().getReport(REPORT_ID).getTargetID()).equals(IssueManagerStatus.SUCCESS)) {
             IssueService.getIssueManager().getReport(REPORT_ID).setStatus(ReportStatus.CLOSED, "(Auto-generated message) Complaint has been deleted");
             return true;
         } else {

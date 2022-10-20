@@ -19,9 +19,11 @@ import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
 import ku.cs.oakcoding.app.models.reports.Report;
+import ku.cs.oakcoding.app.models.reports.ReportResolvingStatus;
 import ku.cs.oakcoding.app.models.reports.ReportStatus;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.AdminUser;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.StaffUser;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
@@ -149,8 +151,6 @@ public class IssueManager {
                                                        Enum.valueOf(ReportStatus.class, this.reportDB.getDataWhere(reportKey, "STATUS")),
                                                        result));
         }
-
-        System.out.println("!!! " + this.reportTable);
     }
 
 
@@ -165,10 +165,13 @@ public class IssueManager {
                                            Path evidencePath,
                                            ComplaintStatus status) {
 
-        System.out.println(">>> " + this.complaintCategorySet);
-
         if (!this.complaintCategorySet.contains(category))
             return IssueManagerStatus.CATEGORY_NOT_FOUND;
+
+        ComplaintStatus statusArg = ComplaintStatus.PENDING;
+
+        if (Objects.nonNull(status))
+            statusArg = status;
 
         Complaint complaint = new Complaint(OakID.generate(Complaint.class.getSimpleName()),
                                             authorUID,
@@ -177,7 +180,7 @@ public class IssueManager {
                                             description,
                                             evidencePath,
                                             null,
-                                            status,
+                                            statusArg,
                                             null);
 
         this.allComplaintTable.put(complaint.getComplaintID(), complaint);
@@ -216,46 +219,12 @@ public class IssueManager {
         return IssueManagerStatus.SUCCESS;
     }
 
-    // public IssueManagerStatus newComplaint(String authorUID,
-    //                                        String category,
-    //                                        String subject,
-    //                                        String description,
-    //                                        Path evidencePath,
-    //                                        Set<String> voters,
-    //                                        ComplaintStatus status) {
-
-    //     if (!this.complaintCategorySet.contains(category))
-    //         return IssueManagerStatus.CATEGORY_NOT_FOUND;
-
-    //     Complaint complaint = new Complaint(OakID.generate(Complaint.class.getSimpleName()),
-    //                                         authorUID,
-    //                                         category,
-    //                                         subject,
-    //                                         description,
-    //                                         evidencePath,
-    //                                         voters,
-    //                                         status,
-    //                                         null);
-
-    //     this.allComplaintTable.put(complaint.getComplaintID(), complaint);
-
-    //     this.complaintDB.addRecord(new String[] {
-    //         complaint.getComplaintID(),
-    //         complaint.getAuthorUID(),
-    //         complaint.getCategory(),
-    //         complaint.getSubject(),
-    //         complaint.getDescription(),
-    //         complaint.getEvidencePath().toString(),
-    //         OakHotspot.toColonSeparatedValues(complaint.getVoters()),
-    //         complaint.getStatus().name(),
-    //         complaint.getCaseManagerUID()
-    //     });
-
-    //     return IssueManagerStatus.SUCCESS;
-    // }
+    public boolean complaintExist(String complaintID) {
+        return this.allComplaintTable.containsKey(complaintID);
+    }
 
     public IssueManagerStatus deleteComplaint(AdminUser admin, String complaintID) {
-        if (Objects.nonNull(admin) || !(admin instanceof AdminUser))
+        if (Objects.isNull(admin) || !(admin instanceof AdminUser))
             return IssueManagerStatus.INVALID_ACCESS;
         else if (!this.allComplaintTable.containsKey(complaintID))
             return IssueManagerStatus.COMPLAINT_NOT_FOUND;
@@ -294,12 +263,54 @@ public class IssueManager {
         return res;
     }
 
+    public IssueManagerStatus voteComplaint(ConsumerUser consumerUser, String complaintID) {
+        if (Objects.isNull(consumerUser))
+            return IssueManagerStatus.INVALID_ACCESS;
+        else if (!complaintExist(complaintID))
+            return IssueManagerStatus.COMPLAINT_NOT_FOUND;
+
+        if (getComplaint(complaintID).vote(consumerUser.getUID())) {
+            this.complaintDB.editRecord(complaintID, "VOTERS", OakHotspot.appendToColonSeparatedValues(this.complaintDB.getDataWhere(complaintID, "VOTERS"), consumerUser.getUID()), false);
+        }
+
+        Complaint complaint = getComplaint(complaintID);
+
+        if (complaint.getVoteCount() == 0)
+            this.complaintDB.editRecord(complaintID, "VOTERS", OakAppDefaults.NIL, false);
+        else
+            this.complaintDB.editRecord(complaintID, "VOTERS", OakHotspot.toColonSeparatedValues(complaint.getVoters()), false);
+
+        return IssueManagerStatus.SUCCESS;
+    }
+
+    public IssueManagerStatus unVoteComplaint(ConsumerUser consumerUser, String complaintID) {
+        if (Objects.isNull(consumerUser))
+            return IssueManagerStatus.INVALID_ACCESS;
+        else if (!complaintExist(complaintID))
+            return IssueManagerStatus.COMPLAINT_NOT_FOUND;
+
+        getComplaint(complaintID).unVote(consumerUser.getUID());
+
+        Complaint complaint = getComplaint(complaintID);
+
+        if (complaint.getVoteCount() == 0)
+            this.complaintDB.editRecord(complaintID, "VOTERS", OakAppDefaults.NIL, false);
+        else
+            this.complaintDB.editRecord(complaintID, "VOTERS", OakHotspot.toColonSeparatedValues(complaint.getVoters()), false);
+
+        return IssueManagerStatus.SUCCESS;
+    }
+
     public IssueManagerStatus resolveComplaint(StaffUser staff, String complaintID) {
         if (Objects.isNull(staff) || !(staff instanceof StaffUser))
             return IssueManagerStatus.INVALID_ACCESS;
 
-        getComplaint(complaintID).setStatus(staff, ComplaintStatus.RESOLVED);
+        Complaint complaint = getComplaint(complaintID);
+
+        complaint.setStatus(staff, ComplaintStatus.RESOLVED);
+        complaint.setCaseManager(staff.getUID());
         this.complaintDB.editRecord(complaintID, "STATUS", ComplaintStatus.RESOLVED.name(), false);
+        this.complaintDB.editRecord(complaintID, "CASE_MANAGER_UID", staff.getUID(), false);
 
         return IssueManagerStatus.SUCCESS;
     }
@@ -309,15 +320,37 @@ public class IssueManager {
      * @section Reports
      */
 
-    public void newReport(ReportType type,
-                          String authorUID,
-                          String targetUID,
-                          String description) {
+    public IssueManagerStatus newReport(ReportType type,
+                                        String authorUID,
+                                        String targetID,
+                                        String description) {
+
+        if (!AccountService.getUserManager().userExists(authorUID))
+            return IssueManagerStatus.INVALID_ACCESS;
+
+        switch (type) {
+            case BEHAVIOR:
+                if (!AccountService.getUserManager().userExists(targetID))
+                    return IssueManagerStatus.TARGET_NOT_FOUND;
+                else if (!OakID.isIDOfType(targetID, ConsumerUser.class))
+                    return IssueManagerStatus.WRONG_REPORT_TYPE;
+
+                break;
+            case CONTENT:
+                if (!complaintExist(targetID))
+                    return IssueManagerStatus.TARGET_NOT_FOUND;
+                else if (!OakID.isIDOfType(targetID, Complaint.class))
+                    return IssueManagerStatus.WRONG_REPORT_TYPE;
+
+                break;
+            default:
+                return IssueManagerStatus.NO_REPORT_TYPE_SPECIFIED;
+        }
 
         Report report = new Report(OakID.generate(Report.class.getSimpleName()),
                                    type,
                                    authorUID,
-                                   targetUID,
+                                   targetID,
                                    description,
                                    ReportStatus.PENDING,
                                    null);
@@ -332,6 +365,8 @@ public class IssueManager {
             report.getStatus().name(),
             OakAppDefaults.NIL
         });
+
+        return IssueManagerStatus.SUCCESS;
     }
 
     public Report getReport(String reportID) {
@@ -350,6 +385,25 @@ public class IssueManager {
 
         this.reportTable.remove(reportID);
         this.reportDB.removeRecordWhere(reportID);
+
+        return IssueManagerStatus.SUCCESS;
+    }
+
+    public IssueManagerStatus reviewReport(AdminUser admin, String reportID, boolean approve) {
+        if (!this.reportTable.containsKey(reportID))
+            return IssueManagerStatus.REPORT_NOT_FOUND;
+
+        if (approve) {
+            if (this.reportTable.get(reportID).approve(admin).equals(ReportResolvingStatus.SUCCESS))
+                this.reportDB.removeRecordWhere(reportID);
+            else
+                return IssueManagerStatus.FAILURE;
+        } else {
+            if (this.reportTable.get(reportID).deny(admin).equals(ReportResolvingStatus.SUCCESS))
+                this.reportDB.removeRecordWhere(reportID);
+            else
+                return IssueManagerStatus.FAILURE;
+        }
 
         return IssueManagerStatus.SUCCESS;
     }

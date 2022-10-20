@@ -7,5 +7,9 @@ public enum IssueManagerStatus {
     CATEGORY_ALREADY_EXIST,
     COMPLAINT_NOT_FOUND,
     REPORT_NOT_FOUND,
+    TARGET_NOT_FOUND,
+    /* when a user report themself */   SELF_REPORTING_ERROR,
+    WRONG_REPORT_TYPE,
+    NO_REPORT_TYPE_SPECIFIED,
     FAILURE
 }

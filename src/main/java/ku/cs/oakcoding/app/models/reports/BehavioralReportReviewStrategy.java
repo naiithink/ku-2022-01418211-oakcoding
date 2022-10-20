@@ -1,6 +1,7 @@
 package ku.cs.oakcoding.app.models.reports;
 
 import ku.cs.oakcoding.app.models.users.AdminUser;
+import ku.cs.oakcoding.app.models.users.UserManagerStatus;
 import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.IssueService;
 
@@ -18,11 +19,10 @@ public class BehavioralReportReviewStrategy
         if (!verifyAccess(admin))
             return false;
 
-        AccountService.getUserManager().setActiveStatus(admin, IssueService.getIssueManager().getReport(REPORT_ID).getTargetID(), false);
-        IssueService.getIssueManager().getReport(REPORT_ID).setStatus(ReportStatus.RESOLVED, "(Auto-generated message) User '" + IssueService.getIssueManager().getReport(REPORT_ID).getTargetID() + "' status has been marked as suspended");
-
-        if (AccountService.getUserManager().isActive(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getReport(REPORT_ID).getTargetID())) == false)
+        if (AccountService.getUserManager().setActiveStatus(admin, AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getReport(REPORT_ID).getTargetID()), false).equals(UserManagerStatus.SUCCESSFUL)) {
+            IssueService.getIssueManager().getReport(REPORT_ID).setStatus(ReportStatus.RESOLVED, "(Auto-generated message) User '" + IssueService.getIssueManager().getReport(REPORT_ID).getTargetID() + "' status has been marked as suspended");
             return true;
+        }
 
         return false;
     }

@@ -22,6 +22,17 @@ public final class OakID {
         return timestamp + OakAppConfigs.getProperty("app.id.separator") + suffix;
     }
 
+    public static boolean isIDOfType(String oakID, Class<?> type) {
+        String[] splittedID = oakID.split(OakAppConfigs.getProperty("app.id.separator"));
+
+        if (splittedID.length < 1) {
+            OakLogger.log(Level.SEVERE, "Invalid OakID '" + oakID + "'");
+            return false;
+        }
+
+        return splittedID[1].contains(type.getSimpleName().toLowerCase());
+    }
+
     public static Long getGenerateTimeOf(String oakID) {
         if (Objects.isNull(oakID)) {
             OakLogger.log(Level.SEVERE, "Attempting to get time from null argument");
