@@ -187,9 +187,9 @@ public class AdminController implements Initializable {
     @FXML
     private TableView<Department> departmentsListTableView;
     @FXML
-    private TableColumn<Department, ReadOnlyStringWrapper> departmentCol;
+    private TableColumn<Department, String> departmentCol;
     @FXML
-    private TableColumn<Department, ReadOnlyStringWrapper> leaderStaffCol;
+    private TableColumn<Department, String> leaderStaffCol;
 
     private ObservableSet<Department> observableDepartmentSet = FXCollections.observableSet();
 
@@ -272,6 +272,13 @@ public class AdminController implements Initializable {
         });
     }
 
+    private void clearAllData(){
+        clearUsersPageData();
+        clearProfilePageData();
+        clearDepartmentPageData();
+        clearComplaintPageData();
+    }
+
     private void initUsersTableView() {
 
 
@@ -332,8 +339,16 @@ public class AdminController implements Initializable {
             }
         });
 
+    }
 
-
+    private void clearUsersPageData(){
+       usersListTableView = null;
+       firstNameCol.setText("");
+       lastNameCol.setText("");
+       profileImageCol = null;
+       lastLoginCol.setText("");
+       observableUserSet = null;
+       observableUserList = null;
 
     }
 
@@ -385,6 +400,7 @@ public class AdminController implements Initializable {
     @FXML
     private void handleRegisterDepartment(){
         String nameDepartment = nameDepartmentTextField.getText();
+        nameDepartmentTextField.clear();
         Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
         alertInformation.setTitle("INFORMATION");
         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
@@ -402,8 +418,19 @@ public class AdminController implements Initializable {
 
     }
 
+    private void clearDepartmentPageData(){
+        departmentsListTableView = null;
+        observableDepartmentSet = null;
+        observableDepartmentList = null;
+    }
 
-    void setProfileLabel(){
+
+    /**
+     *
+     * Profile page
+     */
+
+    private void setProfileLabel(){
         AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
         userNameLabel.setText(admin.getUserName());
         statusAccountLabel.setText(admin.getRole().getPrettyPrinted());
@@ -414,6 +441,21 @@ public class AdminController implements Initializable {
 
 
     }
+
+    private void clearProfilePageData(){
+        userNameLabel.setText("");
+        statusAccountLabel.setText("");
+        firstNameLabelAccount.setText("");
+        lastNameLabel.setText("");
+        picProfileSettingLabel.setImage(null);
+    }
+
+    /**
+     *
+     * Complaint Page
+     *
+     *
+     */
 
 
     public void initComplaintChoiceBox(){
@@ -437,6 +479,12 @@ public class AdminController implements Initializable {
 
             }
         });
+    }
+
+    private void clearComplaintPageData(){
+        complaintChoiceBox = null;
+        personalTableView = null;
+        surroundingTableView = null;
     }
 
 
@@ -568,11 +616,7 @@ public class AdminController implements Initializable {
     @FXML
     void handleClickLogoutButton() {
         try {
-            userNameLabel.setText("");
-            statusAccountLabel.setText("");
-            firstNameLabelAccount.setText("");
-            lastNameLabel.setText("");
-            picProfileSettingLabel.setImage(null);
+            clearAllData();
             StageManager.getStageManager().setPage("authentication", null);
         } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
