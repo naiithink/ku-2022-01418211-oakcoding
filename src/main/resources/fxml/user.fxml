@@ -243,10 +243,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="complaintTypeChoiceBox" layoutX="75.0" layoutY="81.0" prefWidth="150.0" />
-            <Label layoutX="75.0" layoutY="49.0" text="ReportType" textFill="WHITE" />
-            <Label layoutX="312.0" layoutY="50.0" text="Category" textFill="WHITE" />
-            <ChoiceBox fx:id="complaintCategoryChoiceBox" layoutX="288.0" layoutY="81.0" prefWidth="150.0" />
+            <Label layoutX="74.0" layoutY="56.0" text="Category" textFill="WHITE" />
+            <ChoiceBox fx:id="complaintCategoryChoiceBox" layoutX="74.0" layoutY="88.0" prefWidth="150.0" />
             <TextField fx:id="complaintSubjectTextField" layoutX="74.0" layoutY="165.0" />
             <Label layoutX="75.0" layoutY="140.0" text="Subject" textFill="WHITE" />
             <ImageView fx:id="uploadButton" fitHeight="42.0" fitWidth="40.0" layoutX="279.0" layoutY="165.0" onMouseClicked="#handleProfileUpload" pickOnBounds="true" preserveRatio="true">
@@ -256,6 +254,11 @@
             </ImageView>
             <Label layoutX="277.0" layoutY="140.0" prefHeight="21.0" prefWidth="71.0" text="Evidence" textFill="WHITE" />
             <Label fx:id="fileUpload" layoutX="337.0" layoutY="175.0" prefHeight="21.0" prefWidth="115.0" text="FileName" textFill="WHITE" />
+            <ImageView fx:id="backButton2" fitHeight="30.0" fitWidth="23.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#handleBackButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
@@ -265,7 +268,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Button layoutX="60.0" layoutY="483.0" mnemonicParsing="false" styleClass="button-blue" text="Report " />
+            <Button fx:id="reportComplaint" layoutX="226.0" layoutY="478.0" mnemonicParsing="false" onAction="#handleReportComplaint" styleClass="button-blue" text="Report" />
             <ChoiceBox fx:id="reportChooseChoiceBox" layoutX="60.0" layoutY="447.0" prefWidth="150.0" />
             <Label layoutX="77.0" layoutY="70.0" prefHeight="75.0" prefWidth="159.0" text="Author" textFill="#545454">
                <font>
@@ -357,12 +360,13 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Button layoutX="276.0" layoutY="483.0" mnemonicParsing="false" onAction="#handleVoteButton" styleClass="button-blue" text="Vote" />
-            <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleBackButton">
+            <Button layoutX="397.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleVoteButton" styleClass="button-blue" text="Vote" />
+            <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" onMouseClicked="#handleBackButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
+            <TextField fx:id="reportAddDescriptionLabel" layoutX="55.0" layoutY="484.0" promptText="Description" />
          </children>
       </Pane>
     </children>

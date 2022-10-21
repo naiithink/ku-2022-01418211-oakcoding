@@ -18,6 +18,7 @@ import java.util.logging.Level;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -155,8 +156,7 @@ public class UserController implements Initializable {
      * Complaint Page
      */
 
-    @FXML
-    private ChoiceBox<String> complaintTypeChoiceBox;
+
     @FXML
     private ChoiceBox<String> complaintCategoryChoiceBox;
 
@@ -226,6 +226,9 @@ public class UserController implements Initializable {
 
     private String complaintID;
 
+    @FXML
+    private TextField reportAddDescriptionLabel;
+
 
 
 
@@ -256,15 +259,31 @@ public class UserController implements Initializable {
     private void initReportTableView(){
 
         observableReportSet.addAll(IssueService.getIssueManager().getAllReportsSet());
+        for (Report report: observableReportSet
+             ) {
+            System.out.println(report);
+
+        }
         observableReportSet.addListener((SetChangeListener<? super Report>) change -> {
             observableReportList.addAll(observableReportSet);
             reportTableView.refresh();
         });
 
+        // new PropertyValueFactory<>("targetID")
+
         reportTableView.setEditable(true);
         reportTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         reportDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        reportTargetCol.setCellValueFactory(new PropertyValueFactory<>("TARGET_ID"));
+        reportTargetCol.setCellValueFactory(p -> {
+            ObjectProperty<String> res = null;
+
+            if (AccountService.getUserManager().userExists(p.getValue().getTargetID()))
+                res = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getTargetID()));
+            else
+                res = new SimpleObjectProperty<>(p.getValue().getTargetID());
+
+            return res;
+        });
 
         observableReportList.addAll(observableReportSet);
         reportTableView.getItems().setAll(observableReportList);
@@ -293,10 +312,25 @@ public class UserController implements Initializable {
         List<String> reportTypeChoiceBoxSelected = new ArrayList<>();
         reportTypeChoiceBoxSelected.add("BEHAVIOR");
         reportTypeChoiceBoxSelected.add("CONTENT");
-        complaintTypeChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
 
         complaintCategoryChoiceBox.setItems(FXCollections.observableArrayList(IssueService.getIssueManager().getAllCategorySet()));
 
+
+    }
+    @FXML
+    private void handleReportComplaint(){
+        String discrip = reportAddDescriptionLabel.getText();
+        if (Objects.isNull(discrip))
+            discrip = "";
+        if (reportChooseChoiceBox.getValue().equals("AUTHOR")){
+            IssueService.getIssueManager().newReport(ReportType.BEHAVIOR,((ConsumerUser)StageManager.getStageManager().getContext()).getUID(),
+                                                                        IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID(),discrip);
+            reportTableView.refresh();
+        }
+        else if (reportChooseChoiceBox.getValue().equals("COMPLAINT")){
+            IssueService.getIssueManager().newReport(ReportType.CONTENT,((ConsumerUser)StageManager.getStageManager().getContext()).getUID(),complaintID,discrip);
+            reportTableView.refresh();
+        }
 
     }
 
