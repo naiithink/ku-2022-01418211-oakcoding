@@ -44,10 +44,7 @@ import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.models.users.UserManagerStatus;
-import ku.cs.oakcoding.app.services.AccountService;
-import ku.cs.oakcoding.app.services.WorkspaceManager;
-import ku.cs.oakcoding.app.services.WorkspaceManagerStatus;
-import ku.cs.oakcoding.app.services.WorkspaceService;
+import ku.cs.oakcoding.app.services.*;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import org.w3c.dom.Text;
 
@@ -420,17 +417,16 @@ public class AdminController implements Initializable {
          * @todo Read AdminUser instance
          */
 
-        ObservableSet<FullUserEntry> fullUserEntries = AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext());
-        fullUserEntries.addListener((SetChangeListener<? super FullUserEntry>) change -> {
-            fullUserEntries.addAll(AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext()));
+
+        observableUserSet = AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext());
+        observableUserSet.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+
+            observableUserList.setAll(observableUserSet);
+            usersListTableView.getItems().setAll(observableUserList);
             usersListTableView.refresh();
         });
 
-        observableUserSet.addAll(fullUserEntries); /* dataSourceCSV.readData().getUsers() */;
         usersListTableView.setEditable(true);
-
-
-
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         profileImageCol.setCellValueFactory(p -> {
@@ -545,14 +541,13 @@ public class AdminController implements Initializable {
 
 
     private void initDepartmentTableView(){
-        departmentsListTableView.getItems().clear();
-        ObservableSet<Department> departments = WorkspaceService.getWorkspaceManager().getAllDepartmentsSet();
-        departments.addListener((SetChangeListener<? super Department>) change -> {
-            departments.removeAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
-            departments.addAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
+
+        observableDepartmentSet = WorkspaceService.getWorkspaceManager().getAllDepartmentsSet();
+        observableDepartmentSet.addListener((SetChangeListener<? super Department>) change -> {
+            observableDepartmentList.setAll(observableDepartmentSet);
+            departmentsListTableView.getItems().setAll(observableDepartmentList);
             departmentsListTableView.refresh();
         });
-        observableDepartmentSet.addAll(departments);
 
 
         departmentsListTableView.setEditable(true);
@@ -599,8 +594,7 @@ public class AdminController implements Initializable {
         departmentsListTableView.setOnMousePressed(e ->{
             if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
                 int index = departmentsListTableView.getSelectionModel().getSelectedIndex();
-                Department department = departmentsListTableView.getItems().get(index);
-                showSelectedDepartment(department.getDepartmentID());
+                showSelectedDepartment(departmentsListTableView.getItems().get(index).getDepartmentID());
             }
         });
 
@@ -625,8 +619,6 @@ public class AdminController implements Initializable {
 
 
         initStaffMembersListView(departmentID);
-
-
         departmentNameLabel.setText(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentName());
         leaderStaffLabel.setText(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getLeaderStaffMemberID());
         changeLeaderDepartmentID = WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentID();
@@ -636,19 +628,15 @@ public class AdminController implements Initializable {
     }
 
     private void initStaffTableView(){
-        chooseLeaderStaffTableView.getItems().clear();
-        ObservableSet<FullUserEntry> staffUserEntries = AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF);
 
-        staffUserEntries.addListener((SetChangeListener<? super FullUserEntry>) change -> {
-            staffUserEntries.addAll(AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF));
+        observableStaffMembersSet = AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF);
+        observableStaffMembersSet.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+            observableStaffMembersList.setAll(observableStaffMembersSet);
+            chooseLeaderStaffTableView.getItems().setAll(observableStaffMembersList);
             chooseLeaderStaffTableView.refresh();
         });
 
-        observableStaffMembersSet.addAll(staffUserEntries); /* dataSourceCSV.readData().getUsers() */;
         chooseLeaderStaffTableView.setEditable(true);
-
-
-
         chooseFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         chooseLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         chooseLeaderProfileImageCol.setCellValueFactory(p -> {
@@ -698,7 +686,6 @@ public class AdminController implements Initializable {
                 int index = chooseLeaderStaffTableView.getSelectionModel().getSelectedIndex();
                 WorkspaceService.getWorkspaceManager().assignLeaderStaffMember(changeLeaderDepartmentID, chooseLeaderStaffTableView.getItems().get(index).getUID());
                 sideBarPane.setDisable(false);
-                initDepartmentTableView();
                 handleClickOrganizations();
             }
         });
