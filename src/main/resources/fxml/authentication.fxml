@@ -27,7 +27,7 @@
                </styleClass></Button>
             <Group layoutX="24.0" layoutY="65.0">
                <children>
-                      <Label alignment="CENTER" layoutX="70.0" prefHeight="19.0" prefWidth="119.0" styleClass="text" text="Kasetsart University" textFill="#cdcdcd">
+                      <Label alignment="CENTER" layoutX="48.0" layoutY="3.0" prefHeight="20.0" prefWidth="163.0" styleClass="text" text="Kasetsart University" textFill="#cdcdcd">
                      <font>
                         <Font size="16.0" />
                      </font>
