@@ -144,11 +144,11 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="usersListTableView" layoutX="51.0" layoutY="76.0" prefHeight="441.0" prefWidth="580.0">
+            <TableView fx:id="usersListTableView" layoutX="51.0" layoutY="76.0" prefHeight="439.0" prefWidth="548.0">
                <columns>
                   <TableColumn fx:id="profileImageCol" prefWidth="129.80538940429688" text="ProfileImage" />
                   <TableColumn fx:id="lastLoginCol" minWidth="0.0" prefWidth="140.09552001953125" text="LastLogin" />
@@ -156,7 +156,7 @@
                   <TableColumn fx:id="lastNameCol" prefWidth="174.2286376953125" text="LastName" />
                </columns>
             </TableView>
-            <Button layoutX="509.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleCreateStaffMember" prefHeight="30.0" prefWidth="122.0" styleClass="button-blue" text="Create Staff" />
+            <Button layoutX="470.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleCreateStaffMember" prefHeight="30.0" prefWidth="122.0" styleClass="button-blue" text="Create Staff" />
          </children>
       </Pane>
       <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
@@ -417,7 +417,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>

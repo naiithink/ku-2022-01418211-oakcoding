@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
-        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
+        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
             <children>
             <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
                <children>
@@ -203,12 +203,7 @@
                         <Image url="@../images/upload.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="nameProfileUploadStaffLabel" layoutX="204.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AliceProfileStaff.png" textFill="#da9e9f">
-                     <font>
-                        <Font name="Kanit Regular" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="messageWhenRegisterStaffLabel" layoutX="163.0" layoutY="496.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="New staff account has been registered" textFill="#da9e9f">
+                  <Label fx:id="nameProfileUploadStaffLabel" layoutX="204.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AliceProfileStaff.png" textFill="#da9e9f" visible="false">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>

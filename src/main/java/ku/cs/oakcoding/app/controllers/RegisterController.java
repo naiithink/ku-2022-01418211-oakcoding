@@ -113,12 +113,15 @@ public class RegisterController implements Initializable {
 
     @FXML
     private TextField usernameStaffField;
-
     private Path profileImagePath;
 
     @FXML
     void handleBackButtonGoToAdminPage(MouseEvent event) {
-
+        try {
+            StageManager.getStageManager().setPage("admin", null);
+        } catch (StageManager.PageNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "Page not found");
+        }
     }
 
     @FXML
@@ -143,6 +146,8 @@ public class RegisterController implements Initializable {
 
         if (Objects.nonNull(selectedFile)) {
             this.profileImagePath = selectedFile.toPath();
+            nameProfileUploadStaffLabel.setText(this.profileImagePath.getFileName().toString());
+            nameProfileUploadStaffLabel.setVisible(true);
             nameProfileUploadLabel.setText(this.profileImagePath.getFileName().toString());
             nameProfileUploadLabel.setVisible(true);
         }
