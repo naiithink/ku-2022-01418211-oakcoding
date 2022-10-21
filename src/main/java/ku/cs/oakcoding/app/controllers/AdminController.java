@@ -435,6 +435,7 @@ public class AdminController implements Initializable {
                 initReportTableView();
                 handleSelectedUsersTableView();
                 handleSelectedDepartmentTableView();
+                handleSelectComplaintTableView();
             }
         });
     }
@@ -1009,6 +1010,15 @@ public class AdminController implements Initializable {
         departmentNameLabel1.setText(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName());
         leaderStaffLabel1.setText(AccountService.getUserManager().getUIDOf(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getLeaderStaffMemberID()));
         handleSelectStaffLeader();
+    }
+    private void handleSelectComplaintTableView(){
+
+        complaintTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = complaintTableView.getSelectionModel().getSelectedIndex();
+                showDetailComplaint(complaintTableView.getItems().get(index).getComplaintID());
+            }
+        });
     }
 
     private void handleSelectStaffLeader(){
