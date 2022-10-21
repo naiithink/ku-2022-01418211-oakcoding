@@ -144,7 +144,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
@@ -157,29 +157,6 @@
                </columns>
             </TableView>
             <Button layoutX="470.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleCreateStaffMember" prefHeight="30.0" prefWidth="122.0" styleClass="button-blue" text="Create Staff" />
-         </children>
-      </Pane>
-      <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
-         <children>
-            <Label layoutX="44.0" layoutY="28.0" text="แจ้งเรื่อง" textFill="WHITE" />
-            <Line endX="405.0" layoutX="176.0" layoutY="70.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="personalTableView" layoutX="44.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0">
-               <columns>
-                  <TableColumn fx:id="categoryCol" prefWidth="124.0" text="Category" />
-                  <TableColumn fx:id="subjectCol" prefWidth="160.0" text="Subject" />
-                  <TableColumn fx:id="descriptionCol" prefWidth="292.0" text="Description" />
-                  <TableColumn fx:id="evidenceCol" minWidth="0.0" prefWidth="0.0" />
-               </columns>
-            </TableView>
-            <ChoiceBox fx:id="complaintChoiceBox" layoutX="43.0" layoutY="62.0" prefWidth="150.0" />
-            <TableView fx:id="surroundingTableView" layoutX="46.0" layoutY="98.0" prefHeight="417.0" prefWidth="569.0" visible="false">
-               <columns>
-                  <TableColumn fx:id="categorySurroundCol" prefWidth="124.0" text="Category" />
-                  <TableColumn fx:id="subjectSurroundCol" prefWidth="160.0" text="Subject" />
-                  <TableColumn fx:id="descriptionSurroundCol" prefWidth="146.0" text="Description" />
-                  <TableColumn fx:id="evidenceSurroundCol" prefWidth="146.0" text="Evidence" />
-               </columns>
-            </TableView>
          </children>
       </Pane>
       <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
@@ -197,7 +174,7 @@
             <Label layoutX="96.0" layoutY="459.0" text="ชื่อองค์กร" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="reportPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="reportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="75.0" layoutY="35.0" text="รายงาน" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="63.0" startX="-100.0" stroke="#2a2c32" />
@@ -467,6 +444,39 @@
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+         </children>
+      </Pane>
+      <Pane fx:id="reportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Label layoutX="281.0" layoutY="40.0" text="Report" textFill="WHITE" />
+            <TableView fx:id="reportTableView" layoutX="81.0" layoutY="113.0" prefHeight="306.0" prefWidth="433.0">
+               <columns>
+                  <TableColumn fx:id="reportTypeCol" prefWidth="95.0" text="Type" />
+                  <TableColumn fx:id="reportDescriptionCol" prefWidth="187.0" text="Description" />
+                  <TableColumn fx:id="reportTargetCol" prefWidth="150.0" text="Target" />
+               </columns>
+            </TableView>
+            <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
+            <Button layoutX="82.0" layoutY="443.0" mnemonicParsing="false" styleClass="button-blue" text="Report " />
+         </children>
+      </Pane>
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TableView fx:id="complaintTableView" layoutX="48.0" layoutY="90.0" prefHeight="356.0" prefWidth="526.0">
+               <columns>
+                  <TableColumn fx:id="complaintCategoryCol" prefWidth="102.0" text="Category" />
+                  <TableColumn fx:id="complaintSubjectCol" prefWidth="89.0" text="Subject" />
+                  <TableColumn fx:id="complaintDescriptionCol" prefWidth="202.0" text="Description" />
+                  <TableColumn fx:id="complaintVotersCol" prefWidth="54.0" text="Vote" />
+                  <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
+               </columns>
+            </TableView>
+            <Button layoutX="48.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleCreateComplaintButton" styleClass="button-blue" text="Create Complaint" />
          </children>
       </Pane>
    </children>

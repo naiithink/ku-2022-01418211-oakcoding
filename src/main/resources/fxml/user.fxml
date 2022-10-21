@@ -112,7 +112,7 @@
             <Button layoutX="48.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleCreateComplaintButton" styleClass="button-blue" text="Create Complaint" />
          </children>
       </Pane>
-      <Pane fx:id="reportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="reportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
 
             <Label layoutX="281.0" layoutY="40.0" text="Report" textFill="WHITE" />
@@ -261,7 +261,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>

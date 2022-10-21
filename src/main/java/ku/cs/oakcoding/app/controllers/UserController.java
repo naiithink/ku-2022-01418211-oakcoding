@@ -259,11 +259,6 @@ public class UserController implements Initializable {
     private void initReportTableView(){
 
         observableReportSet.addAll(IssueService.getIssueManager().getAllReportsSet());
-        for (Report report: observableReportSet
-             ) {
-            System.out.println(report);
-
-        }
         observableReportSet.addListener((SetChangeListener<? super Report>) change -> {
             observableReportList.addAll(observableReportSet);
             reportTableView.refresh();

@@ -10,16 +10,13 @@ package ku.cs.oakcoding.app.controllers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.logging.Level;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,14 +36,15 @@ import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
 import ku.cs.oakcoding.app.models.complaints.Complaint;
+import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
 import ku.cs.oakcoding.app.models.org.Department;
+import ku.cs.oakcoding.app.models.reports.Report;
+import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
-import ku.cs.oakcoding.app.models.users.UserManagerStatus;
 import ku.cs.oakcoding.app.services.*;
 import ku.cs.oakcoding.app.services.stages.StageManager;
-import org.w3c.dom.Text;
 
 
 public class AdminController implements Initializable {
@@ -67,7 +65,7 @@ public class AdminController implements Initializable {
     private ImageView complaintsImageView;
 
     @FXML
-    private Pane complaintsPane;
+    private Pane createReportsUserPane;
 
     @FXML
     private Button dashboardButton;
@@ -121,7 +119,7 @@ public class AdminController implements Initializable {
     private ImageView reportImageView;
 
     @FXML
-    private Pane reportPane;
+    private Pane reportsUserPane;
 
     @FXML
     private Button requestButton;
@@ -263,13 +261,39 @@ public class AdminController implements Initializable {
      */
 
     @FXML
-    private ChoiceBox<String> complaintChoiceBox;
+    private ChoiceBox<String> complaintCategoryChoiceBox;
 
     @FXML
-    private TableView<Complaint> personalTableView;
+    private TextField complaintSubjectTextField;
 
     @FXML
-    private TableView<Complaint> surroundingTableView;
+    private TextArea complaintDescriptionTextArea;
+
+    private Path evidence;
+    @FXML
+    private Label fileUpload;
+
+    @FXML
+    private TableView<Complaint> complaintTableView;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintCategoryCol;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintSubjectCol;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintDescriptionCol;
+
+    @FXML
+    private TableColumn<Complaint, Long>  complaintVotersCol;
+
+    @FXML
+    private TableColumn<Complaint, ComplaintStatus> complaintStatusCol;
+
+
+    private ObservableSet<Complaint> observableComplaintSet = FXCollections.observableSet();
+    private ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList() ;
 
     /**
      *
@@ -321,6 +345,78 @@ public class AdminController implements Initializable {
     private Label leaderStaffLabel1;
 
     /**
+     *
+     *
+     *  report pane
+     *
+     */
+
+    @FXML
+    private TableView<Report> reportTableView;
+
+    @FXML
+    private TableColumn<Report, ReportType> reportTypeCol;
+
+    @FXML
+    private TableColumn<Report, String> reportDescriptionCol ;
+
+    @FXML
+    private TableColumn<Report, String> reportTargetCol;
+
+    @FXML
+    private ChoiceBox<String> reportTypeChoiceBox;
+
+    private ObservableSet<Report> observableReportSet = FXCollections.observableSet();
+    private ObservableList<Report> observableReportList = FXCollections.observableArrayList() ;
+
+    private void initReportTableView(){
+
+        observableReportSet.addAll(IssueService.getIssueManager().getAllReportsSet());
+        observableReportSet.addListener((SetChangeListener<? super Report>) change -> {
+            observableReportList.addAll(observableReportSet);
+            reportTableView.refresh();
+        });
+
+        // new PropertyValueFactory<>("targetID")
+
+        reportTableView.setEditable(true);
+        reportTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        reportDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        reportTargetCol.setCellValueFactory(p -> {
+            ObjectProperty<String> res = null;
+
+            if (AccountService.getUserManager().userExists(p.getValue().getTargetID()))
+                res = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getTargetID()));
+            else
+                res = new SimpleObjectProperty<>(p.getValue().getTargetID());
+
+            return res;
+        });
+
+        observableReportList.addAll(observableReportSet);
+        reportTableView.getItems().setAll(observableReportList);
+        reportTableView.refresh();
+
+    }
+
+    private void initReportPageChoiceBox(){
+        List<String> reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("BEHAVIOR");
+        reportTypeChoiceBoxSelected.add("CONTENT");
+        reportTypeChoiceBoxSelected.add("DEFAULT");
+        reportTypeChoiceBox.setValue("DEFAULT");
+        reportTypeChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+
+    }
+
+
+
+
+
+
+
+
+    /**
      * methods zones
      */
 
@@ -331,9 +427,9 @@ public class AdminController implements Initializable {
         sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -389,13 +485,14 @@ public class AdminController implements Initializable {
 
         initPane();
         initComplaintChoiceBox();
-//        initTableView();
+        initReportPageChoiceBox();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("admin")) {
                 initUsersTableView();
                 initDepartmentTableView();
                 initStaffTableView();
                 setMyPane();
+                initReportTableView();
                 handleSelectedUsersTableView();
                 handleSelectedComplaintChoiceBox();
                 handleSelectedDepartmentTableView();
@@ -503,9 +600,9 @@ public class AdminController implements Initializable {
         sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(true);
@@ -607,9 +704,9 @@ public class AdminController implements Initializable {
     private void showSelectedDepartment(String departmentID){
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -665,9 +762,9 @@ public class AdminController implements Initializable {
         sideBarPane.setDisable(true);
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -840,9 +937,9 @@ public class AdminController implements Initializable {
                 "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(true);
+        createReportsUserPane.setVisible(true);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -904,9 +1001,9 @@ public class AdminController implements Initializable {
                 "-fx-cursor: hand;");
         welcomePane.setVisible(true);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -982,9 +1079,9 @@ public class AdminController implements Initializable {
                 "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(true);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -1052,9 +1149,9 @@ public class AdminController implements Initializable {
                 "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(true);
+        reportsUserPane.setVisible(true);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -1120,9 +1217,9 @@ public class AdminController implements Initializable {
                 "-fx-cursor: hand;");
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(true);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -1190,9 +1287,9 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(true);
         userDetailPane.setVisible(false);
@@ -1255,9 +1352,9 @@ public class AdminController implements Initializable {
 
         welcomePane.setVisible(false);
         userPane.setVisible(true);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
@@ -1270,9 +1367,9 @@ public class AdminController implements Initializable {
     public void initPane() {
         welcomePane.setVisible(true);
         userPane.setVisible(false);
-        complaintsPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
         organizationsPane.setVisible(false);
-        reportPane.setVisible(false);
+        reportsUserPane.setVisible(false);
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
