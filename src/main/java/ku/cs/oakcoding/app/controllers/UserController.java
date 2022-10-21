@@ -192,6 +192,14 @@ public class UserController implements Initializable {
     private ObservableSet<Complaint> observableComplaintSet = FXCollections.observableSet();
     private ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList() ;
 
+    /**
+     *
+     * Detail Complaint page
+     */
+
+    @FXML
+    private Pane detailComplaintPane;
+
 
 
 
@@ -205,6 +213,8 @@ public class UserController implements Initializable {
                 setMyPane();
                 initReportTableView();
                 initComplaintTableView();
+
+                handleSelectComplaintTableView();
             }
         });
     }
@@ -264,9 +274,9 @@ public class UserController implements Initializable {
 
     private void initComplaintTableView(){
 
-         IssueService.getIssueManager().getAllComplaintSet().addListener((SetChangeListener<? super Complaint>) change -> {
-            System.out.println(">>>> listener");
-            observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+        observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+         observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
+
             observableComplaintList.setAll(observableComplaintSet);
             complaintTableView.getItems().setAll(observableComplaintList);
             complaintTableView.refresh();
@@ -296,6 +306,29 @@ public class UserController implements Initializable {
 
     }
 
+    private void handleSelectComplaintTableView(){
+
+        complaintTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = complaintTableView.getSelectionModel().getSelectedIndex();
+                showDetailComplaint(complaintTableView.getItems().get(index).getComplaintID());
+            }
+        });
+    }
+
+    private void showDetailComplaint(String complaintID){
+        sideBarPane.setDisable(true);
+        reportsUserPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        welcomeUserPane.setVisible(false);
+        settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(true);
+
+
+    }
+
     @FXML
     void handleProfileUpload(MouseEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -322,6 +355,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(true);
+        detailComplaintPane.setVisible(false);
     }
 
     @FXML
@@ -447,6 +481,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
     }
 
     public void handleClickCreateReport() {
@@ -477,6 +512,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
     }
 
     public void handleClickSetting() {
@@ -507,6 +543,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(true);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
         setProfileLabel();
     }
 
@@ -564,6 +601,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
     }
 
     public void setMyPane() {
@@ -582,6 +620,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(true);
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
     }
 
     public void handleBackUserPictureButton(){
@@ -598,6 +637,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(true);
         reportsPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
 
     }
 }
