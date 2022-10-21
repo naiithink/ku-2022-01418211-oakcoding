@@ -8,20 +8,38 @@
 
 package ku.cs.oakcoding.app.controllers;
 
+import java.io.File;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.logging.Level;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.complaints.Complaint;
+import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
+import ku.cs.oakcoding.app.models.reports.Report;
+import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.*;
 import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.services.IssueService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
@@ -52,6 +70,9 @@ public class UserController implements Initializable {
 
     @FXML
     private Pane welcomeUserPane;
+
+    @FXML
+    private Pane reportsPane;
 
     @FXML
     private Button settingButton;
@@ -102,6 +123,244 @@ public class UserController implements Initializable {
 
     @FXML
     private Pane sideBarPane;
+
+    /**
+     *
+     *
+     *  report page
+     *
+     */
+    @FXML
+    private TableView<Report> reportTableView;
+
+    @FXML
+    private TableColumn<Report, ReportType> reportTypeCol;
+
+    @FXML
+    private TableColumn<Report, String> reportDescriptionCol ;
+
+    @FXML
+    private TableColumn<Report, String> reportTargetCol;
+
+    @FXML
+    private ChoiceBox<String> reportTypeChoiceBox;
+
+    private ObservableSet<Report> observableReportSet = FXCollections.observableSet();
+    private ObservableList<Report> observableReportList = FXCollections.observableArrayList() ;
+
+    /**
+     *
+     * Complaint Page
+     */
+
+    @FXML
+    private ChoiceBox<String> complaintTypeChoiceBox;
+    @FXML
+    private ChoiceBox<String> complaintCategoryChoiceBox;
+
+    @FXML
+    private TextField complaintSubjectTextField;
+
+    @FXML
+    private TextArea complaintDescriptionTextArea;
+
+    private Path evidence;
+    @FXML
+    private Label fileUpload;
+
+    @FXML
+    private TableView<Complaint> complaintTableView;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintCategoryCol;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintSubjectCol;
+
+    @FXML
+    private TableColumn<Complaint, String> complaintDescriptionCol;
+
+    @FXML
+    private TableColumn<Complaint, Long>  complaintVotersCol;
+
+    @FXML
+    private TableColumn<Complaint, ComplaintStatus> complaintStatusCol;
+
+
+    private ObservableSet<Complaint> observableComplaintSet = FXCollections.observableSet();
+    private ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList() ;
+
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initPane();
+        initReportPageChoiceBox();
+        initComplaintPageChoiceBox();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("user")) {
+                setMyPane();
+                initReportTableView();
+                initComplaintTableView();
+            }
+        });
+    }
+
+    /**
+     *
+     * Report pane
+     *
+     */
+
+    private void initReportTableView(){
+
+        observableReportSet.addAll(IssueService.getIssueManager().getAllReportsSet());
+        observableReportSet.addListener((SetChangeListener<? super Report>) change -> {
+            observableReportList.addAll(observableReportSet);
+            reportTableView.refresh();
+        });
+
+        reportTableView.setEditable(true);
+        reportTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        reportDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        reportTargetCol.setCellValueFactory(new PropertyValueFactory<>("TARGET_ID"));
+
+        observableReportList.addAll(observableReportSet);
+        reportTableView.getItems().setAll(observableReportList);
+        reportTableView.refresh();
+
+    }
+
+    private void initReportPageChoiceBox(){
+        List<String>reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("BEHAVIOR");
+        reportTypeChoiceBoxSelected.add("CONTENT");
+        reportTypeChoiceBoxSelected.add("DEFAULT");
+        reportTypeChoiceBox.setValue("DEFAULT");
+        reportTypeChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+
+    }
+
+
+    /**
+     *
+     * Complaint pane
+     *
+     */
+
+    private void initComplaintPageChoiceBox(){
+        List<String> reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("BEHAVIOR");
+        reportTypeChoiceBoxSelected.add("CONTENT");
+        complaintTypeChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+
+        complaintCategoryChoiceBox.setItems(FXCollections.observableArrayList(IssueService.getIssueManager().getAllCategorySet()));
+
+
+    }
+
+    private void initComplaintTableView(){
+
+        observableComplaintSet.addAll(IssueService.getIssueManager().getAllComplaintSet());
+        observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
+            observableComplaintList.addAll(observableComplaintSet);
+            complaintTableView.refresh();
+        });
+
+        complaintTableView.setEditable(true);
+        complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        complaintDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        complaintVotersCol.setCellValueFactory(p -> {
+            ObjectProperty<Long> numVote = null;
+            try {
+                long num = p.getValue().getVoteCount();
+                numVote = new SimpleObjectProperty<>(num);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return numVote;
+            }
+        });
+        complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+        observableComplaintList.addAll(observableComplaintSet);
+        complaintTableView.getItems().setAll(observableComplaintList);
+        complaintTableView.refresh();
+
+    }
+
+    @FXML
+    void handleProfileUpload(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("อัพโหลดรูปหลักฐาน");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
+
+        if (Objects.nonNull(selectedFile)) {
+            this.evidence = selectedFile.toPath();
+            fileUpload.setText(this.evidence.getFileName().toString());
+        }
+    }
+
+
+    @FXML
+    private void handleCreateComplaintButton(){
+        sideBarPane.setDisable(true);
+        reportsUserPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        welcomeUserPane.setVisible(false);
+        settingUserPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(true);
+    }
+
+    @FXML
+    private void handleCreateButton(){
+        IssueService.getIssueManager().newComplaint(((ConsumerUser) StageManager.getStageManager().getContext()).getUID()
+                                                    ,complaintCategoryChoiceBox.getValue()
+                                                    ,complaintSubjectTextField.getText()
+                                                    ,complaintDescriptionTextArea.getText()
+                                                    ,evidence
+                                                    ,null
+        );
+
+        sideBarPane.setDisable(false);
+        handleClickCreateReport();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void handleChangeDetail() {
         String username = usernameTextField.getText();
@@ -164,6 +423,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(false);
     }
 
     public void handleClickCreateReport() {
@@ -193,6 +453,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(false);
     }
 
     public void handleClickSetting() {
@@ -222,6 +483,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(true);
         settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(false);
         setProfileLabel();
     }
 
@@ -278,6 +540,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(true);
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(false);
+        reportsPane.setVisible(false);
     }
 
     public void setMyPane() {
@@ -295,16 +558,7 @@ public class UserController implements Initializable {
         settingUserPane.setVisible(false);
         welcomeUserPane.setVisible(true);
         settingDetailChangeUserPane.setVisible(false);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initPane();
-        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
-            if (newValue.equals("user")) {
-                setMyPane();
-            }
-        });
+        reportsPane.setVisible(false);
     }
 
     public void handleBackUserPictureButton(){
@@ -320,6 +574,7 @@ public class UserController implements Initializable {
         welcomeUserPane.setVisible(false);
         settingUserPane.setVisible(false);
         settingDetailChangeUserPane.setVisible(true);
+        reportsPane.setVisible(false);
 
     }
 }

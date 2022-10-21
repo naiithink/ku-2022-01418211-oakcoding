@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -43,14 +47,14 @@
       </Pane>
       <Pane fx:id="sideBarPane" prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
-            <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1" />
+            <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Reports" textFill="#e0e0e1" />
             <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="39.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/flag.png" />
                </image>
             </ImageView>
             <Line endX="100.0" layoutX="107.0" layoutY="500.0" startX="-100.0" />
-            <Button fx:id="createReportButton" layoutX="6.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleClickCreateReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="  แจ้งเรื่อง" textFill="#e0e0e1" />
+            <Button fx:id="createReportButton" layoutX="15.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleClickCreateReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1" />
             <ImageView fx:id="createReportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/paper-plane.png" />
@@ -75,13 +79,13 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="settingButton" layoutX="13.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="การตั้งค่า" textFill="#e0e0e1" />
+            <Button fx:id="settingButton" layoutX="13.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Settings" textFill="#e0e0e1" />
             <ImageView fx:id="settingImageView" fitHeight="23.0" fitWidth="23.0" layoutX="46.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/settings.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="     แดชบอร์ด" textFill="#e0e0e1" />
+            <Button fx:id="dashboardButton" layoutX="15.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Dashboard" textFill="#e0e0e1" />
             <ImageView fx:id="dashboardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home.png" />
@@ -89,15 +93,37 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="createReportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
-            <Label layoutX="245.0" layoutY="48.0" text="หน้าแจ้งเรื่อง" textFill="WHITE" />
+            <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <TableView fx:id="complaintTableView" layoutX="48.0" layoutY="90.0" prefHeight="356.0" prefWidth="526.0">
+              <columns>
+                <TableColumn fx:id="complaintCategoryCol" prefWidth="102.0" text="Category" />
+                <TableColumn fx:id="complaintSubjectCol" prefWidth="89.0" text="Subject" />
+                  <TableColumn fx:id="complaintDescriptionCol" prefWidth="202.0" text="Description" />
+                  <TableColumn fx:id="complaintVotersCol" prefWidth="54.0" text="Voters" />
+                  <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
+              </columns>
+            </TableView>
+            <Button layoutX="48.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleCreateComplaintButton" styleClass="button-blue" text="Create Complaint" />
          </children>
       </Pane>
-      <Pane fx:id="reportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="reportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
 
-            <Label layoutX="292.0" layoutY="80.0" text="รีพอร์ต" textFill="WHITE" />
+            <Label layoutX="281.0" layoutY="40.0" text="Report" textFill="WHITE" />
+            <TableView fx:id="reportTableView" layoutX="81.0" layoutY="113.0" prefHeight="306.0" prefWidth="433.0">
+              <columns>
+                <TableColumn fx:id="reportTypeCol" prefWidth="95.0" text="Type" />
+                <TableColumn fx:id="reportDescriptionCol" prefWidth="187.0" text="Description" />
+                  <TableColumn fx:id="reportTargetCol" prefWidth="150.0" text="Target" />
+              </columns>
+            </TableView>
+            <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
+            <Button layoutX="82.0" layoutY="443.0" mnemonicParsing="false" styleClass="button-blue" text="Report " />
          </children>
       </Pane>
       <Pane fx:id="settingUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
@@ -166,7 +192,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane fx:id="welcomeUserPane111" layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -200,11 +226,35 @@
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
-            <ImageView fx:id="backPicture" fitHeight="42.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleBackUserPictureButton">
+            <ImageView fx:id="backPicture" fitHeight="42.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" onMouseClicked="#handleBackUserPictureButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="reportsPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Button layoutX="75.0" layoutY="455.0" mnemonicParsing="false" onAction="#handleCreateButton" styleClass="button-blue" text="Create" />
+            <TextArea fx:id="complaintDescriptionTextArea" layoutX="73.0" layoutY="272.0" prefHeight="163.0" prefWidth="414.0" />
+            <Label layoutX="73.0" layoutY="233.0" prefHeight="21.0" prefWidth="69.0" text="Description" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="complaintTypeChoiceBox" layoutX="75.0" layoutY="81.0" prefWidth="150.0" />
+            <Label layoutX="75.0" layoutY="49.0" text="ReportType" textFill="WHITE" />
+            <Label layoutX="312.0" layoutY="50.0" text="Category" textFill="WHITE" />
+            <ChoiceBox fx:id="complaintCategoryChoiceBox" layoutX="288.0" layoutY="81.0" prefWidth="150.0" />
+            <TextField fx:id="complaintSubjectTextField" layoutX="74.0" layoutY="165.0" />
+            <Label layoutX="75.0" layoutY="140.0" text="Subject" textFill="WHITE" />
+            <ImageView fx:id="uploadButton" fitHeight="42.0" fitWidth="40.0" layoutX="279.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleProfileUpload">
+               <image>
+                  <Image url="@../images/upload.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="277.0" layoutY="140.0" prefHeight="21.0" prefWidth="71.0" text="Evidence" textFill="WHITE" />
+            <Label fx:id="fileUpload" layoutX="337.0" layoutY="175.0" prefHeight="21.0" prefWidth="115.0" text="FileName" textFill="WHITE" />
          </children>
       </Pane>
     </children>

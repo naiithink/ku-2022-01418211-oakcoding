@@ -110,30 +110,30 @@ public class StaffController implements Initializable {
         settingStaffPane.setVisible(false);
     }
 
-    private void clearAllData(){
-        clearUsersPageData();
-        clearProfilePageData();
-        clearDepartmentPageData();
-        clearComplaintPageData();
-    }
-
-    private void clearUsersPageData(){
-
-        firstNameCol.setText("");
-        lastNameCol.setText("");
-        profileImageCol.setText("");
-        lastLoginCol.setText("");
-        observableUserSet = FXCollections.observableSet();
-        observableUserList = FXCollections.observableArrayList();
-        usersListTableView.getItems().clear();
-        usersListTableView.refresh();
- 
-     }
+//    private void clearAllData(){
+//        clearUsersPageData();
+//        clearProfilePageData();
+//        clearDepartmentPageData();
+//        clearComplaintPageData();
+//    }
+//
+//    private void clearUsersPageData(){
+//
+//        firstNameCol.setText("");
+//        lastNameCol.setText("");
+//        profileImageCol.setText("");
+//        lastLoginCol.setText("");
+//        observableUserSet = FXCollections.observableSet();
+//        observableUserList = FXCollections.observableArrayList();
+//        usersListTableView.getItems().clear();
+//        usersListTableView.refresh();
+//
+//     }
 
     @FXML
     public void handleClickLogoutButton(ActionEvent actionEvent) {
         try {
-            clearAllData();
+//            clearAllData();
             StageManager.getStageManager().setPage("authentication", null);
         } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
