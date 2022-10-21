@@ -156,6 +156,7 @@
                   <TableColumn fx:id="lastNameCol" prefWidth="174.2286376953125" text="LastName" />
                </columns>
             </TableView>
+            <Button layoutX="509.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleCreateStaffMember" prefHeight="30.0" prefWidth="122.0" styleClass="button-blue" text="Create Staff" />
          </children>
       </Pane>
       <Pane fx:id="complaintsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
@@ -391,7 +392,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -416,7 +417,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -449,13 +450,19 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ListView fx:id="usersStaffListVIew" layoutX="42.0" layoutY="213.0" prefHeight="172.0" prefWidth="367.0" stylesheets="@../css/list-view.css" />
                   <Label layoutX="47.0" layoutY="163.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Choose leaderStaff" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                   <Button layoutX="432.0" layoutY="367.0" mnemonicParsing="false" onAction="#handleSaveLeaderStaffButton" styleClass="button-blue" text="Save" />
+                  <TableView fx:id="chooseLeaderStaffTableView" layoutX="41.0" layoutY="209.0" prefHeight="189.0" prefWidth="378.0">
+                    <columns>
+                      <TableColumn fx:id="chooseLeaderProfileImageCol" prefWidth="127.0" text="ProfileImage" />
+                        <TableColumn fx:id="chooseFirstNameCol" prefWidth="119.0" text="FirstName" />
+                        <TableColumn fx:id="chooseLastNameCol" prefWidth="131.0" text="LastName" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />

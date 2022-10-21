@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
-        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
+        <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
             <children>
             <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
                <children>
@@ -121,7 +121,7 @@
             </Pane>
             </children>
         </Pane>
-      <Pane fx:id="addStaffRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
+      <Pane fx:id="addStaffRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
          <children>
             <Pane prefHeight="568.0" prefWidth="241.0" style="-fx-background-color: #2E3034;">
                <children>
@@ -173,7 +173,7 @@
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usernameStaffField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" visible="false" />
+                  <TextField fx:id="usernameStaffField" layoutX="17.0" layoutY="199.0" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #2A2C32;" styleClass="Text-field" stylesheets="@../css/style2.css" />
                   <Label layoutX="17.0" layoutY="174.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Username" textFill="#d0d0d0">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />

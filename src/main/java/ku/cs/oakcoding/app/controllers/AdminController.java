@@ -13,6 +13,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -280,15 +282,29 @@ public class AdminController implements Initializable {
      * */
 
     @FXML
+    private ListView<String> departmentStaffMembersListView = new ListView<>();
+
+    @FXML
     private Label departmentNameLabel;
 
     @FXML
     private Label leaderStaffLabel;
 
     @FXML
-    private ListView<String> departmentStaffMembersListView = new ListView<>();
+    private TableView<FullUserEntry> chooseLeaderStaffTableView;
 
-     private ObservableSet<String> staffMembers;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> chooseLeaderProfileImageCol;
+
+    @FXML
+    private TableColumn<FullUserEntry, String> chooseFirstNameCol;
+
+    @FXML
+    private TableColumn<FullUserEntry, String> chooseLastNameCol;
+
+     private ObservableSet<FullUserEntry> observableStaffMembersSet = FXCollections.observableSet();
+
+    private ObservableList<FullUserEntry> observableStaffMembersList = FXCollections.observableArrayList();
 
 
     /**
@@ -299,7 +315,7 @@ public class AdminController implements Initializable {
     @FXML
     private Pane departmentChangeLeaderPane;
 
-    private Department changeLeaderDepartment;
+    private String changeLeaderDepartmentID;
 
     @FXML
     private Label departmentNameLabel1;
@@ -381,6 +397,7 @@ public class AdminController implements Initializable {
             if (newValue.equals("admin")) {
                 initUsersTableView();
                 initDepartmentTableView();
+                initStaffTableView();
                 setMyPane();
                 handleSelectedUsersTableView();
                 handleSelectedComplaintChoiceBox();
@@ -403,8 +420,13 @@ public class AdminController implements Initializable {
          * @todo Read AdminUser instance
          */
 
+        ObservableSet<FullUserEntry> fullUserEntries = AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext());
+        fullUserEntries.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+            fullUserEntries.addAll(AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext()));
+            usersListTableView.refresh();
+        });
 
-        observableUserSet.addAll(AccountService.getUserManager().getAllUsersSetProperty(AccountService.getUserManager().login("_ROOT","admin")) /* dataSourceCSV.readData().getUsers() */);
+        observableUserSet.addAll(fullUserEntries); /* dataSourceCSV.readData().getUsers() */;
         usersListTableView.setEditable(true);
 
 
@@ -441,8 +463,9 @@ public class AdminController implements Initializable {
             }
         });
 
-        observableUserList.addAll(observableUserSet);
+        observableUserList.setAll(observableUserSet);
         usersListTableView.getItems().addAll(observableUserList);
+        usersListTableView.refresh();
 
     }
 
@@ -456,6 +479,15 @@ public class AdminController implements Initializable {
             }
         });
 
+    }
+    @FXML
+    private void handleCreateStaffMember(){
+        try {
+            clearUsersPageData();
+            StageManager.getStageManager().setPage("register", StageManager.getStageManager().getContext());
+        } catch (StageManager.PageNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clearUsersPageData(){
@@ -511,17 +543,27 @@ public class AdminController implements Initializable {
 
 
 
-    private void initDepartmentTableView(){
 
-        observableDepartmentSet.addAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
+    private void initDepartmentTableView(){
+        departmentsListTableView.getItems().clear();
+        ObservableSet<Department> departments = WorkspaceService.getWorkspaceManager().getAllDepartmentsSet();
+        departments.addListener((SetChangeListener<? super Department>) change -> {
+            departments.removeAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
+            departments.addAll(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet());
+            departmentsListTableView.refresh();
+        });
+        observableDepartmentSet.addAll(departments);
+
+
         departmentsListTableView.setEditable(true);
 
 
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
         leaderStaffCol.setCellValueFactory(new PropertyValueFactory<>("leaderStaffMemberID"));
 
-        observableDepartmentList.addAll(observableDepartmentSet);
+        observableDepartmentList.setAll(observableDepartmentSet);
         departmentsListTableView.getItems().addAll(observableDepartmentList);
+        departmentsListTableView.refresh();
 
 
 
@@ -558,13 +600,17 @@ public class AdminController implements Initializable {
             if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
                 int index = departmentsListTableView.getSelectionModel().getSelectedIndex();
                 Department department = departmentsListTableView.getItems().get(index);
-                showSelectedDepartment(department);
+                showSelectedDepartment(department.getDepartmentID());
             }
         });
 
     }
 
-    private void showSelectedDepartment(Department department){
+    private void initStaffMembersListView(String departmentID){
+        departmentStaffMembersListView.getItems().addAll(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getStaffMemberSetProperty());
+    }
+
+    private void showSelectedDepartment(String departmentID){
         welcomePane.setVisible(false);
         userPane.setVisible(false);
         complaintsPane.setVisible(false);
@@ -577,13 +623,51 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(true);
         departmentChangeLeaderPane.setVisible(false);
 
-        departmentNameLabel.setText(department.getDepartmentName());
-        leaderStaffLabel.setText(department.getLeaderStaffMemberID());
-        staffMembers = department.getStaffMemberSetProperty();
-        departmentStaffMembersListView.getItems().addAll(staffMembers);
-        changeLeaderDepartment = department;
+
+        initStaffMembersListView(departmentID);
 
 
+        departmentNameLabel.setText(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentName());
+        leaderStaffLabel.setText(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getLeaderStaffMemberID());
+        changeLeaderDepartmentID = WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentID();
+
+
+
+    }
+
+    private void initStaffTableView(){
+        chooseLeaderStaffTableView.getItems().clear();
+        ObservableSet<FullUserEntry> staffUserEntries = AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF);
+
+        staffUserEntries.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+            staffUserEntries.addAll(AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF));
+            chooseLeaderStaffTableView.refresh();
+        });
+
+        observableStaffMembersSet.addAll(staffUserEntries); /* dataSourceCSV.readData().getUsers() */;
+        chooseLeaderStaffTableView.setEditable(true);
+
+
+
+        chooseFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        chooseLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        chooseLeaderProfileImageCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+
+        observableStaffMembersList.setAll(observableStaffMembersSet);
+        chooseLeaderStaffTableView.getItems().addAll(observableStaffMembersList);
+        chooseLeaderStaffTableView.refresh();
 
     }
 
@@ -602,18 +686,42 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(true);
 
-        departmentNameLabel1.setText(changeLeaderDepartment.getDepartmentName());
-        leaderStaffLabel1.setText(changeLeaderDepartment.getLeaderStaffMemberID());
 
+        departmentNameLabel1.setText(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName());
+        leaderStaffLabel1.setText(AccountService.getUserManager().getUIDOf(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getLeaderStaffMemberID()));
+        handleSelectStaffLeader();
+    }
 
+    private void handleSelectStaffLeader(){
+        chooseLeaderStaffTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = chooseLeaderStaffTableView.getSelectionModel().getSelectedIndex();
+                WorkspaceService.getWorkspaceManager().assignLeaderStaffMember(changeLeaderDepartmentID, chooseLeaderStaffTableView.getItems().get(index).getUID());
+                sideBarPane.setDisable(false);
+                initDepartmentTableView();
+                handleClickOrganizations();
+            }
+        });
 
+    }
+
+    private void changeStaffLeader(String staffUID){
+        System.out.println(">>>>" + staffUID);
+        System.out.println(changeLeaderDepartmentID);
+        System.out.println(WorkspaceService.getWorkspaceManager().assignLeaderStaffMember(changeLeaderDepartmentID, staffUID));
+        System.out.println("write down");
+        departmentNameLabel1.setText(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName());
+        leaderStaffLabel1.setText(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentID());
 
 
     }
+
     @FXML
     private void handleSaveLeaderStaffButton(){
         sideBarPane.setDisable(false);
+        initDepartmentTableView();
         handleClickOrganizations();
+
 
     }
     private void clearDepartmentPageData(){
@@ -896,6 +1004,7 @@ public class AdminController implements Initializable {
         settingDetailPane.setVisible(false);
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        initStaffTableView();
 
     }
 

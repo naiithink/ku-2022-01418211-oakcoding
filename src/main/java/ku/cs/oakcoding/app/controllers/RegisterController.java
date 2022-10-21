@@ -25,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import ku.cs.oakcoding.app.helpers.hotspot.OakHotspot;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.models.users.UserManagerStatus;
@@ -154,7 +155,55 @@ public class RegisterController implements Initializable {
 
     @FXML
     void handleRegisterStaffButton(ActionEvent event) {
+        String userName = usernameStaffField.getText();
+        String firstName = firstnameStaffField.getText();
+        String lastName = lastnameStaffField.getText();
+        String password = passwordStaffField.getText();
+        String passwordConfirm = passwordConfirmStaffField.getText();
 
+
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+        UserManagerStatus status = AccountService.getUserManager().register((AdminUser) StageManager.getStageManager().getContext(), userName, Roles.STAFF, firstName, lastName, profileImagePath, password, passwordConfirm);
+        if (password.equals(passwordConfirm)) {
+                switch (status) {
+                    case SUCCESSFUL:
+                        alertInformation.setContentText(usernameStaffField.getText() + " คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
+                        alertInformation.showAndWait();
+                        usernameStaffField.clear();
+                        firstnameStaffField.clear();
+                        lastnameStaffField.clear();
+                        passwordStaffField.clear();
+                        passwordConfirmStaffField.clear();
+                        nameProfileUploadLabel.setText("");
+                        nameProfileUploadLabel.setVisible(false);
+                        try {
+                            StageManager.getStageManager().setPage("admin", StageManager.getStageManager().getContext());
+                        } catch (StageManager.PageNotFoundException e) {
+                            OakLogger.log(Level.SEVERE, "Page not found");
+                        }
+                        break;
+                    case INVALID_ACCESS:
+                        alertWarning.setContentText(" คุณไม่มีสิทธิ์เข้าถึงผู้ผู้แลระบบ");
+                        alertWarning.showAndWait();
+                        break;
+                    case USER_NAME_ALREADY_EXIST:
+                        alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้บัญชีผู้ใช้นี้มีคนใช้งานแล้ว");
+                        alertWarning.showAndWait();
+                        break;
+                    case USER_NAME_CONTAINS_UPPER_CASE:
+                        alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจากบัญชีต้องมีตัวเล็กทั้งหมด a-z");
+                        alertWarning.showAndWait();
+                        break;
+                }
+
+        }
+        if (!password.equals(passwordConfirm)){
+            alertWarning.setContentText(userNameField.getText() + " กรุณากรอกรหัสผ่านตรงกับยืนยันรหัสผ่าน");
+            alertWarning.showAndWait();
+        }
     }
 
     @FXML
@@ -214,15 +263,32 @@ public class RegisterController implements Initializable {
             alertWarning.showAndWait();
         }
     }
-    public void initPane() {
+    public void initUserRegisterPane() {
         userRegisterPane.setVisible(true);
         addOrganizationPane.setVisible(false);
         addStaffRegisterPane.setVisible(false);
         nameProfileUploadLabel.setVisible(false);
     }
 
+    public void initStaffRegisterPane(){
+        userRegisterPane.setVisible(false);
+        addOrganizationPane.setVisible(false);
+        addStaffRegisterPane.setVisible(true);
+        nameProfileUploadLabel.setVisible(false);
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initPane();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (oldValue.equals("authentication")) {
+                initUserRegisterPane();
+            }
+            else if (oldValue.equals("admin")) {
+                initStaffRegisterPane();
+            }
+        });
+
+
     }
 }
