@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.UserController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.UserController">
     <children>
       <Pane fx:id="welcomeUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
@@ -48,15 +48,15 @@
       </Pane>
       <Pane fx:id="sideBarPane" prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
-            <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Reports" textFill="#e0e0e1" />
-            <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="39.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="reportButton" disable="true" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Reports" textFill="#e0e0e1" visible="false" />
+            <ImageView fx:id="reportImageView" disable="true" fitHeight="23.0" fitWidth="23.0" layoutX="39.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/flag.png" />
                </image>
             </ImageView>
             <Line endX="100.0" layoutX="107.0" layoutY="500.0" startX="-100.0" />
-            <Button fx:id="createReportButton" layoutX="15.0" layoutY="181.0" mnemonicParsing="false" onAction="#handleClickCreateReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1" />
-            <ImageView fx:id="createReportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="createReportButton" layoutX="15.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleClickCreateReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1" />
+            <ImageView fx:id="createReportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/paper-plane.png" />
                </image>
