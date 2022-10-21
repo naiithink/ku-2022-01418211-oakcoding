@@ -200,6 +200,33 @@ public class UserController implements Initializable {
     @FXML
     private Pane detailComplaintPane;
 
+    @FXML
+    private Label reportAuthorLabel;
+
+    @FXML
+    private Label reportNumVoteLabel;
+
+    @FXML
+    private Label reportCategoryLabel;
+
+    @FXML
+    private Label reportSubjectLabel;
+
+    @FXML
+    private Label reportStatusLabel;
+
+    @FXML
+    private Label reportEvidenceLabel;
+
+    @FXML
+    private Label reportDescriptionLabel;
+
+    @FXML
+    private ChoiceBox<String> reportChooseChoiceBox;
+
+    private String complaintID;
+
+
 
 
 
@@ -208,6 +235,7 @@ public class UserController implements Initializable {
         initPane();
         initReportPageChoiceBox();
         initComplaintPageChoiceBox();
+        initDetailReportPageChoiceBox();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("user")) {
                 setMyPane();
@@ -316,6 +344,14 @@ public class UserController implements Initializable {
         });
     }
 
+    private void initDetailReportPageChoiceBox(){
+        List<String>reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("AUTHOR");
+        reportTypeChoiceBoxSelected.add("COMPLAINT");
+        reportChooseChoiceBox.setValue("AUTHOR");
+        reportChooseChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+    }
+
     private void showDetailComplaint(String complaintID){
         sideBarPane.setDisable(true);
         reportsUserPane.setVisible(false);
@@ -326,7 +362,31 @@ public class UserController implements Initializable {
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(true);
 
+        reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
+        reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
+        reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
+        reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
+        reportStatusLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getStatus() + "");
+        reportEvidenceLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getEvidencePath() + "");
+        reportDescriptionLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getDescription());
 
+        this.complaintID = complaintID;
+
+
+
+
+
+
+    }
+    @FXML
+    private void handleVoteButton(){
+        IssueService.getIssueManager().voteComplaint((ConsumerUser) StageManager.getStageManager().getContext(),this.complaintID);
+    }
+
+    @FXML
+    private void handleBackButton(){
+        sideBarPane.setDisable(false);
+        handleClickCreateReport();
     }
 
     @FXML
