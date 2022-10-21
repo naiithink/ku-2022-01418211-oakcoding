@@ -39,6 +39,8 @@ import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.*;
 import ku.cs.oakcoding.app.services.AccountService;
+import ku.cs.oakcoding.app.services.IssueManager;
+import ku.cs.oakcoding.app.services.IssueManagerStatus;
 import ku.cs.oakcoding.app.services.IssueService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
@@ -262,9 +264,11 @@ public class UserController implements Initializable {
 
     private void initComplaintTableView(){
 
-        observableComplaintSet.addAll(IssueService.getIssueManager().getAllComplaintSet());
-        observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
-            observableComplaintList.addAll(observableComplaintSet);
+         IssueService.getIssueManager().getAllComplaintSet().addListener((SetChangeListener<? super Complaint>) change -> {
+            System.out.println(">>>> listener");
+            observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+            observableComplaintList.setAll(observableComplaintSet);
+            complaintTableView.getItems().setAll(observableComplaintList);
             complaintTableView.refresh();
         });
 
@@ -286,7 +290,7 @@ public class UserController implements Initializable {
         complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 
-        observableComplaintList.addAll(observableComplaintSet);
+        observableComplaintList.setAll(observableComplaintSet);
         complaintTableView.getItems().setAll(observableComplaintList);
         complaintTableView.refresh();
 
@@ -322,13 +326,32 @@ public class UserController implements Initializable {
 
     @FXML
     private void handleCreateButton(){
-        IssueService.getIssueManager().newComplaint(((ConsumerUser) StageManager.getStageManager().getContext()).getUID()
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+        IssueManagerStatus status =  IssueService.getIssueManager().newComplaint(((ConsumerUser) StageManager.getStageManager().getContext()).getUID()
                                                     ,complaintCategoryChoiceBox.getValue()
                                                     ,complaintSubjectTextField.getText()
                                                     ,complaintDescriptionTextArea.getText()
                                                     ,evidence
                                                     ,null
         );
+
+        switch (status){
+            case CATEGORY_NOT_FOUND:
+                alertWarning.setContentText("ไม่พบ CATEGORY กรุณาตรวจสอบใหม่อีกครั้ง");
+                alertWarning.showAndWait();
+                break;
+            case EVIDENCE_PATH_DOES_NOT_EXIST:
+                alertWarning.setContentText("กรุณาอัพโหลดรูปภาพ");
+                alertWarning.showAndWait();
+                break;
+            case SUCCESS:
+                alertWarning.setContentText("คุณได้ทำการสร้างเรียบร้อย");
+                alertWarning.showAndWait();
+                break;
+        }
 
         sideBarPane.setDisable(false);
         handleClickCreateReport();
