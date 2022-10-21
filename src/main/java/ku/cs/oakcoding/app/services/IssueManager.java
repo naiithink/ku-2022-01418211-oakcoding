@@ -245,6 +245,10 @@ public class IssueManager {
         return IssueManagerStatus.SUCCESS;
     }
 
+    public ObservableSet<String> getAllCategorySet() {
+        return this.complaintCategorySet;
+    }
+
     public boolean complaintExist(String complaintID) {
         return this.allComplaintTable.containsKey(complaintID);
     }
