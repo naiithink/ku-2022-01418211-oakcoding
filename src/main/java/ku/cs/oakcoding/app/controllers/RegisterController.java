@@ -118,7 +118,7 @@ public class RegisterController implements Initializable {
     @FXML
     void handleBackButtonGoToAdminPage(MouseEvent event) {
         try {
-            StageManager.getStageManager().setPage("admin", null);
+            StageManager.getStageManager().setPage("admin", StageManager.getStageManager().getContext());
         } catch (StageManager.PageNotFoundException e) {
             OakLogger.log(Level.SEVERE, "Page not found");
         }
