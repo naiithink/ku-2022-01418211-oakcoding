@@ -249,6 +249,18 @@ public class IssueManager {
         return this.complaintCategorySet;
     }
 
+    public ObservableSet<Complaint> getAllComplaintSet() {
+        ObservableSet<Complaint> res = FXCollections.observableSet();
+
+        Iterator<Entry<String, Complaint>> allComplaints = this.allComplaintTable.entrySet().iterator();
+
+        while (allComplaints.hasNext()) {
+            res.add(allComplaints.next().getValue());
+        }
+
+        return res;
+    }
+
     public boolean complaintExist(String complaintID) {
         return this.allComplaintTable.containsKey(complaintID);
     }
