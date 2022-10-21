@@ -458,7 +458,9 @@ public class AdminController implements Initializable {
 
         observableReportSet.addAll(IssueService.getIssueManager().getAllReportsSet());
         observableReportSet.addListener((SetChangeListener<? super Report>) change -> {
-            observableReportList.addAll(observableReportSet);
+            observableReportList.clear();
+            observableReportList.setAll(observableReportSet);
+            reportTableView.getItems().setAll(observableReportList);
             reportTableView.refresh();
         });
 
@@ -478,7 +480,7 @@ public class AdminController implements Initializable {
             return res;
         });
 
-        observableReportList.addAll(observableReportSet);
+        observableReportList.setAll(observableReportSet);
         reportTableView.getItems().setAll(observableReportList);
         reportTableView.refresh();
 
@@ -539,7 +541,7 @@ public class AdminController implements Initializable {
 
         observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
         observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
-
+            observableComplaintList.clear();
             observableComplaintList.setAll(observableComplaintSet);
             complaintTableView.getItems().setAll(observableComplaintList);
             complaintTableView.refresh();
@@ -635,9 +637,17 @@ public class AdminController implements Initializable {
     }
 
     private void clearAllData(){
-        clearUsersPageData();
-        clearProfilePageData();
-        clearDepartmentPageData();
+        usersListTableView.getItems().clear();
+        complaintTableView.getItems().clear();
+        chooseLeaderStaffTableView.getItems().clear();
+        departmentsListTableView.getItems().clear();
+        reportTableView.getItems().clear();
+
+        usersListTableView.refresh();
+        complaintTableView.refresh();
+        chooseLeaderStaffTableView.refresh();
+        departmentsListTableView.refresh();
+        reportTableView.refresh();
     }
 
     /**
@@ -693,7 +703,7 @@ public class AdminController implements Initializable {
 
         observableUserSet = AccountService.getUserManager().getAllUsersSetProperty((AdminUser) StageManager.getStageManager().getContext());
         observableUserSet.addListener((SetChangeListener<? super FullUserEntry>) change -> {
-
+            observableUserList.clear();
             observableUserList.setAll(observableUserSet);
             usersListTableView.getItems().setAll(observableUserList);
             usersListTableView.refresh();
@@ -733,7 +743,7 @@ public class AdminController implements Initializable {
         });
 
         observableUserList.setAll(observableUserSet);
-        usersListTableView.getItems().addAll(observableUserList);
+        usersListTableView.getItems().setAll(observableUserList);
         usersListTableView.refresh();
 
     }
@@ -752,25 +762,12 @@ public class AdminController implements Initializable {
     @FXML
     private void handleCreateStaffMember(){
         try {
-            clearUsersPageData();
             StageManager.getStageManager().setPage("register", StageManager.getStageManager().getContext());
         } catch (StageManager.PageNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void clearUsersPageData(){
-
-       firstNameCol.setText("");
-       lastNameCol.setText("");
-       profileImageCol.setText("");
-       lastLoginCol.setText("");
-       observableUserSet = FXCollections.observableSet();
-       observableUserList = FXCollections.observableArrayList();
-       usersListTableView.getItems().clear();
-       usersListTableView.refresh();
-
-    }
 
     private void showSelectedUser(FullUserEntry userEntry){
         sideBarPane.setDisable(true);
@@ -818,6 +815,7 @@ public class AdminController implements Initializable {
 
         observableDepartmentSet = WorkspaceService.getWorkspaceManager().getAllDepartmentsSet();
         observableDepartmentSet.addListener((SetChangeListener<? super Department>) change -> {
+            observableDepartmentList.clear();
             observableDepartmentList.setAll(observableDepartmentSet);
             departmentsListTableView.getItems().setAll(observableDepartmentList);
             departmentsListTableView.refresh();
@@ -831,7 +829,7 @@ public class AdminController implements Initializable {
         leaderStaffCol.setCellValueFactory(new PropertyValueFactory<>("leaderStaffMemberID"));
 
         observableDepartmentList.setAll(observableDepartmentSet);
-        departmentsListTableView.getItems().addAll(observableDepartmentList);
+        departmentsListTableView.getItems().setAll(observableDepartmentList);
         departmentsListTableView.refresh();
 
 
@@ -853,7 +851,6 @@ public class AdminController implements Initializable {
         else{
             alertWarning.setContentText("คุณได้ทำการสมัครองค์กรเป็นที่เรียบร้อยแล้ว" + "'");
             alertWarning.showAndWait();
-            clearDepartmentPageData();
             initDepartmentTableView();
             departmentsListTableView.refresh();
 
@@ -907,6 +904,7 @@ public class AdminController implements Initializable {
 
         observableStaffMembersSet = AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF);
         observableStaffMembersSet.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+            observableStaffMembersList.clear();
             observableStaffMembersList.setAll(observableStaffMembersSet);
             chooseLeaderStaffTableView.getItems().setAll(observableStaffMembersList);
             chooseLeaderStaffTableView.refresh();
@@ -930,7 +928,7 @@ public class AdminController implements Initializable {
 
 
         observableStaffMembersList.setAll(observableStaffMembersSet);
-        chooseLeaderStaffTableView.getItems().addAll(observableStaffMembersList);
+        chooseLeaderStaffTableView.getItems().setAll(observableStaffMembersList);
         chooseLeaderStaffTableView.refresh();
 
     }
@@ -997,13 +995,7 @@ public class AdminController implements Initializable {
 
 
     }
-    private void clearDepartmentPageData(){
-        observableDepartmentSet.clear();
-        observableDepartmentList.clear();
-        departmentsListTableView.getItems().clear();
-        departmentsListTableView.refresh();
 
-    }
 
 
     /**
@@ -1021,14 +1013,6 @@ public class AdminController implements Initializable {
         picProfileSettingLabel.setImage(image);
 
 
-    }
-
-    private void clearProfilePageData(){
-        userNameLabel.setText("");
-        statusAccountLabel.setText("");
-        firstNameLabelAccount.setText("");
-        lastNameLabel.setText("");
-        picProfileSettingLabel = new ImageView();
     }
 
     /**
