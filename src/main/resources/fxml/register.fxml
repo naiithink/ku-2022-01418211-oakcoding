@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
         <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css" visible="false">
             <children>
@@ -42,18 +42,18 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                   <Button fx:id="registerUserButton" layoutX="229.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleRegisterUserButton" prefHeight="26.0" prefWidth="109.0" style="-fx-cursor: hand;" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                   <Button fx:id="registerUserButton" layoutX="229.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleRegisterUserButton" prefHeight="26.0" prefWidth="109.0" style="-fx-cursor: hand;" styleClass="button-red" text="Register" textFill="WHITE">
 
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="42.0" layoutY="429.0" prefHeight="23.0" prefWidth="158.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="ของมหาวิทยาลัยเกษศาสตร์" textFill="WHITE">
+                  <Label layoutX="42.0" layoutY="429.0" prefHeight="23.0" prefWidth="158.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="of Kasetsart University" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="42.0" layoutY="412.0" prefHeight="23.0" prefWidth="193.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="กดที่ปุ่มนี้เพื่อยืนยันว่าคุณเป็นนิสิต" textFill="WHITE">
+                  <Label layoutX="42.0" layoutY="412.0" prefHeight="23.0" prefWidth="193.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="I am a student" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" style="-fx-cursor: hand;" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" style="-fx-cursor: hand;" stylesheets="@../css/style.css" text="Upload Profile Image" textFill="#17abff">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -72,7 +72,7 @@
                         <String fx:value="hover" />
                      </styleClass>
                   </Label>
-                      <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password Confirm" textFill="#d0d0d0">
+                      <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Confirm Password" textFill="#d0d0d0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -100,7 +100,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                      <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สมัครสมาชิก" textFill="WHITE">
+                      <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="Register an Account" textFill="WHITE">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -149,12 +149,12 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                  <Button fx:id="registerStaffButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterStaffButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                  <Button fx:id="registerStaffButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterStaffButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="Register" textFill="WHITE">
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                  <Label layoutX="53.0" layoutY="354.0" onMouseClicked="#handleProfileUpload" prefHeight="24.0" prefWidth="131.0" stylesheets="@../css/style.css" text="Upload Profile Image" textFill="#17abff">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -163,7 +163,7 @@
                         <String fx:value="hover" />
                      </styleClass>
                   </Label>
-                  <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Password Confirm" textFill="#d0d0d0">
+                  <Label layoutX="16.0" layoutY="272.0" prefHeight="25.0" prefWidth="135.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Confirm Password" textFill="#d0d0d0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -191,7 +191,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="เพิ่มจำนวนเจ้าหน้าที่" textFill="WHITE">
+                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="Register New Staff" textFill="WHITE">
                      <font>
                         <Font name="Kanit" size="21.0" />
                      </font>
@@ -203,12 +203,12 @@
                         <Image url="@../images/upload.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="nameProfileUploadStaffLabel" layoutX="172.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AliceProfileStaff.png" textFill="#da9e9f">
+                  <Label fx:id="nameProfileUploadStaffLabel" layoutX="204.0" layoutY="353.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="AliceProfileStaff.png" textFill="#da9e9f">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="messageWhenRegisterStaffLabel" layoutX="179.0" layoutY="496.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการเพิ่มเจ้าหน้าที่เรียบร้อย" textFill="#da9e9f">
+                  <Label fx:id="messageWhenRegisterStaffLabel" layoutX="163.0" layoutY="496.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="New staff account has been registered" textFill="#da9e9f">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
