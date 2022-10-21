@@ -544,6 +544,10 @@ public class UserController implements Initializable {
         }
     }
 
+    /**
+     * 
+     *  
+     
     public void handleClickReport() {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
         reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
@@ -574,6 +578,8 @@ public class UserController implements Initializable {
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
     }
+
+    */
 
     public void handleClickCreateReport() {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
