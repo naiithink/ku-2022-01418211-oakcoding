@@ -3,7 +3,9 @@ package ku.cs.oakcoding.app.services;
 import java.io.FileNotFoundException;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
@@ -180,6 +182,22 @@ public class WorkspaceManager {
     public boolean isUniqueDepartmentName(String depName) {
         return countDepartmentWithName(depName) < 2 ? true
                                                     : false;
+    }
+
+    public String getDepartmentOfStaff(String staffUID) {
+        String res = null;
+        Iterator<Entry<String, AutoUpdateCSV>> departmentEntries = this.departmentMemberFiles.entrySet().iterator();
+
+        while (departmentEntries.hasNext()) {
+            Entry<String, AutoUpdateCSV> departmentEntry = departmentEntries.next();
+
+            if (departmentEntry.getValue().getDataWhere(staffUID, "DATE").isEmpty())
+                continue;
+            else
+                res = departmentEntry.getKey();
+        }
+
+        return res;
     }
 
     public Department getDepartment(String departmentID) {
