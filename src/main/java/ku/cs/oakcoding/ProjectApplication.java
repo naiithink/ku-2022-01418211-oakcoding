@@ -10,13 +10,17 @@ package ku.cs.oakcoding;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.NotDirectoryException;
 import java.util.logging.Level;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppConfigs;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
@@ -34,8 +38,12 @@ import ku.cs.oakcoding.app.services.stages.StageManager.PageNotFoundException;
 
 public class ProjectApplication extends Application {
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+        this.primaryStage = primaryStage;
 
         OakLogger.log(Level.INFO, "App is loading...");
 
@@ -100,25 +108,34 @@ public class ProjectApplication extends Application {
 
     private MenuBar newMenuBar() {
         MenuItem oakCodingAboutMenuItem = new MenuItem("OakCoding");
-        MenuItem contactUsAboutMenuItem = new MenuItem("ติดต่อเรา");
+
+        oakCodingAboutMenuItem.setOnAction(event -> {
+            Scene creatorScene = null;
+
+            try {
+                creatorScene = new Scene(FXMLLoader.load(OakResourcePrefix.getPrefix().resolve("fxml").resolve("creator.fxml").toUri().toURL()), 600.0, 400.0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Stage creatorStage = new Stage();
+    
+            creatorStage.initModality(Modality.WINDOW_MODAL);
+            creatorStage.setScene(creatorScene);
+            creatorStage.initOwner(this.primaryStage);
+
+            creatorStage.show();
+        });
 
         Menu aboutMenu = new Menu("เกี่ยวกับ");
-        aboutMenu.getItems().addAll(oakCodingAboutMenuItem,
-                                    contactUsAboutMenuItem);
-
-
-        MenuItem loginAccountMenuItem = new MenuItem("ลงชื่อเข้าใช้");
-
-        Menu accountMenu = new Menu("บัญชี");
-        accountMenu.getItems().addAll(loginAccountMenuItem);
-
+        aboutMenu.getItems().addAll(oakCodingAboutMenuItem);
 
         MenuItem howTosHelpMenuItem = new MenuItem("วิธีใช้");
 
         Menu helpMenu = new Menu("ช่วยเหลือ");
         helpMenu.getItems().addAll(howTosHelpMenuItem);
 
-        return new MenuBar(aboutMenu, accountMenu, helpMenu);
+        return new MenuBar(aboutMenu, helpMenu);
     }
 
     public static void main(String[] args) {

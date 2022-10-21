@@ -8,9 +8,6 @@
 
 package ku.cs.oakcoding.app.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import ku.cs.oakcoding.app.services.stages.StageManager;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class StaffController implements Initializable {
     @FXML
@@ -109,8 +110,34 @@ public class StaffController implements Initializable {
         settingStaffPane.setVisible(false);
     }
 
+    private void clearAllData(){
+        clearUsersPageData();
+        clearProfilePageData();
+        clearDepartmentPageData();
+        clearComplaintPageData();
+    }
 
+    private void clearUsersPageData(){
+
+        firstNameCol.setText("");
+        lastNameCol.setText("");
+        profileImageCol.setText("");
+        lastLoginCol.setText("");
+        observableUserSet = FXCollections.observableSet();
+        observableUserList = FXCollections.observableArrayList();
+        usersListTableView.getItems().clear();
+        usersListTableView.refresh();
+ 
+     }
+
+    @FXML
     public void handleClickLogoutButton(ActionEvent actionEvent) {
+        try {
+            clearAllData();
+            StageManager.getStageManager().setPage("authentication", null);
+        } catch (StageManager.PageNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleClickSetting(ActionEvent actionEvent) {

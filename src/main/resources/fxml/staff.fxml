@@ -9,13 +9,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.StaffController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.StaffController">
     <children>
       <Pane fx:id="welcomeStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
                <children>
-                  <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้องรับสู่" textFill="#0a141f" />
+                  <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้อนรับสู่" textFill="#0a141f" />
                   <Label layoutX="165.0" layoutY="64.0" styleClass="text-regular" text="ระบบการร้องเรียน" />
                   <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="363.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -41,7 +41,7 @@
       </Pane>
       <Pane prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
-            <Button fx:id="reportButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="รายงาน" textFill="#e0e0e1">
+            <Button fx:id="reportButton" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1">
                <font>
                   <Font name="SukhumvitSet-Thin" size="13.0" />
                </font></Button>
@@ -70,13 +70,13 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="settingButton" layoutX="13.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="การตั้งค่า" textFill="#e0e0e1" />
+            <Button fx:id="settingButton" layoutX="13.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Settings" textFill="#e0e0e1" />
             <ImageView fx:id="settingImageView" fitHeight="23.0" fitWidth="23.0" layoutX="46.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/settings.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="     แดชบอร์ด" textFill="#e0e0e1" />
+            <Button fx:id="dashboardButton" layoutX="14.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" styleClass="button-third-dashboard-nav" text="Dashboard" textFill="#e0e0e1" />
             <ImageView fx:id="dashboardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="40.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home.png" />
@@ -84,12 +84,12 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="reportsUserOfStaffPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="reportsUserOfStaffPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <Label layoutX="245.0" layoutY="48.0" text="หน้าแจ้งเรื่อง" textFill="WHITE" />
+            <Label layoutX="245.0" layoutY="48.0" text="Complaints" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="settingStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="settingStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
