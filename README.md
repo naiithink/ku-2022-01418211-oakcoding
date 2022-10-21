@@ -10,30 +10,19 @@
 
 ### เริ่มต้น
 
-1. **Executable File**
+1. **Clone this Repository**
 
-    วิธีได้มาซึ่ง executable file ของ application
+        $ git clone https://github.com/CS211-651/project211-oakcoding.git
 
-    **วิธีที่ 1** – Build ด้วย Maven (แนะนำ[^1])  
+1. **Change Directory into the Project Directory**
 
-        $ mvn clean package
-    **วิธีที่ 2** – Clone git repository นี้[^2]  
+        $ cd project211-oakcoding
 
-    Executable file และ/หรือ script file ที่เกี่ยวของกับการ execute application ของ project นี้ถูกเก็บอยู่ที่ [`submit/app/`](submit/app/) ของ repository นี้
+1. **Execute the Application**
 
-2. **Execute the Application**[^1] [^2]
+        $ sh run.sh
 
-    เริ่มการทำงานของ application
-
-    **UNIX** – macOS, GNU/Linux  
-
-        $ java -jar "$(ls submit/app/*shaded.jar)"
-
-    **Windows (PowerShell)**
-
-        > .\submit\app\*shaded.jar
-
-</br >
+<br />
 
 ### ความก้าวหน้าของระบบ
 
@@ -42,6 +31,25 @@
 | 1    | 2022-08-11 | ร่าง User Interface, mockup หน้า Sign In ของแอปพลิเคชัน, patch FXRouter, เพิ่ม custom font ผ่าน CSS, ทดลอง implement module สำหรับอ่าน configuration file |
 | 2    | 2022-09-08 | Class สำหรับอ่าน/เขียนข้อมูลลงบนไฟล์, UI improvements, configuration class, message digest class |
 | 3    | 2022-09-30 | UI design, FXML controller linking, dynamic database, StageManager (window management) |
+| 4    | 2022-10-21 | UI implementation, User, Department, and Issue system |
+
+</br >
+
+### คำอธิบาย Directory
+
+```
+    data/               ->      Data source directory (created later by the app itself)
+    docs/               ->      Documentation resources such as images and diagrams
+    src/main/           ->      Application source code and resources
+        java/           ->      Application module root
+        resources/      ->      Application resources
+            css/        ->      Cascading Stylesheets
+            default/    ->      Default resource
+            fonts/      ->      Font resources
+            fxml/       ->      FXML resources
+            images/     ->      Images and icons
+            indices/    ->      StageManager index file for automatic FXML loading and linking
+```
 
 </br >
 
