@@ -8,6 +8,7 @@
 
 package ku.cs.oakcoding.app.controllers;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -31,7 +32,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 
@@ -41,6 +44,7 @@ import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.users.AdminUser;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.*;
@@ -297,6 +301,43 @@ public class AdminController implements Initializable {
 
     /**
      *
+     * Detail Complaint page
+     */
+
+    @FXML
+    private Pane detailComplaintPane;
+
+    @FXML
+    private Label reportAuthorLabel;
+
+    @FXML
+    private Label reportNumVoteLabel;
+
+    @FXML
+    private Label reportCategoryLabel;
+
+    @FXML
+    private Label reportSubjectLabel;
+
+    @FXML
+    private Label reportStatusLabel;
+
+    @FXML
+    private Label reportEvidenceLabel;
+
+    @FXML
+    private Label reportDescriptionLabel;
+
+    @FXML
+    private ChoiceBox<String> reportChooseChoiceBox;
+
+    private String complaintID;
+
+    @FXML
+    private TextField reportAddDescriptionLabel;
+
+    /**
+     *
      *
      * Department Detail Page
      *
@@ -350,6 +391,9 @@ public class AdminController implements Initializable {
      *  report pane
      *
      */
+    @FXML
+    private Pane reportsPane;
+
 
     @FXML
     private TableView<Report> reportTableView;
@@ -368,6 +412,100 @@ public class AdminController implements Initializable {
 
     private ObservableSet<Report> observableReportSet = FXCollections.observableSet();
     private ObservableList<Report> observableReportList = FXCollections.observableArrayList() ;
+
+    /**
+     * methods zones
+     */
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        initPane();
+        initReportPageChoiceBox();
+        initComplaintPageChoiceBox();
+        initDetailReportPageChoiceBox();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("admin")) {
+                initUsersTableView();
+                initDepartmentTableView();
+                initStaffTableView();
+                initComplaintTableView();
+                setMyPane();
+                initReportTableView();
+                handleSelectedUsersTableView();
+                handleSelectedDepartmentTableView();
+            }
+        });
+    }
+
+    @FXML
+    private void handleCreateButton(){
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+        IssueManagerStatus status =  IssueService.getIssueManager().newComplaint(((ConsumerUser) StageManager.getStageManager().getContext()).getUID()
+                ,complaintCategoryChoiceBox.getValue()
+                ,complaintSubjectTextField.getText()
+                ,complaintDescriptionTextArea.getText()
+                ,evidence
+                ,null
+        );
+
+        switch (status){
+            case CATEGORY_NOT_FOUND:
+                alertWarning.setContentText("ไม่พบ CATEGORY กรุณาตรวจสอบใหม่อีกครั้ง");
+                alertWarning.showAndWait();
+                break;
+            case EVIDENCE_PATH_DOES_NOT_EXIST:
+                alertWarning.setContentText("กรุณาอัพโหลดรูปภาพ");
+                alertWarning.showAndWait();
+                break;
+            case SUCCESS:
+                alertWarning.setContentText("คุณได้ทำการสร้างเรียบร้อย");
+                alertWarning.showAndWait();
+                break;
+        }
+
+        sideBarPane.setDisable(false);
+        handleClickComplaints();
+
+    }
+
+    private void initComplaintPageChoiceBox(){
+        List<String> reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("BEHAVIOR");
+        reportTypeChoiceBoxSelected.add("CONTENT");
+
+        complaintCategoryChoiceBox.setItems(FXCollections.observableArrayList(IssueService.getIssueManager().getAllCategorySet()));
+
+
+    }
+
+    @FXML
+    void handleProfileUpload(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("อัพโหลดรูปหลักฐาน");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
+
+        if (Objects.nonNull(selectedFile)) {
+            this.evidence = selectedFile.toPath();
+            fileUpload.setText(this.evidence.getFileName().toString());
+        }
+    }
+
+    private void initDetailReportPageChoiceBox(){
+        List<String>reportTypeChoiceBoxSelected = new ArrayList<>();
+        reportTypeChoiceBoxSelected.add("AUTHOR");
+        reportTypeChoiceBoxSelected.add("COMPLAINT");
+        reportChooseChoiceBox.setValue("AUTHOR");
+        reportChooseChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+    }
 
     private void initReportTableView(){
 
@@ -409,6 +547,39 @@ public class AdminController implements Initializable {
 
     }
 
+    private void initComplaintTableView(){
+
+        observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+        observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
+
+            observableComplaintList.setAll(observableComplaintSet);
+            complaintTableView.getItems().setAll(observableComplaintList);
+            complaintTableView.refresh();
+        });
+
+        complaintTableView.setEditable(true);
+        complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        complaintDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        complaintVotersCol.setCellValueFactory(p -> {
+            ObjectProperty<Long> numVote = null;
+            try {
+                long num = p.getValue().getVoteCount();
+                numVote = new SimpleObjectProperty<>(num);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return numVote;
+            }
+        });
+        complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+        observableComplaintList.setAll(observableComplaintSet);
+        complaintTableView.getItems().setAll(observableComplaintList);
+        complaintTableView.refresh();
+
+    }
 
 
 
@@ -416,9 +587,6 @@ public class AdminController implements Initializable {
 
 
 
-    /**
-     * methods zones
-     */
 
     /**
      * Admin Setting
@@ -433,10 +601,9 @@ public class AdminController implements Initializable {
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
-        personalTableView.setVisible(false);
-        surroundingTableView.setVisible(false);
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(true);
+        reportsPane.setVisible(false);
 
     }
 
@@ -446,7 +613,6 @@ public class AdminController implements Initializable {
         handleClickSetting();
 
     }
-
     public void handleChangePassword(ActionEvent actionEvent) {
         String username = usernameTextField.getText();
         String oldPassword = oldPasswordField.getText();
@@ -479,32 +645,97 @@ public class AdminController implements Initializable {
         }
 
     }
-    @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-        initPane();
-        initComplaintChoiceBox();
-        initReportPageChoiceBox();
-        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
-            if (newValue.equals("admin")) {
-                initUsersTableView();
-                initDepartmentTableView();
-                initStaffTableView();
-                setMyPane();
-                initReportTableView();
-                handleSelectedUsersTableView();
-                handleSelectedComplaintChoiceBox();
-                handleSelectedDepartmentTableView();
-            }
-        });
-    }
 
     private void clearAllData(){
         clearUsersPageData();
         clearProfilePageData();
         clearDepartmentPageData();
-        clearComplaintPageData();
+    }
+
+    /**
+     *
+     *
+     * Complaint page
+     */
+
+    @FXML
+    private void handleCreateComplaintButton(){
+        sideBarPane.setDisable(true);
+        welcomePane.setVisible(false);
+        userPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        organizationsPane.setVisible(false);
+        reportsUserPane.setVisible(false);
+        requestPane.setVisible(false);
+        settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
+        reportsUserPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        settingDetailPane.setVisible(false);
+        departmentDetailPane.setVisible(false);
+        departmentChangeLeaderPane.setVisible(false);
+        reportsPane.setVisible(true);
+    }
+
+
+    @FXML
+    private void handleReportComplaint(){
+        String discrip = reportAddDescriptionLabel.getText();
+        if (Objects.isNull(discrip))
+            discrip = "";
+        if (reportChooseChoiceBox.getValue().equals("AUTHOR")){
+            IssueService.getIssueManager().newReport(ReportType.BEHAVIOR,((ConsumerUser)StageManager.getStageManager().getContext()).getUID(),
+                    IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID(),discrip);
+            reportTableView.refresh();
+        }
+        else if (reportChooseChoiceBox.getValue().equals("COMPLAINT")){
+            IssueService.getIssueManager().newReport(ReportType.CONTENT,((ConsumerUser)StageManager.getStageManager().getContext()).getUID(),complaintID,discrip);
+            reportTableView.refresh();
+        }
+
+    }
+
+    @FXML
+    private void handleVoteButton(){
+        IssueService.getIssueManager().voteComplaint((ConsumerUser) StageManager.getStageManager().getContext(),this.complaintID);
+        showDetailComplaint(this.complaintID);
+    }
+
+    @FXML
+    private void handleBackButton(){
+        sideBarPane.setDisable(false);
+        handleClickComplaints();
+        complaintTableView.refresh();
+    }
+
+    private void showDetailComplaint(String complaintID){
+        sideBarPane.setDisable(true);
+        welcomePane.setVisible(false);
+        userPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        organizationsPane.setVisible(false);
+        reportsUserPane.setVisible(false);
+        requestPane.setVisible(false);
+        settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
+        reportsUserPane.setVisible(false);
+        settingDetailPane.setVisible(false);
+        departmentDetailPane.setVisible(false);
+        departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(true);
+        reportsPane.setVisible(false);
+
+        reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
+        reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
+        reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
+        reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
+        reportStatusLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getStatus() + "");
+        reportEvidenceLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getEvidencePath() + "");
+        reportDescriptionLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getDescription());
+
+        this.complaintID = complaintID;
+
+
     }
 
     private void initUsersTableView() {
@@ -609,6 +840,8 @@ public class AdminController implements Initializable {
         settingDetailPane.setVisible(false);
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
         detailUserNameLabel.setText(userEntry.getUserName());
         detailUserStatusAccountLabel.setText(userEntry.getRole().getPrettyPrinted());
@@ -713,6 +946,7 @@ public class AdminController implements Initializable {
         settingDetailPane.setVisible(false);
         departmentDetailPane.setVisible(true);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
 
 
         initStaffMembersListView(departmentID);
@@ -850,36 +1084,9 @@ public class AdminController implements Initializable {
      */
 
 
-    public void initComplaintChoiceBox(){
-        String [] complaintChoiceBoxSelected = {"Personnel","Surrounding"};
-        complaintChoiceBox.setValue("Personnel");
-        complaintChoiceBox.getItems().addAll(complaintChoiceBoxSelected);
-    }
 
-    private void handleSelectedComplaintChoiceBox(){
-        complaintChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (newValue.equals("Personnel")){
-                    personalTableView.setVisible(true);
-                    surroundingTableView.setVisible(false);
-                }
-                else if (newValue.equals("Surrounding")) {
-                    personalTableView.setVisible(false);
-                    surroundingTableView.setVisible(true);
-                }
 
-            }
-        });
-    }
 
-    private void clearComplaintPageData(){
-        complaintChoiceBox.setValue("Personnel");
-        personalTableView.getItems().clear();
-        personalTableView.refresh();
-        surroundingTableView.getItems().clear();
-        surroundingTableView.refresh();
-    }
 
 
 
@@ -943,11 +1150,11 @@ public class AdminController implements Initializable {
         requestPane.setVisible(false);
         settingPane.setVisible(false);
         userDetailPane.setVisible(false);
-        personalTableView.setVisible(true);
-        surroundingTableView.setVisible(false);
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
 
@@ -1010,6 +1217,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
 
@@ -1088,6 +1297,8 @@ public class AdminController implements Initializable {
         settingDetailPane.setVisible(false);
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
         initStaffTableView();
 
     }
@@ -1158,6 +1369,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
         settingDetailPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
 
@@ -1226,6 +1439,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
 
@@ -1296,6 +1511,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
         setProfileLabel();
 
     }
@@ -1361,6 +1578,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
 
@@ -1376,6 +1595,8 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportsPane.setVisible(false);
 
     }
     public void setMyPane() {
