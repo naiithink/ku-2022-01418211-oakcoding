@@ -381,12 +381,14 @@ public class UserController implements Initializable {
     @FXML
     private void handleVoteButton(){
         IssueService.getIssueManager().voteComplaint((ConsumerUser) StageManager.getStageManager().getContext(),this.complaintID);
+        showDetailComplaint(this.complaintID);
     }
 
     @FXML
     private void handleBackButton(){
         sideBarPane.setDisable(false);
         handleClickCreateReport();
+        complaintTableView.refresh();
     }
 
     @FXML
