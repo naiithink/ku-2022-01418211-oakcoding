@@ -250,15 +250,25 @@ public class IssueManager {
     }
 
     public ObservableSet<Complaint> getAllComplaintSet() {
-        ObservableSet<Complaint> res = FXCollections.observableSet();
+        return new SetBinding<Complaint>() {
 
-        Iterator<Entry<String, Complaint>> allComplaints = this.allComplaintTable.entrySet().iterator();
+            {
+                super.bind(allComplaintTable);
+            }
 
-        while (allComplaints.hasNext()) {
-            res.add(allComplaints.next().getValue());
-        }
+            @Override
+            public ObservableSet<Complaint> computeValue() {
+                ObservableSet<Complaint> res = FXCollections.observableSet();
 
-        return res;
+                Iterator<Entry<String, Complaint>> allComplaints = allComplaintTable.entrySet().iterator();
+        
+                while (allComplaints.hasNext()) {
+                    res.add(allComplaints.next().getValue());
+                }
+        
+                return res;
+            }
+        };
     }
 
     public boolean complaintExist(String complaintID) {
