@@ -11,25 +11,33 @@ package ku.cs.oakcoding.app.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import ku.cs.oakcoding.app.helpers.logging.OakLogger;
+import ku.cs.oakcoding.app.models.users.ConsumerUser;
+import ku.cs.oakcoding.app.models.users.StaffUser;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 public class StaffController implements Initializable {
     @FXML
-    private Button accountChangeInfoButton;
+    private Button AccountChangeInfoButton;
 
     @FXML
-    private Label fullNameLabel;
+    private ImageView backPicture;
 
     @FXML
-    private Label userNameLabel;
+    private Button changePasswordButton;
+
+    @FXML
+    private PasswordField confirmPasswordField;
 
     @FXML
     private Button dashboardButton;
@@ -38,25 +46,37 @@ public class StaffController implements Initializable {
     private ImageView dashboardImageView;
 
     @FXML
-    private Label firstNameLabelAccount;
+    private Label firstNameAccountLabel;
 
     @FXML
-    private Label fullNameLabelAccountSetting;
+    private Label fullNameLabel;
 
     @FXML
-    private Label lastNameLabel;
+    private Label fullNameLabel11121;
+
+    @FXML
+    private Label lastNameAccountLabel;
 
     @FXML
     private Button logoutButton;
 
     @FXML
-    private Label nameProfileSettingLabel;
+    private PasswordField newPasswordField;
 
     @FXML
     private Label numberReportOfUser;
 
     @FXML
-    private ImageView picProfileSettingLabel;
+    private PasswordField oldPasswordField;
+
+    @FXML
+    private Label profileImageNameLabel;
+
+    @FXML
+    private ImageView profileImageView;
+
+    @FXML
+    private ImageView profileImageView1;
 
     @FXML
     private Button reportButton;
@@ -71,6 +91,9 @@ public class StaffController implements Initializable {
     private Button settingButton;
 
     @FXML
+    private Pane settingDetailChangeUserPane;
+
+    @FXML
     private ImageView settingImageView;
 
     @FXML
@@ -80,10 +103,23 @@ public class StaffController implements Initializable {
     private Label statusAccountLabel;
 
     @FXML
-    private Label statusLabel;
+    private Label statusHomeLabel;
+
+    @FXML
+    private Label userNameHomeLabel;
+
+    @FXML
+    private Label userNameLabel;
+
+    @FXML
+    private TextField usernameTextField;
 
     @FXML
     private Pane welcomeStaffPane;
+
+    @FXML
+    private Pane welcomeUserPane111;
+
 
 
 
@@ -108,6 +144,7 @@ public class StaffController implements Initializable {
         reportsUserOfStaffPane.setVisible(true);
         welcomeStaffPane.setVisible(false);
         settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
     }
 
 //    private void clearAllData(){
@@ -160,6 +197,8 @@ public class StaffController implements Initializable {
         reportsUserOfStaffPane.setVisible(false);
         welcomeStaffPane.setVisible(false);
         settingStaffPane.setVisible(true);
+        settingDetailChangeUserPane.setVisible(false);
+        setProfileLabel();
     }
 
 
@@ -184,14 +223,93 @@ public class StaffController implements Initializable {
         reportsUserOfStaffPane.setVisible(false);
         welcomeStaffPane.setVisible(true);
         settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
     }
     public void initPane(){
         reportsUserOfStaffPane.setVisible(false);
         welcomeStaffPane.setVisible(true);
         settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
+    }
+    public void setMyPane() {
+        StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
+        userNameHomeLabel.setText(staffUser.getFirstName());
+        statusHomeLabel.setText(staffUser.getRole().getPrettyPrinted());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         initPane();
+        StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
+            if (newValue.equals("staff")) {
+                setMyPane();
+//                initReportTableView();
+//                initComplaintTableView();
+//
+//                handleSelectComplaintTableView();
+            }
+        });
+    }
+
+    public void handleChangePaneToChangeDetailPane(ActionEvent actionEvent) {
+        reportsUserOfStaffPane.setVisible(false);
+        welcomeStaffPane.setVisible(false);
+        settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(true);
+
+
+
+    }
+
+    public void handleChangeDetail(ActionEvent actionEvent) {
+        String username = usernameTextField.getText();
+        String oldPassword = oldPasswordField.getText();
+        String newPassword = newPasswordField.getText();
+        String confirmNewPassword = confirmPasswordField.getText();
+
+        boolean isChangePassword = AccountService.getUserManager().changePassword(username,oldPassword,newPassword,confirmNewPassword);
+        Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+        alertInformation.setTitle("INFORMATION");
+        Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+        alertWarning.setTitle("WARNING");
+
+        if (isChangePassword){
+            alertInformation.setContentText("รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อย");
+            alertInformation.showAndWait();
+            oldPasswordField.clear();
+            newPasswordField.clear();
+            usernameTextField.clear();
+            confirmPasswordField.clear();
+
+            try {
+
+                StageManager.getStageManager().setPage("authentication", null);
+            } catch (StageManager.PageNotFoundException e) {
+                OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
+            }
+
+        }
+        else {
+            alertWarning.setContentText("คุณไม่สามารถเปลี่ยนรหัสได้ กรุณาตรวจสอบอีกครั้ง");
+            alertWarning.showAndWait();
+        }
+
+    }
+
+    public void handleBackUserPictureButton(MouseEvent mouseEvent) {
+        reportsUserOfStaffPane.setVisible(false);
+        welcomeStaffPane.setVisible(false);
+        settingStaffPane.setVisible(true);
+        settingDetailChangeUserPane.setVisible(false);
+    }
+    private void setProfileLabel(){
+        StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
+        userNameLabel.setText(staffUser.getUserName());
+        statusAccountLabel.setText(staffUser.getRole().getPrettyPrinted());
+        firstNameAccountLabel.setText(staffUser.getFirstName());
+        lastNameAccountLabel.setText(staffUser.getLastName());
+        Image image = new Image(staffUser.getProfileImagePath().toUri().toString());
+        profileImageNameLabel.setText(staffUser.getProfileImagePath().toUri().toString());
+        profileImageView.setImage(image);
     }
 }

@@ -610,6 +610,7 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
+
     }
 
     public void handleClickSetting() {
@@ -706,8 +707,6 @@ public class UserController implements Initializable {
         userNameHomeLabel.setText(consumerUser.getFirstName());
         statusHomeLabel.setText(consumerUser.getRole().getPrettyPrinted());
 
-
-//        OakLogger.log(Level.SEVERE,"no admin");
     }
 
     public void initPane() {
