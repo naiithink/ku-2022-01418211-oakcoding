@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AuthenticationController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AuthenticationController">
     <children>
         <Pane fx:id="getStartedPane" prefHeight="500.0" prefWidth="300.0" styleClass="theme" stylesheets="@../css/stylesheet.css">
             <children>
@@ -24,17 +25,21 @@
                   <String fx:value="sign-in" />
                   <String fx:value="text-bold" />
                </styleClass></Button>
-                <Label layoutX="102.0" layoutY="66.0" prefHeight="19.0" prefWidth="119.0" styleClass="text" text="ระบบแจ้งเรื่อง" textFill="#cdcdcd">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
+            <Group layoutX="24.0" layoutY="65.0">
+               <children>
+                      <Label alignment="CENTER" layoutX="70.0" prefHeight="19.0" prefWidth="119.0" styleClass="text" text="Kasetsart University" textFill="#cdcdcd">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="21.0" prefHeight="34.0" prefWidth="253.0" styleClass="text" text="Student Complaint System" textFill="#cdcdcd">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
             <Separator layoutX="35.0" layoutY="351.0" prefHeight="5.0" prefWidth="235.0" />
-            <Label layoutX="62.0" layoutY="86.0" prefHeight="34.0" prefWidth="253.0" styleClass="text" text="มหาวิทยาลัยเกษตรศาสตร์" textFill="#cdcdcd">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="171.0" fitWidth="168.0" layoutX="69.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/ku-logo.png" />
@@ -42,7 +47,7 @@
             </ImageView>
             </children>
         </Pane>
-      <Pane fx:id="loginPane" prefHeight="500.0" prefWidth="300.0" styleClass="theme" stylesheets="@../css/stylesheet.css">
+      <Pane fx:id="loginPane" prefHeight="500.0" prefWidth="300.0" styleClass="theme" stylesheets="@../css/stylesheet.css" visible="false">
          <children>
             <Button fx:id="loginButton" layoutX="56.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="34.0" prefWidth="189.0" styleClass="sign-in" text="Login" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -54,7 +59,7 @@
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
-            <Label layoutX="85.0" layoutY="58.0" prefHeight="82.0" prefWidth="162.0" styleClass="text-bold" text="เข้าสู่ระบบ" textFill="#cdcdcd">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="73.0" layoutY="58.0" prefHeight="82.0" prefWidth="162.0" styleClass="text-bold" text="Login" textFill="#cdcdcd">
                <font>
                   <Font name="Kanit" size="34.0" />
                </font>
@@ -80,12 +85,12 @@
                </font>
             </Label>
             <Separator layoutX="35.0" layoutY="351.0" prefHeight="5.0" prefWidth="235.0" />
-            <Label layoutX="50.0" layoutY="364.0" styleClass="text-secondary-font" text="หากยังไม่มีบัญชี? " textFill="#d0d0d0">
+            <Label layoutX="50.0" layoutY="364.0" styleClass="text-secondary-font" text="Don't have an account?" textFill="#d0d0d0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="registerUserHereButton" layoutX="201.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleRegisterUserHereToRegisterPage" prefHeight="34.0" prefWidth="68.0" styleClass="button-secondary-text" text="สมัครที่นี้" textAlignment="CENTER" textFill="#17abff">
+            <Button fx:id="registerUserHereButton" layoutX="201.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleRegisterUserHereToRegisterPage" prefHeight="34.0" prefWidth="68.0" styleClass="button-secondary-text" text="Register" textAlignment="CENTER" textFill="#17abff">
                <font>
                   <Font size="16.0" />
                </font>
