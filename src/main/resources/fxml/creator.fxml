@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="userDetailPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;">
          <children>
@@ -15,7 +15,7 @@
                <children>
                   <Pane layoutX="143.0" prefHeight="120.0" prefWidth="142.0">
                      <children>
-                        <Label layoutX="11.0" layoutY="30.0" text="นาย ปาณชัย คชกาษร" textFill="#e4e4e4" />
+                        <Label layoutX="11.0" layoutY="30.0" text="อิง ปาณชัย คชกาษร" textFill="#e4e4e4" />
                         <Label layoutX="11.0" layoutY="47.0" text="6410450176" textFill="#e4e4e4" />
                      </children>
                   </Pane>
@@ -41,13 +41,13 @@
                   </ImageView>
                   <Pane layoutX="142.0" layoutY="155.0" prefHeight="120.0" prefWidth="142.0">
                      <children>
-                        <Label layoutX="11.0" layoutY="30.0" text="นาย ธเนศ จีนสีคง" textFill="#e4e4e4" />
+                        <Label layoutX="11.0" layoutY="30.0" text="ภู ธเนศ จีนสีคง" textFill="#e4e4e4" />
                         <Label layoutX="11.0" layoutY="47.0" text="6410451067" textFill="#e4e4e4" />
                      </children>
                   </Pane>
                   <Pane layoutX="406.0" layoutY="-4.0" prefHeight="120.0" prefWidth="142.0">
                      <children>
-                        <Label layoutX="11.0" layoutY="30.0" text="นาย ธนากร คนหมั่น" textFill="#e4e4e4" />
+                        <Label layoutX="11.0" layoutY="30.0" text="เอิรธ์ ธนากร คนหมั่น" textFill="#e4e4e4" />
                         <Label layoutX="11.0" layoutY="47.0" text="6410451041" textFill="#e4e4e4" />
                      </children>
                   </Pane>
