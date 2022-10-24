@@ -388,7 +388,7 @@ public class AdminController implements Initializable {
     private TableColumn<Report, ReportType> reportTypeCol;
 
     @FXML
-    private TableColumn<Report, String> reportDescriptionCol ;
+    private TableColumn<Report, String> reportDescriptionCol;
 
     @FXML
     private TableColumn<Report, String> reportTargetCol;
@@ -422,6 +422,32 @@ public class AdminController implements Initializable {
 
     @FXML
     private Label reportDetailDescriptionLabel;
+
+    /**
+     *
+     *
+     * StaffMembersinfo PAGe
+     */
+
+    @FXML
+    private Pane staffMembersInfoPane;
+
+    @FXML
+    private TableView<FullUserEntry> staffMemberLeftTableView;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> profileImageStaffLeftCol;
+
+    @FXML
+    private TableColumn<FullUserEntry, String> firstNameStaffLeftCol;
+
+    @FXML
+    private TableView<Report> staffMemberRightTableView;
+
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> profileImageStaffRightCol;
+
+    @FXML
+    private TableColumn<FullUserEntry, String> firstNameStaffRightCol;
 
 
 
@@ -508,6 +534,7 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(false);
         reportDetail.setVisible(true);
+        staffMembersInfoPane.setVisible(false);
 
         reportDetailAuthorLabel.setText(IssueService.getIssueManager().getReport(reportId).getAuthorID());
         reportDetailTargetLabel.setText(IssueService.getIssueManager().getReport(reportId).getTargetID());
@@ -594,6 +621,7 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         settingDetailPane.setVisible(true);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
 
     }
 
@@ -680,6 +708,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(true);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
         reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
         reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
@@ -784,6 +813,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
         detailUserNameLabel.setText(userEntry.getUserName());
         detailUserStatusAccountLabel.setText(userEntry.getRole().getPrettyPrinted());
         detailUserFirstNameLabelAccount.setText(userEntry.getFirstName());
@@ -875,6 +905,24 @@ public class AdminController implements Initializable {
         departmentStaffMembersListView.getItems().addAll(WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getStaffMemberSetProperty());
     }
 
+    @FXML
+    private void handleAddStaffPage(){
+        welcomePane.setVisible(false);
+        userPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        organizationsPane.setVisible(false);
+        reportsUserPane.setVisible(false);
+        requestPane.setVisible(false);
+        settingPane.setVisible(false);
+        userDetailPane.setVisible(false);
+        settingDetailPane.setVisible(false);
+        departmentDetailPane.setVisible(false);
+        departmentChangeLeaderPane.setVisible(false);
+        detailComplaintPane.setVisible(false);
+        reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(true);
+    }
+
     private void showSelectedDepartment(String departmentID){
         welcomePane.setVisible(false);
         userPane.setVisible(false);
@@ -889,6 +937,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
 
 
         initStaffMembersListView(departmentID);
@@ -948,6 +997,7 @@ public class AdminController implements Initializable {
         departmentDetailPane.setVisible(false);
         departmentChangeLeaderPane.setVisible(true);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
 
 
         departmentNameLabel1.setText(WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName());
@@ -1094,6 +1144,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
     }
 
     @FXML
@@ -1157,6 +1208,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
     }
 
     @FXML
@@ -1236,6 +1288,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
 
     }
 
@@ -1307,6 +1360,7 @@ public class AdminController implements Initializable {
         settingDetailPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
     }
 
     @FXML
@@ -1376,6 +1430,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
     }
 
     @FXML
@@ -1447,6 +1502,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
         setProfileLabel();
 
     }
@@ -1514,6 +1570,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
 
     }
 
@@ -1531,6 +1588,7 @@ public class AdminController implements Initializable {
         departmentChangeLeaderPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         reportDetail.setVisible(false);
+        staffMembersInfoPane.setVisible(false);
     }
     public void setMyPane() {
         AdminUser admin = (AdminUser) StageManager.getStageManager().getContext();
