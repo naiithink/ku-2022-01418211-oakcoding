@@ -440,14 +440,23 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<FullUserEntry, String> firstNameStaffLeftCol;
 
+    private ObservableSet<FullUserEntry> observableLeftStaffSet = FXCollections.observableSet();
+    private ObservableList<FullUserEntry> observableLeftStaffList = FXCollections.observableArrayList();
+
+
+
     @FXML
-    private TableView<Report> staffMemberRightTableView;
+    private TableView<FullUserEntry> staffMemberRightTableView;
 
     @FXML
     private TableColumn<FullUserEntry, ImageView> profileImageStaffRightCol;
 
     @FXML
     private TableColumn<FullUserEntry, String> firstNameStaffRightCol;
+
+    private ObservableSet<FullUserEntry> observableRightStaffSet = FXCollections.observableSet();
+    private ObservableList<FullUserEntry> observableRightStaffList = FXCollections.observableArrayList() ;
+
 
 
 
@@ -469,6 +478,7 @@ public class AdminController implements Initializable {
                 initDepartmentTableView();
                 initStaffTableView();
                 initComplaintTableView();
+                initStaffRightTableView();
                 setMyPane();
                 initReportTableView();
                 handleSelectedUsersTableView();
@@ -477,6 +487,41 @@ public class AdminController implements Initializable {
                 handleSelectedReportTableView();
             }
         });
+    }
+
+    private void initStaffRightTableView(){
+        observableRightStaffSet = AccountService.getUserManager().getFilteredUsersSetProperty(((AdminUser) StageManager.getStageManager().getContext()),Roles.STAFF);
+        observableRightStaffSet.addListener((SetChangeListener<? super FullUserEntry>) change -> {
+            observableRightStaffList.clear();
+            observableRightStaffList.setAll(observableRightStaffSet);
+            staffMemberRightTableView.getItems().setAll(observableRightStaffList);
+            staffMemberRightTableView.refresh();
+        });
+
+        staffMemberRightTableView.setEditable(true);
+        profileImageStaffRightCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+        firstNameStaffRightCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+
+        observableRightStaffList.setAll(observableRightStaffSet);
+        staffMemberRightTableView.getItems().setAll(observableRightStaffList);
+        staffMemberRightTableView.refresh();
+
+    }
+
+    private void initStaffLeftTableView(){
+
     }
 
 
@@ -922,6 +967,8 @@ public class AdminController implements Initializable {
         reportDetail.setVisible(false);
         staffMembersInfoPane.setVisible(true);
     }
+
+
 
     private void showSelectedDepartment(String departmentID){
         welcomePane.setVisible(false);

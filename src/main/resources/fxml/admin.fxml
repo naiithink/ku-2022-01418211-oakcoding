@@ -650,7 +650,7 @@
       </Pane>
       <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
-            <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="566.0" styleClass="account-setting-pane">
+            <Pane layoutX="36.0" layoutY="118.0" prefHeight="417.0" prefWidth="566.0" styleClass="account-setting-pane">
                <children>
                   <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
                   <ListView fx:id="departmentStaffMembersListView1" layoutX="42.0" layoutY="249.0" prefHeight="136.0" prefWidth="278.0" stylesheets="@../css/list-view.css" />
