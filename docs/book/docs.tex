@@ -1,0 +1,86 @@
+% !TEX program = xelatex
+\documentclass{article}
+
+
+\usepackage{oakincludes}
+
+
+
+\includeonly{%
+    sections/01_usage.tex,
+    sections/02_seed.tex,
+    sections/03_csv.tex,
+    sections/04_extras.tex}
+
+
+
+%% Globals
+\usepackage{oakglobals}
+
+
+%% Page Layout
+\geometry{%
+a4paper,
+margin = 1in}
+
+
+%% PDF Metadata
+\hypersetup{%
+pdftitle = {\thetitle},
+pdfsubject = {OakCoding},
+pdfauthor = {\ourTeam},
+pdfkeywords = {{Software Construction}, 01418211, \us, {Complaint System}}}
+
+
+%% Languages
+\setdefaultlanguage[numerals=arabic]{thai}
+\setotherlanguages{english}
+
+\XeTeXlinebreaklocale "th"
+
+\setmainfont{TH Sarabun New}
+\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+
+
+%% Page Head/Foot
+\pagestyle{fancy}
+
+\renewcommand{\sectionmark}[1]{%
+\markright{#1}}
+\renewcommand{\subsectionmark}[1]{%
+\markboth{#1}{}}
+
+\fancyhf{}
+\fancyhead[L]{\thetitle}
+\fancyhead[R]{\rightmark~~\thepage}
+
+
+%% Cover Page
+\title{\Huge\flushleft \textbf{\thetitle}\\
+\vspace{1ex}
+\LARGE\ourTeam\\
+\vspace{5ex}
+\large Desktop Application สำหรับการแจ้งเรื่องร้องเรียนของนิสิตมหาวิทยาลัยเกษตรศาสตร์}
+\author{}
+\date{}
+
+
+%% Document
+\begin{document}
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\vspace{-2ex}
+\tableofcontents
+\end{titlepage}
+
+\newpage
+
+\include{sections/01_usage}
+
+\include{sections/02_seed}
+
+\include{sections/03_csv}
+
+\include{sections/04_extras}
+\end{document}
