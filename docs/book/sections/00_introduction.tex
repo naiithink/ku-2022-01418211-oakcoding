@@ -1,0 +1,76 @@
+\section*{บทนำ}
+
+\subsection*{เกี่ยวกับ Application}
+
+OakCoding เป็น desktop application ที่ใช้สำหรับแจ้งเรื่องร้องเรียนของนิสิตมหาวิทยาลัยเกษตรศาสตร์\\
+ภายใน application --- หรือเรียกสั้น ๆ ว่า \textit{app} --- จะมีการแบ่งระดับสิทธิ์ของผู้ใช้งานออกเป็น 3 ระดับ ผู้ใช้ในแต่ละระดับ\\
+จะมีสิทธิ์เข้าถึงความสามารถ (feature) ของ app ที่แตกต่างกันเพื่อความเป็นระเบียบในการบริหารจัดการระบบภายใน app
+
+\subsubsection*{บัญชีและระดับสิทธิ์ของผู้ใช้ระบบ}
+ระดับสิทธิ์ของผู้ใช้ระบบประกอบด้วย 3 ระดับสิทธิ์ ได้แก่ ผู้ดูแลระบบ (Admin), เจ้าหน้าที่ (Staff), และ นิสิต (Consumer)
+
+\begin{enumerate}
+    \item ผู้ดูแลระบบ (Admin)
+
+        ผู้ใช้ที่มีระดับสิทธิ์สูงสุดในระบบ มีสิทธิ์ในการจัดการ (manipulate) เนื้อหา (content) และบัญชีผู้ใช้ในระดับสิทธิ์อื่น ๆ\\
+        เช่น พิจารณาลบเรื่องร้องเรียน (complaint) ที่ถูกรายงานว่ามีเนื้อหาไม่เหมาะสม, พิจารณาระงับ (suspend) บัญชีผู้ใช้\\
+        ของนิสิตที่ถูกรายงานว่ามีพฤติกรรมไม่เหมาะสมในการใช้งานระบบ, และสร้างบัญชีผู้ใช้สำหรับเจ้าหน้าที่ เป็นต้น\\
+        ในระบบจะมีบัญชีของผู้ดูแลระบบได้เพียง 1 บัญชี โดยจะถูกจัดเตรียมไว้ให้แล้วโดยทีมผู้พัฒนา application
+    \item เจ้าหน้าที่ (Staff)
+
+        ผู้ใช้ที่มีหน้าที่ในการจัดการเรื่องร้องเรียน ในส่วนที่ตนเองรับผิดชอบ บัญชีผู้ใช้ของเจ้าหน้าที่จะถูกสร้าง\\
+        (register) โดยผู้ดูแลระบบเท่านั้น ไม่สามารถสร้างบัญชีด้วยตนเองได้
+    \item นิสิต (Consumer)
+
+        ผู้ใช้ทั่วไปซึ่งเป็นนิสิตของมหาวิทยาลัยเกษตรศาสตร์ สามารถแจ้ง เข้าถึง หรือติดตามเรื่องร้องเรียนในระบบได้\\
+        ทั้งนี้ หากผู้ใช้ระบบในระดับสิทธิ์นี้มีพฤติกรรมการใช้งานที่ไม่เหมาะสม หรือนำเข้าเนื้อหาที่ไม่เหมาะสม\\
+        อาจถูกรายงาน (report) เพื่อให้ผู้ดูแลระบบพิจารณาระงับบัญชีผู้ใช้ หรือลบเนื้อหาที่ไม่เหมาะสมได้ ตามลำดับ\\
+        ในกรณีการถูกระงับบัญชีผู้ใช้ของนิสิต นิสิตที่ถูกระงับบัญชีจะไม่มีสิทธิ์ในการเข้าสู่ระบบ (login)\\
+        แต่สามารถส่งคำร้อง (request) เพื่อให้ผู้ดูแลระบบพิจารณาปลดระงับบัญชีได้
+\end{enumerate}
+
+\noindent\framebox[\textwidth][c]{ในปัจจุบัน บัญชีผู้ใช้ที่ถูกสร้างขึ้นในระบบจะไม่สามารถลบออกได้}
+
+
+\pagebreak
+\subsection*{เกี่ยวกับการพัฒนา Application}
+
+OakCoding ถูกพัฒนาด้วยภาษา Java โดยใช้ Java Development Kit (JDK) version 17 ร่วมกับ JavaFX version 17\\
+และใช้ \href{https://maven.apache.org/}{Maven} ในการ automate building process
+
+\subsubsection*{โครงสร้าง Directory ของ Project}
+
+โครงสร้าง directory ของ project ถูกดัดแปลงจาก\href{https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html}{โครงสร้าง repository มาตรฐานของ Maven}
+
+\setlength{\parindent}{0em}
+\setlength{\columnsep}{2pt}
+\begin{lstlisting}[name={Project Directory Layout},numbers=none]
+<PROJECT ROOT>/
+    data/
+    docs/
+    src/
+    submit/
+    mvnw*
+    mvnw.cmd*
+    oakcommit.sh*
+    pom.xml
+    README.md
+    run.sh*
+\end{lstlisting}
+
+\subsubsection*{คำอธิบาย Directory ของ Project}
+
+\begin{tabularx}{\textwidth}{ p{8em} p{\textwidth-8em} }
+\textbf{ชื่อไฟล์ / Directory}      & \textbf{คำอธิบาย} \\
+% \hline
+\texttt{data/}              & ข้อมูลของผู้ใช้ระบบ ได้แก่ ไฟล์ CSV และไฟล์ที่ผู้ใช้ทำการนำเข้า (import) สู่ระบบ \\
+\texttt{docs/}              & Source code การร่างคู่มือการใช้งาน application (เอกสารที่ท่านกำลังอ่านอยู่นี้) \\
+\texttt{src/}               & Application source code และไฟล์ resource ที่ใช้ใน application \\
+\texttt{submit/}            & ไฟล์ executable และไฟล์ที่เกี่ยวข้องกับการเปิดใช้งาน application \\
+\texttt{mvnw*}              & \href{https://maven.apache.org/wrapper/}{Maven wrapper script} สําหรับระบบปฏิบัติการ UNIX และ UNIX-like \\
+\texttt{mvnw.cmd*}          & \href{https://maven.apache.org/wrapper/}{Maven wrapper script} สําหรับระบบปฏิบัติการ Microsoft Windows \\
+\texttt{oakcommit.sh*}      & Script สำหรับป้องกัน Git commit confliction ในระหว่างการพัฒนา application \\
+\texttt{pom.xml}            & \href{https://maven.apache.org/guides/introduction/introduction-to-the-pom.html}{Project Object Model ของ Maven} \\
+\texttt{README.md}          & ไฟล์แสดงข้อมูลเกี่ยวกับ project รวมถึงคำอธิบายเกี่ยวกับไฟล์ และ directory ต่าง ๆ \\
+\texttt{run.sh*}            & Script สำหรับเปิดใช้งาน application
+\end{tabularx}
