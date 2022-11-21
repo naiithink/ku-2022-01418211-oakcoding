@@ -2,105 +2,45 @@
 \documentclass{article}
 
 
-\usepackage{oakdraft}
-\usepackage{oakincludes}
-
-
-
-\includeonly{%
-    sections/00_introduction.tex,
-    sections/01_usage.tex,
-    sections/02_seed.tex,
-    sections/03_csv.tex,
-    sections/04_extras.tex}
-
-
-
-%% Globals
-\usepackage{oakglobals}
-
-
-%% Page Layout
-\geometry{%
-a4paper,
-margin = 1in}
-
-
-%% PDF Metadata
-\hypersetup{%
-pdftitle = {\thetitle},
-pdfsubject = {OakCoding},
-pdfauthor = {\ourTeam},
-pdfkeywords = {{Software Construction}, 01418211, \us, {Complaint System}}}
-
-
-%% Languages
-\setdefaultlanguage[numerals=arabic]{thai}
-\setotherlanguages{english}
-
-\XeTeXlinebreaklocale "th"
-
-\setmainfont{TH Sarabun New}
-\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
-
-
-%% Page Head/Foot
-\pagestyle{fancy}
-
-\renewcommand{\sectionmark}[1]{%
-\markright{#1}}
-\renewcommand{\subsectionmark}[1]{%
-\markboth{#1}{}}
-
-\fancyhf{}
-\fancyhead[L]{\thetitle}
-\fancyhead[R]{\rightmark~~\thepage}
-
-\setlength{\headheight}{14pt}
-\addtolength{\topmargin}{-2pt}
+\usepackage{oakcodingdocs}
 
 
 %% Sections
 \setcounter{section}{0}
 
 
-%% Listings
-\lstset{%
-basicstyle = \ttfamilylatin,
-commentstyle = \color{olive},
-keywordstyle = \color{magenta},
-numbers = left,
-captionpos = b,
-belowcaptionskip = 1ex,
-tabsize = 4,
-frame = single,
-framexleftmargin = 0mm,
-framexrightmargin = 0mm,
-title = \lstname}
-
-
 %% Cover Page
-\title{\Huge\flushleft \textbf{\thetitle}\\
+\title{%
+\fontsize{32pt}{\baselineskip}\flushleft\textbf{\docsname}\\
 \vspace{1ex}
-\LARGE\ourTeam\\
-\vspace{5ex}
+\fontsize{22pt}{\baselineskip}\ourTeam\\
+\vspace{3ex}
 \large Desktop Application สำหรับการแจ้งเรื่องร้องเรียนของนิสิตมหาวิทยาลัยเกษตรศาสตร์}
 \author{}
 \date{}
 
 
-%% Document
+\setlength{\baselineskip}{3ex}
+
+
+%% Document Body
 \begin{document}
 \begin{titlepage}
+\newgeometry{
+includemp = false}
 \maketitle
 \thispagestyle{empty}
-\vspace{5ex}
+\vspace{1ex}
 
-\noindent\rule{\textwidth + 1in}{0.6pt}
+% \noindent\rule{\paperwidth - \oddsidemargin}{0.6pt}
 
-\section*{คำชี้แจงที่สำคัญ (Disclaimer)}
+\rule{0em}{2ex}
 
-\subsection*{ทีมผู้พัฒนา OakCoding}
+\LARGE \textbf{คำชี้แจงที่สำคัญ (Disclaimer)} \normalsize
+
+\rule{0em}{3ex}
+
+\large \textbf{ทีมผู้พัฒนา OakCoding} \normalsize
 
 \begin{enumerate}
     \setlength{\itemsep}{0.7pt}
@@ -110,29 +50,46 @@ title = \lstname}
     \item พศวัต ถิ่นกาญจน์วัฒนา
 \end{enumerate}
 
-\subsection*{ระบบปฏิบัติการที่รองรับ}
+\rule{0em}{3ex}
+
+\large \textbf{ระบบปฏิบัติการที่รองรับ} \normalsize\\
 OakCoding เป็น desktop application ที่ถูกพัฒนาและรองรับการใช้งานบนระบบปฏิบัติการ Apple macOS\\
 ทีมผู้พัฒนา OakCoding ไม่รับประกันว่า OakCoding จะสามารถทำงานบนระบบปฏิบัติการอื่นใดได้อย่างสมบูรณ์
 
-\subsection*{ข้อจำกัดความรับผิดชอบ}
+\rule{0em}{3ex}
+
+\large \textbf{ข้อจำกัดความรับผิดชอบ} \normalsize\\
 OakCoding ถูกพัฒนาขึ้นเพื่อจุดประสงค์ทางการศึกษา\\
 ทีมผู้พัฒนา OakCoding จะไม่รับผิดชอบต่อความเสียหายใด ๆ รวมถึง ความเสียหายทางตรง ความเสียหายทางอ้อม\\
 ความเสียหายโดยบังเอิญ หรือความเสียหายเกี่ยวเนื่อง อันเป็นผลหรือสืบเนื่องจากการใช้งาน OakCoding
 \end{titlepage}
 
-\newpage
+\clearpage
 
+\newgeometry{
+includemp = false}
+\thispagestyle{empty}
 \tableofcontents
-
+\restoregeometry
 \newpage
 
-\include{sections/00_introduction.tex}
+\subfile{sections/00_introduction.tex}
 
-\include{sections/01_usage}
+\clearpage
 
-\include{sections/02_seed}
+\subfile{sections/01_usage}
 
-\include{sections/03_csv}
+\clearpage
 
-\include{sections/04_extras}
+\subfile{sections/02_seed}
+
+\clearpage
+
+\subfile{sections/03_csv}
+
+\clearpage
+
+\subfile{sections/04_extras}
+
+\clearpage
 \end{document}

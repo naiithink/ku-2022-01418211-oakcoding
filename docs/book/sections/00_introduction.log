@@ -1,0 +1,3601 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.4)  22 NOV 2022 02:55
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex
+(/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex
+LaTeX2e <2022-11-01>
+L3 programming layer <2022-11-02>
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: Undefined control sequence.
+l.4 \section
+            *{ข้อควรรู้}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*
+             {ข้อควรรู้}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no * in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ข (U+0E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข
+                 ้อควรรู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้
+                    อควรรู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อ
+                       ควรรู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อค
+                          วรรู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ว (U+0E27)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อคว
+                             รรู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อควร
+                                รู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อควรร
+                                   ู้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ู (U+0E39)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อควรรู
+                                      ้}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:4: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4 \section*{ข้อควรรู้
+                                         }
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 4--6
+[]
+ []
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ใ
+       นส่วนนี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ใน
+          ส่วนนี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ส (U+0E2A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส
+             ่วนนี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่
+                วนนี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ว (U+0E27)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่ว
+                   นนี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วน
+                      นี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนน
+                         ี้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี
+                            ้ เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้
+                                เราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เ
+                                   ราจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เร
+                                      าจะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เรา
+                                         จะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character จ (U+0E08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เราจ
+                                            ะอธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ะ (U+0E30)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เราจะ
+                                               อธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ในส่วนนี้ เราจะอ
+                                                  ธิบายข้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ธ (U+0E18)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...ส่วนนี้ เราจะอธ
+                                                  ิบายข้อม�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ิ (U+0E34)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...่วนนี้ เราจะอธิ
+                                                  บายข้อมู�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character บ (U+0E1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...วนนี้ เราจะอธิบ
+                                                  ายข้อมูล�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...นนี้ เราจะอธิบา
+                                                  ยข้อมูลเ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...นี้ เราจะอธิบาย
+                                                  ข้อมูลเบ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ข (U+0E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...ี้ เราจะอธิบายข
+                                                  ้อมูลเบื�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...้ เราจะอธิบายข้
+                                                  อมูลเบื้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ... เราจะอธิบายข้อ
+                                                  มูลเบื้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ม (U+0E21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ราจะอธิบายข้อม
+                                                  ูลเบื้อง�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ู (U+0E39)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�าจะอธิบายข้อมู
+                                                  ลเบื้องต�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ล (U+0E25)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�จะอธิบายข้อมูล
+                                                  เบื้องต้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ะอธิบายข้อมูลเ
+                                                  บื้องต้น�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character บ (U+0E1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�อธิบายข้อมูลเบ
+                                                  ื้องต้นท�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ื (U+0E37)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ธิบายข้อมูลเบื
+                                                  ้องต้นที�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ิบายข้อมูลเบื้
+                                                  องต้นที่�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�บายข้อมูลเบื้อ
+                                                  งต้นที่ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ายข้อมูลเบื้อง
+                                                  ต้นที่คุ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ยข้อมูลเบื้องต
+                                                  ้นที่คุณ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ข้อมูลเบื้องต้
+                                                  นที่คุณค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�้อมูลเบื้องต้น
+                                                  ที่คุณคว�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ท (U+0E17)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�อมูลเบื้องต้นท
+                                                  ี่คุณควร�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�มูลเบื้องต้นที
+                                                  ่คุณควรร�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ูลเบื้องต้นที่
+                                                  คุณควรรู�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ลเบื้องต้นที่ค
+                                                  ุณควรรู้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ุ (U+0E38)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�เบื้องต้นที่คุ
+                                                  ณควรรู้ก�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ณ (U+0E13)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�บื้องต้นที่คุณ
+                                                  ควรรู้ก่�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ื้องต้นที่คุณค
+                                                  วรรู้ก่อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ว (U+0E27)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�้องต้นที่คุณคว
+                                                  รรู้ก่อน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�องต้นที่คุณควร
+                                                  รู้ก่อนเ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�งต้นที่คุณควรร
+                                                  ู้ก่อนเร�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ู (U+0E39)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ต้นที่คุณควรรู
+                                                  ้ก่อนเริ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�้นที่คุณควรรู้
+                                                  ก่อนเริ่�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�นที่คุณควรรู้ก
+                                                  ่อนเริ่ม�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ที่คุณควรรู้ก่
+                                                  อนเริ่มใ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ี่คุณควรรู้ก่อ
+                                                  นเริ่มใช�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�่คุณควรรู้ก่อน
+                                                  เริ่มใช้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�คุณควรรู้ก่อนเ
+                                                  ริ่มใช้ง�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ุณควรรู้ก่อนเร
+                                                  ิ่มใช้งา�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ิ (U+0E34)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ณควรรู้ก่อนเริ
+                                                  ่มใช้งาน O...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ควรรู้ก่อนเริ่
+                                                  มใช้งาน OakC...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ม (U+0E21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�วรรู้ก่อนเริ่ม
+                                                  ใช้งาน OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�รรู้ก่อนเริ่มใ
+                                                  ช้งาน OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�รู้ก่อนเริ่มใช
+                                                  ้งาน OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ู้ก่อนเริ่มใช้
+                                                  งาน OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�้ก่อนเริ่มใช้ง
+                                                  าน OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�ก่อนเริ่มใช้งา
+                                                  น OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...�่อนเริ่มใช้งาน
+                                                   OakCoding
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:7: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 ...��อนเริ่มใช้งาน O
+                                                  akCoding
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no O in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no C in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 7--8
+[] 
+ []
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:9: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.9 \rule{0em}{1ex}
+                   
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: Undefined control sequence.
+l.10 \subsection
+                *{OakCoding คืออะไร}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no * in font nullfont!
+Missing character: There is no O in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no C in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding ค
+                               ืออะไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character ื (U+0E37)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คื
+                                  ออะไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คือ
+                                     อะไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คืออ
+                                        ะไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character ะ (U+0E30)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คืออะ
+                                           ไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character ไ (U+0E44)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คืออะไ
+                                              ร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:10: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.10 \subsection*{OakCoding คืออะไร
+                                                 }
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 \textbf{OakCoding} ค
+                           ือ desktop application --- เรียกส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ื (U+0E37)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 \textbf{OakCoding} คื
+                              อ desktop application --- เรียกส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 \textbf{OakCoding} คือ
+                                  desktop application --- เรียกส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ing} คือ desktop application --- เ
+                                                  รียกสั้น �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...} คือ desktop application --- เร
+                                                  ียกสั้น ๆ ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...��ือ desktop application --- เรี
+                                                  ยกสั้น ๆ ไ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...��อ desktop application --- เรีย
+                                                  กสั้น ๆ ได...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�� desktop application --- เรียก
+                                                  สั้น ๆ ได้...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ส (U+0E2A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...desktop application --- เรียกส
+                                                  ั้น ๆ ได้ว...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ktop application --- เรียกสั
+                                                  ้น ๆ ได้ว่...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...p application --- เรียกสั้
+                                                  น ๆ ได้ว่า...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...pplication --- เรียกสั้น
+                                                   ๆ ได้ว่า \t...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ๆ (U+0E46)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...cation --- เรียกสั้น ๆ
+                                                   ได้ว่า \texti...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ไ (U+0E44)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...on --- เรียกสั้น ๆ ไ
+                                                  ด้ว่า \textit{ap...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ด (U+0E14)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...--- เรียกสั้น ๆ ได
+                                                  ้ว่า \textit{app} ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ... เรียกสั้น ๆ ได้
+                                                  ว่า \textit{app} ห...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ว (U+0E27)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�รียกสั้น ๆ ได้ว
+                                                  ่า \textit{app} หร...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�ียกสั้น ๆ ได้ว่
+                                                  า \textit{app} หรื...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�ยกสั้น ๆ ได้ว่า
+                                                   \textit{app} หรือ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ห (U+0E2B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�� ๆ ได้ว่า \textit{app} ห
+                                                  รือ \textit{แอ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ๆ ได้ว่า \textit{app} หร
+                                                  ือ \textit{แอป} ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ื (U+0E37)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ... ได้ว่า \textit{app} หรื
+                                                  อ \textit{แอป} ---...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...�ด้ว่า \textit{app} หรือ
+                                                   \textit{แอป} --- �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character แ (U+0E41)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...extit{app} หรือ \textit{แอป}
+                                                   --- ที่ใช้ส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...extit{app} หรือ \textit{แอป}
+                                                   --- ที่ใช้ส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ป (U+0E1B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...extit{app} หรือ \textit{แอป}
+                                                   --- ที่ใช้ส...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ท (U+0E17)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...p} หรือ \textit{แอป} --- ท
+                                                  ี่ใช้สำห�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...หรือ \textit{แอป} --- ที
+                                                  ่ใช้สำหร�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...รือ \textit{แอป} --- ที่
+                                                  ใช้สำหรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ือ \textit{แอป} --- ที่ใ
+                                                  ช้สำหรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...อ \textit{แอป} --- ที่ใช
+                                                  ้สำหรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ... \textit{แอป} --- ที่ใช้
+                                                  สำหรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ส (U+0E2A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...extit{แอป} --- ที่ใช้ส
+                                                  ำหรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ำ (U+0E33)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...it{แอป} --- ที่ใช้สำ
+                                                  หรับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ห (U+0E2B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...แอป} --- ที่ใช้สำห
+                                                  รับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...อป} --- ที่ใช้สำหร
+                                                  ับ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ป} --- ที่ใช้สำหรั
+                                                  บ\\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:11: LaTeX Error: Unicode character บ (U+0E1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...} --- ที่ใช้สำหรับ
+                                                  \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character แ (U+0E41)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แ
+        จ้งเรื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character จ (U+0E08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ
+           ้งเรื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้
+              งเรื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้ง
+                 เรื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเ
+                    รื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเร
+                       ื่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ื (U+0E37)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื
+                          ่องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่
+                             องร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่อ
+                                งร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่อง
+                                   ร้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่องร
+                                      ้องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่องร้
+                                         องเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่องร้อ
+                                            งเรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่องร้อง
+                                               เรียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 แจ้งเรื่องร้องเ
+                                                  รียนของน�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...้งเรื่องร้องเร
+                                                  ียนของนิ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...งเรื่องร้องเรี
+                                                  ยนของนิส�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...เรื่องร้องเรีย
+                                                  นของนิสิ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...รื่องร้องเรียน
+                                                  ของนิสิต�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ข (U+0E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ื่องร้องเรียนข
+                                                  องนิสิตม�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...่องร้องเรียนขอ
+                                                  งนิสิตมห�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...องร้องเรียนของ
+                                                  นิสิตมหา�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...งร้องเรียนของน
+                                                  ิสิตมหาว�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ิ (U+0E34)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ร้องเรียนของนิ
+                                                  สิตมหาวิ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ส (U+0E2A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...้องเรียนของนิส
+                                                  ิตมหาวิท�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ิ (U+0E34)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...องเรียนของนิสิ
+                                                  ตมหาวิทย�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...งเรียนของนิสิต
+                                                  มหาวิทยา�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ม (U+0E21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...เรียนของนิสิตม
+                                                  หาวิทยาล�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ห (U+0E2B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...รียนของนิสิตมห
+                                                  าวิทยาลั�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ียนของนิสิตมหา
+                                                  วิทยาลัย�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ว (U+0E27)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ยนของนิสิตมหาว
+                                                  ิทยาลัยเ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ิ (U+0E34)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...นของนิสิตมหาวิ
+                                                  ทยาลัยเก�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ท (U+0E17)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ของนิสิตมหาวิท
+                                                  ยาลัยเกษ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...องนิสิตมหาวิทย
+                                                  าลัยเกษต�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...งนิสิตมหาวิทยา
+                                                  ลัยเกษตร�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ล (U+0E25)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...นิสิตมหาวิทยาล
+                                                  ัยเกษตรศ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ิสิตมหาวิทยาลั
+                                                  ยเกษตรศา�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...สิตมหาวิทยาลัย
+                                                  เกษตรศาส�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character เ (U+0E40)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ิตมหาวิทยาลัยเ
+                                                  กษตรศาสต�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ตมหาวิทยาลัยเก
+                                                  ษตรศาสตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ษ (U+0E29)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...มหาวิทยาลัยเกษ
+                                                  ตรศาสตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...หาวิทยาลัยเกษต
+                                                  รศาสตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...าวิทยาลัยเกษตร
+                                                  ศาสตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ศ (U+0E28)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...วิทยาลัยเกษตรศ
+                                                  าสตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ิทยาลัยเกษตรศา
+                                                  สตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ส (U+0E2A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ทยาลัยเกษตรศาส
+                                                  ตร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ยาลัยเกษตรศาสต
+                                                  ร์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...าลัยเกษตรศาสตร
+                                                  ์
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:12: LaTeX Error: Unicode character ์ (U+0E4C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12 ...ลัยเกษตรศาสตร์
+                                                  
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 9--13
+[][]
+ []
+
+
+Overfull \hbox (24.13179pt too wide) in paragraph at lines 9--13
+\OT1/cmr/bx/n/10 Oak-
+ []
+
+
+Overfull \hbox (24.59709pt too wide) in paragraph at lines 9--13
+\OT1/cmr/bx/n/10 Cod-
+ []
+
+
+Overfull \hbox (15.33325pt too wide) in paragraph at lines 9--13
+\OT1/cmr/bx/n/10 ing
+ []
+
+
+Overfull \hbox (15.33325pt too wide) in paragraph at lines 9--13
+\OT1/cmr/m/it/10 app
+ []
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:14: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 \rule{0em}{1ex}
+                    
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: Undefined control sequence.
+l.15 \subsection
+                *{ฉันจะใช้งานแอป OakCoding ไ�...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no * in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ฉ (U+0E09)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉ
+                     ันจะใช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉั
+                        นจะใช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉัน
+                           จะใช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character จ (U+0E08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจ
+                              ะใช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ะ (U+0E30)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะ
+                                 ใช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะใ
+                                    ช้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะใช
+                                       ้งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะใช้
+                                          งานแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะใช้ง
+                                             านแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \subsection*{ฉันจะใช้งา
+                                                นแอป OakCoding ไ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...section*{ฉันจะใช้งาน
+                                                  แอป OakCoding ได...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character แ (U+0E41)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...tion*{ฉันจะใช้งานแ
+                                                  อป OakCoding ได้...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...n*{ฉันจะใช้งานแอ
+                                                  ป OakCoding ได้อ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ป (U+0E1B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...ฉันจะใช้งานแอป
+                                                   OakCoding ได้อย...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no O in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no k in font nullfont!
+Missing character: There is no C in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ไ (U+0E44)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�ใช้งานแอป OakCoding ไ
+                                                  ด้อย่างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ด (U+0E14)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�ช้งานแอป OakCoding ได
+                                                  ้อย่างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�้งานแอป OakCoding ได้
+                                                  อย่างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�งานแอป OakCoding ได้อ
+                                                  ย่างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�านแอป OakCoding ได้อย
+                                                  ่างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�นแอป OakCoding ได้อย่
+                                                  างไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�แอป OakCoding ได้อย่า
+                                                  งไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�อป OakCoding ได้อย่าง
+                                                  ไร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ไ (U+0E44)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...�ป OakCoding ได้อย่างไ
+                                                  ร}
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:15: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 ...� OakCoding ได้อย่างไร
+                                                  }
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ห (U+0E2B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ห
+        ากคุณต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หา
+           กคุณต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หาก
+              คุณต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากค
+                 ุณต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ุ (U+0E38)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุ
+                    ณต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ณ (U+0E13)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณ
+                       ต้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต
+                          ้องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้
+                             องการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้อ
+                                งการใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้อง
+                                   การใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้องก
+                                      ารใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้องกา
+                                         รใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ร (U+0E23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้องการ
+                                            ใช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้องการใ
+                                               ช้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 หากคุณต้องการใช
+                                                  ้งานแอป ค�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...กคุณต้องการใช้
+                                                  งานแอป คุ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...คุณต้องการใช้ง
+                                                  านแอป คุณ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character า (U+0E32)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ุณต้องการใช้งา
+                                                  นแอป คุณจ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character น (U+0E19)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ณต้องการใช้งาน
+                                                  แอป คุณจะ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character แ (U+0E41)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ต้องการใช้งานแ
+                                                  อป คุณจะต�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...้องการใช้งานแอ
+                                                  ป คุณจะต้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ป (U+0E1B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...องการใช้งานแอป
+                                                   คุณจะต้อ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ค (U+0E04)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��การใช้งานแอป ค
+                                                  ุณจะต้อง�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ุ (U+0E38)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ารใช้งานแอป คุ
+                                                  ณจะต้องม�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ณ (U+0E13)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��รใช้งานแอป คุณ
+                                                  จะต้องมี�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character จ (U+0E08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ใช้งานแอป คุณจ
+                                                  ะต้องมีบ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ะ (U+0E30)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ช้งานแอป คุณจะ
+                                                  ต้องมีบั�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ต (U+0E15)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��้งานแอป คุณจะต
+                                                  ้องมีบัญ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��งานแอป คุณจะต้
+                                                  องมีบัญช�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��านแอป คุณจะต้อ
+                                                  งมีบัญชี�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��นแอป คุณจะต้อง
+                                                  มีบัญชีผ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ม (U+0E21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��แอป คุณจะต้องม
+                                                  ีบัญชีผู�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��อป คุณจะต้องมี
+                                                  บัญชีผู้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character บ (U+0E1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ป คุณจะต้องมีบ
+                                                  ัญชีผู้ใ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...�� คุณจะต้องมีบั
+                                                  ญชีผู้ใช�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ญ (U+0E0D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...คุณจะต้องมีบัญ
+                                                  ชีผู้ใช้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ุณจะต้องมีบัญช
+                                                  ีผู้ใช้ข�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ณจะต้องมีบัญชี
+                                                  ผู้ใช้ขอ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ผ (U+0E1C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...จะต้องมีบัญชีผ
+                                                  ู้ใช้ของ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ู (U+0E39)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ะต้องมีบัญชีผู
+                                                  ้ใช้ของแ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ต้องมีบัญชีผู้
+                                                  ใช้ของแอ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...้องมีบัญชีผู้ใ
+                                                  ช้ของแอป �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...องมีบัญชีผู้ใช
+                                                  ้ของแอป โ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...งมีบัญชีผู้ใช้
+                                                  ของแอป โด�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ข (U+0E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...มีบัญชีผู้ใช้ข
+                                                  องแอป โดย�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ีบัญชีผู้ใช้ขอ
+                                                  งแอป โดยท�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ง (U+0E07)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...บัญชีผู้ใช้ของ
+                                                  แอป โดยที�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character แ (U+0E41)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ัญชีผู้ใช้ของแ
+                                                  อป โดยที่�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character อ (U+0E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ญชีผู้ใช้ของแอ
+                                                  ป โดยที่บ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ป (U+0E1B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ชีผู้ใช้ของแอป
+                                                   โดยที่บั�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character โ (U+0E42)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ผู้ใช้ของแอป โ
+                                                  ดยที่บัญ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ด (U+0E14)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ู้ใช้ของแอป โด
+                                                  ยที่บัญช�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ย (U+0E22)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��้ใช้ของแอป โดย
+                                                  ที่บัญชี�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ท (U+0E17)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ใช้ของแอป โดยท
+                                                  ี่บัญชีผ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ช้ของแอป โดยที
+                                                  ่บัญชีผู�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ่ (U+0E48)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��้ของแอป โดยที่
+                                                  บัญชีผู้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character บ (U+0E1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ของแอป โดยที่บ
+                                                  ัญชีผู้ใ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��องแอป โดยที่บั
+                                                  ญชีผู้ใช�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ญ (U+0E0D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��งแอป โดยที่บัญ
+                                                  ชีผู้ใช้�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��แอป โดยที่บัญช
+                                                  ีผู้ใช้จ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��อป โดยที่บัญชี
+                                                  ผู้ใช้จะ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ผ (U+0E1C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...��ป โดยที่บัญชีผ
+                                                  ู้ใช้จะม�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ู (U+0E39)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...�� โดยที่บัญชีผู
+                                                  ้ใช้จะมี 3...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...โดยที่บัญชีผู้
+                                                  ใช้จะมี 3 �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ใ (U+0E43)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ดยที่บัญชีผู้ใ
+                                                  ช้จะมี 3 ล�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ช (U+0E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ยที่บัญชีผู้ใช
+                                                  ้จะมี 3 ลั�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ้ (U+0E49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ที่บัญชีผู้ใช้
+                                                  จะมี 3 ลัก�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character จ (U+0E08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ี่บัญชีผู้ใช้จ
+                                                  ะมี 3 ลักษ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ะ (U+0E30)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...่บัญชีผู้ใช้จะ
+                                                  มี 3 ลักษณ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ม (U+0E21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...บัญชีผู้ใช้จะม
+                                                  ี 3 ลักษณะ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ี (U+0E35)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ัญชีผู้ใช้จะมี
+                                                   3 ลักษณะใ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no 3 in font nullfont!
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ล (U+0E25)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ชีผู้ใช้จะมี 3 ล
+                                                  ักษณะใหญ�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ั (U+0E31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ีผู้ใช้จะมี 3 ลั
+                                                  กษณะใหญ่ �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16: LaTeX Error: Unicode character ก (U+0E01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 ...ผู้ใช้จะมี 3 ลัก
+                                                  ษณะใหญ่ ๆ ...
+(That makes 100 errors; please try again.) 
+Here is how much of TeX's memory you used:
+ 69 strings out of 474971
+ 1156 string characters out of 5776123
+ 342070 words of memory out of 5000000
+ 21667 multiletter control sequences out of 15000+600000
+ 469913 words of font info for 30 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 13i,1n,12p,525b,64s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+/Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex:16:  ==> Fatal error occurred, no output PDF file produced!

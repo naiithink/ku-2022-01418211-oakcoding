@@ -1,13 +1,60 @@
-\section{วิธีการใช้งาน \appName}
+\documentclass[../docs.tex]{subfiles}
 
-วิธีการใช้งาน application
+\begin{document}
+\section{วิธีการใช้งาน}
+\addcontentsline{toc}{section}{วิธีการใช้งาน \appName}
 
-\subsection{การใช้งานโดยทั่วไป}
-ความสามารถโดยทั่วไปของ application ที่ผู้ใช้ระบบทุกระดับสิทธิ์สามารถใช้งานได้
+% \linespread{1ex}
+\setlength{\baselineskip}{1ex}
+
+
+\begin{enumerate}
+    \setlength{\itemsep}{0.7pt}
+    \item เตรียมตัวสำหรับการเปิดใช้งาน
+    \item ดาวน์โหลดและติดตั้ง OakCoding
+    \item เปิดใช้งานแอป
+\end{enumerate}
 
 \rule{0em}{1ex}
 
-\noindent\blindtext[3]
+\subsection*{เตรียมตัวสำหรับการเปิดใช้งาน}\label{sec:prerequisites}
+
+ก่อนที่เราจะเริ่มต้นกัน คุณจะต้องเตรียมสิ่งต่อไปนี้:
+
+\begin{itemize}
+    \setlength{\itemsep}{0.7pt}
+    \item คอมพิวเตอร์ส่วนบุคคลที่มี \href{https://www.apple.com/macos/}{macOS} ติดตั้งอยู่
+    \item การเชื่อมต่อกับอินเทอร์เน็ต
+    \item คอมพิวเตอร์ส่วนบุคคลของคุณจะต้องติดตั้ง software ต่อไปนี้
+    \item โปรแกรม \href{https://git-scm.com/}{Git}
+    \item โปรแกรม \href{https://openjdk.org/}{JDK17}
+    \item โปรแกรม \href{https://maven.apache.org/}{Maven}
+\end{itemize}
+
+เมื่อคุณมีครบทุกสิ่งทุกอย่างแล้ว คุณก็พร้อมสำหรับการ\textbf{ดาวน์โหลดและติดตั้ง OakCoding}
+
+\label{subsec:installation}
+\subsection*{ดาวน์โหลดและติดตั้ง OakCoding}
+
+หลังจากที่คุณมีทุกสิ่งทุกอย่างพร้อมแล้ว หากยังโปรดไปที่ \nameref{sec:prerequisites}\\
+\rule{0em}{1ex}\\
+สำหรับ macOS คุณสามารถดาวน์โหลดและติดตั้ง OakCoding ได้ตามขั้นตอนต่อไปนี้
+
+\begin{enumerate}
+\setlength{\itemsep}{0.7pt}
+    \item เปิด app Terminal (Terminal.app)
+
+\begin{lstlisting}[frame=none,numbers=none]
+ls
+\end{lstlisting}
+\end{enumerate}
+
+\label{launch-app}
+\subsection*{เปิดใช้งานแอป}
+
+\rule{0em}{1ex}
+
+คุณสามารถเปิดใช้งาน app ได้โดยการ
 
 \subsection{การใช้งานสำหรับผู้ใช้ระบบในระดับสิทธิ์ต่าง ๆ}
 ความสามารถของ application ที่จำเพาะต่อผู้ใช้ระบบในแต่ละระดับสิทธิ์
@@ -20,3 +67,4 @@
 
 \subsubsection{นิสิต (Consumer)}
 \noindent\blindtext[3]
+\end{document}
