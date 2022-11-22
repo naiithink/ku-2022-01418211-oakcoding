@@ -1,0 +1,10 @@
+\defaultfontfeatures[SukhumvitSet]
+{
+    Script = Thai,
+    Scale = 1.0,
+    Ligatures = TeX,
+    Extension = .ttf,
+    Path = ../fonts/SukhumvitSet/,
+    UprightFont = *-Medium,
+    BoldFont = *-Bold
+}

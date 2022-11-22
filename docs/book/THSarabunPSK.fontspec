@@ -1,0 +1,12 @@
+\defaultfontfeatures[THSarabunPSK]
+{
+    Script = Latin,
+    Scale = 1.4,
+    Ligatures = TeX,
+    Extension = .ttf,
+    Path = ../fonts/THSarabunPSK/,
+    UprightFont = THSarabun,
+    BoldFont = THSarabun_Bold,
+    ItalicFont = THSarabun_Italic,
+    BoldItalicFont = THSarabun_Bold_Italic
+}

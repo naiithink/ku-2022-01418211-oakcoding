@@ -1,0 +1,61 @@
+% !TEX program = xelatex
+\documentclass{article}
+
+
+\usepackage{oakcodingdocs}
+
+\includeonly{%
+./sections/00_introduction,
+./sections/01_usage,
+./sections/02_seed,
+./sections/03_csv,
+./sections/04_extras}
+
+
+%% Sections
+\setcounter{section}{0}
+
+
+%% Cover Page
+\title{%
+\fontsize{32pt}{\baselineskip}\flushleft\textbf{\docsname}\\
+\vspace{1ex}
+\fontsize{22pt}{\baselineskip}\ourTeam\\
+\vspace{3ex}
+\large Desktop Application สำหรับการแจ้งเรื่องร้องเรียนของนิสิตมหาวิทยาลัยเกษตรศาสตร์}
+\author{}
+\date{}
+
+
+\setlength{\baselineskip}{3ex}
+
+
+%% Document Body
+\begin{document}
+\import{./}{title.tex}
+
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+\clearpage
+
+\include{./sections/00_introduction}
+
+\clearpage
+
+\include{./sections/01_usage}
+
+\clearpage
+
+\include{./sections/02_seed}
+
+\clearpage
+
+\include{./sections/03_csv}
+
+\clearpage
+
+\include{./sections/04_extras}
+
+\clearpage
+\end{document}
