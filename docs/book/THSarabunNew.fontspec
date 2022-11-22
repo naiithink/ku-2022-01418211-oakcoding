@@ -1,6 +1,6 @@
 \defaultfontfeatures[TH Sarabun New]
 {
-    Script = Default,
+    Script = Latin,
     Scale = 1.4,
     Ligatures = TeX,
     Extension = .ttf,

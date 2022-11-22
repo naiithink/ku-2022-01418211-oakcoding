@@ -1,9 +1,0 @@
-PWD /Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book
-INPUT /usr/local/texlive/2022/texmf.cnf
-INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
-INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/naiithink/Developer/projects/naiithink/oakcoding/docs/book/sections/00_introduction.tex
-OUTPUT sections/00_introduction.log
-INPUT /usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map
-INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
-INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmti10.tfm

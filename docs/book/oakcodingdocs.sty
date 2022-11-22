@@ -1,47 +1,75 @@
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{oakcodingdocs}
 
 %% Draft
 \RequirePackage{blindtext}
+% \RequirePackage{showframe}
 
 %% Packages
+\RequirePackage{import}
 \RequirePackage{geometry}
+\RequirePackage{marginnote}
 \RequirePackage{calc}
 \RequirePackage{tabularx}
+\RequirePackage{graphicx}
 \RequirePackage{multicol}
-% \RequirePackage{utf8]{inputenc}
 \RequirePackage{anyfontsize}
-\RequirePackage{fontspec}
 \RequirePackage{xunicode}
 \RequirePackage{xltxtra}
+\RequirePackage{fontspec}
+\RequirePackage{polyglossia}
+\RequirePackage{enumitem}
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{listings}
-\RequirePackage{polyglossia}
+\RequirePackage{makeidx}
 \RequirePackage{fancyhdr}
-\RequirePackage{nameref}
+% \RequirePackage{nameref}
+\RequirePackage{titleref}
 \RequirePackage{hyperref}
-\RequirePackage{subfiles}
+
+\RequirePackage[document]{ragged2e}
 
 
-%% Custom Commands
-\newcommand{\us}{OakCoding}
-\newcommand{\ourTeam}{The~\us~Team}
-\newcommand{\appName}{\us~Application}
-\newcommand{\docsname}{คู่มือการใช้งาน \appName}
+%% Consts
+\DeclareRobustCommand{\us}{OakCoding}
+\DeclareRobustCommand{\ourTeam}{The~\us~Team}
+\DeclareRobustCommand{\appName}{\us}
+\DeclareRobustCommand{\docsname}{คู่มือการใช้งาน \appName}
+\DeclareRobustCommand{\oakrepourl}{https://github.com/CS211-651/project211-oakcoding.git}
+
+
+%% Text
+\disablehyphenation
+
+\setdefaultlanguage{english}                    % setting default lang to thai is causing toc error
+\setotherlanguage[numerals=arabic]{thai}
+
+\addto\captionsenglish{%
+    \renewcommand{\contentsname}{สารบัญ}}        % setting default lang to thai is causing toc error
+
+\XeTeXlinebreaklocale "th"
+
+\setmainfont{SukhumvitSet}
+\newfontfamily\thaifont{SukhumvitSet}[Script=Thai]
+
+
+\sloppy
 
 
 %% Graphical things
 \geometry{%
-paper = letterpaper,
-hdivide = {, \textwidth + 0.2\textwidth ,},
-marginparwidth = 120pt,
-marginparsep = 32pt,
-includemp = true,
-reversemarginpar = true}
+paper=a4paper,
+marginparwidth=110pt,
+marginparsep=30pt,
+hdivide={0.86in, , 0.86in},
+includemp=true,
+reversemarginpar=true}
 
 
 %% Page Head/Foot
 \pagestyle{fancy}
+\addtolength{\headsep}{24pt}
 \setlength{\headheight}{14pt}
 \addtolength{\topmargin}{-2pt}
 \addtolength{\headwidth}{\marginparsep + \marginparwidth}
@@ -56,7 +84,7 @@ reversemarginpar = true}
 \renewcommand{\sectionmark}[1]{\markboth{#1}{}}
 \renewcommand{\subsectionmark}[1]{\markright{#1}}
 
-\newcommand{\oakheader}[3]{%
+\DeclareRobustCommand{\oakheader}[3]{%
     \fancypagestyle{custom}{%
         \fancyhead[L]{#1}
         \fancyhead[C]{#2}
@@ -66,77 +94,128 @@ reversemarginpar = true}
 
 %% PDF
 \hypersetup{%
-pdftitle = {\docsname},
-pdfsubject = {OakCoding},
-pdfauthor = {\ourTeam},
-pdfkeywords = {{Software Construction}, 01418211, \us, {Complaint System}}}
-
-
-%% Languages
-\setdefaultlanguage[numerals=arabic]{thai}
-\setotherlanguages{english}
-
-\XeTeXlinebreaklocale "th"
-
-\setmainfont{TH Sarabun New}
-\newfontfamily\thaifont[Script=Default]{TH Sarabun New}
+pdftitle={\docsname},
+pdfsubject={OakCoding},
+pdfauthor={\ourTeam},
+pdfkeywords={{Software Construction}, 01418211, \us, {Complaint System}}}
 
 
 %% Sections and Paragraphs
+\renewcommand*{\raggedleftmarginnote}{}
+\renewcommand{\marginfont}{\footnotesize}
+
 \setlength{\parindent}{0em}
+\renewcommand{\baselinestretch}{1.3}
 
 \titleformat{\section}
-{\Huge\bfseries}            % format
-{}                          % label
-{0pt}                       % sep: length between 'label' and 'title body'
+{\Huge\bfseries}                % format
+{\thesection}                   % label
+{26pt}                          % sep: length between 'label' and 'title body'
 {}
 {}
 
 \titleformat{\subsection}
-{\Large\bfseries}           % format
-{}                          % label
-{0pt}                       % sep: length between 'label' and 'title body'
+{\Large\bfseries}               % format
+{\thesubsection}                % label
+{22pt}                          % sep: length between 'label' and 'title body'
 {}
 {}
 
 \titleformat{\subsubsection}
-{\large\bfseries}           % format
-{}                          % label
-{0pt}                       % sep: length between 'label' and 'title body'
+{\large\bfseries}               % format
+{\thesubsubsection}             % label
+{22pt}                          % sep: length between 'label' and 'title body'
 {}
 {}
 
 \titlespacing{\section}
 {0pt}
 {2ex}
-{6ex}
+{10ex}
 
 \titlespacing{\subsection}
 {0pt}
 {6ex}
-{1ex}
+{2ex}
 
 \titlespacing{\subsubsection}
 {0pt}
 {3ex}
-{1ex}
+{1.6ex}
+
+
+%% Items
+\setlist[description, 1]{%
+align=left,
+listparindent=0pt,
+labelwidth=10em,
+itemsep=1.5ex}
+
+\setlist[enumerate, 1]{%
+align=left,
+leftmargin=*,
+itemsep=1ex}
+
+\setlist[itemize, 1]{%
+align=left,
+leftmargin=*,
+itemsep=1ex}
 
 
 %% Listings
 \lstset{%
-basicstyle = \ttfamilylatin,
-commentstyle = \color{olive},
-keywordstyle = \color{magenta},
-numbers = left,
-captionpos = b,
-belowcaptionskip = 1ex,
-tabsize = 4,
-frame = single,
-framexleftmargin = 0mm,
-framexrightmargin = 0mm,
-title = \lstname}
+basicstyle=\ttfamilylatin,
+commentstyle=\color{olive},
+keywordstyle=\color{magenta},
+numbers=left,
+captionpos=b,
+belowcaptionskip=1ex,
+tabsize=4,
+frame=single,
+framexleftmargin=0mm,
+framexrightmargin=0mm,
+aboveskip=1.5ex,
+belowskip=1.5ex,
+title=\lstname}
 
+
+%% Custom Commands
+\reversemarginpar
+\DeclareRobustCommand{\oakmarginpar}[1]{%
+\marginnote[#1]}
+
+\DeclareRobustCommand{\oakinline}[1]{%
+\vspace{1.2ex}
+\lstinline[aboveskip=2ex,belowskip=2ex]{#1}
+\vspace{1.2ex}\par}
+
+\DeclareRobustCommand{\oakdoubleline}[2]{%
+\vspace{1.2ex}
+\lstinline[aboveskip=2ex,belowskip=2ex]{#1}\\
+\lstinline[aboveskip=2ex,belowskip=2ex]{#2}
+\vspace{1.2ex}\par}
+
+\DeclareRobustCommand{\oaktripleline}[3]{%
+\vspace{1.2ex}
+\lstinline[aboveskip=2ex,belowskip=2ex]{#1}\\
+\lstinline[aboveskip=2ex,belowskip=2ex]{#2}\\
+\lstinline[aboveskip=2ex,belowskip=2ex]{#3}
+\vspace{1.2ex}\par}
+
+\DeclareRobustCommand{\oakparimage}[1]{%
+\includegraphics[%
+width=0.8\textwidth,
+keepaspectratio]{#1}}
 
 %% Custom Environments
 \newenvironment{oaknohead}{%
 \oakheader{}{}{}}{}
+
+
+%% Hooks
+\AtBeginDocument{%
+\edef\marginnotetextwidth{\the\textwidth}}
+
+
+%% Init
+\makeindex
