@@ -6,12 +6,13 @@
 % \RequirePackage{showframe}
 
 %% Packages
-\RequirePackage{import}
 \RequirePackage{geometry}
 \RequirePackage{marginnote}
 \RequirePackage{calc}
+\RequirePackage{xcolor}
 \RequirePackage{tabularx}
 \RequirePackage{graphicx}
+\RequirePackage{tikz}
 \RequirePackage{multicol}
 \RequirePackage{anyfontsize}
 \RequirePackage{xunicode}
@@ -37,6 +38,8 @@
 \DeclareRobustCommand{\appName}{\us}
 \DeclareRobustCommand{\docsname}{คู่มือการใช้งาน \appName}
 \DeclareRobustCommand{\oakrepourl}{https://github.com/CS211-651/project211-oakcoding.git}
+
+\definecolor{oakgrey}{RGB}{245,245,245}
 
 
 %% Text
@@ -172,8 +175,11 @@ captionpos=b,
 belowcaptionskip=1ex,
 tabsize=4,
 frame=single,
+frameround=tttt,
 framexleftmargin=0mm,
 framexrightmargin=0mm,
+rulecolor=\color{white},
+backgroundcolor=\color{oakgrey},
 aboveskip=1.5ex,
 belowskip=1.5ex,
 title=\lstname}
