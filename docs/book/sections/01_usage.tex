@@ -48,7 +48,9 @@
 
     \item จากนั้นคุณจะต้องดาวน์โหลดไฟล์ทีี่จำเป็นด้วยคำสั่ง:
 
-    \oakinline{$ git clone https://github.com/CS211-651/project211-oakcoding.git}
+\begin{lstlisting}[numbers=none]
+$ git clone %\oakrepourl%
+\end{lstlisting}
 
     หากคุณได้รับข้อความว่า \texttt{Username for 'https://github.com': } ให้คุณทำการลงชื่อเข้าใช้
     ด้วยบัญชี GitHub ของคุณ\marginpar{บัญชี GitHub ของคุณจะต้องมีสิทธิ์เข้าถึง Git repository ของ OakCoding ด้วย
@@ -56,13 +58,16 @@
 
     \item เมื่อการดาวน์โหลดเสร็จสิ้น ให้คุณตรวจสอบว่ามี directory ที่ชื่อว่า \mbox{\texttt{project211-oakcoding}} อยู่หรือไม่ด้วยคำสั่ง
 
-    \oakinline{$ ls}
+\begin{lstlisting}[numbers=none]
+$ ls
+\end{lstlisting}
 
     หากการดาวน์โหลดนั้นเสร็จสมบูรณ์ จะต้องมีชื่อ directory ปรากฏอยู่
 
-    \oakdoubleline{\$ ls}{project211-oakcoding}
-
-    และนั่นหมายความว่าคุณพร้อมที่จะ\nameref{subsec:launch-app}แล้ว
+\begin{lstlisting}[numbers=none]
+$ ls
+project211-oakcoding
+\end{lstlisting}
 \end{enumerate}
 
 \clearpage

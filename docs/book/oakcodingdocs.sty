@@ -23,7 +23,7 @@
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{listings}
-\RequirePackage{makeidx}
+% \RequirePackage{makeidx}
 \RequirePackage{fancyhdr}
 % \RequirePackage{nameref}
 \RequirePackage{titleref}
@@ -167,6 +167,7 @@ itemsep=1ex}
 
 %% Listings
 \lstset{%
+escapechar=\%,
 basicstyle=\ttfamilylatin,
 commentstyle=\color{olive},
 keywordstyle=\color{magenta},
@@ -181,8 +182,7 @@ framexrightmargin=0mm,
 rulecolor=\color{white},
 backgroundcolor=\color{oakgrey},
 aboveskip=1.5ex,
-belowskip=1.5ex,
-title=\lstname}
+belowskip=1.5ex}
 
 
 %% Custom Commands
@@ -190,28 +190,12 @@ title=\lstname}
 \DeclareRobustCommand{\oakmarginpar}[1]{%
 \marginnote[#1]}
 
-\DeclareRobustCommand{\oakinline}[1]{%
-\vspace{1.2ex}
-\lstinline[aboveskip=2ex,belowskip=2ex]{#1}
-\vspace{1.2ex}\par}
-
-\DeclareRobustCommand{\oakdoubleline}[2]{%
-\vspace{1.2ex}
-\lstinline[aboveskip=2ex,belowskip=2ex]{#1}\\
-\lstinline[aboveskip=2ex,belowskip=2ex]{#2}
-\vspace{1.2ex}\par}
-
-\DeclareRobustCommand{\oaktripleline}[3]{%
-\vspace{1.2ex}
-\lstinline[aboveskip=2ex,belowskip=2ex]{#1}\\
-\lstinline[aboveskip=2ex,belowskip=2ex]{#2}\\
-\lstinline[aboveskip=2ex,belowskip=2ex]{#3}
-\vspace{1.2ex}\par}
-
+% Images
 \DeclareRobustCommand{\oakparimage}[1]{%
 \includegraphics[%
 width=0.8\textwidth,
 keepaspectratio]{#1}}
+
 
 %% Custom Environments
 \newenvironment{oaknohead}{%
@@ -224,4 +208,4 @@ keepaspectratio]{#1}}
 
 
 %% Init
-\makeindex
+% \makeindex
