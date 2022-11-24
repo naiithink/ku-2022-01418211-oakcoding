@@ -1,6 +1,6 @@
 \section{รายละเอียดไฟล์ CSV}
 
-\subsection{ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}} Directory}
+\subsection{ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~Directory}}
 
 \begin{lstlisting}[name={ไฟล์ CSV ใน data/ Directory},numbers=none]
 data/
@@ -34,14 +34,59 @@ data/
 
 \clearpage
 
-ไฟล์ CSV ใน \texttt{data/} directory จะมีรูปแบบร่วมกันคือ
+\subsection{การตีความไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~Directory}}
+
+ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~directory} จะมีรูปแบบร่วมกันคือ
 ในแต่ละไฟล์จะมีหัวตาราง (header) และมีส่วนที่เป็นเนื้อหาของไฟล์ (body)
 
-% \oak
-% "UID","USER_NAME","ROLE","IS_ACTIVE","LOGIN_ATTEMPT"
-% "1666340062670-staffuser","qq","STAFF","true","0"
+ยกตัวอย่างเช่น ข้อมูลในตาราง people ต่อไปนี้:
 
-% \begin{tabular}{@{} }
-% \end{tabular}
+\begin{table}[!htb]
+\begin{tabular}{@{} | l | l | l | l | l | @{}}
+\hline
+USER\textunderscore{}ID     & NAME       & EMAIL\\
+\hline\hline
+0001        & Bob        & bob@example.com\\
+0002        & Alice      & alice@example.com\\
+\hline
+\end{tabular}
+\caption{people}\label{tab:people}
+\end{table}
+
+สามารถเก็บเป็นไฟล์ CSV ได้เป็น
+
+\begin{lstlisting}[caption={\texttt{people.csv}},label={lst:people.csv},numbers=none]
+"USER_ID","NAME","EMAIL"
+"0001","Bob","bob@example.com"
+"0002","Alice","alice@example.com"
+\end{lstlisting}
+
+header ของตารางมีเอาไว้เพื่อกำหนดว่าข้อมูลใน column/field นั้น ๆ คืออะไร
+นั่นก็เพื่ออำนวยให้ทั้งคนและแอปสามารถตีความข้อมูลได้
+
+ส่วน body ของตารางมีเอาไว้เพื่อเก็บข้อมูล โดยที่ข้อมูล 1 entity จะกินพื้นที่ 1 row/record ในตาราง
+และจะวางตัวเป็น tuple; รูปแบบการ represent ข้อมูลอย่างมีลำดับ อย่างเช่น $ (x, y) $ จะเป็นคนละ entity กับ $ (y, x) $
+
+และเมื่อต้องตีความข้อมูลจากไฟล์ \nameref{lst:people.csv} ก็สามารถตีความได้ดังนี้
+
+\begin{enumerate}
+    \item ไฟล์ที่มีชื่อว่า \texttt{people.csv} เป็นไฟล์ CSV ที่มี 3 columns
+    \item แต่ละ column ในไฟล์เก็บข้อมูล \texttt{USER\textunderscore{}ID}, \texttt{NAME}, \texttt{EMAIL} ตามลำดับ
+    \item Record ที่ 1 ของไฟล์นั้น represent ข้อมูล:
+        \begin{itemize}
+            \item \texttt{USER\textunderscore{}ID}: 0001
+            \item \texttt{NAME}: Bob
+            \item \texttt{EMAIL}: bob@example.com
+        \end{itemize}
+    \item Record ที่ 2 ของไฟล์นั้น represent ข้อมูล:
+        \begin{itemize}
+            \item \texttt{USER\textunderscore{}ID}: 0002
+            \item \texttt{NAME}: Alice
+            \item \texttt{EMAIL}: alice@example.com
+        \end{itemize}
+\end{enumerate}
+
+คุณสามารถนำวิธีการตีความไฟล์ CSV นี้ไปปรับใช้กับไฟล์ CSV ใด ๆ ก็ได้ใน \texttt{data/} directory ของ project
+
 \subsection{รายละเอียดของไฟล์ CSV แต่ละไฟล์}
 \noindent\blindtext[3]

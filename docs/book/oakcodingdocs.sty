@@ -23,6 +23,7 @@
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{listings}
+\RequirePackage{caption}
 % \RequirePackage{makeidx}
 \RequirePackage{fancyhdr}
 % \RequirePackage{nameref}
@@ -201,6 +202,10 @@ keepaspectratio]{#1}}
 \newenvironment{oaknohead}{%
 \oakheader{}{}{}}{}
 
+\newenvironment{oaktable}[2][t]{%
+\begin{tabular}[#1]{#2}}{%
+\end{tabular}}
+
 
 %% Hooks
 \AtBeginDocument{%
@@ -209,3 +214,9 @@ keepaspectratio]{#1}}
 
 %% Init
 % \makeindex
+\def\arraystretch{1}
+\setlength{\parskip}{1.3ex}
+
+\captionsetup{%
+justification=raggedright,
+singlelinecheck=false}
