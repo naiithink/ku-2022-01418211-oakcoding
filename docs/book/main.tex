@@ -1,4 +1,6 @@
 % !TEX program = xelatex
+% !BIB program = bibtex
+
 \documentclass{article}
 
 
@@ -11,6 +13,8 @@
 ./sections/02_seed,
 ./sections/03_csv,
 ./sections/04_extras}
+
+\addbibresource{main.bib}
 
 
 %% Sections
@@ -30,11 +34,18 @@
 
 %% Document Body
 \begin{document}
+% \include{./main.bib}
+
 \include{./title}
 
 \clearpage
 \thispagestyle{empty}
 \tableofcontents
+
+\clearpage
+
+\listoftables
+
 \clearpage
 
 \include{./sections/00_introduction}
@@ -57,5 +68,5 @@
 
 \clearpage
 
-\listoftables
+\printbibliography[title={อ้างอิง}]
 \end{document}

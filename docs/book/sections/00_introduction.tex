@@ -65,6 +65,37 @@
 OakCoding ถูกพัฒนาด้วยภาษา Java โดยใช้ Java Development Kit (JDK) 17
 \mbox{ร่วมกับ} JavaFX 17 และใช้ \href{https://maven.apache.org/}{Maven} ในการ automate building process
 
+\subsubsection*{ระบบระบุตัวตน (Identification System)}
+
+Entity ของ object บางประเภทมีความจำเป็นจะต้องมีสิ่งที่เอาไว้ระบุตัวตน\\
+เช่น บัญชีผู้ใช้ในระบบ, department ต่าง ๆ ในระบบ, และ complaint ในระบบ เป็นต้น
+
+เราเรียกสิ่งที่ใช้ระบุตัวตนของ object ในระบบว่า Identifier --- หรือ \emph{ID} --- โดยที่ convention
+ในการสร้าง (generate) ID มีรูปแบบดังนี้:
+
+\begin{lstlisting}[numbers=none,rulecolor=\oakrulecolor]
+<%$ time $%>-<SIMPLE_CLASS_NAME>
+\end{lstlisting}
+
+โดยที่ $time \in [0, 2^{63}-1]$\marginpar{ข้อมูลประเภท \texttt{long} ใน Java สามารถเก็บค่าได้ในช่วง $[-2^{63}, 2^{63}-1]$ \mbox{\cite[JSL \S 4.2.1]{jsl-4.2.1}}} represent เวลาในระบบ UNIX ซึ่งเป็นเวลาที่
+ID นั้น ๆ ถูก generate ขึ้นในระบบ ความยาวของ string $time$ จะเริ่มต้นที่ 13 ตัวอักษร
+
+\texttt{SIMPLE\textunderscore{}CLASS\textunderscore{}NAME} เป็นชื่อของ class อย่างง่าย (simple name) ตามที่ได้กำหนดไว้ใน
+Java Language Specification (JLS) \mbox{\cite[JSL \S 6.2]{jsl-6.2}} ซึ่งจะมีประโยชน์ในการจำแนกประเภทของ object
+ในระบบ
+
+สังเกตว่า แม้ว่า Admin จะมีบัญชีในระบบได้ไม่เกิน 1 บัญชี แต่ก็มี ID เช่นกัน\\
+โดยที่ ID ของ Admin คือ ``\texttt{0000000000000-adminuser}''
+และเหตุผลที่ Admin จำเป็นจะต้องมี ID คือ ระบบจัดการบัญชีของแอป
+ใช้ ID เป็นสิ่งระบุตัวตนหลักของ\mbox{ผู้ใช้}ทุกคน
+
+ด้วยวิธีนี้ จึงทำให้ผู้ใช้สามารถเปลี่ยนชื่อผู้ใช้ (username) ในภายหลังได้
+อีกทั้งยังสามารถประเมินเวลาคร่าว ๆ ได้อีกด้วยว่าบัญชีผู้ใช้
+ต่าง ๆ ในระบบถูกสร้างขึ้นเมื่อใด --- ยกเว้นแต่ Admin บัญชีเดียว
+ซึ่งเราได้สร้างไว้ให้ก่อนหน้าที่คุณจะติดตั้งแอปแล้ว
+
+\clearpage
+
 \rule{0em}{1ex}
 \subsection*{โครงสร้าง Directory ของ Project}
 

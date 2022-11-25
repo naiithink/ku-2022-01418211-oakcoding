@@ -1,39 +1,5 @@
 \section{รายละเอียดไฟล์ CSV}
 
-\subsection{ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~Directory}}
-
-\begin{lstlisting}[name={ไฟล์ CSV ใน data/ Directory},numbers=none]
-data/
-    ...
-    deps/
-        <DEPARTMENTS' DIRECTORIES>/
-            info.csv
-            members.csv
-            tags.csv
-        ...
-        deps.csv
-    issues/
-        complaints/
-            evidences/
-                evidences.csv
-            categories.csv
-            complaints.csv
-        reports/
-            reports.csv
-    users/
-        _ROOT/
-            info.csv
-        <USERS' DIRECTORIES>/
-            info.csv
-        ...
-        requests.csv
-    passwd.csv
-    sessions.csv
-    users.csv
-\end{lstlisting}
-
-\clearpage
-
 \subsection{การตีความไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~Directory}}
 
 ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~directory} จะมีรูปแบบร่วมกันคือ
@@ -55,7 +21,7 @@ USER\textunderscore{}ID     & NAME       & EMAIL\\
 
 สามารถเก็บเป็นไฟล์ CSV ได้เป็น
 
-\begin{lstlisting}[caption={\texttt{people.csv}},label={lst:people.csv},numbers=none]
+\begin{lstlisting}[caption={\texttt{people.csv}},label={lst:people.csv}]
 "USER_ID","NAME","EMAIL"
 "0001","Bob","bob@example.com"
 "0002","Alice","alice@example.com"
@@ -71,16 +37,16 @@ header\marginpar{header ของตารางของไฟล์ CSV ใน
 
 \begin{enumerate}
     \item ไฟล์ที่มีชื่อว่า \texttt{people.csv} เป็นไฟล์ CSV ที่มี 3 columns
-    \item แต่ละ column ในไฟล์เก็บข้อมูล \texttt{USER\textunderscore{}ID}, \texttt{NAME}, \texttt{EMAIL} ตามลำดับ
+    \item แต่ละ column ในไฟล์แสดงข้อมูล \texttt{UID}, \texttt{NAME}, และ \texttt{EMAIL} ตามลำดับ
     \item ในไฟล์นั้นมี 1 record ที่ represent ข้อมูล:\marginpar{เริ่มตั้งแต่บรรทัดที่ 2 ของไฟล์ ลำดับของบรรทัดนั้นไม่มีนัยสำคัญ}
         \begin{itemize}
-            \item \texttt{USER\textunderscore{}ID}: 0001
+            \item \texttt{UID}: 0001
             \item \texttt{NAME}: Bob
             \item \texttt{EMAIL}: bob@example.com
         \end{itemize}
     \item และในไฟล์เดียวกันก็มีอีก 1 record ที่ represent ข้อมูล:
         \begin{itemize}
-            \item \texttt{USER\textunderscore{}ID}: 0002
+            \item \texttt{UID}: 0002
             \item \texttt{NAME}: Alice
             \item \texttt{EMAIL}: alice@example.com
         \end{itemize}
@@ -88,5 +54,406 @@ header\marginpar{header ของตารางของไฟล์ CSV ใน
 
 คุณสามารถนำวิธีการตีความไฟล์ CSV นี้ไปปรับใช้กับไฟล์ CSV ใด ๆ ก็ได้ใน \texttt{data/} directory ของ project
 
+\clearpage
+
+\subsection{ไฟล์ CSV ใน \href{https://github.com/CS211-651/project211-oakcoding/tree/9397d355461933fb007261e2ee97445ea93eacc1/data}{\texttt{data\slash}~Directory}}
+
+นี่คือโครงสร้างคร่าว ๆ เพื่อแสดงที่อยู่ของไฟล์ CSV ใน data/ directory
+
+\begin{lstlisting}[name={ไฟล์ CSV ใน data/ Directory},numbers=none]
+data/
+    ...
+    deps/
+        *<DEPARTMENT>/
+            info.csv -------------------------------% \hyperref[subsubsec:csv-f1]{$ F_{1} $} %
+            members.csv ----------------------------% \hyperref[subsubsec:csv-f2]{$ F_{2} $} %
+            tags.csv -------------------------------% \hyperref[subsubsec:csv-f3]{$ F_{3} $} %
+        ...
+        deps.csv -----------------------------------% \hyperref[subsubsec:csv-f4]{$ F_{4} $} %
+    issues/
+        complaints/
+            evidences/
+                evidences.csv ----------------------% \hyperref[subsubsec:csv-f5]{$ F_{5} $} %
+            categories.csv -------------------------% \hyperref[subsubsec:csv-f6]{$ F_{6} $} %
+            complaints.csv -------------------------% \hyperref[subsubsec:csv-f7]{$ F_{7} $} %
+        reports/
+            reports.csv ----------------------------% \hyperref[subsubsec:csv-f8]{$ F_{8} $} %
+    users/
+        *<USER>/
+            info.csv -------------------------------% \hyperref[subsubsec:csv-f9]{$ F_{9} $} %
+        ...
+        requests.csv -------------------------------% \hyperref[subsubsec:csv-f10]{$ F_{10} $} %
+    passwd.csv -------------------------------------% \hyperref[subsubsec:csv-f11]{$ F_{11} $} %
+    sessions.csv -----------------------------------% \hyperref[subsubsec:csv-f12]{$ F_{12} $} %
+    users.csv --------------------------------------% \hyperref[subsubsec:csv-f13]{$ F_{13} $} %
+\end{lstlisting}
+
+% UNDERSCORED VERSION
+% \begin{lstlisting}[name={ไฟล์ CSV ใน data/ Directory},numbers=none]
+% data/
+%     ...
+%     deps/
+%         *<DEPARTMENT>/
+%             info.csv _______________________________% \hyperref[subsubsec:csv-f1]{$ F_{1} $} %
+%             members.csv ____________________________% \hyperref[subsubsec:csv-f2]{$ F_{2} $} %
+%             tags.csv _______________________________% \hyperref[subsubsec:csv-f3]{$ F_{3} $} %
+%         ...
+%         deps.csv ___________________________________% \hyperref[subsubsec:csv-f4]{$ F_{4} $} %
+%     issues/
+%         complaints/
+%             evidences/
+%                 evidences.csv ______________________% \hyperref[subsubsec:csv-f5]{$ F_{5} $} %
+%             categories.csv _________________________% \hyperref[subsubsec:csv-f6]{$ F_{6} $} %
+%             complaints.csv _________________________% \hyperref[subsubsec:csv-f7]{$ F_{7} $} %
+%         reports/
+%             reports.csv ____________________________% \hyperref[subsubsec:csv-f8]{$ F_{8} $} %
+%     users/
+%         *<USER>/
+%             info.csv _______________________________% \hyperref[subsubsec:csv-f9]{$ F_{9} $} %
+%         ...
+%         requests.csv _______________________________% \hyperref[subsubsec:csv-f10]{$ F_{10} $} %
+%     passwd.csv _____________________________________% \hyperref[subsubsec:csv-f11]{$ F_{11} $} %
+%     sessions.csv ___________________________________% \hyperref[subsubsec:csv-f12]{$ F_{12} $} %
+%     users.csv ______________________________________% \hyperref[subsubsec:csv-f13]{$ F_{13} $} %
+% \end{lstlisting}
+
+และเพื่อความสะดวกในการอ้างอิง เราจะให้ $ F_n $ แทนไฟล์ \texttt{*.csv} ที่ $ n $
+
+\clearpage
+
 \subsection{รายละเอียดของไฟล์ CSV แต่ละไฟล์}
-\noindent\blindtext[3]
+
+
+% F1
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{1} $}{File \#1}: \texttt{data/deps/DEPARTMENT/info.csv}}\label{subsubsec:csv-f1}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DEF\textunderscore{}NAME              & ชื่อของ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}[caption={\texttt{data/deps/human\textunderscore{}resources/info.csv}}]
+"DEP_ID","DEP_NAME"
+"0000000000001-department","human_resources"
+\end{lstlisting}
+
+\begin{description}[labelwidth=*]
+    \item[$ \Rightarrow $]  Department ที่มี ID ``\texttt{0000000000001-department}'' เป็น department ที่มีชื่อว่า ``human\textunderscore{}resources''
+\end{description}
+\end{minipage}
+
+
+% F2
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{2} $}{File \#2}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f2}
+\phantomsection
+
+รายชื่อของ staff member ใน department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & UID                                   & หมายเลขประจำตัวผู้ใช้ของ staff ที่เป็น member ของ department \\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}[caption={\texttt{data/deps/human\textunderscore{}resources/members.csv}}]
+"UID","DATE_ADDED"
+"0000000000001-staffuser","0000000000000"
+\end{lstlisting}
+
+\begin{description}[labelwidth=*]
+    \item[$ \Rightarrow $]  ใน department ที่มีชื่อว่า ``human\textunderscore{}resources'' มีผู้ใช้ member อยู่ 1 ผู้ใช้ที่มี
+\mbox{หมายเลขประจำตัวผู้ใช้} ``\texttt{0000000000001-staffuser}'' โดยถูกเพิ่มเข้ามา\relax
+เมื่อเวลา 00:00:00 UTC ของวันพฤหัสบดีที่ 1 มกราคม ค.ศ. 1970
+\end{description}
+\end{minipage}
+
+
+% F3
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{3} $}{File \#3}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f3}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F4
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{4} $}{File \#4}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f4}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F5
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{5} $}{File \#5}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f5}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F6
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{6} $}{File \#6}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f6}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F7
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{7} $}{File \#7}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f7}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F8
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{8} $}{File \#8}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f8}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F9
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{9} $}{File \#9}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f9}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F10
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{10} $}{File \#10}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f10}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F11
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{11} $}{File \#11}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f11}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F12
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{12} $}{File \#12}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f12}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
+
+
+% F13
+\begin{minipage}{\textwidth}
+\subsubsection{\texorpdfstring{$ F_{13} $}{File \#13}: \texttt{**/DEPARTMENT/members.csv}}\label{subsubsec:csv-f13}
+\phantomsection
+
+ข้อมูลทั่วไปของ department
+
+\begin{tabular}[!hbt]{| r | >{\ttfamily}p{15ex}<{\rmfamily} | p{36ex} |}
+\hline
+Column \#       & \rmfamily Column Title                & คำอธิบาย\\
+\hline
+1               & DEP\textunderscore{}ID                & หมายเลขประจำ department\\
+2               & DATE\textunderscore{}ADDED            & เวลาที่เพิ่ม member คนนั้น ๆ เข้าสู่ department\\
+\hline
+\end{tabular}
+
+\oaksimsec{ตัวอย่างข้อมูล}
+
+\begin{lstlisting}
+"UID","DATE_ADDED"
+"0000000000000-adminuser",""
+\end{lstlisting}
+\end{minipage}
