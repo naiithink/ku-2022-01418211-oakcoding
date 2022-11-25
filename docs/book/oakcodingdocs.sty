@@ -69,12 +69,10 @@
 \addto\captionsenglish{%
     \renewcommand{\figurename}{รูปที่}}
 
-\renewcommand{\lstlistingname}{ลิสต์ที่}
-
 \renewcommand{\lstlistlistingname}{สารบัญลิสต์}
 
-% \addto\captionsenglish{%
-%     \renewcommand{\bibname}{อ้างอิง}}
+\renewcommand{\lstlistingname}{ลิสต์ที่}
+
 
 \XeTeXlinebreaklocale "th"
 
@@ -90,7 +88,7 @@
 paper=a4paper,
 twoside=false,
 hmargin={0.86in,0.86in},
-vmargin={1in,1in},
+vmargin={1in,1.3in},
 marginparwidth=110pt,
 marginparsep=30pt,
 includemp=true,
@@ -242,8 +240,7 @@ keepaspectratio]{#1}}
 
 %% Hooks
 \AtBeginDocument{%
-\edef\marginnotetextwidth{\the\textwidth},
-\captionof{table}{ตาราง}}
+\edef\marginnotetextwidth{\the\textwidth}}
 
 
 %% Init
