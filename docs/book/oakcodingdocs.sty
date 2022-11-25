@@ -61,7 +61,17 @@
     \renewcommand{\listtablename}{สารบัญตาราง}}
 
 \addto\captionsenglish{%
+    \renewcommand{\tablename}{ตารางที่}}
+
+\addto\captionsenglish{%
     \renewcommand{\listfigurename}{สารบัญรูป}}
+
+\addto\captionsenglish{%
+    \renewcommand{\figurename}{รูปที่}}
+
+\renewcommand{\lstlistingname}{ลิสต์ที่}
+
+\renewcommand{\lstlistlistingname}{สารบัญลิสต์}
 
 % \addto\captionsenglish{%
 %     \renewcommand{\bibname}{อ้างอิง}}
@@ -232,7 +242,8 @@ keepaspectratio]{#1}}
 
 %% Hooks
 \AtBeginDocument{%
-\edef\marginnotetextwidth{\the\textwidth}}
+\edef\marginnotetextwidth{\the\textwidth},
+\captionof{table}{ตาราง}}
 
 
 %% Init
