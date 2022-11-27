@@ -254,10 +254,20 @@ belowskip=1.5ex}
 \textbf{#1}
 \vspace{1.6\parsep}\newline}
 
+\DeclareRobustCommand{\oaksecref}[1]{%
+% \hypersetup{hidelinks}
+\textbf{\hyperref[#1]{%
+\if\getrefnumber{#1}\relax%
+\else
+\ref{#1}~%
+\fi
+\nameref{#1}}}}
+
 % Images
 \DeclareRobustCommand{\oakparimage}[1]{%
 \includegraphics[%
 width=0.8\textwidth,
+height=0.8\textwidth,
 keepaspectratio]{#1}}
 
 

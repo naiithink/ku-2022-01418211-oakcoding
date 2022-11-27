@@ -27,14 +27,14 @@
     \item \href{https://maven.apache.org/}{Maven}
 \end{itemize}
 
-เมื่อคุณมีครบทุกสิ่งทุกอย่างแล้ว คุณก็พร้อมที่จะ\nameref{subsec:install}
+เมื่อคุณมีครบทุกสิ่งทุกอย่างแล้ว คุณก็พร้อมที่จะไปที่ \oaksecref{subsec:install}
 
 \clearpage
 
 \subsection{ดาวน์โหลด OakCoding}
 \label{subsec:install}
 
-หลังจากที่คุณมีทุกสิ่งทุกอย่างพร้อมแล้ว หากยังโปรดไปที่\linebreak[3]\mbox{\textbf{\nameref{subsec:prep-install}}}\\
+หลังจากที่คุณมีทุกสิ่งทุกอย่างพร้อมแล้ว หากยังโปรดไปที่\linebreak[3]\mbox{\oaksecref{subsec:prep-install}}\\
 
 \rule{0em}{1ex}
 
@@ -53,11 +53,11 @@
 $ git clone %\oakrepourl%
 \end{lstlisting}
 
-    หากคุณได้รับข้อความว่า \texttt{Username for 'https://github.com': } ให้คุณทำการลงชื่อเข้าใช้
-    ด้วยบัญชี GitHub ของคุณ\marginnote{บัญชี GitHub ของคุณจะต้องมีสิทธิ์เข้าถึง Git repository ของ OakCoding ด้วย
+    หากคุณได้รับข้อความว่า ``\texttt{Username for 'https://github.com': }''\\
+    ให้คุณทำการลงชื่อเข้าใช้ด้วยบัญชี GitHub ของคุณ\marginnote{บัญชี GitHub ของคุณจะต้องมีสิทธิ์เข้าถึง Git repository ของ OakCoding ด้วย
     ไม่เช่นนั้นคุณจะไม่สามารถดาวน์โหลดไฟล์ต่าง ๆ ได้}
 
-    \item เมื่อการดาวน์โหลดเสร็จสิ้น ให้คุณตรวจสอบว่ามี directory ที่ชื่อว่า \mbox{\texttt{project211-oakcoding}} อยู่หรือไม่ด้วยคำสั่ง
+    \item เมื่อการดาวน์โหลดเสร็จสิ้น ให้คุณตรวจสอบว่ามี directory ที่ชื่อว่า ``\mbox{\texttt{project211-oakcoding}}'' อยู่หรือไม่ด้วยคำสั่ง
 
 \begin{lstlisting}[numbers=none]
 $ ls
@@ -71,7 +71,7 @@ project211-oakcoding
 \end{lstlisting}
 \end{enumerate}
 
-เมื่อคุณได้ดาวน์โหลดไฟล์ที่จำเป็นเสร็จสมบูรณ์แล้ว ให้คุณเปลี่ยน directory เข้าไปที่ \texttt{project211-oakcoding} ด้วยคำสั่ง:
+เมื่อคุณได้ดาวน์โหลดไฟล์ที่จำเป็นเสร็จสมบูรณ์แล้ว ให้คุณเปลี่ยน directory เข้าไปที่ ``\texttt{project211-oakcoding}'' ด้วยคำสั่ง:
 
 \begin{lstlisting}[numbers=none]
 $ cd project211-oakcoding
@@ -79,7 +79,7 @@ $ cd project211-oakcoding
 
 \clearpage
 
-จากนั้น เมื่อคุณใช้คำสั่ง \texttt{ls run.sh} เพื่อตรวจสอบเนื้อหาภายใน directory คุณควรจะเห็นไฟล์หนึ่งที่มีชื่อว่า \texttt{run.sh}
+จากนั้น เมื่อคุณใช้คำสั่ง ``\texttt{ls run.sh}'' เพื่อตรวจสอบเนื้อหาภายใน directory คุณควรจะเห็นไฟล์หนึ่งที่มีชื่อว่า ``\texttt{run.sh}''
 
 \begin{lstlisting}[numbers=none]
 $ ls run.sh
@@ -88,7 +88,7 @@ run.sh
 
 และนั่นก็คือไฟล์ที่จะช่วยให้คุณสามารถที่จะติดตั้งและเปิดใช้งานแอปได้ภายในคำสั่งเดียว
 
-ต่อไปเราจะ\nameref{subsec:launch-app}กัน
+ต่อไปเราจะต่อที่ \oaksecref{subsec:launch-app} กัน
 
 \clearpage
 
@@ -107,12 +107,71 @@ $ sh run.sh
 \end{lstlisting}
 
 การติดตั้งอาจใช้เวลาครู่หนึ่ง ขึ้นอยู่กับหลายปัจจัย อย่างเช่น อินเทอร์เน็ตของคุณ
-คอมพิวเตอร์ของคุณ หรือหากคุณไม่เคยเรียกใช้คำสั่ง \texttt{mvn} เพื่อสร้างหรือเปิดใช้งาน
+คอมพิวเตอร์ของคุณ หรือหากคุณไม่เคยเรียกใช้คำสั่ง ``\texttt{mvn}'' เพื่อสร้างหรือเปิดใช้งาน
 project ใด ๆ มาก่อนบนคอมพิวเตอร์ของคุณ
 
 หากการติดตั้งนั้นผ่านไปได้ด้วยดี แอป OakCoding จะเปิดขึ้นมาต้อนรับคุณ!
 
+\oakparimage{sections/images/01/01-03_app-welcome.png}
 
+หน้าตาของแอปอาจแตกต่างจากที่คุณเห็นในคู่มือเล่มนี้
+ขึ้นอยู่กับว่าคุณใช้งานระบบปฏิบัติการใด สำหรับ macOS ชุดปุ่มควบคุมหน้าต่างจะอยู่มุมบนซ้ายของแอป
+ส่วนระบบปฏิบัติการอื่น ๆ ชุดปุ่มดังกล่าวจะอยู่ที่มุมบนขวา
+
+OakCoding จะปรับตัวให้เข้ากับการใช้งานของคุณ บนระบบปฏิบัติการของคุณ
+
+\clearpage
+
+\subsection{การใช้งานโดยทั่วไป}
+
+\oakparimage{sections/images/01/01-03_app-welcome.png}
+
+เลือก ``Get Started'' เพื่อเริ่มใช้งาน
+
+จากนั้นคุณจะพบกับหน้าลงชื่อเข้าใช้
+
+\oakparimage{sections/images/01/01-04_app-login.png}
+
+\begin{itemize}
+    \item หากคุณมีบัญชีผู้ใช้ของแอปอยู่แล้ว
+คุณสามารถลงชื่อเข้าใช้ด้วยการกรอกชื่อผู้ใช้ของคุณในช่อง ``Username'' และรหัสผ่านของคุณลงในช่อง ``Password''
+แล้วเลือก ``Login'' ได้เลย คุณสามารถไปที่~\oaksecref{subsubsec:gen-use}~ต่อได้เลย
+    \item หากคุณไม่มีบัญชีผู้ใช้ของแอป และคุณเป็นนิสิตของมหาวิทยาลัยเกษตรศาสตร์ คุณสามารถสร้างบัญชีผู้ใช้
+ในสถานะผู้ใช้ทั่วไปได้ด้วยการเลือก ``Register'' แล้วไปที่ \oaksecref{subsubsec:register-consumer-acct}
+\end{itemize}
+
+\subsubsection{การสร้างบัญชีผู้ใช้ทั่วไป}\label{subsubsec:register-consumer-acct}
+
+ในหน้า ``Register an Account'' คุณจะต้อง
+
+\oakparimage{sections/images/01/01-05_app-consumer-register-acct.png}
+
+\begin{enumerate}
+    \item ใส่ข้อมูลส่วนตัวของคุณลงใน:
+        \begin{description}
+            \item[``Firstname''] ชื่อต้น/ชื่อจริง
+            \item[``Lastname''] นามสกุล
+            \item[``Username''] \parbox[t]{0.5\textwidth}{ตั้งชื่อผู้ใช้ โดยชื่อผู้ใช้จำต้องประกอบไปด้วย อักขระในภาษาอังกฤษพิมพ์เล็กและตัวเลขฮินดู-อาราบิกเท่านั้น ห้ามมีอักขระว่าง (whitespace character)}
+            \item[``Password''] ตั้งรหัสผ่านบัญชีของคุณ
+            \item[``Confirm Password''] ยืนยันรหัสผ่านบัญชีของคุณ
+        \end{description}
+    \item หากต้องการ คุณสามารถเลือกรูป profile สำหรับบัญชีของคุณได้ด้วยการเลือก ``Upload Profile Image''
+    \item หากคุณยืนยันว่าคุณเป็นนิสิตของมหาวิทยาลัยเกษตรศาสตร์ ให้คุณเลือกที่ช่องด้านหน้าข้อความ ``I am a student of Kasetsart University''
+    \item เลือก ``Register'' เพื่อเสร็จสิ้นการสร้างบัญชี
+\end{enumerate}
+
+หากเกิดข้อผิดพลาดใด ๆ แอปจะแจ้งเตือนให้คุณทราบ
+หากทุกอย่างผ่านไปด้วยดีและแอปแจ้งคุณว่า ``คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว'' นั่นหมายความว่า คุณได้สร้างบัญชีผู้ใช้ของแอปเรียบร้อยแล้ว
+
+เมื่อคุณเลือก ``OK'' แอปจะพาคุณไปที่หน้าลงชื่อเข้าใช้หรือ ``Login''\\
+คุณสามารถลงชื่อเข้าใช้ด้วยการกรอกชื่อผู้ใช้ของคุณในช่อง ``Username''\\
+และรหัสผ่านของคุณลงในช่อง ``Password'' แล้วเลือก ``Login'' ได้เลย
+
+\clearpage
+
+\subsubsection{การใช้งานเบื้องต้น}\label{subsubsec:gen-use}
+
+\clearpage
 
 \subsection{การใช้งานสำหรับผู้ใช้ระบบในระดับสิทธิ์ต่าง ๆ}
 ความสามารถของ application ที่จำเพาะต่อผู้ใช้ระบบในแต่ละระดับสิทธิ์
