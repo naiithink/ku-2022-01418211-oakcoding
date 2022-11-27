@@ -255,12 +255,12 @@ belowskip=1.5ex}
 \vspace{1.6\parsep}\newline}
 
 \DeclareRobustCommand{\oaksecref}[1]{%
-% \hypersetup{hidelinks}
+%% \hypersetup{hidelinks}
 \textbf{\hyperref[#1]{%
-\if\getrefnumber{#1}\relax%
-\else
+% \if\getrefnumber{#1}\relax%
+% \else
 \ref{#1}~%
-\fi
+% \fi
 \nameref{#1}}}}
 
 % Images
