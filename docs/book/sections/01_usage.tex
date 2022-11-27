@@ -30,7 +30,8 @@
 เมื่อคุณมีครบทุกสิ่งทุกอย่างแล้ว คุณก็พร้อมที่จะ\nameref{subsec:install}
 
 \clearpage
-\subsection{ดาวน์โหลดและติดตั้ง OakCoding}
+
+\subsection{ดาวน์โหลด OakCoding}
 \label{subsec:install}
 
 หลังจากที่คุณมีทุกสิ่งทุกอย่างพร้อมแล้ว หากยังโปรดไปที่\linebreak[3]\mbox{\textbf{\nameref{subsec:prep-install}}}\\
@@ -70,14 +71,48 @@ project211-oakcoding
 \end{lstlisting}
 \end{enumerate}
 
+เมื่อคุณได้ดาวน์โหลดไฟล์ที่จำเป็นเสร็จสมบูรณ์แล้ว ให้คุณเปลี่ยน directory เข้าไปที่ \texttt{project211-oakcoding} ด้วยคำสั่ง:
+
+\begin{lstlisting}[numbers=none]
+$ cd project211-oakcoding
+\end{lstlisting}
+
 \clearpage
 
-\subsection{เปิดใช้งานแอป}
+จากนั้น เมื่อคุณใช้คำสั่ง \texttt{ls run.sh} เพื่อตรวจสอบเนื้อหาภายใน directory คุณควรจะเห็นไฟล์หนึ่งที่มีชื่อว่า \texttt{run.sh}
+
+\begin{lstlisting}[numbers=none]
+$ ls run.sh
+run.sh
+\end{lstlisting}
+
+และนั่นก็คือไฟล์ที่จะช่วยให้คุณสามารถที่จะติดตั้งและเปิดใช้งานแอปได้ภายในคำสั่งเดียว
+
+ต่อไปเราจะ\nameref{subsec:launch-app}กัน
+
+\clearpage
+
+\subsection{ติดตั้งและเปิดใช้งานแอป}
 \label{subsec:launch-app}
 
 \rule{0em}{1ex}
 
-คุณสามารถเปิดใช้งานแอปได้โดยการ
+การติดตั้งแอปอาจมีการดาวน์โหลดสิ่งที่จำเป็นอีกเล็กน้อย
+นั่นก็เพื่อให้แอปทำงานได้อย่างลื่นไหล
+
+คุณสามารถติดตั้งและเปิดใช้งานแอปได้โดยด้วยคำสั่ง:
+
+\begin{lstlisting}[numbers=none]
+$ sh run.sh
+\end{lstlisting}
+
+การติดตั้งอาจใช้เวลาครู่หนึ่ง ขึ้นอยู่กับหลายปัจจัย อย่างเช่น อินเทอร์เน็ตของคุณ
+คอมพิวเตอร์ของคุณ หรือหากคุณไม่เคยเรียกใช้คำสั่ง \texttt{mvn} เพื่อสร้างหรือเปิดใช้งาน
+project ใด ๆ มาก่อนบนคอมพิวเตอร์ของคุณ
+
+หากการติดตั้งนั้นผ่านไปได้ด้วยดี แอป OakCoding จะเปิดขึ้นมาต้อนรับคุณ!
+
+
 
 \subsection{การใช้งานสำหรับผู้ใช้ระบบในระดับสิทธิ์ต่าง ๆ}
 ความสามารถของ application ที่จำเพาะต่อผู้ใช้ระบบในแต่ละระดับสิทธิ์
