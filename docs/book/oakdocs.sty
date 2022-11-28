@@ -8,9 +8,10 @@
 %% Packages
 \RequirePackage{geometry}
 \RequirePackage[fulladjust]{marginnote}
+\RequirePackage{tabularx}
 \RequirePackage{calc}
 \RequirePackage{xcolor}
-\RequirePackage{tabularx}
+\RequirePackage{xparse}
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \RequirePackage{multicol}
@@ -44,6 +45,8 @@
 \DeclareRobustCommand{\appName}{\us}
 \DeclareRobustCommand{\docsname}{คู่มือการใช้งาน \appName}
 \DeclareRobustCommand{\oakrepourl}{https://github.com/CS211-651/project211-oakcoding.git}
+
+\def\javaisfun{sections/images/eiei/eiei.jpg}
 
 \DeclareRobustCommand{\oakrulecolor}{\color{black}}
 \definecolor{oakgrey}{RGB}{245,245,245}
@@ -265,11 +268,28 @@ belowskip=1.5ex}
 \nameref{#1}}}}
 
 % Images
-\DeclareRobustCommand{\oakparimage}[1]{%
-\includegraphics[%
-width=0.8\textwidth,
-height=0.8\textwidth,
-keepaspectratio]{#1}}
+\DeclareRobustCommand{\oakparimagehere}[2][\relax]{%
+\vspace{\baselineskip}
+\begin{figure}[!htb]
+    \includegraphics[
+        width=0.7\textwidth,
+        height=0.7\textwidth,
+        keepaspectratio]{#2}
+    \ifx#1\relax
+    \else
+    \caption{\protect#1}
+    \fi
+\end{figure}
+\vspace{\baselineskip}}
+
+\DeclareRobustCommand{\thebestimage}[1]{%
+\oakparimagehere[{\textcolor{red}{\textbf{DO REPLACE ME WITH}}: #1}]{\javaisfun}}
+
+%%
+\newcommand{\editlater}{%
+\subsection*{edit later}
+\addcontentsline{toc}{sec}{{\color{red}\textbf{Editing Mark}}}
+\phantomsection}
 
 
 %% Custom Environments
