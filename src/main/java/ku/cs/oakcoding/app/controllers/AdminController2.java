@@ -42,6 +42,7 @@ import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.*;
 import ku.cs.oakcoding.app.services.stages.StageManager;
+
 import org.w3c.dom.Text;
 
 public class AdminController2 implements Initializable{
@@ -162,6 +163,7 @@ public class AdminController2 implements Initializable{
 
                 handleSelectedUsersTableViewListener();
                 handleSelectedComplaintTableViewListener();
+                handleSelectedDepartmentTableViewListener();
 
             }
         });
@@ -427,9 +429,9 @@ public class AdminController2 implements Initializable{
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
         leaderStaffCol.setCellValueFactory(p -> {
 
-            ObjectProperty<String> leaderName = null;
+            ObjectProperty<String> leaderName = new SimpleObjectProperty<>("NO LEADER");
             try {
-                if (!p.getValue().hasLeaderStaffMember()){
+                if (p.getValue().hasLeaderStaffMember()){
                     leaderName = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getLeaderStaffMemberID()));
                 }
                 else {
@@ -449,6 +451,39 @@ public class AdminController2 implements Initializable{
 
     }
 
+    @FXML
+    private TextField nameDepartmentTextField;
+    @FXML
+    private void handleRegisterDepartment(){
+        String nameDepartment = nameDepartmentTextField.getText();
+        nameDepartmentTextField.clear();
+        if (!nameDepartment.isBlank()) {
+            Department department = WorkspaceService.getWorkspaceManager().newDepartment(nameDepartment);
+
+            if (department == null) {
+                Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+                alertWarning.setTitle("WARNING");
+                alertWarning.setContentText("This department name have already in use!!");
+                alertWarning.showAndWait();
+                handleClickDepartmentPane();
+            } else {
+                Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
+                alertInformation.setTitle("INFORMATION");
+                alertInformation.setContentText("You have created new Department : " + nameDepartment);
+                alertInformation.showAndWait();
+                handleClickDepartmentPane();
+            }
+        }
+        else {
+            Alert alertWarning = new Alert(Alert.AlertType.WARNING);
+            alertWarning.setTitle("WARNING");
+            alertWarning.setContentText("Department name must not empty");
+            alertWarning.showAndWait();
+            handleClickDepartmentPane();
+        }
+
+    }
+
     public void handleSelectedDepartmentTableViewListener() {
 
         departmentTableView.setOnMousePressed(e ->{
@@ -460,11 +495,167 @@ public class AdminController2 implements Initializable{
 
     }
 
-    public void showSelectedDepartment(String departmentID){
+    //////// DEPARTMENT DETAIL ///////
 
+    @FXML
+    private Label departmentNameLabel;
+    @FXML
+    private Label leaderStaffLabel;
+    @FXML
+    private Label departmentDetailStaffMembersLabel;
+    private String changeLeaderDepartmentID;
+    public void showSelectedDepartment(String departmentID){
+        initPane(departmentDetailPane);
+        sideBarPane.setDisable(true);
+        initStaffMembersTableView(departmentID);
+
+        Department department = WorkspaceService.getWorkspaceManager().getDepartment(departmentID);
+        departmentNameLabel.setText(department.getDepartmentName());
+
+
+        if (WorkspaceService.getWorkspaceManager().getAllStaffMemberSetProperty(departmentID).isEmpty()){
+            departmentDetailStaffMembersLabel.setText("There is no Staff members");
+        }
+        else {
+            departmentDetailStaffMembersLabel.setText("");
+        }
+
+        if (WorkspaceService.getWorkspaceManager().hasLeaderStaffMember(departmentID)) {
+            leaderStaffLabel.setText(AccountService.getUserManager().getUserNameOf(department.getLeaderStaffMemberID()));
+        }
+        else {
+            leaderStaffLabel.setText("NO LEADER");
+        }
+        changeLeaderDepartmentID = WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentID();
+
+    }
+    @FXML
+    private TableView<FullUserEntry> departmentStaffMembersTableView;
+    @FXML
+    private TableColumn<FullUserEntry, String> staffFirstNameCol;
+    @FXML
+    private TableColumn<FullUserEntry, String> staffLastNameCol;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> staffProfileImageCol;
+
+    public void initStaffMembersTableView(String departmentID){
+        departmentStaffMembersTableView.getItems().clear();
+
+        ObservableSet<FullUserEntry> observableStaffDepartmentSet = WorkspaceService.getWorkspaceManager().getAllStaffMemberSetProperty(departmentID);
+        ObservableList<FullUserEntry> observableStaffDepartmentList = FXCollections.observableArrayList();
+
+        departmentStaffMembersTableView.setEditable(true);
+        staffFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        staffLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        staffProfileImageCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+
+        observableStaffDepartmentList.setAll(observableStaffDepartmentSet);
+        departmentStaffMembersTableView.setItems(observableStaffDepartmentList);
+        departmentStaffMembersTableView.refresh();
 
     }
 
+
+    @FXML
+    public void handleDepartmentBackButton(){
+        handleClickDepartmentPane();
+        sideBarPane.setDisable(false);
+    }
+
+    //////// CHANGE LEADER STAFF ///////
+
+    @FXML
+    private Label departmentChangeLeaderNameLabel;
+    @FXML
+    private Label changeLeaderStaffNameLabel;
+    @FXML
+    private Label chooseLeaderTableViewLabel;
+
+    @FXML
+    public void handleClickChangeLeaderStaffMemberButton(){
+        initPane(departmentChangeLeaderPane);
+        initChooseLeaderStaffTableView();
+
+        if (WorkspaceService.getWorkspaceManager().getAllStaffMemberSetProperty(changeLeaderDepartmentID).isEmpty()){
+            chooseLeaderTableViewLabel.setText("There is no Staff members");
+        }
+        else {
+            chooseLeaderTableViewLabel.setText("");
+        }
+
+        Department department = WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID);
+        departmentChangeLeaderNameLabel.setText(department.getDepartmentName());
+
+        if (WorkspaceService.getWorkspaceManager().hasLeaderStaffMember(changeLeaderDepartmentID)) {
+            changeLeaderStaffNameLabel.setText(AccountService.getUserManager().getUserNameOf(department.getLeaderStaffMemberID()));
+        }
+        else {
+            changeLeaderStaffNameLabel.setText("NO LEADER");
+        }
+
+    }
+
+    @FXML
+    private TableView<FullUserEntry> chooseLeaderStaffTableView;
+    @FXML
+    private TableColumn<FullUserEntry, String> chooseFirstNameCol;
+    @FXML
+    private TableColumn<FullUserEntry, String> chooseLastNameCol;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> chooseLeaderProfileImageCol;
+
+    public void initChooseLeaderStaffTableView(){
+        chooseLeaderStaffTableView.getItems().clear();
+
+        ObservableSet<FullUserEntry> observableStaffDepartmentSet = WorkspaceService.getWorkspaceManager().getAllStaffMemberSetProperty(changeLeaderDepartmentID);
+        ObservableList<FullUserEntry> observableStaffDepartmentList = FXCollections.observableArrayList();
+
+        chooseLeaderStaffTableView.setEditable(true);
+        chooseFirstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        chooseLastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        chooseLeaderProfileImageCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+
+        observableStaffDepartmentList.setAll(observableStaffDepartmentSet);
+        chooseLeaderStaffTableView.setItems(observableStaffDepartmentList);
+        chooseLeaderStaffTableView.refresh();
+
+    }
+    @FXML
+    public void handleClickChangeLeaderSaveButton(){
+        showSelectedDepartment(changeLeaderDepartmentID);
+
+    }
+
+    ///////// Add Staff //////////
+    @FXML
+    public void handleClickAddStaffButton(){
+        initPane(staffMembersInfoPane);
+        sideBarPane.setDisable(true);
+    }
 
 
 
@@ -1051,17 +1242,6 @@ public class AdminController2 implements Initializable{
      *
      * bug fixed
      */
-    @FXML
-    public void handleRegisterDepartment(){}
-
-    @FXML
-    public void handleAddStaffPage(){}
-
-    @FXML
-    public void handleChangeLeaderStaffButton(){}
-
-    @FXML
-    public void handleSaveLeaderStaffButton(){}
 
     @FXML
     public void handleReportDetailBackButton(){}
