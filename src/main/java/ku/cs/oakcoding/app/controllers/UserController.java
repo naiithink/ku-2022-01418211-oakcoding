@@ -465,15 +465,15 @@ public class UserController implements Initializable {
 
         switch (status){
             case CATEGORY_NOT_FOUND:
-                alertWarning.setContentText("ไม่พบ CATEGORY กรุณาตรวจสอบใหม่อีกครั้ง");
+                alertWarning.setContentText("Category not found, please check again.");
                 alertWarning.showAndWait();
                 break;
             case EVIDENCE_PATH_DOES_NOT_EXIST:
-                alertWarning.setContentText("กรุณาอัพโหลดรูปภาพ");
+                alertWarning.setContentText("please upload pictures.");
                 alertWarning.showAndWait();
                 break;
             case SUCCESS:
-                alertWarning.setContentText("คุณได้ทำการสร้างเรียบร้อย");
+                alertWarning.setContentText("You have successfully created.");
                 alertWarning.showAndWait();
                 break;
         }

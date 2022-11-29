@@ -105,7 +105,7 @@ public class AuthenticationController implements Initializable {
                     passwordField.clear();
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("WARNING");
-                    alert.setContentText("โปรดตรวจสอบรหัสผ่านของคุณอีกครั้ง");
+                    alert.setContentText("Please check your password agian");
                     alert.showAndWait();
                 }
             }
