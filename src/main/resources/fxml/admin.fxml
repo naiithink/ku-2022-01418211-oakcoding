@@ -303,7 +303,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -336,13 +336,12 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ListView fx:id="departmentStaffMembersListView" layoutX="42.0" layoutY="249.0" prefHeight="136.0" prefWidth="278.0" stylesheets="@../css/list-view.css" />
                   <Label layoutX="57.0" layoutY="208.0" prefHeight="53.0" prefWidth="217.0" styleClass="account-setting-text" text="Department Staff Members" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Button layoutX="352.0" layoutY="302.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddStaffPage" prefHeight="42.0" prefWidth="111.0" styleClass="button-blue" text="Add staff">
+                  <Button layoutX="404.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddStaffPage" prefHeight="32.0" prefWidth="86.0" styleClass="button-blue" text="Add staff">
                      <font>
                         <Font size="1.0" />
                      </font>
@@ -352,6 +351,14 @@
                         <Font size="1.0" />
                      </font>
                   </Button>
+                  <Label fx:id="departmentDetailStaffMembersLabel" layoutX="259.0" layoutY="221.0" prefHeight="27.0" prefWidth="201.0" text="Label" textFill="RED" />
+                  <TableView fx:id="departmentStaffMembersTableView" layoutX="19.0" layoutY="261.0" prefHeight="131.0" prefWidth="378.0">
+                     <columns>
+                        <TableColumn fx:id="staffProfileImageCol" prefWidth="127.0" text="ProfileImage" />
+                        <TableColumn fx:id="staffFirstNameCol" prefWidth="119.0" text="FirstName" />
+                        <TableColumn fx:id="staffLastNameCol" prefWidth="131.0" text="LastName" />
+                     </columns>
+                  </TableView>
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
@@ -388,7 +395,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -434,6 +441,7 @@
                         <TableColumn fx:id="chooseLastNameCol" prefWidth="131.0" text="LastName" />
                     </columns>
                   </TableView>
+                  <Label fx:id="chooseLeaderTableViewLabel" layoutX="224.0" layoutY="176.0" prefHeight="27.0" prefWidth="196.0" text="Label" textFill="RED" />
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
