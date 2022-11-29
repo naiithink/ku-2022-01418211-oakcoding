@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.complaints.CaseAssignable;
+import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.services.AccountService;
 
 public class Department

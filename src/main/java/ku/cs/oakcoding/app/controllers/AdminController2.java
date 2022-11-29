@@ -162,6 +162,7 @@ public class AdminController2 implements Initializable{
 
                 handleSelectedUsersTableViewListener();
                 handleSelectedComplaintTableViewListener();
+                handleSelectedDepartmentTableViewListener();
 
             }
         });
@@ -460,7 +461,61 @@ public class AdminController2 implements Initializable{
 
     }
 
+    //////// DEPARTMENT DETAIL ///////
+
+    @FXML
+    private Label departmentNameLabel;
+    @FXML
+    private Label leaderStaffLabel;
+
+    private String changeLeaderDepartmentID;
     public void showSelectedDepartment(String departmentID){
+        initPane(departmentDetailPane);
+        sideBarPane.setDisable(true);
+        Department department = WorkspaceService.getWorkspaceManager().getDepartment(departmentID);
+        departmentNameLabel.setText(department.getDepartmentName());
+
+        if (!department.hasLeaderStaffMember()) {
+            leaderStaffLabel.setText(AccountService.getUserManager().getUserNameOf(department.getLeaderStaffMemberID()));
+        }
+        else {
+            leaderStaffLabel.setText("NO LEADER");
+        }
+        changeLeaderDepartmentID = WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentID();
+
+    }
+    @FXML
+    public void handleDepartmentBackButton(){
+        handleClickDepartmentPane();
+        sideBarPane.setDisable(false);
+    }
+
+    //////// CHANGE LEADER STAFF ///////
+
+    @FXML
+    private Label departmentChangeLeaderNameLabel;
+    @FXML
+    private Label changeLeaderStaffNameLabel;
+
+    @FXML
+    public void handleClickChangeLeaderStaffMemberButton(){
+        initPane(departmentChangeLeaderPane);
+        Department department = WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID);
+        departmentChangeLeaderNameLabel.setText(department.getDepartmentName());
+
+        if (!department.hasLeaderStaffMember()) {
+            changeLeaderStaffNameLabel.setText(AccountService.getUserManager().getUserNameOf(department.getLeaderStaffMemberID()));
+        }
+        else {
+            changeLeaderStaffNameLabel.setText("NO LEADER");
+        }
+
+    }
+
+    @FXML
+    private TableView<FullUserEntry> chooseLeaderStaffTableView;
+    @FXML
+    public void handleClickChangeLeaderSaveButton(){
 
 
     }
@@ -1056,13 +1111,6 @@ public class AdminController2 implements Initializable{
 
     @FXML
     public void handleAddStaffPage(){}
-
-    @FXML
-    public void handleChangeLeaderStaffButton(){}
-
-    @FXML
-    public void handleSaveLeaderStaffButton(){}
-
     @FXML
     public void handleReportDetailBackButton(){}
 

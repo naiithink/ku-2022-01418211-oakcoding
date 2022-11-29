@@ -19,6 +19,7 @@ import ku.cs.oakcoding.app.helpers.file.OakWorkspaceResource;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.org.Departments;
+import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
 public class WorkspaceManager {
@@ -244,6 +245,15 @@ public class WorkspaceManager {
 
     public boolean hasLeaderStaffMember(String departmentID) {
         return getDepartment(departmentID).hasLeaderStaffMember();
+    }
+
+    public ObservableSet<FullUserEntry> getAllStaffMemberSetProperty(String departmentID){
+        ObservableSet<FullUserEntry> departmentStaffMembers = FXCollections.observableSet();
+        for (String staffUID : getDepartment(departmentID).getStaffMemberSetProperty()){
+            departmentStaffMembers.add(AccountService.getUserManager().getFullUserEntryFromUID(staffUID));
+        }
+
+        return departmentStaffMembers;
     }
 
     public boolean assignLeaderStaffMember(String departmentID, String staffUID) {

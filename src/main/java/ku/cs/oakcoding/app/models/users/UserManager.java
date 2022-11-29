@@ -130,6 +130,15 @@ public final class UserManager {
         return this.briefUserTable.containsKey(UID);
     }
 
+    public FullUserEntry getFullUserEntryFromUID(String UID){
+        for (FullUserEntry user : this.userEntrySet){
+            if (user.getUID().equals(UID)){
+                return user;
+            }
+        }
+        return null;
+    }
+
     public Set<FullUserEntry> getAllUsersSet(AdminUser adminUser) {
         if (Objects.isNull(adminUser)) {
             OakLogger.log(Level.SEVERE, "Attempting to get all users list with out AdminUser access, null is returned");
@@ -349,7 +358,7 @@ public final class UserManager {
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends User> T getUser(String userName) {
+    private   <T extends User> T getUser(String userName) {
 
         if (!isRegistered(userName)) {
             OakLogger.log(Level.SEVERE, "Attempting to get non existing user");
