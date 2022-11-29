@@ -202,9 +202,11 @@ public class StaffController implements Initializable {
 
 
     private void setProfileLabel(){
-        System.out.println("Hello World123");
+        /* hotfix/0.0.1 */
+        System.out.println(StageManager.getStageManager().getContext());
+
         StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
-        System.out.println("Hello World345");
+
         userNameLabel.setText(staffUser.getUserName());
         statusAccountLabel.setText(staffUser.getRole().getPrettyPrinted());
         firstNameAccountLabel.setText(staffUser.getFirstName());
