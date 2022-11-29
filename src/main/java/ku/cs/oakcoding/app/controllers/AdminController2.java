@@ -160,6 +160,7 @@ public class AdminController2 implements Initializable{
                 initDepartmentTableView();
                 initReportTableView();
                 initRequestTableView();
+                initDashBoard();
 
                 setProfileSetting();
                 setMockUpProfile();
@@ -183,6 +184,22 @@ public class AdminController2 implements Initializable{
      *
      * DASHBOARD PANE
      */
+
+    @FXML
+    private Label complaintCountLabel;
+    @FXML
+    private Label reportCountLabel;
+    @FXML
+    private Label userCountLabel;
+    @FXML
+    private Label departmentCountLabel;
+
+    public void initDashBoard(){
+        complaintCountLabel.setText(IssueService.getIssueManager().getAllComplaintSet().size() + "");
+        reportCountLabel.setText(IssueService.getIssueManager().getAllReportsSet().size() + "");
+        userCountLabel.setText(AccountService.getUserManager().getAllUsersSet((AdminUser) StageManager.getStageManager().getContext()).size() + "");
+        departmentCountLabel.setText(WorkspaceService.getWorkspaceManager().getAllDepartmentsSet().size() + "");
+    }
 
     /**
      *
@@ -1059,6 +1076,7 @@ public class AdminController2 implements Initializable{
     @FXML
     public void handleClickBackChangeSettingButton(){
         initPane(settingPane);
+        sideBarPane.setDisable(false);
         handleClickSettingPane();
     }
 
@@ -1226,6 +1244,7 @@ public class AdminController2 implements Initializable{
                 "-fx-cursor: hand;");
 
         initPane(welcomePane);
+        initDashBoard();
     }
 
     @FXML
