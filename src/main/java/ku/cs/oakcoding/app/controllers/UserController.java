@@ -523,7 +523,7 @@ public class UserController implements Initializable {
         alertWarning.setTitle("WARNING");
 
         if (isChangePassword){
-            alertInformation.setContentText("รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อย");
+            alertInformation.setContentText("Your password has been changed");
             alertInformation.showAndWait();
             oldPasswordField.clear();
             newPasswordField.clear();
