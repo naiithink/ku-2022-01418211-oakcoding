@@ -264,14 +264,26 @@ public class WorkspaceManager {
     public ObservableSet<FullUserEntry> getALlComplementMemberSetProperty(AdminUser adminUser, String departmentID){
         ObservableSet<FullUserEntry> departmentStaffSet = getAllStaffMemberSetProperty(departmentID);
         ObservableSet<FullUserEntry> allStaffSet = AccountService.getUserManager().getFilteredUsersSetProperty(adminUser, Roles.STAFF);
-        allStaffSet.removeAll(departmentStaffSet);
 
-//        for (FullUserEntry staff : allStaffSet){
-//            if (Objects.nonNull(getDepartmentOfStaff(staff.getUID()))){
-//                allStaffSet.remove(staff);
-//            }
-//        }
-        return allStaffSet;
+        allStaffSet.removeAll(departmentStaffSet);
+        if (allStaffSet.size() == 0){
+            return null;
+        }
+
+
+        ObservableSet<FullUserEntry> finalStaff = getAllAvaliableStaffMemberSetProperty(allStaffSet);
+
+        return finalStaff;
+    }
+
+    public ObservableSet<FullUserEntry> getAllAvaliableStaffMemberSetProperty(ObservableSet<FullUserEntry> staffMembers){
+        ObservableSet<FullUserEntry> finalStaff = FXCollections.observableSet();
+
+        for (FullUserEntry staff : staffMembers){
+            finalStaff.add(staff);
+        }
+
+        return finalStaff;
     }
 
     public boolean assignLeaderStaffMember(String departmentID, String staffUID) {
@@ -316,11 +328,12 @@ public class WorkspaceManager {
     }
 
     public void removeStaffMember(String departmentID, String staffUID) {
-        if (getDepartment(departmentID).getLeaderStaffMemberID().equals(staffUID))
+        if (getDepartment(departmentID).getLeaderStaffMemberID().equals(staffUID)) {
             this.departmentIndexFile.editRecord(departmentID, "LEADER_STAFF", "NIL", false);
-
+        }
         this.departmentMemberFiles.get(departmentID).removeRecordWhere(staffUID);
         getDepartment(departmentID).removeStaffMember(staffUID);
+
     }
 
     public void assignCategory(String departmentID, String categoryName) {

@@ -165,6 +165,8 @@ public class AdminController2 implements Initializable{
                 handleSelectedComplaintTableViewListener();
                 handleSelectedDepartmentTableViewListener();
                 handleSelectedRightStaffMembersTableViewListener();
+                handleSelectedLeftStaffMembersTableViewListener();
+                handleSelectedChooseLeaderTableViewListener();
 
 
 
@@ -647,6 +649,22 @@ public class AdminController2 implements Initializable{
         chooseLeaderStaffTableView.refresh();
 
     }
+
+    public void handleSelectedChooseLeaderTableViewListener() {
+
+        chooseLeaderStaffTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = chooseLeaderStaffTableView.getSelectionModel().getSelectedIndex();
+                changeLeaderStaffDepartment(chooseLeaderStaffTableView.getItems().get(index).getUID());
+                handleClickChangeLeaderStaffMemberButton();
+            }
+        });
+
+    }
+
+    public void changeLeaderStaffDepartment(String staffUID){
+        WorkspaceService.getWorkspaceManager().changeLeaderStaffMember(changeLeaderDepartmentID, staffUID);
+    }
     @FXML
     public void handleClickChangeLeaderSaveButton(){
         showSelectedDepartment(changeLeaderDepartmentID);
@@ -698,6 +716,24 @@ public class AdminController2 implements Initializable{
         observableLeftStaffDepartmentList.setAll(observableLeftStaffDepartmentSet);
         staffMemberLeftTableView.setItems(observableLeftStaffDepartmentList);
         staffMemberLeftTableView.refresh();
+
+    }
+
+    public void handleSelectedLeftStaffMembersTableViewListener() {
+
+        staffMemberLeftTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = staffMemberLeftTableView.getSelectionModel().getSelectedIndex();
+                removeStaffFromDepartment(staffMemberLeftTableView.getItems().get(index).getUID());
+                handleClickAddStaffButton();
+            }
+        });
+
+    }
+
+    public void removeStaffFromDepartment(String staffUID){
+        WorkspaceService.getWorkspaceManager().removeStaffMember(changeLeaderDepartmentID, staffUID);
+        System.out.println(WorkspaceService.getWorkspaceManager().hasLeaderStaffMember(changeLeaderDepartmentID));
 
     }
 

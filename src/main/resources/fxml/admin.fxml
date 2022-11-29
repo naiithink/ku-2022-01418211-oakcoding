@@ -395,7 +395,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="departmentChangeLeaderPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -441,6 +441,7 @@
                     </columns>
                   </TableView>
                   <Label fx:id="chooseLeaderTableViewLabel" layoutX="224.0" layoutY="176.0" prefHeight="27.0" prefWidth="196.0" text="Label" textFill="RED" />
+                  <Button fx:id="saveKeaderButton" layoutX="413.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="69.0" styleClass="button-blue" text="Save" onMouseClicked="#handleClickChangeLeaderSaveButton" />
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
@@ -662,7 +663,7 @@
             <Button layoutX="176.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleReportDeniedButton" prefHeight="38.0" prefWidth="86.0" styleClass="button-blue" text="Denied" />
          </children>
       </Pane>
-      <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="36.0" layoutY="118.0" prefHeight="417.0" prefWidth="566.0" styleClass="account-setting-pane">
                <children>
