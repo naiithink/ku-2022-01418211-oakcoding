@@ -191,22 +191,22 @@ public class RegisterController implements Initializable {
                         }
                         break;
                     case INVALID_ACCESS:
-                        alertWarning.setContentText(" คุณไม่มีสิทธิ์เข้าถึงผู้ผู้แลระบบ");
+                        alertWarning.setContentText(" You do not have administrator access.");
                         alertWarning.showAndWait();
                         break;
                     case USER_NAME_ALREADY_EXIST:
-                        alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้บัญชีผู้ใช้นี้มีคนใช้งานแล้ว");
+                        alertWarning.setContentText(userNameField.getText() + " This user account cannot be used due to this user account already exists.");
                         alertWarning.showAndWait();
                         break;
                     case USER_NAME_CONTAINS_UPPER_CASE:
-                        alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจากบัญชีต้องมีตัวเล็กทั้งหมด a-z");
+                        alertWarning.setContentText(userNameField.getText() + " This cannot be used because the account must contain all lowercase letters a-z.");
                         alertWarning.showAndWait();
                         break;
                 }
 
         }
         if (!password.equals(passwordConfirm)){
-            alertWarning.setContentText(userNameField.getText() + " กรุณากรอกรหัสผ่านตรงกับยืนยันรหัสผ่าน");
+            alertWarning.setContentText(userNameField.getText() + " Please enter the same password as the confirmation password.");
             alertWarning.showAndWait();
         }
     }
@@ -229,7 +229,7 @@ public class RegisterController implements Initializable {
             if (confirmStudentCheckbox.isSelected()) {
         switch (status) {
             case SUCCESSFUL:
-                alertInformation.setContentText(userNameField.getText() + " คุณได้ทำการสมัครสมาชิกเรียบร้อยแล้ว");
+                alertInformation.setContentText(userNameField.getText() + " You have successfully subscribed.");
                 alertInformation.showAndWait();
                 userNameField.clear();
                 firstNameField.clear();
@@ -245,26 +245,26 @@ public class RegisterController implements Initializable {
                 }
                 break;
             case INVALID_ACCESS:
-                alertWarning.setContentText(" คุณไม่มีสิทธิ์เข้าถึงผู้ผู้แลระบบ");
+                alertWarning.setContentText(" You do not have administrator access.");
                 alertWarning.showAndWait();
                 break;
             case USER_NAME_ALREADY_EXIST:
-                alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้บัญชีผู้ใช้นี้มีคนใช้งานแล้ว");
+                alertWarning.setContentText(userNameField.getText() + " This user account cannot be used due to this user account already exists. ");
                 alertWarning.showAndWait();
                 break;
             case USER_NAME_CONTAINS_UPPER_CASE:
-                alertWarning.setContentText(userNameField.getText() + " ไม่สามารถใช้ได้เนื่องจากบัญชีต้องมีตัวเล็กทั้งหมด a-z");
+                alertWarning.setContentText(userNameField.getText() + " This cannot be used because the account must contain all lowercase letters a-z.");
                 alertWarning.showAndWait();
                 break;
         }
     }
 }
         if (!password.equals(passwordConfirm)){
-            alertWarning.setContentText(userNameField.getText() + " กรุณากรอกรหัสผ่านตรงกับยืนยันรหัสผ่าน");
+            alertWarning.setContentText(userNameField.getText() + "Please enter the same password as the confirmation password.");
             alertWarning.showAndWait();
         }
         if (!confirmStudentCheckbox.isSelected()){
-            alertWarning.setContentText(" คุณจำเป็นต้องเลือกว่าคุณเป็นนิสิต");
+            alertWarning.setContentText("Please comfirm you are student in kasetsart University");
             alertWarning.showAndWait();
         }
     }

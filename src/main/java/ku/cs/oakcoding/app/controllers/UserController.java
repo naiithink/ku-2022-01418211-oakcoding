@@ -235,12 +235,12 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initPane();
-        initReportPageChoiceBox();
-        initComplaintPageChoiceBox();
-        initDetailReportPageChoiceBox();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("user")) {
+                initPane();
+                initReportPageChoiceBox();
+                initComplaintPageChoiceBox();
+                initDetailReportPageChoiceBox();
                 setMyPane();
                 initReportTableView();
                 initComplaintTableView();
@@ -391,7 +391,7 @@ public class UserController implements Initializable {
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(true);
 
-        reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
+        reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
         reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
         reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
@@ -465,15 +465,15 @@ public class UserController implements Initializable {
 
         switch (status){
             case CATEGORY_NOT_FOUND:
-                alertWarning.setContentText("ไม่พบ CATEGORY กรุณาตรวจสอบใหม่อีกครั้ง");
+                alertWarning.setContentText("Category not found, please check again.");
                 alertWarning.showAndWait();
                 break;
             case EVIDENCE_PATH_DOES_NOT_EXIST:
-                alertWarning.setContentText("กรุณาอัพโหลดรูปภาพ");
+                alertWarning.setContentText("please upload pictures.");
                 alertWarning.showAndWait();
                 break;
             case SUCCESS:
-                alertWarning.setContentText("คุณได้ทำการสร้างเรียบร้อย");
+                alertWarning.setContentText("You have successfully created.");
                 alertWarning.showAndWait();
                 break;
         }
@@ -523,7 +523,7 @@ public class UserController implements Initializable {
         alertWarning.setTitle("WARNING");
 
         if (isChangePassword){
-            alertInformation.setContentText("รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อย");
+            alertInformation.setContentText("Your password has been changed");
             alertInformation.showAndWait();
             oldPasswordField.clear();
             newPasswordField.clear();
@@ -610,6 +610,7 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
+        initComplaintPageChoiceBox();
 
     }
 

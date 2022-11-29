@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AdminController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AdminController2">
    <children>
       <Pane fx:id="welcomePane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
@@ -81,7 +81,7 @@
       </Pane>
       <Pane fx:id="sideBarPane" prefHeight="568.0" prefWidth="211.0" styleClass="secondary-bg-color">
          <children>
-            <Button fx:id="userButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickUser" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Users" textFill="#e0e0e1" />
+            <Button fx:id="userButton" layoutX="6.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleClickUserPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Users" textFill="#e0e0e1" />
             <ImageView fx:id="userImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/flag.png" />
@@ -107,32 +107,32 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="settingButton" layoutX="6.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleClickSetting" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Settings" textFill="#e0e0e1" />
+            <Button fx:id="settingButton" layoutX="6.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleClickSettingPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Settings" textFill="#e0e0e1" />
             <ImageView fx:id="settingImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/settings.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickDashboard" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="DashBoard" textFill="#e0e0e1" />
+            <Button fx:id="dashboardButton" layoutX="3.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickDashBoardPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="DashBoard" textFill="#e0e0e1" />
             <ImageView fx:id="dashboardImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="complaintsButton" layoutX="6.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleClickComplaints" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1" />
+            <Button fx:id="complaintsButton" layoutX="6.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleClickComplaintPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Complaints" textFill="#e0e0e1" />
             <ImageView fx:id="complaintsImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/comment-alt-middle.png" />
                </image>
             </ImageView>
-            <Button fx:id="organizationsButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClickOrganizations" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Departments" textFill="#e0e0e1" />
-            <Button fx:id="reportButton" layoutX="3.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleClickReport" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Reports" textFill="#e0e0e1" />
+            <Button fx:id="organizationsButton" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleClickDepartmentPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Departments" textFill="#e0e0e1" />
+            <Button fx:id="reportButton" layoutX="3.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleClickReportPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Reports" textFill="#e0e0e1" />
             <ImageView fx:id="reportImageView" fitHeight="23.0" fitWidth="23.0" layoutX="13.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/calendar-lines.png" />
                </image>
             </ImageView>
-            <Button fx:id="requestButton" layoutX="3.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClickRequest" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Requests" textFill="#e0e0e1" />
+            <Button fx:id="requestButton" layoutX="3.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleClickRequestPane" prefHeight="38.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="button-third-dashboard-nav" text="Requests" textFill="#e0e0e1" />
             <ImageView fx:id="requestImageView" fitHeight="23.0" fitWidth="23.0" layoutX="12.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/envelope.png" />
@@ -164,7 +164,7 @@
          <children>
             <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="departmentsListTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
+            <TableView fx:id="departmentTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
                <columns>
                   <TableColumn fx:id="departmentCol" prefWidth="262.0" text="DepartMent" />
                   <TableColumn fx:id="leaderStaffCol" prefWidth="285.0" text="LeaderStaff" />
@@ -231,7 +231,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangePaneToChangeDetailPane" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                  <Button layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleClickChangeSettingPane" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
                   <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/peter-parker.png" />
@@ -266,7 +266,7 @@
                   </Label>
                   <Pane layoutX="81.0" layoutY="137.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
                      <children>
-                        <Label fx:id="detailUserFirstNameLabelAccount" layoutY="-12.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
+                        <Label fx:id="detailUserFirstNameLabel" layoutY="-12.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -296,14 +296,14 @@
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
-            <ImageView fx:id="backPicture" fitHeight="38.0" fitWidth="32.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#handleBackUserPictureButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backPicture" fitHeight="38.0" fitWidth="32.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#handleClickBackUserDetail" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -336,26 +336,38 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ListView fx:id="departmentStaffMembersListView" layoutX="42.0" layoutY="249.0" prefHeight="136.0" prefWidth="278.0" stylesheets="@../css/list-view.css" />
                   <Label layoutX="57.0" layoutY="208.0" prefHeight="53.0" prefWidth="217.0" styleClass="account-setting-text" text="Department Staff Members" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Button layoutX="352.0" layoutY="302.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" styleClass="button-blue" text="Add staff">
+                  <Button layoutX="404.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClickAddStaffButton" prefHeight="32.0" prefWidth="86.0" styleClass="button-blue" text="Add staff">
                      <font>
                         <Font size="1.0" />
                      </font>
                   </Button>
-                  <Button layoutX="297.0" layoutY="176.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleChangeLeaderStaffButton" prefHeight="35.0" prefWidth="166.0" styleClass="button-blue" text="Change leaderStaff">
+                  <Button layoutX="297.0" layoutY="176.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClickChangeLeaderStaffMemberButton" prefHeight="35.0" prefWidth="166.0" styleClass="button-blue" text="Change leaderStaff">
                      <font>
                         <Font size="1.0" />
                      </font>
                   </Button>
+                  <Label fx:id="departmentDetailStaffMembersLabel" layoutX="259.0" layoutY="221.0" prefHeight="27.0" prefWidth="201.0" text="Label" textFill="RED" />
+                  <TableView fx:id="departmentStaffMembersTableView" layoutX="19.0" layoutY="261.0" prefHeight="131.0" prefWidth="378.0">
+                     <columns>
+                        <TableColumn fx:id="staffProfileImageCol" prefWidth="127.0" text="ProfileImage" />
+                        <TableColumn fx:id="staffFirstNameCol" prefWidth="119.0" text="FirstName" />
+                        <TableColumn fx:id="staffLastNameCol" prefWidth="131.0" text="LastName" />
+                     </columns>
+                  </TableView>
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+            <ImageView fx:id="departmentBackButton" fitHeight="42.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#handleDepartmentBackButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
@@ -376,7 +388,7 @@
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
-            <ImageView fx:id="backPicture2" fitHeight="38.0" fitWidth="32.0" layoutX="28.0" layoutY="26.0" onMouseClicked="#handleBackUserSettingPictureButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backPicture2" fitHeight="38.0" fitWidth="32.0" layoutX="28.0" layoutY="26.0" onMouseClicked="#handleClickBackChangeSettingButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>
@@ -395,7 +407,7 @@
                   </Label>
                   <Pane layoutX="55.0" layoutY="57.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
                      <children>
-                        <Label fx:id="departmentNameLabel1" layoutX="5.0" layoutY="-15.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
+                        <Label fx:id="departmentChangeLeaderNameLabel" layoutX="5.0" layoutY="-15.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Peter" textFill="WHITE">
                            <font>
                               <Font size="30.0" />
                            </font>
@@ -409,7 +421,7 @@
                   </Label>
                   <Pane layoutX="55.0" layoutY="121.0" prefHeight="32.0" prefWidth="201.0" styleClass="account-setting-button">
                      <children>
-                        <Label fx:id="leaderStaffLabel1" layoutX="6.0" layoutY="-15.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
+                        <Label fx:id="changeLeaderStaffNameLabel" layoutX="6.0" layoutY="-15.0" prefHeight="53.0" prefWidth="201.0" styleClass="purple-color-font" text="Parker" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -421,7 +433,6 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="432.0" layoutY="367.0" mnemonicParsing="false" onAction="#handleSaveLeaderStaffButton" styleClass="button-blue" text="Save" />
                   <TableView fx:id="chooseLeaderStaffTableView" layoutX="41.0" layoutY="209.0" prefHeight="189.0" prefWidth="378.0">
                     <columns>
                       <TableColumn fx:id="chooseLeaderProfileImageCol" prefWidth="127.0" text="ProfileImage" />
@@ -429,6 +440,7 @@
                         <TableColumn fx:id="chooseLastNameCol" prefWidth="131.0" text="LastName" />
                     </columns>
                   </TableView>
+                  <Label fx:id="chooseLeaderTableViewLabel" layoutX="224.0" layoutY="176.0" prefHeight="27.0" prefWidth="196.0" text="Label" textFill="RED" />
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Department Info" textFill="WHITE" />
@@ -446,7 +458,6 @@
                </columns>
             </TableView>
             <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
-            <Button layoutX="82.0" layoutY="443.0" mnemonicParsing="false" styleClass="button-blue" text="Report " />
          </children>
       </Pane>
       <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
@@ -465,9 +476,11 @@
                   <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
                </columns>
             </TableView>
+            <TextField fx:id="complaintCategoryCreateTextField" layoutX="48.0" layoutY="474.0" prefHeight="26.0" prefWidth="217.0" />
+            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" onAction="#handleComplaintCategoryCreateButton" styleClass="button-blue" text="Create Category" />
          </children>
       </Pane>
-      <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="complaintDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -564,14 +577,14 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" onMouseClicked="#handleBackButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" onMouseClicked="#handleComplaintBackButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="reportDetail" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="reportDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="281.0" layoutY="40.0" text="ReportDetail" textFill="WHITE" />
             <Label layoutX="104.0" layoutY="68.0" prefHeight="75.0" prefWidth="159.0" text="Author" textFill="#545454">
@@ -626,7 +639,6 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Button fx:id="banButton" layoutX="88.0" layoutY="409.0" mnemonicParsing="false" styleClass="button-blue" text="Ban" />
             <Label layoutX="270.0" layoutY="68.0" prefHeight="75.0" prefWidth="159.0" text="Target" textFill="#545454">
                <font>
                   <Font size="23.0" />
@@ -646,6 +658,36 @@
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
+            <Button layoutX="67.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleReportApprovedButton" styleClass="button-blue" text="Approved" />
+            <Button layoutX="176.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleReportDeniedButton" prefHeight="38.0" prefWidth="86.0" styleClass="button-blue" text="Denied" />
+         </children>
+      </Pane>
+      <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Pane layoutX="36.0" layoutY="118.0" prefHeight="417.0" prefWidth="566.0" styleClass="account-setting-pane">
+               <children>
+                  <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
+                  <ListView fx:id="departmentStaffMembersListView1" layoutX="42.0" layoutY="249.0" prefHeight="136.0" prefWidth="278.0" stylesheets="@../css/list-view.css" />
+                  <TableView fx:id="staffMemberLeftTableView" layoutX="14.0" layoutY="14.0" prefHeight="392.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="profileImageStaffLeftCol" prefWidth="127.0" text="ProfileImage" />
+                        <TableColumn fx:id="firstNameStaffLeftCol" prefWidth="119.0" text="FirstName" />
+                        <TableColumn fx:id="chooseFirstNameCol11" prefWidth="119.0" text="FirstName" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="staffMemberRightTableView" layoutX="298.0" layoutY="14.0" prefHeight="392.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="profileImageStaffRightCol" prefWidth="127.0" text="ProfileImage" />
+                        <TableColumn fx:id="firstNameStaffRightCol" prefWidth="119.0" text="FirstName" />
+                        <TableColumn fx:id="chooseFirstNameCol111" prefWidth="119.0" text="FirstName" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Label layoutX="206.0" layoutY="21.0" prefHeight="27.0" prefWidth="250.0" styleClass="text-regular" text="Department Staff members Info" textFill="WHITE" />
+            <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
+            <Label layoutX="75.0" layoutY="77.0" prefHeight="27.0" prefWidth="250.0" styleClass="text-regular" text="Department Staff members" textFill="WHITE" />
+            <Label layoutX="372.0" layoutY="77.0" prefHeight="27.0" prefWidth="250.0" styleClass="text-regular" text="All Staff members" textFill="WHITE" />
          </children>
       </Pane>
    </children>

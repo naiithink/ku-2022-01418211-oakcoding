@@ -155,7 +155,7 @@ public class StaffController implements Initializable {
         alertWarning.setTitle("WARNING");
 
         if (isChangePassword){
-            alertInformation.setContentText("รหัสผ่านของคุณถูกเปลี่ยนเรียบร้อย");
+            alertInformation.setContentText("Your password has been successfully changed.");
             alertInformation.showAndWait();
             oldPasswordField.clear();
             newPasswordField.clear();
@@ -171,7 +171,7 @@ public class StaffController implements Initializable {
 
         }
         else {
-            alertWarning.setContentText("คุณไม่สามารถเปลี่ยนรหัสได้ กรุณาตรวจสอบอีกครั้ง");
+            alertWarning.setContentText("Please check again.");
             alertWarning.showAndWait();
         }
 
