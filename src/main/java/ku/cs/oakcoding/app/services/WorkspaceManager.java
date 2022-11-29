@@ -196,7 +196,6 @@ public class WorkspaceManager {
             else
                 res = departmentEntry.getKey();
         }
-
         return res;
     }
 

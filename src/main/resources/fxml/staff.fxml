@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +16,7 @@
 
 <AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.StaffController">
     <children>
-      <Pane fx:id="welcomeStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="welcomeStaffPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
                <children>
@@ -86,12 +89,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="reportsUserOfStaffPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
-         <children>
-            <Label layoutX="245.0" layoutY="48.0" text="Complaints" textFill="WHITE" />
-         </children>
-      </Pane>
-      <Pane fx:id="settingStaffPane" layoutX="220.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="settingStaffPane" layoutX="220.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -196,9 +194,135 @@
                   <TextField fx:id="usernameTextField" layoutX="78.0" layoutY="64.0" style="-fx-background-color: #121212 #121212;" />
                </children>
             </Pane>
+
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
             <ImageView fx:id="backPicture" fitHeight="42.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" onMouseClicked="#handleBackUserPictureButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="createReportsUserPane" layoutX="221.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TableView fx:id="complaintTableView" layoutX="48.0" layoutY="90.0" prefHeight="356.0" prefWidth="526.0">
+               <columns>
+                  <TableColumn fx:id="complaintCategoryCol" prefWidth="102.0" text="Category" />
+                  <TableColumn fx:id="complaintSubjectCol" prefWidth="89.0" text="Subject" />
+                  <TableColumn fx:id="complaintDescriptionCol" prefWidth="202.0" text="Description" />
+                  <TableColumn fx:id="complaintVotersCol" prefWidth="54.0" text="Vote" />
+                  <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
+               </columns>
+            </TableView>
+            <TextField fx:id="complaintCategoryCreateTextField" layoutX="48.0" layoutY="474.0" prefHeight="26.0" prefWidth="217.0" />
+            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" onAction="#handleComplaintCategoryCreateButton" styleClass="button-blue" text="Create Category" />
+         </children>
+      </Pane>
+      <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+         <children>
+            <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="77.0" layoutY="70.0" prefHeight="75.0" prefWidth="159.0" text="Author" textFill="#545454">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="reportAuthorLabel" layoutX="77.0" layoutY="122.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="77.0" layoutY="165.0" prefHeight="65.0" prefWidth="150.0" text="Subject" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="reportSubjectLabel" layoutX="77.0" layoutY="207.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="264.0" layoutY="69.0" prefHeight="75.0" prefWidth="159.0" text="Votes" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="reportNumVoteLabel" layoutX="259.0" layoutY="122.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="167.0" prefHeight="65.0" prefWidth="150.0" text="Status" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="reportStatusLabel" layoutX="260.0" layoutY="207.0" prefHeight="65.0" prefWidth="150.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="437.0" layoutY="69.0" prefHeight="75.0" prefWidth="159.0" text="Category" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="reportCategoryLabel" layoutX="437.0" layoutY="123.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="429.0" layoutY="164.0" prefHeight="75.0" prefWidth="159.0" styleClass="yellow-color-font" text="Evidence" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="reportEvidenceLabel" layoutX="437.0" layoutY="209.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="265.0" prefHeight="65.0" prefWidth="150.0" styleClass="yellow-color-font" text="Description" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="reportDescriptionLabel" layoutX="71.0" layoutY="310.0" prefHeight="119.0" prefWidth="462.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" onMouseClicked="#handleComplaintBackButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/angle-left.png" />
                </image>

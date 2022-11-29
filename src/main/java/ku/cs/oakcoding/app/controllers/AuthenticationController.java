@@ -83,9 +83,6 @@ public class AuthenticationController implements Initializable {
 
         }
         User user = AccountService.getUserManager().login(userName, password);
-
-
-
         if (Objects.nonNull(user)) {
             try {
                 userNameTextField.clear();
@@ -147,8 +144,5 @@ public class AuthenticationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
         loginSuccessfulLabel.setVisible(false);
-
-
-
     }
 }
