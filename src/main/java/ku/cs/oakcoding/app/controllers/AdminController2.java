@@ -155,6 +155,7 @@ public class AdminController2 implements Initializable{
             if (newValue.equals("admin")) {
                 initUsersTableView();
                 initComplaintTableView();
+                initDepartmentTableView();
 
                 setProfileSetting();
                 setMockUpProfile();
@@ -414,6 +415,55 @@ public class AdminController2 implements Initializable{
     private TableColumn<Department, String> departmentCol;
     @FXML
     private TableColumn<Department, String> leaderStaffCol;
+
+    public void initDepartmentTableView(){
+
+        departmentTableView.getItems().clear();
+
+        ObservableSet<Department> observableDepartmentSet = WorkspaceService.getWorkspaceManager().getAllDepartmentsSet();
+        ObservableList<Department> observableDepartmentList = FXCollections.observableArrayList();
+
+        departmentTableView.setEditable(true);
+        departmentCol.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
+        leaderStaffCol.setCellValueFactory(p -> {
+
+            ObjectProperty<String> leaderName = null;
+            try {
+                if (!p.getValue().hasLeaderStaffMember()){
+                    leaderName = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getLeaderStaffMemberID()));
+                }
+                else {
+                    leaderName = new SimpleObjectProperty<>("NO LEADER");
+                }
+
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return leaderName;
+            }
+        });
+
+        observableDepartmentList.setAll(observableDepartmentSet);
+        departmentTableView.setItems(observableDepartmentList);
+        departmentTableView.refresh();
+
+    }
+
+    public void handleSelectedDepartmentTableViewListener() {
+
+        departmentTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = departmentTableView.getSelectionModel().getSelectedIndex();
+                showSelectedDepartment(departmentTableView.getItems().get(index).getDepartmentID());
+            }
+        });
+
+    }
+
+    public void showSelectedDepartment(String departmentID){
+
+
+    }
 
 
 
@@ -804,6 +854,7 @@ public class AdminController2 implements Initializable{
                 "-fx-cursor: hand;");
 
         initPane(organizationsPane);
+        initDepartmentTableView();
 
     }
 
