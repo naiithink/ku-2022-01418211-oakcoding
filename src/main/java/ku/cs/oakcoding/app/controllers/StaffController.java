@@ -105,6 +105,7 @@ public class StaffController implements Initializable {
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("staff")) {
                 setMyPane();
+                setProfileLabel();
 //                initReportTableView();
 //                initComplaintTableView();
 //
@@ -113,7 +114,6 @@ public class StaffController implements Initializable {
         });
         initComplaintTableView();
         handleSelectedComplaintTableViewListener();
-        setProfileLabel();
     }
     /**
      *
@@ -203,8 +203,6 @@ public class StaffController implements Initializable {
 
     private void setProfileLabel(){
         /* hotfix/0.0.1 */
-        System.out.println(StageManager.getStageManager().getContext());
-
         StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
 
         userNameLabel.setText(staffUser.getUserName());
