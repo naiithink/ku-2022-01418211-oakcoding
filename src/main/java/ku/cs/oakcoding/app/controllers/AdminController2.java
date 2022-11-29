@@ -36,6 +36,7 @@ import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
 import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportType;
+import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequest;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
@@ -157,6 +158,8 @@ public class AdminController2 implements Initializable{
                 initUsersTableView();
                 initComplaintTableView();
                 initDepartmentTableView();
+                initReportTableView();
+                initRequestTableView();
 
                 setProfileSetting();
                 setMockUpProfile();
@@ -167,6 +170,7 @@ public class AdminController2 implements Initializable{
                 handleSelectedRightStaffMembersTableViewListener();
                 handleSelectedLeftStaffMembersTableViewListener();
                 handleSelectedChooseLeaderTableViewListener();
+                handleSelectedReportTableViewListener();
 
 
 
@@ -792,6 +796,195 @@ public class AdminController2 implements Initializable{
         WorkspaceService.getWorkspaceManager().addStaffMember(changeLeaderDepartmentID, staffUID);
     }
 
+    /**
+     *
+     * REPORT PANE
+     */
+
+    @FXML
+    private TableView<Report> reportTableView;
+    @FXML
+    private TableColumn<Report, ReportType> reportTypeCol;
+
+    @FXML
+    private TableColumn<Report, String> reportDescriptionCol;
+
+    @FXML
+    private TableColumn<Report, String> reportTargetCol;
+
+
+    public void initReportTableView(){
+
+        reportTableView.getItems().clear();
+
+        ObservableSet<Report> observableReportSet = IssueService.getIssueManager().getAllReportsSet();
+        System.out.println(observableReportSet.size());
+        ObservableList<Report> observableReportList = FXCollections.observableArrayList();
+
+
+        reportTableView.setEditable(true);
+        reportTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        reportDescriptionCol.setCellValueFactory(p -> {
+            ObjectProperty<String> description = new SimpleObjectProperty<>("NO Description");
+            try {
+                if (!p.getValue().getDescription().isEmpty()){
+                    description = new SimpleObjectProperty<>(p.getValue().getDescription());
+                }
+                else {
+                    description = new SimpleObjectProperty<>("NO Description");
+                }
+
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return description;
+            }
+
+        });
+        reportTargetCol.setCellValueFactory(p -> {
+            ObjectProperty<String> res = null;
+
+            if (AccountService.getUserManager().userExists(p.getValue().getTargetID()))
+                res = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getTargetID()));
+            else
+                res = new SimpleObjectProperty<>("report content");
+
+            return res;
+        });
+
+        observableReportList.setAll(observableReportSet);
+        reportTableView.setItems(observableReportList);
+        reportTableView.refresh();
+
+    }
+
+    public void handleSelectedReportTableViewListener() {
+
+        reportTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = reportTableView.getSelectionModel().getSelectedIndex();
+                showSelectedReport(reportTableView.getItems().get(index).getReportID());
+
+            }
+        });
+
+    }
+
+    //////// REPORT DETAIL PANE /////////
+    @FXML
+    private Label reportDetailAuthorLabel;
+    @FXML
+    private Label reportDetailTargetLabel;
+    @FXML
+    private Label reportDetailTypeTargetLabel;
+    @FXML
+    private Label reportDetailStatusLabel;
+    @FXML
+    private Label reportDetailDescriptionLabel;
+
+    private String reportIDTemp;
+
+    private void showSelectedReport(String reportId){
+        initPane(reportDetailPane);
+        sideBarPane.setDisable(true);
+
+
+
+        reportDetailAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getReport(reportId).getAuthorID()));
+        if (AccountService.getUserManager().userExists(reportId))
+            reportDetailTargetLabel.setText(AccountService.getUserManager().getUserNameOf(reportId));
+        else
+            reportDetailTargetLabel.setText("report content");
+
+        reportDetailTypeTargetLabel.setText(IssueService.getIssueManager().getReport(reportId).getType() + "");
+        reportDetailStatusLabel.setText(IssueService.getIssueManager().getReport(reportId).getStatus() + "");
+        reportDetailDescriptionLabel.setText(IssueService.getIssueManager().getReport(reportId).getDescription());
+
+        reportIDTemp = reportId;
+
+    }
+
+    @FXML
+    public void handleReportDetailBackButton(){
+        handleClickReportPane();
+        sideBarPane.setDisable(false);
+    }
+
+    @FXML
+    public void handleReportApprovedButton(){
+        IssueService.getIssueManager().reviewReport((AdminUser) StageManager.getStageManager().getContext(), reportIDTemp, true);
+        handleReportDetailBackButton();
+
+    }
+
+    @FXML
+    public void handleReportDeniedButton(){
+        IssueService.getIssueManager().reviewReport((AdminUser) StageManager.getStageManager().getContext(), reportIDTemp, false);
+        handleReportDetailBackButton();
+    }
+
+    /**
+     *
+     * REQUEST PANE
+     */
+
+    @FXML
+    private TableView<UserUnsuspendRequest> requestTableView;
+    @FXML
+    private TableColumn<UserUnsuspendRequest, String> requestAuthorCol;
+    @FXML
+    private TableColumn<UserUnsuspendRequest, String> requestDescriptionCol;
+
+    public void initRequestTableView(){
+
+        requestTableView.getItems().clear();
+
+        ObservableSet<UserUnsuspendRequest> observableRequestSet = AccountService.getUserManager().getUserUnsuspendRequestSet();
+        System.out.println(observableRequestSet.size());
+        ObservableList<UserUnsuspendRequest> observableRequestList = FXCollections.observableArrayList();
+
+
+        requestTableView.setEditable(true);
+        requestAuthorCol.setCellValueFactory(p -> {
+            ObjectProperty<String> author = null;
+            try {
+                author = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getUID()));
+            }  catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return author;
+            }
+
+        });
+        requestDescriptionCol.setCellValueFactory(p -> {
+            ObjectProperty<String> message = new SimpleObjectProperty<>("NO Message");
+            try {
+
+                if (!p.getValue().getMessage().isEmpty()){
+                    message = new SimpleObjectProperty<>(p.getValue().getMessage());
+                }
+                else {
+                    message = new SimpleObjectProperty<>("NO Message");
+                }
+
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return message;
+            }
+
+        });
+
+        observableRequestList.setAll(observableRequestSet);
+        requestTableView.setItems(observableRequestList);
+        requestTableView.refresh();
+
+    }
+
+
+
+
+
 
 
 
@@ -901,44 +1094,6 @@ public class AdminController2 implements Initializable{
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * ALL PANE INIT
@@ -1244,6 +1399,7 @@ public class AdminController2 implements Initializable{
                 "-fx-cursor: hand;");
 
         initPane(reportsUserPane);
+        initReportTableView();
     }
 
     @FXML
@@ -1302,6 +1458,7 @@ public class AdminController2 implements Initializable{
                 "-fx-cursor: hand;");
 
         initPane(requestPane);
+        initRequestTableView();
 
 
     }
@@ -1380,24 +1537,5 @@ public class AdminController2 implements Initializable{
      *
      * bug fixed
      */
-
-    @FXML
-    public void handleReportDetailBackButton(){}
-
-    @FXML
-    public void handleReportApprovedButton(){}
-
-    @FXML
-    public void handleReportDeniedButton(){}
-
-
-
-
-
-
-
-
-
-
 
 }
