@@ -42,6 +42,7 @@ import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.*;
 import ku.cs.oakcoding.app.services.stages.StageManager;
+import org.w3c.dom.Text;
 
 public class AdminController2 implements Initializable{
 
@@ -367,12 +368,13 @@ public class AdminController2 implements Initializable{
     private Label reportEvidenceLabel;
     @FXML
     private Label reportDescriptionLabel;
+    @FXML
+    private TextField complaintCategoryCreateTextField;
 
     public void showSelectedComplaint(String complaintID){
         initPane(complaintDetailPane);
         sideBarPane.setDisable(true);
-
-        reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
+        reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
         reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
         reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
@@ -386,6 +388,19 @@ public class AdminController2 implements Initializable{
     public void handleComplaintBackButton(){
         handleClickComplaintPane();
         sideBarPane.setDisable(false);
+    }
+
+    @FXML
+    public void handleComplaintCategoryCreateButton(){
+        String category = complaintCategoryCreateTextField.getText();
+        complaintCategoryCreateTextField.clear();
+        IssueService.getIssueManager().newComplaintCategory((AdminUser) StageManager.getStageManager().getContext(),category);
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("WARNING");
+        alert.setContentText("You have created complaint category : " + category);
+        alert.showAndWait();
+
     }
 
 
@@ -956,19 +971,21 @@ public class AdminController2 implements Initializable{
 
     }
 
+    @FXML
+    public void handleClickLogoutButton(){
+        try {
+            StageManager.getStageManager().setPage("authentication", null);
+        } catch (StageManager.PageNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      *
      * bug fixed
      */
-
-    @FXML
-    public void handleClickLogoutButton(){}
-
     @FXML
     public void handleRegisterDepartment(){}
-
-    @FXML
-    public void handleBackUserPictureButton(){}
 
     @FXML
     public void handleAddStaffPage(){}
@@ -978,9 +995,6 @@ public class AdminController2 implements Initializable{
 
     @FXML
     public void handleSaveLeaderStaffButton(){}
-
-    @FXML
-    public void handleBackButton(){}
 
     @FXML
     public void handleReportDetailBackButton(){}

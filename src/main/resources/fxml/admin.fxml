@@ -243,7 +243,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="userDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="userDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -448,7 +448,7 @@
             <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -464,6 +464,8 @@
                   <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
                </columns>
             </TableView>
+            <TextField fx:id="complaintCategoryCreateTextField" layoutX="48.0" layoutY="474.0" prefHeight="26.0" prefWidth="217.0" />
+            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" styleClass="button-blue" text="Create Category" onAction="#handleComplaintCategoryCreateButton" />
          </children>
       </Pane>
       <Pane fx:id="complaintDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
