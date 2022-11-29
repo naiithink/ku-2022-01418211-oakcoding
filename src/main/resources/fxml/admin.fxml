@@ -147,7 +147,7 @@
       </Pane>
       <Pane fx:id="userPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <Label layoutX="55.0" layoutY="37.0" text="ผู้ใช้งาน" textFill="WHITE" />
+            <Label layoutX="55.0" layoutY="37.0" text="Users" textFill="WHITE" />
             <Line endX="479.0" layoutX="156.0" layoutY="66.0" startX="-100.0" stroke="#2a2c32" />
             <TableView fx:id="usersListTableView" layoutX="51.0" layoutY="76.0" prefHeight="439.0" prefWidth="548.0">
                <columns>
@@ -162,7 +162,7 @@
       </Pane>
       <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
-            <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="43.0" text="Departments" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
             <TableView fx:id="departmentTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
                <columns>
@@ -172,10 +172,10 @@
             </TableView>
             <Button fx:id="createDepartmentButton" layoutX="381.0" layoutY="487.0" mnemonicParsing="false" onAction="#handleRegisterDepartment" text="สร้าง" />
             <TextField fx:id="nameDepartmentTextField" layoutX="93.0" layoutY="489.0" prefWidth="250.0" />
-            <Label layoutX="96.0" layoutY="459.0" text="ชื่อองค์กร" textFill="WHITE" />
+            <Label layoutX="96.0" layoutY="459.0" text="department name" textFill="WHITE" />
          </children>
       </Pane>
-      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="requestPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="57.0" layoutY="39.0" prefHeight="21.0" prefWidth="68.0" text="Request" textFill="WHITE" />
             <Line endX="405.0" layoutX="158.0" layoutY="75.0" startX="-100.0" stroke="#2a2c32" />
@@ -231,7 +231,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleClickChangeSettingPane" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                  <Button layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleClickChangeSettingPane" styleClass="button-blue" text="Change Account Info" />
                   <ImageView fx:id="picProfileSettingLabel" fitHeight="182.0" fitWidth="144.0" layoutX="317.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/peter-parker.png" />
@@ -239,7 +239,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account Setting" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
@@ -294,7 +294,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account Info" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
             <ImageView fx:id="backPicture" fitHeight="38.0" fitWidth="32.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#handleClickBackUserDetail" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -386,7 +386,7 @@
                   <TextField fx:id="usernameTextField" layoutX="62.0" layoutY="81.0" style="-fx-background-color: #121212;" />
                </children>
             </Pane>
-            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account Setting" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
             <ImageView fx:id="backPicture2" fitHeight="38.0" fitWidth="32.0" layoutX="28.0" layoutY="26.0" onMouseClicked="#handleClickBackChangeSettingButton" pickOnBounds="true" preserveRatio="true">
                <image>
