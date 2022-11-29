@@ -77,13 +77,27 @@ public class AuthenticationController implements Initializable {
         // Set<User> hashSet = newUsersList.getUsers();
         String userName = userNameTextField.getText();
         String password = passwordField.getText();
-        Set<FullUserEntry> entries = AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager().login("_ROOT","admin"));
-        for (FullUserEntry entry: entries) {
+        Set<FullUserEntry> entries = AccountService.getUserManager().getAllUsersSet(AccountService.getUserManager().login("_ROOT", "admin"));
+        for (FullUserEntry entry : entries) {
             OakLogger.log(Level.SEVERE, entry.getFirstName());
 
         }
-        User user = AccountService.getUserManager().login(userName, password);
+        if (!AccountService.getUserManager().userExists(AccountService.getUserManager().getUIDOf(userName))) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Please check your password again!!");
+            alert.showAndWait();
 
+        } else if (!AccountService.getUserManager().isActive(userName)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("You're being suspended!!");
+            alert.showAndWait();
+
+        }
+
+
+        User user = AccountService.getUserManager().login(userName, password);
 
 
         if (Objects.nonNull(user)) {
@@ -99,17 +113,7 @@ public class AuthenticationController implements Initializable {
                 OakLogger.log(Level.SEVERE, "Page not found");
             }
         }
-        else{
-            {
-                    userNameTextField.clear();
-                    passwordField.clear();
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("WARNING");
-                    alert.setContentText("Please check your password agian");
-                    alert.showAndWait();
-                }
-            }
-        }
+    }
 
 
     @FXML

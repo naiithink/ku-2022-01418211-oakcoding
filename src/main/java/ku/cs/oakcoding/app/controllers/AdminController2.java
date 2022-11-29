@@ -653,7 +653,8 @@ public class AdminController2 implements Initializable{
     ///////// Add Staff //////////
     @FXML
     public void handleClickAddStaffButton(){
-
+        initPane(staffMembersInfoPane);
+        sideBarPane.setDisable(true);
     }
 
 
@@ -1242,8 +1243,6 @@ public class AdminController2 implements Initializable{
      * bug fixed
      */
 
-    @FXML
-    public void handleAddStaffPage(){}
     @FXML
     public void handleReportDetailBackButton(){}
 

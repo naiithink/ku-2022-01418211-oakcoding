@@ -341,7 +341,7 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Button layoutX="404.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAddStaffPage" prefHeight="32.0" prefWidth="86.0" styleClass="button-blue" text="Add staff">
+                  <Button layoutX="404.0" layoutY="301.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleClickAddStaffButton" prefHeight="32.0" prefWidth="86.0" styleClass="button-blue" text="Add staff">
                      <font>
                         <Font size="1.0" />
                      </font>
@@ -433,7 +433,6 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="432.0" layoutY="367.0" mnemonicParsing="false" onAction="#handleClickChangeLeaderSaveButton" styleClass="button-blue" text="Save" />
                   <TableView fx:id="chooseLeaderStaffTableView" layoutX="41.0" layoutY="209.0" prefHeight="189.0" prefWidth="378.0">
                     <columns>
                       <TableColumn fx:id="chooseLeaderProfileImageCol" prefWidth="127.0" text="ProfileImage" />
