@@ -303,7 +303,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="departmentDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -662,24 +662,22 @@
             <Button layoutX="176.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleReportDeniedButton" prefHeight="38.0" prefWidth="86.0" styleClass="button-blue" text="Denied" />
          </children>
       </Pane>
-      <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="staffMembersInfoPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="36.0" layoutY="118.0" prefHeight="417.0" prefWidth="566.0" styleClass="account-setting-pane">
                <children>
                   <Line endX="405.0" layoutX="100.0" layoutY="85.0" startX="-100.0" stroke="#2a2c32" />
                   <ListView fx:id="departmentStaffMembersListView1" layoutX="42.0" layoutY="249.0" prefHeight="136.0" prefWidth="278.0" stylesheets="@../css/list-view.css" />
-                  <TableView fx:id="staffMemberLeftTableView" layoutX="14.0" layoutY="14.0" prefHeight="392.0" prefWidth="250.0">
+                  <TableView fx:id="staffMemberLeftTableView" layoutX="24.0" layoutY="14.0" prefHeight="392.0" prefWidth="250.0">
                      <columns>
                         <TableColumn fx:id="profileImageStaffLeftCol" prefWidth="127.0" text="ProfileImage" />
                         <TableColumn fx:id="firstNameStaffLeftCol" prefWidth="119.0" text="FirstName" />
-                        <TableColumn fx:id="chooseFirstNameCol11" prefWidth="119.0" text="FirstName" />
                      </columns>
                   </TableView>
                   <TableView fx:id="staffMemberRightTableView" layoutX="298.0" layoutY="14.0" prefHeight="392.0" prefWidth="250.0">
                      <columns>
                         <TableColumn fx:id="profileImageStaffRightCol" prefWidth="127.0" text="ProfileImage" />
                         <TableColumn fx:id="firstNameStaffRightCol" prefWidth="119.0" text="FirstName" />
-                        <TableColumn fx:id="chooseFirstNameCol111" prefWidth="119.0" text="FirstName" />
                      </columns>
                   </TableView>
                </children>
@@ -688,6 +686,11 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
             <Label layoutX="75.0" layoutY="77.0" prefHeight="27.0" prefWidth="250.0" styleClass="text-regular" text="Department Staff members" textFill="WHITE" />
             <Label layoutX="372.0" layoutY="77.0" prefHeight="27.0" prefWidth="250.0" styleClass="text-regular" text="All Staff members" textFill="WHITE" />
+            <ImageView fx:id="departmentAddBack" fitHeight="42.0" fitWidth="49.0" layoutX="14.0" layoutY="16.0" onMouseClicked="#handleAddStaffBackButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

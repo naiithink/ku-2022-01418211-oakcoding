@@ -6,6 +6,7 @@ import java.util.logging.Level;
 
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleSetProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
@@ -45,8 +46,11 @@ public class Department
         this.DEP_ID = departmentID;
         this.departmentName = new ReadOnlyStringWrapper(departmentName);
         this.leaderStaffMemberID = new ReadOnlyStringWrapper(leaderStaffMemberID);
-        this.departmentStaffMembers = FXCollections.observableSet(departmentStaffMembers);
+        this.departmentStaffMembers = FXCollections.observableSet();
         this.asssignedCategories = FXCollections.observableSet();
+
+        for (String staff : departmentStaffMembers)
+            this.departmentStaffMembers.add(staff);
 
         if (Objects.nonNull(asssignedCategories))
             this.asssignedCategories.addAll(asssignedCategories);
@@ -113,7 +117,16 @@ public class Department
     }
 
     public void addStaffMember(String staffUID) {
+        System.out.println(this.departmentStaffMembers.getClass().getSimpleName());
+        System.out.println(this.departmentStaffMembers == null);
+
+        System.out.println("""
+                lll
+                """);
         this.departmentStaffMembers.add(staffUID);
+        System.out.println("""
+                qqq
+                """);
     }
 
     public void removeStaffMember(String staffUID) {

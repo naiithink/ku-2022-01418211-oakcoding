@@ -19,7 +19,9 @@ import ku.cs.oakcoding.app.helpers.file.OakWorkspaceResource;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.org.Departments;
+import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
+import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
 
 public class WorkspaceManager {
@@ -192,7 +194,7 @@ public class WorkspaceManager {
         while (departmentEntries.hasNext()) {
             Entry<String, AutoUpdateCSV> departmentEntry = departmentEntries.next();
 
-            if (departmentEntry.getValue().getDataWhere(staffUID, "DATE").isEmpty())
+            if (Objects.isNull(departmentEntry.getValue().getDataWhere(staffUID, "DATE_ADDED")))
                 continue;
             else
                 res = departmentEntry.getKey();
@@ -259,6 +261,19 @@ public class WorkspaceManager {
         return departmentStaffMembers;
     }
 
+    public ObservableSet<FullUserEntry> getALlComplementMemberSetProperty(AdminUser adminUser, String departmentID){
+        ObservableSet<FullUserEntry> departmentStaffSet = getAllStaffMemberSetProperty(departmentID);
+        ObservableSet<FullUserEntry> allStaffSet = AccountService.getUserManager().getFilteredUsersSetProperty(adminUser, Roles.STAFF);
+        allStaffSet.removeAll(departmentStaffSet);
+
+//        for (FullUserEntry staff : allStaffSet){
+//            if (Objects.nonNull(getDepartmentOfStaff(staff.getUID()))){
+//                allStaffSet.remove(staff);
+//            }
+//        }
+        return allStaffSet;
+    }
+
     public boolean assignLeaderStaffMember(String departmentID, String staffUID) {
         if (!this.departmentTable.containsKey(departmentID)) {
             OakLogger.log(Level.SEVERE, "Department not found ID '" + departmentID + "'");
@@ -295,6 +310,7 @@ public class WorkspaceManager {
             return;
         }
 
+        System.out.println(this.departmentMemberFiles.containsKey(departmentID));
         getDepartment(departmentID).addStaffMember(staffUID);
         this.departmentMemberFiles.get(departmentID).addRecord(new String[] { staffUID, Long.toString(Instant.now().toEpochMilli()) });
     }

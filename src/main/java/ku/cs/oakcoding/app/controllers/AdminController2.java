@@ -164,6 +164,9 @@ public class AdminController2 implements Initializable{
                 handleSelectedUsersTableViewListener();
                 handleSelectedComplaintTableViewListener();
                 handleSelectedDepartmentTableViewListener();
+                handleSelectedRightStaffMembersTableViewListener();
+
+
 
             }
         });
@@ -654,8 +657,107 @@ public class AdminController2 implements Initializable{
     @FXML
     public void handleClickAddStaffButton(){
         initPane(staffMembersInfoPane);
+        initLeftStaffMembers();
+        initRightStaffMembers();
         sideBarPane.setDisable(true);
     }
+    @FXML
+    public void handleAddStaffBackButton(){
+        showSelectedDepartment(changeLeaderDepartmentID);
+        sideBarPane.setDisable(false);
+    }
+
+    @FXML
+    private TableView<FullUserEntry> staffMemberLeftTableView;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> profileImageStaffLeftCol;
+    @FXML
+    private TableColumn<FullUserEntry, String> firstNameStaffLeftCol;
+    public void initLeftStaffMembers(){
+        staffMemberLeftTableView.getItems().clear();
+
+        ObservableSet<FullUserEntry> observableLeftStaffDepartmentSet = WorkspaceService.getWorkspaceManager().getAllStaffMemberSetProperty(changeLeaderDepartmentID);
+        ObservableList<FullUserEntry> observableLeftStaffDepartmentList = FXCollections.observableArrayList();
+
+        staffMemberLeftTableView.setEditable(true);
+        firstNameStaffLeftCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        profileImageStaffLeftCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+
+        observableLeftStaffDepartmentList.setAll(observableLeftStaffDepartmentSet);
+        staffMemberLeftTableView.setItems(observableLeftStaffDepartmentList);
+        staffMemberLeftTableView.refresh();
+
+    }
+
+
+
+
+    @FXML
+    private TableView<FullUserEntry> staffMemberRightTableView;
+    @FXML
+    private TableColumn<FullUserEntry, ImageView> profileImageStaffRightCol;
+    @FXML
+    private TableColumn<FullUserEntry, String> firstNameStaffRightCol;
+
+    public void initRightStaffMembers(){
+
+        staffMemberRightTableView.getItems().clear();
+
+        ObservableSet<FullUserEntry> observableRightStaffDepartmentSet = WorkspaceService.getWorkspaceManager().getALlComplementMemberSetProperty((AdminUser) StageManager.getStageManager().getContext(), changeLeaderDepartmentID);
+        ObservableList<FullUserEntry> observableRightStaffDepartmentList = FXCollections.observableArrayList();
+
+        staffMemberRightTableView.setEditable(true);
+        firstNameStaffRightCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        profileImageStaffRightCol.setCellValueFactory(p -> {
+            ObjectProperty<ImageView> res = null;
+            try {
+                res = new SimpleObjectProperty<>(new ImageView(new Image(p.getValue().getProfileImagePath().toUri().toURL().toString())));
+                res.get().setPreserveRatio(true);
+                res.get().setFitWidth(30);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return res;
+            }
+        });
+
+
+        observableRightStaffDepartmentList.setAll(observableRightStaffDepartmentSet);
+        staffMemberRightTableView.setItems(observableRightStaffDepartmentList);
+        staffMemberRightTableView.refresh();
+
+    }
+
+    public void handleSelectedRightStaffMembersTableViewListener() {
+
+        staffMemberRightTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = staffMemberRightTableView.getSelectionModel().getSelectedIndex();
+                addStaffToDepartment(staffMemberRightTableView.getItems().get(index).getUID());
+                handleClickAddStaffButton();
+            }
+        });
+
+    }
+
+    public void addStaffToDepartment(String staffUID){
+        WorkspaceService.getWorkspaceManager().addStaffMember(changeLeaderDepartmentID, staffUID);
+    }
+
+
+
 
 
 
