@@ -86,7 +86,7 @@ public class Department
     }
 
     public boolean hasLeaderStaffMember() {
-        return this.leaderStaffMemberID.isNotEmpty().get();
+        return !this.leaderStaffMemberID.get().equals("NIL");
     }
 
     public boolean assignLeaderStaffMemberTo(String staffUID) {

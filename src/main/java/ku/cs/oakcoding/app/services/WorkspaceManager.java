@@ -240,7 +240,8 @@ public class WorkspaceManager {
     }
 
     public String getLeaderStaffMemberIDOf(String departmentID) {
-        return getDepartment(departmentID).getLeaderStaffMemberID();
+        return getDepartment(departmentID).hasLeaderStaffMember()   ? getDepartment(departmentID).getLeaderStaffMemberID()
+                                                                    : null;
     }
 
     public boolean hasLeaderStaffMember(String departmentID) {
@@ -250,7 +251,9 @@ public class WorkspaceManager {
     public ObservableSet<FullUserEntry> getAllStaffMemberSetProperty(String departmentID){
         ObservableSet<FullUserEntry> departmentStaffMembers = FXCollections.observableSet();
         for (String staffUID : getDepartment(departmentID).getStaffMemberSetProperty()){
-            departmentStaffMembers.add(AccountService.getUserManager().getFullUserEntryFromUID(staffUID));
+            if (!Objects.isNull(AccountService.getUserManager().getFullUserEntryFromUID(staffUID))) {
+                departmentStaffMembers.add(AccountService.getUserManager().getFullUserEntryFromUID(staffUID));
+            }
         }
 
         return departmentStaffMembers;
