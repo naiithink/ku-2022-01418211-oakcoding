@@ -160,11 +160,11 @@
             <Button layoutX="470.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleCreateStaffMember" prefHeight="30.0" prefWidth="122.0" styleClass="button-blue" text="Create Staff" />
          </children>
       </Pane>
-      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="organizationsPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="75.0" layoutY="43.0" text="องค์กร" textFill="WHITE" />
             <Line endX="405.0" layoutX="176.0" layoutY="71.0" startX="-100.0" stroke="#2a2c32" />
-            <TableView fx:id="departmentsListTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
+            <TableView fx:id="departmentTableView" layoutX="50.0" layoutY="84.0" prefHeight="350.0" prefWidth="548.0">
                <columns>
                   <TableColumn fx:id="departmentCol" prefWidth="262.0" text="DepartMent" />
                   <TableColumn fx:id="leaderStaffCol" prefWidth="285.0" text="LeaderStaff" />
@@ -448,7 +448,7 @@
             <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -465,7 +465,7 @@
                </columns>
             </TableView>
             <TextField fx:id="complaintCategoryCreateTextField" layoutX="48.0" layoutY="474.0" prefHeight="26.0" prefWidth="217.0" />
-            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" styleClass="button-blue" text="Create Category" onAction="#handleComplaintCategoryCreateButton" />
+            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" onAction="#handleComplaintCategoryCreateButton" styleClass="button-blue" text="Create Category" />
          </children>
       </Pane>
       <Pane fx:id="complaintDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">

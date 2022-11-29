@@ -235,12 +235,12 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initPane();
-        initReportPageChoiceBox();
-        initComplaintPageChoiceBox();
-        initDetailReportPageChoiceBox();
         StageManager.getStageManager().getCurrentPrimaryStageScenePageNickProperty().addListener((observer, oldValue, newValue) -> {
             if (newValue.equals("user")) {
+                initPane();
+                initReportPageChoiceBox();
+                initComplaintPageChoiceBox();
+                initDetailReportPageChoiceBox();
                 setMyPane();
                 initReportTableView();
                 initComplaintTableView();
@@ -391,7 +391,7 @@ public class UserController implements Initializable {
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(true);
 
-        reportAuthorLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID());
+        reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
         reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
         reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
@@ -610,6 +610,7 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
+        initComplaintPageChoiceBox();
 
     }
 

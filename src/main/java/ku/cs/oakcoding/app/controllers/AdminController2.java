@@ -403,6 +403,22 @@ public class AdminController2 implements Initializable{
 
     }
 
+    /**
+     *
+     * DEPARTMENT PANE
+     */
+
+    @FXML
+    private TableView<Department> departmentTableView;
+    @FXML
+    private TableColumn<Department, String> departmentCol;
+    @FXML
+    private TableColumn<Department, String> leaderStaffCol;
+
+
+
+
+
 
 
 
