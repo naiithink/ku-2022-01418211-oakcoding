@@ -353,14 +353,19 @@ public class IssueManager {
         return IssueManagerStatus.SUCCESS;
     }
 
-    public IssueManagerStatus resolveComplaint(StaffUser staff, String complaintID) {
+    public IssueManagerStatus resolveComplaint(StaffUser staff, String complaintID, String method) {
         if (Objects.isNull(staff) || !(staff instanceof StaffUser))
             return IssueManagerStatus.INVALID_ACCESS;
 
         Complaint complaint = getComplaint(complaintID);
 
+        String preDescription = complaint.getDescription();
+
+        String postDescription = preDescription + "\\n" + method;
+
         complaint.setStatus(staff, ComplaintStatus.RESOLVED);
         complaint.setCaseManager(staff.getUID());
+        this.complaintDB.editRecord(complaintID, "DESCRIPTION", postDescription, false);
         this.complaintDB.editRecord(complaintID, "STATUS", ComplaintStatus.RESOLVED.name(), false);
         this.complaintDB.editRecord(complaintID, "CASE_MANAGER_UID", staff.getUID(), false);
 
