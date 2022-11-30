@@ -158,6 +158,8 @@ public class AutoUpdateCSV implements CSVBase<CSV>,
 
     @Override
     public String getDataWhere(String primaryKey, String column) {
+        System.out.println(this.data.getTableName());
+        System.out.println("pk: " + primaryKey + " :: " + "col: " + column);
         return this.data.getDataWhere(primaryKey, column);
     }
 
