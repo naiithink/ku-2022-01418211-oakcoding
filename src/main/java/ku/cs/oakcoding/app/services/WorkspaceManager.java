@@ -194,6 +194,8 @@ public class WorkspaceManager {
         while (departmentEntries.hasNext()) {
             Entry<String, AutoUpdateCSV> departmentEntry = departmentEntries.next();
 
+            System.out.println(departmentEntry.getKey());
+
             if (Objects.isNull(departmentEntry.getValue().getDataWhere(staffUID, "DATE_ADDED")))
                 continue;
             else
@@ -247,6 +249,10 @@ public class WorkspaceManager {
     }
 
     public boolean hasLeaderStaffMember(String departmentID) {
+        System.out.println("> " + departmentID);
+        for (String s : this.departmentTable.keySet())
+            System.out.println(s);
+        System.out.println("< ");
         return getDepartment(departmentID).hasLeaderStaffMember();
     }
 
@@ -266,24 +272,9 @@ public class WorkspaceManager {
         ObservableSet<FullUserEntry> allStaffSet = AccountService.getUserManager().getFilteredUsersSetProperty(adminUser, Roles.STAFF);
 
         allStaffSet.removeAll(departmentStaffSet);
-        if (allStaffSet.size() == 0){
-            return null;
-        }
 
 
-        ObservableSet<FullUserEntry> finalStaff = getAllAvaliableStaffMemberSetProperty(allStaffSet);
-
-        return finalStaff;
-    }
-
-    public ObservableSet<FullUserEntry> getAllAvaliableStaffMemberSetProperty(ObservableSet<FullUserEntry> staffMembers){
-        ObservableSet<FullUserEntry> finalStaff = FXCollections.observableSet();
-
-        for (FullUserEntry staff : staffMembers){
-            finalStaff.add(staff);
-        }
-
-        return finalStaff;
+        return allStaffSet;
     }
 
     public boolean assignLeaderStaffMember(String departmentID, String staffUID) {

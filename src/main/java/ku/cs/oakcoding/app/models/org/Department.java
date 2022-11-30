@@ -32,7 +32,7 @@ public class Department
 
         this.DEP_ID = departmentID;
         this.departmentName = new ReadOnlyStringWrapper(departmentName);
-        this.leaderStaffMemberID = new ReadOnlyStringWrapper();
+        this.leaderStaffMemberID = new ReadOnlyStringWrapper(new String());
         this.departmentStaffMembers = FXCollections.observableSet();
         this.asssignedCategories = FXCollections.observableSet();
     }

@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -169,7 +171,7 @@ public class AdminController2 implements Initializable{
                 handleSelectedComplaintTableViewListener();
                 handleSelectedDepartmentTableViewListener();
                 handleSelectedRightStaffMembersTableViewListener();
-                handleSelectedLeftStaffMembersTableViewListener();
+//                handleSelectedLeftStaffMembersTableViewListener();
                 handleSelectedChooseLeaderTableViewListener();
                 handleSelectedReportTableViewListener();
 
@@ -455,13 +457,13 @@ public class AdminController2 implements Initializable{
         departmentCol.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
         leaderStaffCol.setCellValueFactory(p -> {
 
-            ObjectProperty<String> leaderName = new SimpleObjectProperty<>("NO LEADER");
+            StringProperty leaderName = new SimpleStringProperty("NO LEADER");
             try {
                 if (p.getValue().hasLeaderStaffMember()){
-                    leaderName = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getLeaderStaffMemberID()));
+                    leaderName.set(AccountService.getUserManager().getUserNameOf(p.getValue().getLeaderStaffMemberID()));
                 }
                 else {
-                    leaderName = new SimpleObjectProperty<>("NO LEADER");
+                    leaderName.set("NO LEADER");
                 }
 
             } catch (IllegalArgumentException e) {
@@ -564,6 +566,9 @@ public class AdminController2 implements Initializable{
     @FXML
     private TableColumn<FullUserEntry, ImageView> staffProfileImageCol;
 
+    @FXML
+    private TextField newNameDepartmentTextField;
+
     public void initStaffMembersTableView(String departmentID){
         departmentStaffMembersTableView.getItems().clear();
 
@@ -592,6 +597,26 @@ public class AdminController2 implements Initializable{
         departmentStaffMembersTableView.refresh();
 
     }
+
+    @FXML
+    public void handleClickRenameDepartment(){
+        String newName = newNameDepartmentTextField.getText();
+        newNameDepartmentTextField.clear();
+        if (!newName.isBlank()){
+            WorkspaceService.getWorkspaceManager().renameDepartment(changeLeaderDepartmentID, WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName(), newName);
+            showSelectedDepartment(changeLeaderDepartmentID);
+
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Department name must not blank");
+            alert.showAndWait();
+
+        }
+    }
+
+
 
 
     @FXML
@@ -704,6 +729,7 @@ public class AdminController2 implements Initializable{
     public void handleAddStaffBackButton(){
         showSelectedDepartment(changeLeaderDepartmentID);
         sideBarPane.setDisable(false);
+
     }
 
     @FXML
@@ -740,23 +766,23 @@ public class AdminController2 implements Initializable{
 
     }
 
-    public void handleSelectedLeftStaffMembersTableViewListener() {
-
-        staffMemberLeftTableView.setOnMousePressed(e ->{
-            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
-                int index = staffMemberLeftTableView.getSelectionModel().getSelectedIndex();
-                removeStaffFromDepartment(staffMemberLeftTableView.getItems().get(index).getUID());
-                handleClickAddStaffButton();
-            }
-        });
-
-    }
-
-    public void removeStaffFromDepartment(String staffUID){
-        WorkspaceService.getWorkspaceManager().removeStaffMember(changeLeaderDepartmentID, staffUID);
-        System.out.println(WorkspaceService.getWorkspaceManager().hasLeaderStaffMember(changeLeaderDepartmentID));
-
-    }
+//    public void handleSelectedLeftStaffMembersTableViewListener() {
+//
+//        staffMemberLeftTableView.setOnMousePressed(e ->{
+//            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+//                int index = staffMemberLeftTableView.getSelectionModel().getSelectedIndex();
+//                removeStaffFromDepartment(staffMemberLeftTableView.getItems().get(index).getUID());
+//                handleClickAddStaffButton();
+//            }
+//        });
+//
+//    }
+//
+//    public void removeStaffFromDepartment(String staffUID){
+//        WorkspaceService.getWorkspaceManager().removeStaffMember(changeLeaderDepartmentID, staffUID);
+//        System.out.println(WorkspaceService.getWorkspaceManager().hasLeaderStaffMember(changeLeaderDepartmentID));
+//
+//    }
 
 
 
