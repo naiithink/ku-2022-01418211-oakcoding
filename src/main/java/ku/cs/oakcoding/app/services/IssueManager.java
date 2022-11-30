@@ -470,14 +470,16 @@ public class IssueManager {
             return IssueManagerStatus.REPORT_NOT_FOUND;
 
         if (approve) {
-            if (this.reportTable.get(reportID).approve(admin).equals(ReportResolvingStatus.SUCCESS))
+            if (this.reportTable.get(reportID).approve(admin).equals(ReportResolvingStatus.SUCCESS)) {
                 this.reportDB.removeRecordWhere(reportID);
-            else
+                this.reportTable.remove(reportID);
+            } else
                 return IssueManagerStatus.FAILURE;
         } else {
-            if (this.reportTable.get(reportID).deny(admin).equals(ReportResolvingStatus.SUCCESS))
+            if (this.reportTable.get(reportID).deny(admin).equals(ReportResolvingStatus.SUCCESS)) {
                 this.reportDB.removeRecordWhere(reportID);
-            else
+                this.reportTable.remove(reportID);
+            } else
                 return IssueManagerStatus.FAILURE;
         }
 
