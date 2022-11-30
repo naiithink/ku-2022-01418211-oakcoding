@@ -336,4 +336,8 @@ public class WorkspaceManager {
         getDepartment(departmentID).removeAssignment(categoryName);
         this.departmentTagFiles.get(departmentID).removeRecordWhere(categoryName);
     }
+
+    public ObservableSet<String> getAssignedCategoryFromDepartment(String departmentId){
+        return getDepartment(departmentId).getAsssignedCategoriesSetProperty();
+    }
 }

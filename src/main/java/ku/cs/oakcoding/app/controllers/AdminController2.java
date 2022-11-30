@@ -99,6 +99,9 @@ public class AdminController2 implements Initializable{
     @FXML
     private Pane sideBarPane;
 
+    @FXML
+    private Pane departmentCategoryPane;
+
     /**
      *  ALL IMAGEVIEW
      *
@@ -531,6 +534,9 @@ public class AdminController2 implements Initializable{
     private Label leaderStaffLabel;
     @FXML
     private Label departmentDetailStaffMembersLabel;
+
+    @FXML
+    private Label departmentCateLabel;
     private String changeLeaderDepartmentID;
     public void showSelectedDepartment(String departmentID){
         initPane(departmentDetailPane);
@@ -554,6 +560,8 @@ public class AdminController2 implements Initializable{
         else {
             leaderStaffLabel.setText("NO LEADER");
         }
+
+
         changeLeaderDepartmentID = WorkspaceService.getWorkspaceManager().getDepartment(departmentID).getDepartmentID();
 
     }
@@ -616,14 +624,56 @@ public class AdminController2 implements Initializable{
         }
     }
 
-
-
+    @FXML
+    public void handleDepartmentCateButton(){
+        initPane(departmentCategoryPane);
+        sideBarPane.setDisable(true);
+        initDepartmentCateChoiceBox();
+        initDepartmentCateListView(changeLeaderDepartmentID);
+    }
 
     @FXML
     public void handleDepartmentBackButton(){
         handleClickDepartmentPane();
         sideBarPane.setDisable(false);
     }
+
+    /////// DEPARTMENT CATEGORY ///////////
+
+    @FXML
+    private ChoiceBox<String> departmentCateChoiceBox;
+
+    @FXML
+    private ListView<String> departmentCateListView;
+
+    @FXML
+    public void handleClickDepartmentCateBackButton(){
+        handleClickDepartmentPane();
+        sideBarPane.setDisable(false);
+    }
+
+    public void initDepartmentCateChoiceBox(){
+        departmentCateChoiceBox.setItems(FXCollections.observableArrayList(IssueService.getIssueManager().getAllCategorySet()));
+    }
+
+    public void initDepartmentCateListView(String departmentID){
+        departmentCateListView.getItems().setAll(WorkspaceService.getWorkspaceManager().getAssignedCategoryFromDepartment(departmentID));
+    }
+
+    public void addDepartmentCate(){
+        WorkspaceService.getWorkspaceManager().assignCategory(changeLeaderDepartmentID, departmentCateChoiceBox.getValue());
+        handleDepartmentCateButton();
+    }
+
+    public void removeDepartmentCate(){
+        WorkspaceService.getWorkspaceManager().removeCategory(changeLeaderDepartmentID, departmentCateChoiceBox.getValue());
+        handleDepartmentCateButton();
+    }
+
+
+
+
+
 
     //////// CHANGE LEADER STAFF ///////
 
@@ -862,6 +912,9 @@ public class AdminController2 implements Initializable{
 
         ObservableSet<Report> observableReportSet = IssueService.getIssueManager().getAllReportsSet();
         System.out.println(observableReportSet.size());
+        for (Report repot : observableReportSet){
+            System.out.println(repot);
+        }
         ObservableList<Report> observableReportList = FXCollections.observableArrayList();
 
 
@@ -1158,6 +1211,7 @@ public class AdminController2 implements Initializable{
         complaintDetailPane.setVisible(false);
         reportDetailPane.setVisible(false);
         staffMembersInfoPane.setVisible(false);
+        departmentCategoryPane.setVisible(false);
     }
 
     public void initPane(Pane pane){
