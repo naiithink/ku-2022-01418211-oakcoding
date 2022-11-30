@@ -205,7 +205,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="221.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="createReportsUserPane" layoutX="221.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -221,8 +221,6 @@
                   <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
                </columns>
             </TableView>
-            <TextField fx:id="complaintCategoryCreateTextField" layoutX="48.0" layoutY="474.0" prefHeight="26.0" prefWidth="217.0" />
-            <Button layoutX="283.0" layoutY="468.0" mnemonicParsing="false" onAction="#handleComplaintCategoryCreateButton" styleClass="button-blue" text="Create Category" />
          </children>
       </Pane>
       <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
@@ -327,6 +325,13 @@
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
+            <Button fx:id="resolvedButton" layoutX="308.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleReseloved" text="Reslove" />
+            <TextField fx:id="resolvedTextField" layoutX="71.0" layoutY="462.0" prefHeight="31.0" prefWidth="217.0" />
+            <Label layoutX="70.0" layoutY="436.0" prefHeight="27.0" prefWidth="150.0" styleClass="yellow-color-font" text="Resolved" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
     </children>

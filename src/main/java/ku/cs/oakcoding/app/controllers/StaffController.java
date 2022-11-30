@@ -25,11 +25,13 @@ import javafx.scene.layout.Pane;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.complaints.Complaint;
 import ku.cs.oakcoding.app.models.complaints.ComplaintStatus;
+import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.StaffUser;
 import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.IssueService;
+import ku.cs.oakcoding.app.services.WorkspaceService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 
 import java.net.URL;
@@ -98,6 +100,16 @@ public class StaffController implements Initializable {
     @FXML
     private Button settingButton;
 
+//  add by pooh
+
+    private String UID;
+
+    private String departmentOfStaff;
+
+    private String nameDepartment;
+
+    private StaffUser staffUser;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -106,14 +118,15 @@ public class StaffController implements Initializable {
             if (newValue.equals("staff")) {
                 setMyPane();
                 setProfileLabel();
+                addStaff();
 //                initReportTableView();
 //                initComplaintTableView();
-//
 //                handleSelectComplaintTableView();
+                initComplaintTableView();
+                handleSelectedComplaintTableViewListener();
             }
         });
-        initComplaintTableView();
-        handleSelectedComplaintTableViewListener();
+
     }
     /**
      *
@@ -203,7 +216,7 @@ public class StaffController implements Initializable {
 
     private void setProfileLabel(){
         /* hotfix/0.0.1 */
-        StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
+        staffUser = (StaffUser) StageManager.getStageManager().getContext();
 
         userNameLabel.setText(staffUser.getUserName());
         statusAccountLabel.setText(staffUser.getRole().getPrettyPrinted());
@@ -248,21 +261,30 @@ public class StaffController implements Initializable {
     @FXML
     private TableColumn<Complaint, ComplaintStatus> complaintStatusCol;
 
-    private String UID;
+    @FXML
+    private TextField resolvedTextField;
+
+    private String complainID;
+
+
+
+
+
+
 
 
     public void initComplaintTableView(){
 
         complaintTableView.getItems().clear();
 
-        // get department
-//        System.out.println("Got: " + StageManager.getStageManager().getContext());
-//        StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
-//        System.out.println(staffUser);
-//        UID = staffUser.getUID();
-//        System.out.println("MY UID is " + UID);
+//        System.out.println("MY UID" + UID);
+//        System.out.println("MY DEPARTMENT " + departmentOfStaff);
+//        System.out.println("MY CATORGARY NAME" + staffUser);
+//        System.out.println("MY CATORY " + myCategory);
 
-        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory("pollution");
+//        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
         ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
 
         complaintTableView.setEditable(true);
@@ -284,6 +306,9 @@ public class StaffController implements Initializable {
 
 
         observableComplaintList.setAll(observableComplaintSet);
+//        for (Complaint c:observableComplaintList) {
+//            System.out.println("my list " + c.toString());
+//        }
         complaintTableView.setItems(observableComplaintList);
         complaintTableView.refresh();
 
@@ -295,9 +320,22 @@ public class StaffController implements Initializable {
             if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
                 int index = complaintTableView.getSelectionModel().getSelectedIndex();
                 showSelectedComplaint(complaintTableView.getItems().get(index).getComplaintID());
+                complainID = complaintTableView.getItems().get(index).getComplaintID();
+
+
             }
         });
+
     }
+    public void handleReseloved(ActionEvent actionEvent) {
+        System.out.println("My textfield is " + resolvedTextField.getText());
+        System.out.println("Print complainID" +complainID.toString());
+//
+        IssueService.getIssueManager().resolveComplaint(staffUser,complainID,resolvedTextField.getText());
+        System.out.println("Work reseloved" +complainID.toString());
+    }
+
+
 
     /**
      *
@@ -324,7 +362,12 @@ public class StaffController implements Initializable {
     private TextField complaintCategoryCreateTextField;
 
     public void showSelectedComplaint(String complaintID){
-//        initPane(complaintDetailPane);
+        welcomeStaffPane.setVisible(false);
+        settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
+        createReportsUserPane.setVisible(false);
+        complaintDetailPane.setVisible(true);
+
 //        sideBarPane.setDisable(true);
         reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
@@ -337,7 +380,7 @@ public class StaffController implements Initializable {
 
     @FXML
     public void handleComplaintBackButton(){
-//        handleClickComplaintPane();
+
 //        sideBarPane.setDisable(false);
     }
 
@@ -356,6 +399,8 @@ public class StaffController implements Initializable {
 
 
 
+
+
     /**
      *
      * Other
@@ -371,6 +416,9 @@ public class StaffController implements Initializable {
 
     @FXML
     private Label userNameHomeLabel;
+
+    private Department myDepartment;
+    private String myCatogory;
 
 
 
@@ -510,9 +558,24 @@ public class StaffController implements Initializable {
 
     }
     public void setMyPane() {
-        StaffUser staffUser = (StaffUser) StageManager.getStageManager().getContext();
+        staffUser = (StaffUser) StageManager.getStageManager().getContext();
         userNameHomeLabel.setText(staffUser.getFirstName());
         statusHomeLabel.setText(staffUser.getRole().getPrettyPrinted());
+        UID = staffUser.getUID();
+        departmentOfStaff = WorkspaceService.getWorkspaceManager().getDepartmentOfStaff(UID);
+        nameDepartment = WorkspaceService.getWorkspaceManager().getDepartmentNameOfID(departmentOfStaff);
+        myDepartment = WorkspaceService.getWorkspaceManager().getDepartment(departmentOfStaff);
+//        myCatogory = myDepartment.
+
+
+
+
+//        getDepartment
+        System.out.println("nameDepartment" + nameDepartment);
+        System.out.println("departmentOfStaff" + departmentOfStaff);
+
+
+
     }
 
 
@@ -524,7 +587,6 @@ public class StaffController implements Initializable {
         complaintDetailPane.setVisible(false);
         createReportsUserPane.setVisible(false);
     }
-
     public void handleBackUserPictureButton(MouseEvent mouseEvent) {
 
         welcomeStaffPane.setVisible(false);
@@ -537,9 +599,24 @@ public class StaffController implements Initializable {
 
     public void handleComplaintCategoryCreateButton(ActionEvent actionEvent) {
 
+
     }
 
     public void handleComplaintBackButton(MouseEvent mouseEvent) {
+        welcomeStaffPane.setVisible(false);
+        settingStaffPane.setVisible(false);
+        settingDetailChangeUserPane.setVisible(false);
+        createReportsUserPane.setVisible(true);
+        complaintDetailPane.setVisible(false);
 
     }
+
+    public void addStaff(){
+        System.out.println("Add staff working!!");
+
+//        WorkspaceService.getWorkspaceManager().addStaffMember("1666947632318-department", "1669701656176-staffuser");
+    }
+
+
+
 }

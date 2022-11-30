@@ -192,7 +192,7 @@ public class WorkspaceManager {
         while (departmentEntries.hasNext()) {
             Entry<String, AutoUpdateCSV> departmentEntry = departmentEntries.next();
 
-            if (departmentEntry.getValue().getDataWhere(staffUID, "DATE").isEmpty())
+            if (departmentEntry.getValue().getDataWhere(staffUID, "DATE_ADDED") == null)
                 continue;
             else
                 res = departmentEntry.getKey();

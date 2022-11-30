@@ -304,11 +304,14 @@ public class IssueManager {
     }
 
     public ObservableSet<Complaint> getComplaintsWithCategory(String categoryName) {
+        System.out.println("getComplaintsWithCategory ");
         ObservableSet<Complaint> res = FXCollections.observableSet();
 
         Iterator<String> complaintIDs = this.categorizedComplaintTable.get(categoryName).iterator();
 
         while (complaintIDs.hasNext()) {
+//            add by pooh debug can delete
+//            System.out.println("complaints from user" + getComplaint(complaintIDs.next()));
             res.add(getComplaint(complaintIDs.next()));
         }
 
@@ -361,7 +364,7 @@ public class IssueManager {
 
         String preDescription = complaint.getDescription();
 
-        String postDescription = preDescription + "\\n" + method;
+        String postDescription = preDescription + "\n" + "Fixed it -> " + method;
 
         complaint.setStatus(staff, ComplaintStatus.RESOLVED);
         complaint.setDescription(postDescription);
