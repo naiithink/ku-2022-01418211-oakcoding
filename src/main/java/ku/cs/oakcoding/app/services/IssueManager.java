@@ -364,6 +364,7 @@ public class IssueManager {
         String postDescription = preDescription + "\\n" + method;
 
         complaint.setStatus(staff, ComplaintStatus.RESOLVED);
+        complaint.setDescription(postDescription);
         complaint.setCaseManager(staff.getUID());
         this.complaintDB.editRecord(complaintID, "DESCRIPTION", postDescription, false);
         this.complaintDB.editRecord(complaintID, "STATUS", ComplaintStatus.RESOLVED.name(), false);

@@ -137,6 +137,10 @@ public class Complaint {
         return true;
     }
 
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
     public boolean isResolved() {
         return isResolved.get();
     }
