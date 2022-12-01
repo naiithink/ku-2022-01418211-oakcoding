@@ -436,7 +436,10 @@ public final class UserManager {
 
             OakLogger.log(Level.INFO, "Profile image extension: " + profileImageExtension);
 
-            profileImagePath = OakResource.renameFile(OakResource.copyFile(newProfileImage, OakUserResource.getUserDirOf(userName).resolve(newProfileImage.getFileName())), OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + profileImageExtension));
+            profileImagePath = OakResource.copyFile(newProfileImage,
+                                                    OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + profileImageExtension));
+
+            System.out.println();
         } catch (IOException e) {
             OakLogger.log(Level.SEVERE, "Got 'IOException' while saving uploaded profile image");
             return UserManagerStatus.FAILURE;
@@ -567,7 +570,11 @@ public final class UserManager {
         //         latestTimestamp = timestamp;
 
         UserUnsuspendRequest request = new UserUnsuspendRequest(getUIDOf(userName),
+<<<<<<< Updated upstream
                                                                 "NIL",
+=======
+                                                                null,
+>>>>>>> Stashed changes
                                                                 message);
 
         this.userRequestTable.put(getUIDOf(userName), request);
