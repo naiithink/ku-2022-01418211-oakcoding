@@ -884,6 +884,7 @@ public class UserController implements Initializable {
         statusAccountLabel.setText(consumerUser.getRole().getPrettyPrinted());
         firstNameAccountLabel.setText(consumerUser.getFirstName());
         lastNameAccountLabel.setText(consumerUser.getLastName());
+        // hotfix/0.0.2
         Image image = new Image(consumerUser.getProfileImagePath().toUri().toString());
         profileImageNameLabel.setText(consumerUser.getProfileImagePath().toUri().toString());
         profileImageView.setImage(image);
