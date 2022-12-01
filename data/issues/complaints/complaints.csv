@@ -1,3 +1,1 @@
 "COMPLAINT_ID","AUTHOR_UID","CATEGORY","SUBJECT","DESCRIPTION","EVIDENCE_PATH","VOTERS","STATUS","CASE_MANAGER_UID"
-"1669868306073-complaint","1669699840525-consumeruser","pollution","dfgdfg","dfgdfgfdg
-Fixed it -> It should work now","NIL","NIL","RESOLVED","1669701656176-staffuser"
