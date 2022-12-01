@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.RegisterController">
     <children>
         <Pane fx:id="userRegisterPane" prefHeight="406.0" prefWidth="640.0" styleClass="decorated-window" stylesheets="@../css/stylesheet.css">
             <children>
@@ -240,12 +234,12 @@
             </Pane>
             <Pane layoutX="240.0" prefHeight="568.0" prefWidth="567.0" style="-fx-background-color: #121212;">
                <children>
-                  <Button fx:id="registerOrganizationButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterOrganizationButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="สมัครสมาชิก" textFill="WHITE">
+                  <Button fx:id="registerOrganizationButton" layoutX="229.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleRegisterOrganizationButton" prefHeight="26.0" prefWidth="109.0" styleClass="button-red" text="Create" textFill="WHITE">
                      <font>
                         <Font name="Kanit Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="51.0" layoutY="413.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="112.0" stylesheets="@../css/style.css" text="อัพโหลดรูปโปรไฟล์" textFill="#17abff">
+                  <Label layoutX="51.0" layoutY="413.0" onMouseClicked="#handleProfileUpload" prefHeight="23.0" prefWidth="142.0" stylesheets="@../css/style.css" text="Upload Profile Image" textFill="#17abff">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -254,7 +248,7 @@
                         <String fx:value="hover" />
                      </styleClass>
                   </Label>
-                  <Label layoutX="16.0" layoutY="236.0" prefHeight="25.0" prefWidth="215.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Member (ใช้คอมม่าคั่นแต่ละชื่อ)" textFill="#d0d0d0">
+                  <Label layoutX="16.0" layoutY="236.0" prefHeight="25.0" prefWidth="320.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="Member (Use ccomma betaween members)" textFill="#d0d0d0">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
@@ -271,7 +265,7 @@
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="สร้าง Organization" textFill="WHITE">
+                  <Label layoutX="229.0" layoutY="23.0" styleClass="TextTH" stylesheets="@../css/KanitThLoader.css" text="Create Organization" textFill="WHITE">
                      <font>
                         <Font name="Kanit" size="21.0" />
                      </font>
@@ -281,12 +275,12 @@
                         <Image url="@../images/upload.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="nameLogoUploadOrganizationLabel" layoutX="173.0" layoutY="412.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="toktokOrganization.png" textFill="#da9e9f">
+                  <Label fx:id="nameLogoUploadOrganizationLabel" layoutX="199.0" layoutY="412.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="toktokOrganization.png" textFill="#da9e9f">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="messageWhenRegisterOrganizationLabel" layoutX="163.0" layoutY="497.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="ท่านได้ทำการเพิ่ม Organization เรียบร้อย" textFill="#da9e9f">
+                  <Label fx:id="messageWhenRegisterOrganizationLabel" layoutX="181.0" layoutY="495.0" styleClass="Text" stylesheets="@../css/kanitEngLoader.css" text="You have created Organization" textFill="#da9e9f">
                      <font>
                         <Font name="Kanit Regular" size="16.0" />
                      </font>

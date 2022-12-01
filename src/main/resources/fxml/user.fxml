@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.UserController">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.UserController">
    <children>
-      <Pane fx:id="welcomeUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="welcomeUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
                <children>
-                  <Label layoutX="113.0" layoutY="14.0" prefHeight="53.0" prefWidth="250.0" styleClass="text-large-bold" text="ยินดีต้อนรับสู่" textFill="#0a141f" />
-                  <Label layoutX="165.0" layoutY="64.0" styleClass="text-regular" text="ระบบการร้องเรียน" />
+                  <Label layoutX="130.0" layoutY="16.0" prefHeight="58.0" prefWidth="222.0" styleClass="text-large-bold" text="WELCOME" textFill="#0a141f" />
+                  <Label layoutX="184.0" layoutY="64.0" styleClass="text-regular" text="OakCoding" />
                   <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="363.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/hand-holding-heart.png" />
@@ -33,7 +24,7 @@
             </Pane>
             <Pane fx:id="welcomeUserPane1" layoutX="74.0" layoutY="267.0" prefHeight="150.0" prefWidth="181.0" styleClass="all-report-user-pane">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" styleClass="all-report-user-pane" text="จำนวนรายงานทั้งหมด" textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="14.0" styleClass="all-report-user-pane" text="Complaints" textFill="WHITE" />
                   <Label fx:id="numberReportOfUser" layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="97.0" styleClass="text-large-bold" text="999" textAlignment="CENTER" textFill="#332c16" />
                   <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="139.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +33,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label layoutX="74.0" layoutY="225.0" text="สถิติทั้งหมด" textFill="WHITE" />
+            <Label layoutX="74.0" layoutY="225.0" text="All stats" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="255.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
@@ -189,11 +180,11 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button fx:id="AccountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangePaneToChangeDetailPane" styleClass="button-blue" text="แก้ไขข้อมูลส่วนตัว" />
+                  <Button fx:id="AccountChangeInfoButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangePaneToChangeDetailPane" styleClass="button-blue" text="Edit Account Info" />
                   <ImageView fx:id="profileImageView" fitHeight="150.0" fitWidth="181.0" layoutX="292.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account info" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
@@ -211,7 +202,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="changePasswordButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangeDetail" styleClass="button-blue" text="เปลี่ยนรหัสผ่าน" />
+                  <Button fx:id="changePasswordButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangeDetail" styleClass="button-blue" text="Change Password" />
                   <ImageView fx:id="newPic" fitHeight="150.0" fitWidth="181.0" layoutX="292.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
                   <PasswordField fx:id="newPasswordField" layoutX="78.0" layoutY="191.0" style="-fx-background-color: #121212;" />
                   <PasswordField fx:id="confirmPasswordField" layoutX="78.0" layoutY="257.0" style="-fx-background-color: #121212;" />
@@ -234,7 +225,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account info" textFill="WHITE" />
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
             <ImageView fx:id="backPicture" fitHeight="42.0" fitWidth="37.0" layoutX="18.0" layoutY="8.0" onMouseClicked="#handleBackUserPictureButton" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -270,7 +261,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="detailComplaintPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>

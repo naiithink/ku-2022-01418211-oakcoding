@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="userDetailPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;">
          <children>
@@ -59,7 +57,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Label layoutX="274.0" layoutY="28.0" styleClass="text-regular" text="ผู้จัดทำ" textFill="WHITE" />
+            <Label layoutX="274.0" layoutY="28.0" styleClass="text-regular" text="Creators" textFill="WHITE" />
             <Line endX="405.0" layoutX="151.0" layoutY="55.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
