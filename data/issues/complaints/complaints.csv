@@ -20,7 +20,7 @@
 "02-complaint","1669878444495-consumeruser","surrounding","ฝาท่อมีปัญหา","พบรถเก็บขยะมาเก็บขยะแล้วปล่อยทิ้งเรี่ยราดที่บริเวณป้ายรถเมล์คปภ. ถนนรัชดาภิเษก32 อาจกระจายลงท่อระบายน้ำทำให้ท่อตันได้","NIL","NIL","PENDING",""
 "15-complaint","1669878795256-consumeruser","surrounding","สายไฟชำรุด","สายไฟหรือสายสื่อสาร ห้อยลงมา อาจก่อให้เกิดอันตรายได้","NIL","NIL","RESOLVED",""
 "28-complaint","1669878549882-consumeruser","surrounding","สายไฟพันออกนอกเสา","สายไฟพันออกมานอกเสาไฟแสงสว่าง","NIL","NIL","PENDING",""
-"04-complaint","1669878722814-consumeruser","surrounding","ฟุธบาธมีปัญหา","แม่ค้าถั่วต้ม ข้าวโพดต้ม เทน้ำทิ้งลงท่อระบายน้ำ ไม่แน่ใจจะทำให้อุดตันไหม รู้สึกท่อแถวนั้นมีกลิ่น","NIL","NIL","PENDING",""
+"04-complaint","1669878722814-consumeruser","pollution","ฟุธบาธมีปัญหา","แม่ค้าถั่วต้ม ข้าวโพดต้ม เทน้ำทิ้งลงท่อระบายน้ำ ไม่แน่ใจจะทำให้อุดตันไหม รู้สึกท่อแถวนั้นมีกลิ่น","NIL","NIL","PENDING",""
 "32-complaint","1669878549882-consumeruser","surrounding","สายไฟพันออกนอกเสา","สายไฟพันออกมานอกเสาไฟแสงสว่าง\nSolution:\nok","NIL","NIL","RESOLVED","1669872160575-staffuser"
 "17-complaint","1669878512257-consumeruser","surrounding","เสาสำหรับดันสายไฟ","สายไฟขาดลงพื้น สภาพถนนทรุดโทรมอย่างมาก ฝาท่อระบายน้ำทรุดตัว เสี่ยงอันตราย","NIL","NIL","RESOLVED",""
 "11-complaint","1669878388713-consumeruser","surrounding","ฟุธบาทมีปัญหา","พบสายสื่อสารห้อยลงมืออยู่ในระดับศีรษะ ดูไม่สวยงามและอาจเกิดอันตรายกับคนที่เดินผ่านไปมาด้วย","NIL","NIL","IN_PROGRESS",""
@@ -31,3 +31,4 @@
 "22-complaint","1669878814301-consumeruser","surrounding","สายไฟรก","สายไฟฟ้าพันรกค่ะ","NIL","NIL","PENDING",""
 "14-complaint","1669878766565-consumeruser","surrounding","ฝาท่อชำรุด","กล่องสายโทรศัพท์ถูกทิ้งไม่เป็นระเบียบ\nSolution:\nok already fixed!!","NIL","NIL","RESOLVED","1669872160575-staffuser"
 "27-complaint","1669878549882-consumeruser","surrounding","สายไฟพันออกนอกเสา","สายไฟพันออกมานอกเสาไฟแสงสว่าง\nSolution:\nyeaaaa","NIL","NIL","RESOLVED","1669872160575-staffuser"
+"99-complaint","1669878549882-consumeruser","personnel","อาจารย์สอนดีเกินไป","อาจารย์สอนเข้าใจมากเกินไป","NIL","NIL","PENDING",""
