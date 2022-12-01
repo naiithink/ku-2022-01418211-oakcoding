@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AdminController2">
+<AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.AdminController2">
    <children>
       <Pane fx:id="welcomePane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
@@ -692,6 +683,42 @@
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="requestDetailPane" layoutX="211.0" onMouseClicked="#handleRequestDetailBackButton" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+         <children>
+            <Label layoutX="281.0" layoutY="40.0" text="RequestDetail" textFill="WHITE" />
+            <Label layoutX="75.0" layoutY="69.0" prefHeight="75.0" prefWidth="159.0" text="Author" textFill="#545454">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="text-bold" />
+                  <String fx:value="yellow-color-font" />
+               </styleClass>
+            </Label>
+            <Label fx:id="requestDetailAuthorLabel1" layoutX="75.0" layoutY="121.0" prefHeight="65.0" prefWidth="424.0" styleClass="text-bold" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="75.0" layoutY="186.0" prefHeight="65.0" prefWidth="150.0" styleClass="yellow-color-font" text="Description" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="requestDetailDescriptionLabel1" alignment="TOP_LEFT" layoutX="75.0" layoutY="251.0" prefHeight="119.0" prefWidth="462.0" styleClass="text-bold" text="Label" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="requestDetailBackButton1" fitHeight="26.0" fitWidth="23.0" layoutX="22.0" layoutY="18.0" onMouseClicked="#handleRequestDetailBackButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/angle-left.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="approveSuspendButton" layoutX="188.0" layoutY="455.0" mnemonicParsing="false" onAction="#handleApproveSuspendButton" styleClass="button-blue" text="Approve" />
+            <Button fx:id="denySuspendButton" layoutX="354.0" layoutY="455.0" mnemonicParsing="false" onAction="#handleDenySuspendButton" styleClass="button-blue" text="Deny" />
          </children>
       </Pane>
    </children>

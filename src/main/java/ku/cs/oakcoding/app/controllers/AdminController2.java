@@ -37,6 +37,7 @@ import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequest;
+import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequestReviewStrategy;
 import ku.cs.oakcoding.app.models.users.AdminUser;
 import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
@@ -51,6 +52,8 @@ public class AdminController2 implements Initializable{
     /**
      *  ALL FXML PANE
      * */
+
+    UserUnsuspendRequest selectedReport = null;
 
     @FXML
     private Pane welcomePane;
@@ -172,6 +175,7 @@ public class AdminController2 implements Initializable{
                 handleSelectedLeftStaffMembersTableViewListener();
                 handleSelectedChooseLeaderTableViewListener();
                 handleSelectedReportTableViewListener();
+                handleSelectedRequestTableViewListener();
 
 
 
@@ -875,6 +879,7 @@ public class AdminController2 implements Initializable{
 
     }
 
+
     public void handleSelectedReportTableViewListener() {
 
         reportTableView.setOnMousePressed(e ->{
@@ -965,7 +970,8 @@ public class AdminController2 implements Initializable{
         requestAuthorCol.setCellValueFactory(p -> {
             ObjectProperty<String> author = null;
             try {
-                author = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getUID()));
+                //author = new SimpleObjectProperty<>(AccountService.getUserManager().getUserNameOf(p.getValue().getUID()));
+                author = new SimpleObjectProperty<>(p.getValue().getReportID());
             }  catch (IllegalArgumentException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -995,6 +1001,63 @@ public class AdminController2 implements Initializable{
         observableRequestList.setAll(observableRequestSet);
         requestTableView.setItems(observableRequestList);
         requestTableView.refresh();
+
+    }
+
+    /// Request Detail pane ////
+
+    @FXML
+    private Label requestDetailAuthorLabel1;
+    @FXML
+    private Label requestDetailDescriptionLabel1;
+    @FXML
+    private Button approveSuspendButton;
+    @FXML
+    private Button denySuspendButton;
+    @FXML
+    private Pane requestDetailPane;
+
+    private String requestIdTemp;
+
+    private void showSelectedRequest(String message, String username){
+        initPane(requestDetailPane);
+        sideBarPane.setDisable(true);
+
+        requestDetailAuthorLabel1.setText(username);
+        requestDetailDescriptionLabel1.setText(message);
+    }
+    @FXML
+    private void handleApproveSuspendButton(){
+        if(selectedReport == null)
+            return;
+        selectedReport.approve((AdminUser) StageManager.getStageManager().getContext());
+        handleRequestDetailBackButton();
+        sideBarPane.setDisable(false);
+    };
+    @FXML
+    private void handleDenySuspendButton(){
+        if(selectedReport == null)
+            return;
+        selectedReport.deny((AdminUser) StageManager.getStageManager().getContext());
+        handleRequestDetailBackButton();
+        sideBarPane.setDisable(false);
+    };
+
+    @FXML
+    public void handleRequestDetailBackButton(){
+        handleClickRequestPane();
+        sideBarPane.setDisable(false);
+    }
+
+    public void handleSelectedRequestTableViewListener() {
+        requestTableView.setOnMousePressed(e ->{
+            if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
+                int index = requestTableView.getSelectionModel().getSelectedIndex();
+                selectedReport = requestTableView.getItems().get(index);
+                showSelectedRequest(selectedReport.getMessage(),selectedReport.getReportID());
+
+            }
+        });
 
     }
 
@@ -1131,6 +1194,7 @@ public class AdminController2 implements Initializable{
         departmentChangeLeaderPane.setVisible(false);
         complaintDetailPane.setVisible(false);
         reportDetailPane.setVisible(false);
+        requestDetailPane.setVisible(false);
         staffMembersInfoPane.setVisible(false);
     }
 
