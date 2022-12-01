@@ -37,6 +37,7 @@ import ku.cs.oakcoding.app.helpers.id.OakID;
 import ku.cs.oakcoding.app.helpers.logging.OakLogger;
 import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequest;
+import ku.cs.oakcoding.app.services.AccountService;
 import ku.cs.oakcoding.app.services.IssueService;
 import ku.cs.oakcoding.app.services.PasswordManager;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
@@ -410,6 +411,50 @@ public final class UserManager {
         };
 
         return user;
+    }
+
+    public UserManagerStatus changeProfileImage(String userName, Path newProfileImage) {
+        if (newProfileImage == null)
+            return UserManagerStatus.FAILURE;
+
+        AccountService.getUserManager().getUser(userName);
+        OakUserResource.getUserDirOf(userName);
+
+        boolean usingDefaultProfileImage = false;
+        Path profileImagePath = null;
+        String profileImageExtension = null;
+        Pattern extensionPattern = Pattern.compile("[^\\\\]*\\.(\\w+)$");
+        Matcher extensionMatcher = null;
+
+        try {
+            extensionMatcher = extensionPattern.matcher(newProfileImage.toString());
+
+            OakLogger.log(Level.INFO, "Profile image Content-Type: " + Files.probeContentType(newProfileImage));
+
+            if (extensionMatcher.find() && extensionMatcher.groupCount() == 1)
+                profileImageExtension = extensionMatcher.group(1);
+
+            OakLogger.log(Level.INFO, "Profile image extension: " + profileImageExtension);
+
+            profileImagePath = OakResource.renameFile(OakResource.copyFile(newProfileImage, OakUserResource.getUserDirOf(userName).resolve(newProfileImage.getFileName())), OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + profileImageExtension));
+        } catch (IOException e) {
+            OakLogger.log(Level.SEVERE, "Got 'IOException' while saving uploaded profile image");
+            return UserManagerStatus.FAILURE;
+        }
+
+        AutoUpdateCSV userCSV;
+
+        try {
+            userCSV = new AutoUpdateCSV(userName, "UID", userName, OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_INFO.value()));
+        } catch (FileNotFoundException e) {
+            OakLogger.log(Level.SEVERE, "User info file not found");
+            return null;
+        }
+
+        userCSV.editRecord(getUser(userName).getUID(), "USING_DEFAULT_PROFILE_IMAGE", "false", usingDefaultProfileImage);
+        userCSV.editRecord(getUser(userName).getUID(), "PROFILE_IMAGE_EXT", profileImageExtension, usingDefaultProfileImage);
+
+        return UserManagerStatus.SUCCESSFUL;
     }
 
     public UserManagerStatus setActiveStatus(AdminUser adminUser, String userName, boolean isActive) {
