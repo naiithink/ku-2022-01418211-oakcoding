@@ -94,7 +94,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="createReportsUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -197,7 +197,7 @@
             <Line endX="405.0" layoutX="175.0" layoutY="103.0" startX="-100.0" stroke="#2a2c32" />
          </children>
       </Pane>
-      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="settingDetailChangeUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Pane fx:id="welcomeUserPane111" layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -212,7 +212,7 @@
                      </font>
                   </Label>
                   <Button fx:id="changePasswordButton" layoutX="201.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleChangeDetail" styleClass="button-blue" text="เปลี่ยนรหัสผ่าน" />
-                  <ImageView fx:id="profileImageView1" fitHeight="150.0" fitWidth="181.0" layoutX="292.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="newPic" fitHeight="150.0" fitWidth="181.0" layoutX="292.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
                   <PasswordField fx:id="newPasswordField" layoutX="78.0" layoutY="191.0" style="-fx-background-color: #121212;" />
                   <PasswordField fx:id="confirmPasswordField" layoutX="78.0" layoutY="257.0" style="-fx-background-color: #121212;" />
                   <Label layoutX="78.0" layoutY="90.0" prefHeight="53.0" prefWidth="181.0" styleClass="account-setting-text" text="Old Password" textFill="WHITE">
@@ -227,6 +227,11 @@
                      </font>
                   </Label>
                   <TextField fx:id="usernameTextField" layoutX="78.0" layoutY="64.0" style="-fx-background-color: #121212 #121212;" />
+                  <ImageView fx:id="upPic" fitHeight="53.0" fitWidth="51.0" layoutX="363.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleNewProfileUpload">
+                     <image>
+                        <Image url="@../images/upload.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="ข้อมูลบัญชี" textFill="WHITE" />

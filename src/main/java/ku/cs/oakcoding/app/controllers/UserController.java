@@ -11,6 +11,7 @@ package ku.cs.oakcoding.app.controllers;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -716,7 +717,8 @@ public class UserController implements Initializable {
 
 
 
-
+    @FXML
+    private ImageView newPic;
 
     public void handleChangeDetail() {
         String username = usernameTextField.getText();
@@ -743,6 +745,9 @@ public class UserController implements Initializable {
                 StageManager.getStageManager().setPage("authentication", null);
             } catch (PageNotFoundException e) {
                 OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
+            } finally {
+                setMyPane();
+                setProfileLabel();
             }
 
         }
@@ -750,6 +755,22 @@ public class UserController implements Initializable {
             alertWarning.setContentText("คุณไม่สามารถเปลี่ยนรหัสได้ กรุณาตรวจสอบอีกครั้ง");
             alertWarning.showAndWait();
         }
+    }
+
+    @FXML
+    void handleNewProfileUpload(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("อัพโหลดรูปโปรไฟล์");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
+
+        ((ConsumerUser)StageManager.getStageManager().getContext()).setProfileImagePath(Paths.get(selectedFile.getPath()));
+
+        handleChangePaneToChangeDetailPane();
+
     }
 
     /**
@@ -939,7 +960,7 @@ public class UserController implements Initializable {
     }
 
 
-    public void handleChangePaneToChangeDetailPane(ActionEvent actionEvent) {
+    public void handleChangePaneToChangeDetailPane() {
         sideBarPane.setDisable(true);
         reportsUserPane.setVisible(false);
         createReportsUserPane.setVisible(false);
@@ -948,6 +969,10 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(true);
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
+
+        ConsumerUser consumerUser = (ConsumerUser) StageManager.getStageManager().getContext();
+        Image image = new Image(consumerUser.getProfileImagePath().toUri().toString());
+        newPic.setImage(image);
 
     }
 }
