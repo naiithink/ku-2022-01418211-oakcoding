@@ -247,6 +247,7 @@ public class UserController implements Initializable {
                 initPane();
                 initReportPageChoiceBox();
                 initComplaintFilterChoiceBox();
+                initComplaintSortChoiceBox();
                 initComplaintPageChoiceBox();
                 initDetailReportPageChoiceBox();
                 setMyPane();
@@ -257,6 +258,7 @@ public class UserController implements Initializable {
                 handleSelectComplaintTableView();
 
                 complaintFilterChoiceBoxListener();
+                complaintSortChoiceBoxListener();
 
 
             }
@@ -351,6 +353,8 @@ public class UserController implements Initializable {
 
     }
 
+    private ObservableList<Complaint> tempListForSorted = FXCollections.observableArrayList();
+
     @FXML
     private ChoiceBox<String> complaintFilterChoiceBox;
 
@@ -369,6 +373,39 @@ public class UserController implements Initializable {
 
     }
 
+    public void initComplaintSortChoiceBox(){
+        List<String> complaintSorted = new ArrayList<>();
+        complaintSorted.add("ID-ASCENDING");
+        complaintSorted.add("ID-DESCENDING");
+        complaintSorted.add("VOTE-ASCENDING");
+        complaintSorted.add("VOTE-DESCENDING");
+
+        complaintSortChoiceBox.setItems(FXCollections.observableArrayList(complaintSorted));
+        complaintSortChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    public void complaintSortChoiceBoxListener(){
+
+        complaintSortChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String partOfSpeech, String t1) {
+                String new_val = t1 + "";
+                System.out.println(new_val);
+                if (new_val.compareTo("ID-ASCENDING") == 0)
+                    initComplaintSortedTableView("ID","A");
+                else if (new_val.compareTo("ID-DESCENDING") == 0)
+                    initComplaintSortedTableView("ID","D");
+                else if (new_val.compareTo("VOTE-ASCENDING") == 0)
+                    initComplaintSortedTableView("VOTE","A");
+                else if (new_val.compareTo("VOTE-DESCENDING") == 0)
+                    initComplaintSortedTableView("VOTE","D");
+
+
+
+            }
+        });
+    }
+
     public void complaintFilterChoiceBoxListener(){
 
         complaintFilterChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -384,6 +421,8 @@ public class UserController implements Initializable {
                     initComplaintFilteredTableView(ComplaintStatus.IN_PROGRESS);
                 else if (new_val.compareTo("RESOLVED") == 0)
                     initComplaintFilteredTableView(ComplaintStatus.RESOLVED);
+
+
 
 
             }
@@ -419,6 +458,8 @@ public class UserController implements Initializable {
         complaintTableView.setItems(observableComplaintList);
         complaintTableView.refresh();
 
+        tempListForSorted.setAll(observableComplaintSet);
+
     }
 
     private void initComplaintFilteredTableView(ComplaintStatus complaintStatus){
@@ -448,6 +489,45 @@ public class UserController implements Initializable {
         observableComplaintList.setAll(observableComplaintSet);
         complaintTableView.setItems(observableComplaintList);
         complaintTableView.refresh();
+
+        tempListForSorted.setAll(observableComplaintSet);
+
+    }
+
+    private void initComplaintSortedTableView(String sortedBy, String sortedOrder){
+        complaintTableView.getItems().clear();
+        ObservableList<Complaint> newList = FXCollections.observableArrayList();
+
+        if (complaintFilterChoiceBox.getValue().compareTo("DEFAULT") == 0){
+            newList.setAll(IssueService.getIssueManager().getAllComplaintSet());
+        }
+
+        else {
+            newList.setAll(IssueService.getIssueManager().getFilteredComplaintsSetProperty(ComplaintStatus.valueOf(complaintFilterChoiceBox.getValue())));
+        }
+
+
+        ObservableList<Complaint> observableComplaintList = IssueService.getIssueManager().getComparedComplaintsSetProperty(newList, sortedBy, sortedOrder);
+        complaintTableView.setEditable(true);
+        complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        complaintDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        complaintVotersCol.setCellValueFactory(p -> {
+            ObjectProperty<Long> numVote = null;
+            try {
+                long num = p.getValue().getVoteCount();
+                numVote = new SimpleObjectProperty<>(num);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return numVote;
+            }
+        });
+        complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        complaintTableView.setItems(observableComplaintList);
+        complaintTableView.refresh();
+
 
     }
 
@@ -703,6 +783,7 @@ public class UserController implements Initializable {
         detailComplaintPane.setVisible(false);
         initComplaintPageChoiceBox();
         initComplaintFilterChoiceBox();
+        initComplaintSortChoiceBox();
         initComplaintTableView();
 
     }

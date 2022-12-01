@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,8 +13,10 @@ import java.util.regex.Pattern;
 import javafx.beans.binding.MapBinding;
 import javafx.beans.binding.SetBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.collections.ObservableSet;
+import javafx.fxml.FXML;
 import ku.cs.oakcoding.app.helpers.configurations.OakAppDefaults;
 import ku.cs.oakcoding.app.helpers.file.OakResource;
 import ku.cs.oakcoding.app.helpers.file.OakResourcePrefix;
@@ -279,6 +278,54 @@ public class IssueManager {
         }
 
         return filteredComplaints;
+    }
+
+    public ObservableList<Complaint> getComparedComplaintsSetProperty(ObservableList<Complaint> complaintsList, String sortedBy , String sortedOrder){
+        Collections.sort(complaintsList, new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                Complaint complaint1 = (Complaint) o1;
+                Complaint complaint2 = (Complaint) o2;
+
+                if (sortedBy.compareTo("ID") == 0){
+                    if (sortedOrder.compareTo("A") == 0){
+                        if (complaint1.getComplaintID().compareTo(complaint2.getComplaintID()) == 1)
+                            return 1;
+                        else
+                            return -1;
+                    }
+                    else if (sortedOrder.compareTo("D") == 0){
+                        if (complaint1.getComplaintID().compareTo(complaint2.getComplaintID()) == 1)
+                            return -1;
+                        else
+                            return 1;
+
+                    }
+                }
+                else if (sortedBy.compareTo("VOTE") == 0) {
+                    if (sortedOrder.compareTo("A") == 0) {
+                        if (complaint1.getVoteCount() > complaint2.getVoteCount())
+                            return 1;
+                        else
+                            return -1;
+
+                    }
+                    else if (sortedOrder.compareTo("D") == 0){
+                        if (complaint1.getVoteCount() > complaint2.getVoteCount())
+                            return -1;
+                        else
+                            return 1;
+                    }
+                }
+
+                return 0;
+
+            }
+
+        });
+
+        return complaintsList;
     }
 
     public boolean complaintExist(String complaintID) {
