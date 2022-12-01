@@ -217,6 +217,9 @@ public class AdminController2 implements Initializable{
     private TableColumn<FullUserEntry, String> firstNameCol;
     @FXML
     private TableColumn<FullUserEntry, String> lastNameCol;
+
+    @FXML
+    private TableColumn<FullUserEntry, String> userNameCol;
     @FXML
     private TableColumn<FullUserEntry, ImageView> profileImageCol;
     @FXML
@@ -243,6 +246,7 @@ public class AdminController2 implements Initializable{
         usersListTableView.setEditable(true);
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        userNameCol.setCellValueFactory(new PropertyValueFactory<>("UserName"));
         profileImageCol.setCellValueFactory(p -> {
             ObjectProperty<ImageView> res = null;
             try {
@@ -275,6 +279,7 @@ public class AdminController2 implements Initializable{
 
         observableUserList.setAll(observableUserSet);
         usersListTableView.setItems(observableUserList);
+        usersListTableView.getSortOrder().add(lastLoginCol);
         usersListTableView.refresh();
 
 
@@ -309,6 +314,17 @@ public class AdminController2 implements Initializable{
     @FXML
     private ImageView detailUserPicProfileSettingLabel;
 
+    ///// STAFF ONLY/////
+
+    @FXML
+    private Label userDetailDepartmentText;
+    @FXML
+    private Label userDetailDepartmentLabel;
+    @FXML
+    private Pane userDetailDepartmentBlack;
+
+
+
     public void showSelectedUser(FullUserEntry userEntry){
         initPane(userDetailPane);
         sideBarPane.setDisable(true);
@@ -318,12 +334,34 @@ public class AdminController2 implements Initializable{
         detailUserLastNameLabel.setText(userEntry.getLastName());
         Image image = new Image(userEntry.getProfileImagePath().toUri().toString());
         detailUserPicProfileSettingLabel.setImage(image);
+
+        userDetailDepartmentText.setVisible(false);
+        userDetailDepartmentLabel.setVisible(false);
+        userDetailDepartmentBlack.setVisible(false);
+
+        //// Staff ONLY ///
+        if (userEntry.getRole() == Roles.STAFF){
+            userDetailDepartmentText.setVisible(true);
+            userDetailDepartmentLabel.setVisible(true);
+            if (WorkspaceService.getWorkspaceManager().getDepartmentOfStaff(userEntry.getUID()) == null){
+                userDetailDepartmentLabel.setText("NO DEPARTMENT");
+            }
+            else {
+                userDetailDepartmentLabel.setText(WorkspaceService.getWorkspaceManager().getDepartmentNameOfID(WorkspaceService.getWorkspaceManager().getDepartmentOfStaff(userEntry.getUID())));
+            }
+            userDetailDepartmentBlack.setVisible(true);
+        }
+
     }
 
     @FXML
     public void handleClickBackUserDetail(){
         sideBarPane.setDisable(false);
         handleClickUserPane();
+
+        userDetailDepartmentText.setVisible(false);
+        userDetailDepartmentLabel.setVisible(false);
+        userDetailDepartmentBlack.setVisible(false);
 
     }
 
