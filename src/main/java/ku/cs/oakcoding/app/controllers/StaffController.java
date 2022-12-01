@@ -35,7 +35,9 @@ import ku.cs.oakcoding.app.services.WorkspaceService;
 import ku.cs.oakcoding.app.services.stages.StageManager;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class StaffController implements Initializable {
@@ -266,6 +268,8 @@ public class StaffController implements Initializable {
 
     private String complainID;
 
+    private ObservableSet<String> cate;
+
 
 
 
@@ -283,7 +287,7 @@ public class StaffController implements Initializable {
 //        System.out.println("MY CATORY " + myCategory);
 
 
-        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory("pollution");
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory(myCatogory);
 //        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
         ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
 
@@ -446,6 +450,8 @@ public class StaffController implements Initializable {
 
 
 
+
+
     /**
      * ALL PANE INIT
      * */
@@ -565,7 +571,19 @@ public class StaffController implements Initializable {
         departmentOfStaff = WorkspaceService.getWorkspaceManager().getDepartmentOfStaff(UID);
         nameDepartment = WorkspaceService.getWorkspaceManager().getDepartmentNameOfID(departmentOfStaff);
         myDepartment = WorkspaceService.getWorkspaceManager().getDepartment(departmentOfStaff);
-//        myCatogory = myDepartment.
+        String myDepartmentID = WorkspaceService.getWorkspaceManager().getDepartmentIDOfName(nameDepartment);
+//        getAsssignedCategoriesSetProperty()
+//       myCatogory = String.valueOf(myDepartment.getAsssignedCategoriesSetProperty());
+        cate  =  myDepartment.getAsssignedCategoriesSetProperty();
+
+       for (String s : cate){
+           System.out.println("my s is " + s);
+           myCatogory = s;
+       }
+//        System.out.println("my Cateogry is" + myCatogory);
+
+
+
 
 
 
