@@ -443,6 +443,9 @@ public class AdminController2 implements Initializable{
     @FXML
     private TextField complaintCategoryCreateTextField;
 
+    @FXML
+    private ListView<String> complaintCateListView;
+
     public void showSelectedComplaint(String complaintID){
         initPane(complaintDetailPane);
         sideBarPane.setDisable(true);
@@ -466,13 +469,30 @@ public class AdminController2 implements Initializable{
     public void handleComplaintCategoryCreateButton(){
         String category = complaintCategoryCreateTextField.getText();
         complaintCategoryCreateTextField.clear();
-        IssueService.getIssueManager().newComplaintCategory((AdminUser) StageManager.getStageManager().getContext(),category);
 
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("WARNING");
-        alert.setContentText("You have created complaint category : " + category);
-        alert.showAndWait();
+        if (category.isBlank()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Category Name must not blank!");
+            alert.showAndWait();
+        }
+        else {
+            IssueService.getIssueManager().newComplaintCategory((AdminUser) StageManager.getStageManager().getContext(), category);
 
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("You have created complaint category : " + category);
+            alert.showAndWait();
+        }
+
+        handleClickComplaintPane();
+
+    }
+
+    public void initComplaintCategoryListView(){
+        ObservableList<String> observableCateList = FXCollections.observableArrayList();
+        observableCateList.setAll(IssueService.getIssueManager().getAllCategorySet());
+        complaintCateListView.setItems(observableCateList);
     }
 
     /**
@@ -1420,6 +1440,7 @@ public class AdminController2 implements Initializable{
 
         initPane(createReportsUserPane);
         initComplaintTableView();
+        initComplaintCategoryListView();
     }
 
     @FXML
