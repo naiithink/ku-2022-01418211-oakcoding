@@ -288,7 +288,7 @@ public class StaffController implements Initializable {
 
 
         System.out.println(myCatogory);
-        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory("pollution");
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory(myCatogory);
 //        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
         ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
 
