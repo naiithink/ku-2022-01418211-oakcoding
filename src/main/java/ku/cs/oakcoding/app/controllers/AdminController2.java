@@ -572,9 +572,6 @@ public class AdminController2 implements Initializable{
     private Label leaderStaffLabel;
     @FXML
     private Label departmentDetailStaffMembersLabel;
-
-    @FXML
-    private Label departmentCateLabel;
     private String changeLeaderDepartmentID;
     public void showSelectedDepartment(String departmentID){
         initPane(departmentDetailPane);
@@ -648,17 +645,23 @@ public class AdminController2 implements Initializable{
     public void handleClickRenameDepartment(){
         String newName = newNameDepartmentTextField.getText();
         newNameDepartmentTextField.clear();
-        if (!newName.isBlank()){
-            WorkspaceService.getWorkspaceManager().renameDepartment(changeLeaderDepartmentID, WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName(), newName);
-            showSelectedDepartment(changeLeaderDepartmentID);
+        if (newName.isBlank()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Department name must not blank!");
+            alert.showAndWait();
+
+        }
+        else if (WorkspaceService.getWorkspaceManager().containsDepartmentWithName(newName)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Department name has already in use!");
+            alert.showAndWait();
 
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("WARNING");
-            alert.setContentText("Department name must not blank");
-            alert.showAndWait();
-
+            WorkspaceService.getWorkspaceManager().renameDepartment(changeLeaderDepartmentID, WorkspaceService.getWorkspaceManager().getDepartment(changeLeaderDepartmentID).getDepartmentName(), newName);
+            showSelectedDepartment(changeLeaderDepartmentID);
         }
     }
 
