@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -1196,10 +1197,16 @@ public class AdminController2 implements Initializable{
         Image image = new Image(admin.getProfileImagePath().toUri().toString());
         picProfileSettingLabel.setImage(image);
     }
+
+    @FXML
+    private ImageView newImage;
     @FXML
     public void handleClickChangeSettingPane(){
         initPane(settingDetailPane);
         sideBarPane.setDisable(true);
+        AdminUser adminUser = (AdminUser) StageManager.getStageManager().getContext();
+        Image image = new Image(adminUser.getProfileImagePath().toUri().toString());
+        newImage.setImage(image);
     }
 
     /////////////// CHANGE SETTING ///////////////
@@ -1218,6 +1225,23 @@ public class AdminController2 implements Initializable{
         initPane(settingPane);
         sideBarPane.setDisable(false);
         handleClickSettingPane();
+    }
+
+    @FXML
+    void handleNewProfileUpload(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("อัพโหลดรูปโปรไฟล์");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Profile Image", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
+
+        ((AdminUser)StageManager.getStageManager().getContext()).setProfileImagePath(Paths.get(selectedFile.getPath()));
+
+        handleClickChangeSettingPane();
+        setProfileSetting();
+
     }
 
     public void handleChangePassword(ActionEvent actionEvent) {
@@ -1244,6 +1268,9 @@ public class AdminController2 implements Initializable{
                 StageManager.getStageManager().setPage("authentication", null);
             } catch (StageManager.PageNotFoundException e) {
                 OakLogger.log(Level.SEVERE, "Page not found: " + e.getMessage());
+            } finally {
+                handleClickChangeSettingPane();
+                setProfileSetting();
             }
         }
         else {

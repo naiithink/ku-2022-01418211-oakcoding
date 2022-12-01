@@ -398,7 +398,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="settingDetailPane" layoutX="211.0" prefHeight="568.0" prefWidth="661.0" style="-fx-background-color: #121212;">
          <children>
             <Pane layoutX="67.0" layoutY="118.0" prefHeight="417.0" prefWidth="506.0" styleClass="account-setting-pane">
                <children>
@@ -412,6 +412,12 @@
                   <PasswordField fx:id="confirmPasswordField" layoutX="61.0" layoutY="255.0" style="-fx-background-color: #121212;" />
                   <Label layoutX="62.0" layoutY="228.0" styleClass="text-regular" text="Confirm Password" textFill="WHITE" />
                   <TextField fx:id="usernameTextField" layoutX="62.0" layoutY="81.0" style="-fx-background-color: #121212;" />
+                  <ImageView fx:id="uploadImage" fitHeight="53.0" fitWidth="58.0" layoutX="347.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#handleNewProfileUpload">
+                     <image>
+                        <Image url="@../images/upload.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="newImage" fitHeight="150.0" fitWidth="200.0" layoutX="274.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <Label layoutX="75.0" layoutY="75.0" styleClass="text-regular" text="Account Setting" textFill="WHITE" />
@@ -489,7 +495,7 @@
             <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
