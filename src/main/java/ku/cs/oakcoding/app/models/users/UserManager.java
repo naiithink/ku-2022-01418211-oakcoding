@@ -436,8 +436,7 @@ public final class UserManager {
 
             OakLogger.log(Level.INFO, "Profile image extension: " + profileImageExtension);
 
-            profileImagePath = OakResource.copyFile(newProfileImage,
-                                                    OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + profileImageExtension));
+            profileImagePath = OakResource.renameFile(OakResource.copyFile(newProfileImage, OakUserResource.getUserDirOf(userName).resolve(newProfileImage.getFileName())), OakUserResource.getUserDirOf(userName).resolve(OakAppDefaults.APP_USER_PROFILE_IMAGE_NAME.value() + "." + profileImageExtension));
 
             System.out.println();
         } catch (IOException e) {

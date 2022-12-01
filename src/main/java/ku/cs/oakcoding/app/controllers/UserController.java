@@ -9,6 +9,7 @@
 package ku.cs.oakcoding.app.controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -694,29 +695,6 @@ public class UserController implements Initializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     private ImageView newPic;
 
@@ -767,7 +745,7 @@ public class UserController implements Initializable {
 
         File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
 
-        ((ConsumerUser)StageManager.getStageManager().getContext()).setProfileImagePath(Paths.get(selectedFile.getPath()));
+        System.out.println(AccountService.getUserManager().changeProfileImage(((ConsumerUser) StageManager.getStageManager().getContext()).getUserName(), selectedFile.toPath()));
 
         handleChangePaneToChangeDetailPane();
 
@@ -885,9 +863,13 @@ public class UserController implements Initializable {
         firstNameAccountLabel.setText(consumerUser.getFirstName());
         lastNameAccountLabel.setText(consumerUser.getLastName());
         // hotfix/0.0.2
-        Image image = new Image(consumerUser.getProfileImagePath().toUri().toString());
         profileImageNameLabel.setText(consumerUser.getProfileImagePath().toUri().toString());
-        profileImageView.setImage(image);
+        try {
+            profileImageView.setImage(new Image(AccountService.getUserManager().getFullUserEntryFromUID(consumerUser.getUID()).getProfileImagePath().toUri().toURL().toString()));
+
+        } catch (IOException e){
+            e.getMessage();
+        }
     }
 
     public void handleClickLogoutButton() {
@@ -972,8 +954,13 @@ public class UserController implements Initializable {
         detailComplaintPane.setVisible(false);
 
         ConsumerUser consumerUser = (ConsumerUser) StageManager.getStageManager().getContext();
-        Image image = new Image(consumerUser.getProfileImagePath().toUri().toString());
-        newPic.setImage(image);
+        try {
+            newPic.setImage(new Image(AccountService.getUserManager().getFullUserEntryFromUID(consumerUser.getUID()).getProfileImagePath().toUri().toURL().toString()));
+
+        } catch (IOException e){
+            e.getMessage();
+        }
+
 
     }
 }

@@ -1292,7 +1292,7 @@ public class AdminController2 implements Initializable{
 
         File selectedFile = fileChooser.showOpenDialog(StageManager.getStageManager().getPrimaryStage());
 
-        ((AdminUser)StageManager.getStageManager().getContext()).setProfileImagePath(Paths.get(selectedFile.getPath()));
+        AccountService.getUserManager().changeProfileImage(((AdminUser) StageManager.getStageManager().getContext()).getUserName(), selectedFile.toPath());
 
         handleClickChangeSettingPane();
         setProfileSetting();
