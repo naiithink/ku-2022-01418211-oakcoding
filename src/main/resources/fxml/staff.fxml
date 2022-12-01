@@ -205,7 +205,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="221.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="607.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -223,14 +223,14 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label layoutX="77.0" layoutY="70.0" prefHeight="75.0" prefWidth="159.0" text="Author" textFill="#545454">
+            <Label layoutX="70.0" layoutY="91.0" prefHeight="65.0" prefWidth="150.0" text="Subject" textFill="WHITE">
                <font>
                   <Font size="23.0" />
                </font>
@@ -239,21 +239,7 @@
                   <String fx:value="yellow-color-font" />
                </styleClass>
             </Label>
-            <Label fx:id="reportAuthorLabel" layoutX="77.0" layoutY="122.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <Label layoutX="77.0" layoutY="165.0" prefHeight="65.0" prefWidth="150.0" text="Subject" textFill="WHITE">
-               <font>
-                  <Font size="23.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="text-bold" />
-                  <String fx:value="yellow-color-font" />
-               </styleClass>
-            </Label>
-            <Label fx:id="reportSubjectLabel" layoutX="77.0" layoutY="207.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
+            <Label fx:id="reportSubjectLabel" layoutX="71.0" layoutY="156.0" prefHeight="65.0" prefWidth="115.0" styleClass="text-bold" text="Label" textFill="WHITE">
                <font>
                   <Font size="23.0" />
                </font>

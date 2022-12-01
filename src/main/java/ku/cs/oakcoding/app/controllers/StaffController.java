@@ -287,7 +287,8 @@ public class StaffController implements Initializable {
 //        System.out.println("MY CATORY " + myCategory);
 
 
-        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory(myCatogory);
+        System.out.println(myCatogory);
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getComplaintsWithCategory("pollution");
 //        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
         ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
 
@@ -348,8 +349,8 @@ public class StaffController implements Initializable {
 
     @FXML
     private Pane complaintDetailPane;
-    @FXML
-    private Label reportAuthorLabel;
+//    @FXML
+//    private Label reportAuthorLabel;
     @FXML
     private Label reportNumVoteLabel;
     @FXML
@@ -373,7 +374,7 @@ public class StaffController implements Initializable {
         complaintDetailPane.setVisible(true);
 
 //        sideBarPane.setDisable(true);
-        reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
+//        reportAuthorLabel.setText(AccountService.getUserManager().getUserNameOf(IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID()));
         reportNumVoteLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getVoteCount() + "");
         reportCategoryLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getCategory());
         reportSubjectLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getSubject());
