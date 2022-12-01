@@ -381,6 +381,7 @@ public class StaffController implements Initializable {
         reportStatusLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getStatus() + "");
         reportEvidenceLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getEvidencePath() + "");
         reportDescriptionLabel.setText(IssueService.getIssueManager().getComplaint(complaintID).getDescription());
+        reportDescriptionLabel.setWrapText(true);
     }
 
     @FXML
