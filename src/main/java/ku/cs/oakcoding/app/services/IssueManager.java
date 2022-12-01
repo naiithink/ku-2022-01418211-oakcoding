@@ -30,11 +30,9 @@ import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportResolvingStatus;
 import ku.cs.oakcoding.app.models.reports.ReportStatus;
 import ku.cs.oakcoding.app.models.reports.ReportType;
-import ku.cs.oakcoding.app.models.users.AdminUser;
-import ku.cs.oakcoding.app.models.users.ConsumerUser;
-import ku.cs.oakcoding.app.models.users.Roles;
-import ku.cs.oakcoding.app.models.users.StaffUser;
+import ku.cs.oakcoding.app.models.users.*;
 import ku.cs.oakcoding.app.services.data_source.AutoUpdateCSV;
+import ku.cs.oakcoding.app.services.filter.UserRolesFilter;
 
 /**
  * DataSources:
@@ -269,6 +267,18 @@ public class IssueManager {
                 return res;
             }
         };
+    }
+
+    public ObservableSet<Complaint> getFilteredComplaintsSetProperty(ComplaintStatus complaintStatus){
+        ObservableSet<Complaint> allComplaints = getAllComplaintSet();
+        ObservableSet<Complaint> filteredComplaints = FXCollections.observableSet();
+
+        for (Complaint complaint: allComplaints) {
+            if (complaint.getStatus() == complaintStatus)
+                filteredComplaints.add(complaint);
+        }
+
+        return filteredComplaints;
     }
 
     public boolean complaintExist(String complaintID) {

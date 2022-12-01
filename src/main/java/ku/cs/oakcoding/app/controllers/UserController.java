@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -189,8 +191,6 @@ public class UserController implements Initializable {
     private TableColumn<Complaint, ComplaintStatus> complaintStatusCol;
 
 
-    private ObservableSet<Complaint> observableComplaintSet = FXCollections.observableSet();
-    private ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList() ;
 
     /**
      *
@@ -229,6 +229,13 @@ public class UserController implements Initializable {
     @FXML
     private TextField reportAddDescriptionLabel;
 
+    /**
+     *
+     * DASHBOARD PAGE
+     */
+
+    @FXML
+    private Label numberReportOfUser;
 
 
 
@@ -239,15 +246,30 @@ public class UserController implements Initializable {
             if (newValue.equals("user")) {
                 initPane();
                 initReportPageChoiceBox();
+                initComplaintFilterChoiceBox();
                 initComplaintPageChoiceBox();
                 initDetailReportPageChoiceBox();
                 setMyPane();
                 initReportTableView();
                 initComplaintTableView();
+                initDashBoard();
 
                 handleSelectComplaintTableView();
+
+                complaintFilterChoiceBoxListener();
+
+
             }
         });
+    }
+
+    /**
+     *
+     * DASHBOARD PANE
+     */
+
+    public void initDashBoard(){
+        numberReportOfUser.setText(IssueService.getIssueManager().getAllComplaintSet().size() + "");
     }
 
     /**
@@ -291,8 +313,8 @@ public class UserController implements Initializable {
         reportTypeChoiceBoxSelected.add("BEHAVIOR");
         reportTypeChoiceBoxSelected.add("CONTENT");
         reportTypeChoiceBoxSelected.add("DEFAULT");
-        reportTypeChoiceBox.setValue("DEFAULT");
         reportTypeChoiceBox.setItems(FXCollections.observableArrayList(reportTypeChoiceBoxSelected));
+
 
     }
 
@@ -329,16 +351,52 @@ public class UserController implements Initializable {
 
     }
 
-    private void initComplaintTableView(){
+    @FXML
+    private ChoiceBox<String> complaintFilterChoiceBox;
 
-        observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
-         observableComplaintSet.addListener((SetChangeListener<? super Complaint>) change -> {
+    @FXML
+    private ChoiceBox<String> complaintSortChoiceBox;
 
-            observableComplaintList.setAll(observableComplaintSet);
-            complaintTableView.getItems().setAll(observableComplaintList);
-            complaintTableView.refresh();
+    public void initComplaintFilterChoiceBox(){
+        List<String> complaintFilter = new ArrayList<>();
+        complaintFilter.add("DEFAULT");
+        complaintFilter.add("PENDING");
+        complaintFilter.add("IN_PROGRESS");
+        complaintFilter.add("RESOLVED");
+        complaintFilterChoiceBox.setItems(FXCollections.observableArrayList(complaintFilter));
+        complaintFilterChoiceBox.getSelectionModel().selectFirst();
+
+
+    }
+
+    public void complaintFilterChoiceBoxListener(){
+
+        complaintFilterChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String partOfSpeech, String t1) {
+                String new_val = t1 + "";
+                System.out.println(new_val);
+                if (new_val.compareTo("DEFAULT") == 0)
+                    initComplaintTableView();
+                else if (new_val.compareTo("PENDING") == 0)
+                    initComplaintFilteredTableView(ComplaintStatus.PENDING);
+                else if (new_val.compareTo("IN_PROGRESS") == 0)
+                    initComplaintFilteredTableView(ComplaintStatus.IN_PROGRESS);
+                else if (new_val.compareTo("RESOLVED") == 0)
+                    initComplaintFilteredTableView(ComplaintStatus.RESOLVED);
+
+
+            }
         });
+    }
 
+    private void initComplaintTableView(){
+        complaintTableView.getItems().clear();
+
+
+
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+        ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
         complaintTableView.setEditable(true);
         complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
@@ -358,7 +416,37 @@ public class UserController implements Initializable {
 
 
         observableComplaintList.setAll(observableComplaintSet);
-        complaintTableView.getItems().setAll(observableComplaintList);
+        complaintTableView.setItems(observableComplaintList);
+        complaintTableView.refresh();
+
+    }
+
+    private void initComplaintFilteredTableView(ComplaintStatus complaintStatus){
+        complaintTableView.getItems().clear();
+
+
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getFilteredComplaintsSetProperty(complaintStatus);
+        ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
+        complaintTableView.setEditable(true);
+        complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        complaintDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        complaintVotersCol.setCellValueFactory(p -> {
+            ObjectProperty<Long> numVote = null;
+            try {
+                long num = p.getValue().getVoteCount();
+                numVote = new SimpleObjectProperty<>(num);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return numVote;
+            }
+        });
+        complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+        observableComplaintList.setAll(observableComplaintSet);
+        complaintTableView.setItems(observableComplaintList);
         complaintTableView.refresh();
 
     }
@@ -418,6 +506,7 @@ public class UserController implements Initializable {
         sideBarPane.setDisable(false);
         handleClickCreateReport();
         complaintTableView.refresh();
+
     }
 
     @FXML
@@ -480,6 +569,8 @@ public class UserController implements Initializable {
 
         sideBarPane.setDisable(false);
         handleClickCreateReport();
+        initComplaintTableView();
+
 
     }
 
@@ -611,6 +702,8 @@ public class UserController implements Initializable {
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
         initComplaintPageChoiceBox();
+        initComplaintFilterChoiceBox();
+        initComplaintTableView();
 
     }
 
@@ -701,6 +794,8 @@ public class UserController implements Initializable {
         settingDetailChangeUserPane.setVisible(false);
         reportsPane.setVisible(false);
         detailComplaintPane.setVisible(false);
+
+        initDashBoard();
     }
 
     public void setMyPane() {
