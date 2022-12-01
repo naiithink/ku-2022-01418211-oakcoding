@@ -433,7 +433,7 @@ public class IssueManager {
 
         String preDescription = complaint.getDescription();
 
-        String postDescription = preDescription + "\nSolution:  \n" + method;
+        String postDescription = preDescription + "\\\nSolution:  \\\n" + method;
 
         complaint.setStatus(staff, ComplaintStatus.RESOLVED);
         complaint.setDescription(postDescription);
