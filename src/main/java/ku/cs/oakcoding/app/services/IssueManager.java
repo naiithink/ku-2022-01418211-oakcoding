@@ -268,6 +268,18 @@ public class IssueManager {
         };
     }
 
+    public ObservableSet<Complaint> getMyComplaintsSetProperty(String authorID){
+        ObservableSet<Complaint> allComplaints = getAllComplaintSet();
+        ObservableSet<Complaint> myComplaints = FXCollections.observableSet();
+
+        for (Complaint complaint: allComplaints) {
+            if (complaint.getAuthorUID().compareTo(authorID) == 0)
+                myComplaints.add(complaint);
+        }
+
+        return myComplaints;
+    }
+
     public ObservableSet<Complaint> getFilteredComplaintsSetProperty(ComplaintStatus complaintStatus){
         ObservableSet<Complaint> allComplaints = getAllComplaintSet();
         ObservableSet<Complaint> filteredComplaints = FXCollections.observableSet();

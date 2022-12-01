@@ -1,6 +1,6 @@
 /**
  * @file UserController.java
- * 
+ *
  * Reviews:
  *  - Naming
  *      1. (CASE) naiithink, 2022-10-05
@@ -343,7 +343,7 @@ public class UserController implements Initializable {
             discrip = "";
         if (reportChooseChoiceBox.getValue().equals("AUTHOR")){
             IssueService.getIssueManager().newReport(ReportType.BEHAVIOR,((ConsumerUser)StageManager.getStageManager().getContext()).getUID(),
-                                                                        IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID(),discrip);
+                    IssueService.getIssueManager().getComplaint(complaintID).getAuthorUID(),discrip);
             reportTableView.refresh();
         }
         else if (reportChooseChoiceBox.getValue().equals("COMPLAINT")){
@@ -367,6 +367,7 @@ public class UserController implements Initializable {
         complaintFilter.add("PENDING");
         complaintFilter.add("IN_PROGRESS");
         complaintFilter.add("RESOLVED");
+        complaintFilter.add("MY_COMPLAINT");
         complaintFilterChoiceBox.setItems(FXCollections.observableArrayList(complaintFilter));
         complaintFilterChoiceBox.getSelectionModel().selectFirst();
 
@@ -421,6 +422,9 @@ public class UserController implements Initializable {
                     initComplaintFilteredTableView(ComplaintStatus.IN_PROGRESS);
                 else if (new_val.compareTo("RESOLVED") == 0)
                     initComplaintFilteredTableView(ComplaintStatus.RESOLVED);
+                else if (new_val.compareTo("MY_COMPLAINT") == 0)
+                    initMyComplaintFilteredTableView(((ConsumerUser)StageManager.getStageManager().getContext()).getUID());
+
 
 
 
@@ -435,6 +439,37 @@ public class UserController implements Initializable {
 
 
         ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getAllComplaintSet();
+        ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
+        complaintTableView.setEditable(true);
+        complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        complaintSubjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        complaintDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        complaintVotersCol.setCellValueFactory(p -> {
+            ObjectProperty<Long> numVote = null;
+            try {
+                long num = p.getValue().getVoteCount();
+                numVote = new SimpleObjectProperty<>(num);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException(e);
+            } finally {
+                return numVote;
+            }
+        });
+        complaintStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+        observableComplaintList.setAll(observableComplaintSet);
+        complaintTableView.setItems(observableComplaintList);
+        complaintTableView.refresh();
+
+        tempListForSorted.setAll(observableComplaintSet);
+
+    }
+    private void initMyComplaintFilteredTableView(String authorID){
+        complaintTableView.getItems().clear();
+
+
+        ObservableSet<Complaint> observableComplaintSet = IssueService.getIssueManager().getMyComplaintsSetProperty(authorID);
         ObservableList<Complaint> observableComplaintList = FXCollections.observableArrayList();
         complaintTableView.setEditable(true);
         complaintCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -501,6 +536,8 @@ public class UserController implements Initializable {
         if (complaintFilterChoiceBox.getValue().compareTo("DEFAULT") == 0){
             newList.setAll(IssueService.getIssueManager().getAllComplaintSet());
         }
+        else if (complaintFilterChoiceBox.getValue().compareTo("MY_COMPLAINT") == 0)
+            newList.setAll(IssueService.getIssueManager().getMyComplaintsSetProperty(((ConsumerUser)StageManager.getStageManager().getContext()).getUID()));
 
         else {
             newList.setAll(IssueService.getIssueManager().getFilteredComplaintsSetProperty(ComplaintStatus.valueOf(complaintFilterChoiceBox.getValue())));
@@ -625,11 +662,11 @@ public class UserController implements Initializable {
         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
         alertWarning.setTitle("WARNING");
         IssueManagerStatus status =  IssueService.getIssueManager().newComplaint(((ConsumerUser) StageManager.getStageManager().getContext()).getUID()
-                                                    ,complaintCategoryChoiceBox.getValue()
-                                                    ,complaintSubjectTextField.getText()
-                                                    ,complaintDescriptionTextArea.getText()
-                                                    ,evidence
-                                                    ,null
+                ,complaintCategoryChoiceBox.getValue()
+                ,complaintSubjectTextField.getText()
+                ,complaintDescriptionTextArea.getText()
+                ,evidence
+                ,null
         );
 
         switch (status){
@@ -716,41 +753,41 @@ public class UserController implements Initializable {
     }
 
     /**
-     * 
-     *  
-     
-    public void handleClickReport() {
-        dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
-        reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
-        createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane.png").toExternalForm()));
-        settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
-        reportButton.setStyle("-fx-text-fill: #FFFFFF;" +
-                "-fx-background-color: #7986CD;" +
-                "-fx-border-radius: 5px;" +
-                "-fx-cursor: hand;");
-        createReportButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;" +
-                "-fx-cursor: hand;");
-        settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;" +
-                "-fx-cursor: hand;");
-        dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
-                "-fx-font-size:18;" +
-                "-fx-background-color:transparent;" +
-                "-fx-cursor: hand;");
+     *
+     *
 
-        reportsUserPane.setVisible(true);
-        createReportsUserPane.setVisible(false);
-        welcomeUserPane.setVisible(false);
-        settingUserPane.setVisible(false);
-        settingDetailChangeUserPane.setVisible(false);
-        reportsPane.setVisible(false);
-        detailComplaintPane.setVisible(false);
-    }
+     public void handleClickReport() {
+     dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));
+     reportImageView.setImage(new Image(getClass().getResource("/images/flag-seleted.png").toExternalForm()));
+     createReportImageView.setImage(new Image(getClass().getResource("/images/paper-plane.png").toExternalForm()));
+     settingImageView.setImage(new Image(getClass().getResource("/images/settings.png").toExternalForm()));
+     reportButton.setStyle("-fx-text-fill: #FFFFFF;" +
+     "-fx-background-color: #7986CD;" +
+     "-fx-border-radius: 5px;" +
+     "-fx-cursor: hand;");
+     createReportButton.setStyle("-fx-text-fill: #C0C0C9;" +
+     "-fx-font-size:18;" +
+     "-fx-background-color:transparent;" +
+     "-fx-cursor: hand;");
+     settingButton.setStyle("-fx-text-fill: #C0C0C9;" +
+     "-fx-font-size:18;" +
+     "-fx-background-color:transparent;" +
+     "-fx-cursor: hand;");
+     dashboardButton.setStyle("-fx-text-fill: #C0C0C9;" +
+     "-fx-font-size:18;" +
+     "-fx-background-color:transparent;" +
+     "-fx-cursor: hand;");
 
-    */
+     reportsUserPane.setVisible(true);
+     createReportsUserPane.setVisible(false);
+     welcomeUserPane.setVisible(false);
+     settingUserPane.setVisible(false);
+     settingDetailChangeUserPane.setVisible(false);
+     reportsPane.setVisible(false);
+     detailComplaintPane.setVisible(false);
+     }
+
+     */
 
     public void handleClickCreateReport() {
         dashboardImageView.setImage(new Image(getClass().getResource("/images/home.png").toExternalForm()));

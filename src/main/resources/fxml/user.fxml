@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="567.0" prefWidth="806.0" style="-fx-background-color: transparent;" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ku.cs.oakcoding.app.controllers.UserController">
-    <children>
+   <children>
       <Pane fx:id="welcomeUserPane" layoutX="209.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Pane layoutX="74.0" layoutY="58.0" prefHeight="131.0" prefWidth="451.0" styleClass="welcome-user-pane">
@@ -101,13 +101,13 @@
                   <Font size="25.0" />
                </font></Label>
             <TableView fx:id="complaintTableView" layoutX="48.0" layoutY="90.0" prefHeight="356.0" prefWidth="526.0">
-              <columns>
-                <TableColumn fx:id="complaintCategoryCol" prefWidth="102.0" text="Category" />
-                <TableColumn fx:id="complaintSubjectCol" prefWidth="89.0" text="Subject" />
+               <columns>
+                  <TableColumn fx:id="complaintCategoryCol" prefWidth="102.0" text="Category" />
+                  <TableColumn fx:id="complaintSubjectCol" prefWidth="89.0" text="Subject" />
                   <TableColumn fx:id="complaintDescriptionCol" prefWidth="202.0" text="Description" />
                   <TableColumn fx:id="complaintVotersCol" prefWidth="54.0" text="Vote" />
                   <TableColumn fx:id="complaintStatusCol" prefWidth="78.0" text="Status" />
-              </columns>
+               </columns>
             </TableView>
             <Button layoutX="48.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleCreateComplaintButton" styleClass="button-blue" text="Create Complaint" />
             <ChoiceBox fx:id="complaintFilterChoiceBox" layoutX="224.0" layoutY="487.0" prefWidth="150.0" />
@@ -121,11 +121,11 @@
 
             <Label layoutX="281.0" layoutY="40.0" text="Report" textFill="WHITE" />
             <TableView fx:id="reportTableView" layoutX="81.0" layoutY="113.0" prefHeight="306.0" prefWidth="433.0">
-              <columns>
-                <TableColumn fx:id="reportTypeCol" prefWidth="95.0" text="Type" />
-                <TableColumn fx:id="reportDescriptionCol" prefWidth="187.0" text="Description" />
+               <columns>
+                  <TableColumn fx:id="reportTypeCol" prefWidth="95.0" text="Type" />
+                  <TableColumn fx:id="reportDescriptionCol" prefWidth="187.0" text="Description" />
                   <TableColumn fx:id="reportTargetCol" prefWidth="150.0" text="Target" />
-              </columns>
+               </columns>
             </TableView>
             <ChoiceBox fx:id="reportTypeChoiceBox" layoutX="81.0" layoutY="79.0" prefHeight="21.0" prefWidth="115.0" />
             <Button layoutX="82.0" layoutY="443.0" mnemonicParsing="false" styleClass="button-blue" text="Report " />
@@ -373,5 +373,5 @@
             <TextField fx:id="reportAddDescriptionLabel" layoutX="55.0" layoutY="484.0" promptText="Description" />
          </children>
       </Pane>
-    </children>
+   </children>
 </AnchorPane>
