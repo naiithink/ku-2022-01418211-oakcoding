@@ -570,11 +570,7 @@ public final class UserManager {
         //         latestTimestamp = timestamp;
 
         UserUnsuspendRequest request = new UserUnsuspendRequest(getUIDOf(userName),
-<<<<<<< Updated upstream
                                                                 "NIL",
-=======
-                                                                null,
->>>>>>> Stashed changes
                                                                 message);
 
         this.userRequestTable.put(getUIDOf(userName), request);
