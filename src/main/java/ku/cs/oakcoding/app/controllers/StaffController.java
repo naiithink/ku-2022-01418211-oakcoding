@@ -121,6 +121,7 @@ public class StaffController implements Initializable {
                 setMyPane();
                 setProfileLabel();
                 addStaff();
+                initDashBoard();
 //                initReportTableView();
 //                initComplaintTableView();
 //                handleSelectComplaintTableView();
@@ -388,6 +389,12 @@ public class StaffController implements Initializable {
     public void handleComplaintBackButton(){
 
 //        sideBarPane.setDisable(false);
+
+    }
+
+    public void initDashBoard(){
+        numberReportOfUser.setText(IssueService.getIssueManager().getAllComplaintSet().size() + "");
+
     }
 
     @FXML
