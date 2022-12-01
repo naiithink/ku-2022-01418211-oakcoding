@@ -3,24 +3,19 @@ package ku.cs.oakcoding.app.controllers;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 
-import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,15 +35,11 @@ import ku.cs.oakcoding.app.models.org.Department;
 import ku.cs.oakcoding.app.models.reports.Report;
 import ku.cs.oakcoding.app.models.reports.ReportType;
 import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequest;
-import ku.cs.oakcoding.app.models.reports.UserUnsuspendRequestReviewStrategy;
 import ku.cs.oakcoding.app.models.users.AdminUser;
-import ku.cs.oakcoding.app.models.users.ConsumerUser;
 import ku.cs.oakcoding.app.models.users.FullUserEntry;
 import ku.cs.oakcoding.app.models.users.Roles;
 import ku.cs.oakcoding.app.services.*;
 import ku.cs.oakcoding.app.services.stages.StageManager;
-
-import org.w3c.dom.Text;
 
 public class AdminController2 implements Initializable{
 
@@ -56,7 +47,7 @@ public class AdminController2 implements Initializable{
      *  ALL FXML PANE
      * */
 
-    UserUnsuspendRequest selectedReport = null;
+    UserUnsuspendRequest selectedRequest = null;
 
     @FXML
     private Pane welcomePane;
@@ -1169,17 +1160,16 @@ public class AdminController2 implements Initializable{
     }
     @FXML
     private void handleApproveSuspendButton(){
-        if(selectedReport == null)
-            return;
-        selectedReport.approve((AdminUser) StageManager.getStageManager().getContext());
+        //IssueService.getIssueManager().reviewReport((AdminUser) StageManager.getStageManager().getContext(), selectedReport.getReportID(),true);
+        System.out.println(selectedRequest);
+        selectedRequest.approve((AdminUser) StageManager.getStageManager().getContext());
         handleRequestDetailBackButton();
         sideBarPane.setDisable(false);
     };
     @FXML
     private void handleDenySuspendButton(){
-        if(selectedReport == null)
-            return;
-        selectedReport.deny((AdminUser) StageManager.getStageManager().getContext());
+        //IssueService.getIssueManager().reviewReport((AdminUser) StageManager.getStageManager().getContext(), selectedReport.getReportID(),false);
+        selectedRequest.deny((AdminUser) StageManager.getStageManager().getContext());
         handleRequestDetailBackButton();
         sideBarPane.setDisable(false);
     };
@@ -1194,8 +1184,8 @@ public class AdminController2 implements Initializable{
         requestTableView.setOnMousePressed(e ->{
             if (e.getClickCount() == 2 && e.isPrimaryButtonDown()){
                 int index = requestTableView.getSelectionModel().getSelectedIndex();
-                selectedReport = requestTableView.getItems().get(index);
-                showSelectedRequest(selectedReport.getMessage(),selectedReport.getReportID());
+                selectedRequest = requestTableView.getItems().get(index);
+                showSelectedRequest(selectedRequest.getMessage(), selectedRequest.getReportID());
 
             }
         });

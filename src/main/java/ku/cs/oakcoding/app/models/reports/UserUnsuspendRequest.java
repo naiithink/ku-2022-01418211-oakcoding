@@ -36,6 +36,16 @@ public class UserUnsuspendRequest {
         return MESSAGE;
     }
 
+    @Override
+    public String toString() {
+        return "UserUnsuspendRequest{" +
+                "UID='" + UID + '\'' +
+                ", REPORT_ID='" + REPORT_ID + '\'' +
+                ", MESSAGE='" + MESSAGE + '\'' +
+                ", REVIEW_STRATEGY=" + REVIEW_STRATEGY +
+                '}';
+    }
+
     public boolean approve(AdminUser admin) {
         return this.REVIEW_STRATEGY.approve(admin);
     }

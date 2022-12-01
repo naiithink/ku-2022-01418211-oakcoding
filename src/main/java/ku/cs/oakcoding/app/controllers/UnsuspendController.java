@@ -20,7 +20,7 @@ public class UnsuspendController {
     private TextField messageTextField;
 
     public void handleSubmitButton(ActionEvent actionEvent) {
-        String username = usernameTextField.getText();
+        String userName = usernameTextField.getText();
         String message = messageTextField.getText();
 
         Alert alertInformation = new Alert(Alert.AlertType.INFORMATION);
@@ -28,7 +28,7 @@ public class UnsuspendController {
         Alert alertWarning = new Alert(Alert.AlertType.WARNING);
         alertWarning.setTitle("WARNING");
 
-        if(username.isEmpty() || username.isBlank()){
+        if(userName.isEmpty() || userName.isBlank()){
             alertWarning.setContentText(" Please enter username ");
             alertWarning.showAndWait();
         }
@@ -38,19 +38,19 @@ public class UnsuspendController {
             alertWarning.showAndWait();
         }
 
-        if(AccountService.getUserManager().userExists(AccountService.getUserManager().getUIDOf(username))) {
-            if(AccountService.getUserManager().isActive(username)){
+        if(AccountService.getUserManager().userExists(AccountService.getUserManager().getUIDOf(userName))) {
+            if(AccountService.getUserManager().isActive(userName)){
                 alertWarning.setContentText(" This User is not suspended ");
                 alertWarning.showAndWait();
-            } else if (!AccountService.getUserManager().isActive(username)) {
-                AccountService.getUserManager().newUserRequest(username,message);
+            } else if (!AccountService.getUserManager().isActive(userName)) {
+                System.out.println(AccountService.getUserManager().newUserRequest(userName,message));
                 alertInformation.setContentText(" Your request sent ");
                 alertInformation.showAndWait();
 
             }
         }
 
-        if(!username.isEmpty() && !username.isBlank() && !AccountService.getUserManager().userExists(AccountService.getUserManager().getUIDOf(username))){
+        if(!userName.isEmpty() && !userName.isBlank() && !AccountService.getUserManager().userExists(AccountService.getUserManager().getUIDOf(userName))){
             alertWarning.setContentText(" User is not exist ");
             alertWarning.showAndWait();
         }

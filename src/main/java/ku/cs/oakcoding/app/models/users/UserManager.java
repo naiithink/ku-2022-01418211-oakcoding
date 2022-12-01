@@ -566,8 +566,8 @@ public final class UserManager {
         //     if (timestamp > latestTimestamp)
         //         latestTimestamp = timestamp;
 
-        UserUnsuspendRequest request = new UserUnsuspendRequest(OakID.of(Instant.now().toEpochMilli(), Report.class.getSimpleName()),
-                                                                userName,
+        UserUnsuspendRequest request = new UserUnsuspendRequest(getUIDOf(userName),
+                                                                "NIL",
                                                                 message);
 
         this.userRequestTable.put(getUIDOf(userName), request);
