@@ -361,11 +361,14 @@ public class IssueManager {
     }
 
     public ObservableSet<Complaint> getComplaintsWithCategory(String categoryName) {
+        System.out.println("getComplaintsWithCategory ");
         ObservableSet<Complaint> res = FXCollections.observableSet();
 
         Iterator<String> complaintIDs = this.categorizedComplaintTable.get(categoryName).iterator();
 
         while (complaintIDs.hasNext()) {
+//            add by pooh debug can delete
+//            System.out.println("complaints from user" + getComplaint(complaintIDs.next()));
             res.add(getComplaint(complaintIDs.next()));
         }
 
@@ -410,14 +413,20 @@ public class IssueManager {
         return IssueManagerStatus.SUCCESS;
     }
 
-    public IssueManagerStatus resolveComplaint(StaffUser staff, String complaintID) {
+    public IssueManagerStatus resolveComplaint(StaffUser staff, String complaintID, String method) {
         if (Objects.isNull(staff) || !(staff instanceof StaffUser))
             return IssueManagerStatus.INVALID_ACCESS;
 
         Complaint complaint = getComplaint(complaintID);
 
+        String preDescription = complaint.getDescription();
+
+        String postDescription = preDescription + "\n" + "Fixed it -> " + method;
+
         complaint.setStatus(staff, ComplaintStatus.RESOLVED);
+        complaint.setDescription(postDescription);
         complaint.setCaseManager(staff.getUID());
+        this.complaintDB.editRecord(complaintID, "DESCRIPTION", postDescription, false);
         this.complaintDB.editRecord(complaintID, "STATUS", ComplaintStatus.RESOLVED.name(), false);
         this.complaintDB.editRecord(complaintID, "CASE_MANAGER_UID", staff.getUID(), false);
 

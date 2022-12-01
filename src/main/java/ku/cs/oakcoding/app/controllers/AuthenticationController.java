@@ -151,8 +151,5 @@ public class AuthenticationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPane();
         loginSuccessfulLabel.setVisible(false);
-
-
-
     }
 }
