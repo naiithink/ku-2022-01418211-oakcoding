@@ -205,7 +205,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="607.0" style="-fx-background-color: #121212;">
+      <Pane fx:id="createReportsUserPane" layoutX="211.0" prefHeight="568.0" prefWidth="607.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -223,7 +223,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;" visible="false">
+      <Pane fx:id="complaintDetailPane" layoutX="221.0" layoutY="-1.0" prefHeight="568.0" prefWidth="598.0" style="-fx-background-color: #121212;">
          <children>
             <Label layoutX="264.0" layoutY="33.0" prefHeight="27.0" prefWidth="71.0" text="Complaints" textFill="WHITE">
                <font>
@@ -303,7 +303,7 @@
             </Label>
             <Label fx:id="reportDescriptionLabel" layoutX="71.0" layoutY="310.0" prefHeight="119.0" prefWidth="462.0" styleClass="text-bold" text="Label" textFill="WHITE">
                <font>
-                  <Font size="23.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <ImageView fx:id="detailBackButton" fitHeight="27.0" fitWidth="23.0" layoutX="28.0" layoutY="9.0" onMouseClicked="#handleComplaintBackButton" pickOnBounds="true" preserveRatio="true">
@@ -311,9 +311,9 @@
                   <Image url="@../images/angle-left.png" />
                </image>
             </ImageView>
-            <Button fx:id="resolvedButton" layoutX="308.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleReseloved" text="Reslove" />
+            <Button fx:id="resolvedButton" layoutX="308.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleReseloved" styleClass="button-blue" text="Resolve" />
             <TextField fx:id="resolvedTextField" layoutX="71.0" layoutY="462.0" prefHeight="31.0" prefWidth="217.0" />
-            <Label layoutX="70.0" layoutY="436.0" prefHeight="27.0" prefWidth="150.0" styleClass="yellow-color-font" text="Resolved" textFill="WHITE">
+            <Label layoutX="70.0" layoutY="436.0" prefHeight="27.0" prefWidth="150.0" styleClass="yellow-color-font" text="Resolve" textFill="WHITE">
                <font>
                   <Font size="23.0" />
                </font>
