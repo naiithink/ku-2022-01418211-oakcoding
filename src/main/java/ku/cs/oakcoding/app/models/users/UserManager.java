@@ -548,25 +548,25 @@ public final class UserManager {
     }
 
     public UserManagerStatus newUserRequest(String userName, String message) {
-        ObservableSet<Report> relatedReportSet = IssueService.getIssueManager().getBehavioralReportsRelatedToTarget(getUIDOf(userName));
+        // ObservableSet<Report> relatedReportSet = IssueService.getIssueManager().getBehavioralReportsRelatedToTarget(getUIDOf(userName));
 
-        if (relatedReportSet.isEmpty())
-            return UserManagerStatus.USER_REPORT_REFERENCE_NOT_FOUND;
+        // if (relatedReportSet.isEmpty())
+        //     return UserManagerStatus.USER_REPORT_REFERENCE_NOT_FOUND;
 
-        Map<Long, Report> reportTimeline = new HashMap<>();
+        // Map<Long, Report> reportTimeline = new HashMap<>();
 
-        for (Report report : relatedReportSet) {
-            reportTimeline.put(OakID.getGenerateTimeOf(report.getReportID()), report);
-        }
+        // for (Report report : relatedReportSet) {
+        //     reportTimeline.put(OakID.getGenerateTimeOf(report.getReportID()), report);
+        // }
 
-        Set<Long> reportTimestampSet = reportTimeline.keySet();
-        Long latestTimestamp = 0L;
+        // Set<Long> reportTimestampSet = reportTimeline.keySet();
+        // Long latestTimestamp = 0L;
 
-        for (Long timestamp : reportTimestampSet)
-            if (timestamp > latestTimestamp)
-                latestTimestamp = timestamp;
+        // for (Long timestamp : reportTimestampSet)
+        //     if (timestamp > latestTimestamp)
+        //         latestTimestamp = timestamp;
 
-        UserUnsuspendRequest request = new UserUnsuspendRequest(OakID.of(latestTimestamp, Report.class.getSimpleName()),
+        UserUnsuspendRequest request = new UserUnsuspendRequest(OakID.of(Instant.now().toEpochMilli(), Report.class.getSimpleName()),
                                                                 userName,
                                                                 message);
 
